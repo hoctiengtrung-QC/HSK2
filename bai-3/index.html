@@ -15,282 +15,331 @@
   --teal:#0E7C7B;--teal-bg:#E8F6F6;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--rice);color:var(--ink);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;}
+body{background:var(--rice);color:var(--ink);font-family:'DM Sans',sans-serif;min-height:100vh;}
 
-.hero{background:linear-gradient(135deg,#B5281C 0%,#e04f43 100%);padding:40px 20px 32px;text-align:center;position:relative;overflow:hidden;}
-.hero::after{content:'手表';position:absolute;font-family:'Noto Serif SC',serif;font-size:160px;color:rgba(255,255,255,0.05);right:-10px;bottom:-20px;line-height:1;pointer-events:none;}
-.hero-back{display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,0.75);font-size:12px;text-decoration:none;margin-bottom:12px;padding:4px 12px;border-radius:20px;border:1px solid rgba(255,255,255,0.25);transition:all .2s;}
-.hero-back:hover{background:rgba(255,255,255,0.12);color:white;}
+.hero{background:linear-gradient(135deg,#B5281C 0%,#e04f43 100%);padding:40px 20px;text-align:center;position:relative;color:white;}
 .hero-badge{display:inline-block;background:var(--gold);color:#1a0a00;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 14px;border-radius:20px;margin-bottom:12px;}
-.hero h1{font-family:'Noto Serif SC',serif;font-size:clamp(18px,4vw,32px);color:white;margin-bottom:5px;line-height:1.4;}
-.hero-en{font-family:'Lora',serif;font-style:italic;font-size:13px;color:rgba(255,255,255,0.6);margin-bottom:16px;}
-.hero-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;}
-.hero-pill{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.85);font-size:11px;padding:3px 11px;border-radius:20px;}
+.hero h1{font-family:'Noto Serif SC',serif;font-size:28px;margin-bottom:8px;}
+.hero-en{font-family:'Lora',serif;font-style:italic;font-size:14px;opacity:0.8;}
 
 .prog-wrap{height:5px;background:var(--warm);position:sticky;top:0;z-index:100;}
-.prog-bar{height:100%;background:linear-gradient(90deg,var(--red),var(--gold));transition:width .5s;}
+.prog-bar{height:100%;background:linear-gradient(90deg,var(--red),var(--gold));transition:width .3s;width:10%;}
 
-.tabs-wrap{background:white;border-bottom:2px solid var(--warm);position:sticky;top:5px;z-index:99;overflow-x:auto;scrollbar-width:none;}
-.tabs-wrap::-webkit-scrollbar{display:none;}
-.tabs{display:flex;min-width:max-content;}
-.tab-sep{width:2px;background:var(--warm);flex-shrink:0;margin:6px 0;}
-.tab-label{padding:10px 8px 10px 12px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);opacity:.7;display:flex;align-items:center;white-space:nowrap;border-bottom:3px solid transparent;margin-bottom:-2px;}
-.tab{flex-shrink:0;padding:10px 13px;font-size:12px;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;white-space:nowrap;}
-.tab:hover{color:var(--red);}
+.tabs-wrap{background:white;border-bottom:2px solid var(--warm);position:sticky;top:5px;z-index:99;overflow-x:auto;}
+.tabs{display:flex;min-width:max-content;padding:0 10px;}
+.tab{padding:12px 15px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;transition:0.2s;}
 .tab.active{color:var(--red);border-bottom-color:var(--red);}
-.tab.wb:hover{color:var(--purple);}
 .tab.wb.active{color:var(--purple);border-bottom-color:var(--purple);}
 
-.section{display:none;padding:20px 16px 40px;max-width:740px;margin:0 auto;}
-.section.active{display:block;animation:rise .3s ease;}
-@keyframes rise{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.section{display:none;padding:20px 16px;max-width:800px;margin:0 auto;}
+.section.active{display:block;}
 
-.book-banner{padding:7px 16px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-align:center;border-radius:8px;margin-bottom:16px;}
-.book-banner.tb{background:var(--red-l);color:var(--red);}
-.book-banner.wb{background:var(--purple-bg);color:var(--purple);}
+.book-banner{padding:8px;font-size:11px;font-weight:700;text-align:center;border-radius:8px;margin-bottom:20px;text-transform:uppercase;letter-spacing:1px;}
+.tb-banner{background:var(--red-l);color:var(--red);}
+.wb-banner{background:var(--purple-bg);color:var(--purple);}
 
-.sec-title{font-family:'Lora',serif;font-size:19px;color:var(--red);margin-bottom:3px;}
-.sec-title.wb{color:var(--purple);}
-.sec-desc{font-size:12px;color:var(--muted);margin-bottom:16px;line-height:1.6;}
+/* Vocabulary Style */
+.v-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));gap:12px;}
+.vc{background:white;border:1px solid var(--warm);border-radius:12px;padding:15px;display:flex;align-items:center;gap:15px;cursor:pointer;transition:0.2s;}
+.vc:hover{border-color:var(--red);transform:translateY(-2px);}
+.vc-char{font-family:'Noto Serif SC',serif;font-size:28px;color:var(--red);width:60px;text-align:center;}
+.vc-main{flex:1;}
+.vc-py{font-size:13px;color:var(--red);font-weight:600;}
+.vc-vi{font-size:14px;color:var(--ink);margin:2px 0;}
+.vc-pos{font-size:10px;background:var(--warm);padding:2px 6px;border-radius:4px;color:var(--muted);text-transform:uppercase;}
 
-/* Cấu trúc các thành phần giống Bài 2 */
-.ctx-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:9px;padding-bottom:5px;border-bottom:1px solid var(--warm);}
-.ctx-sec{margin-bottom:20px;}
-.vlist{display:flex;flex-direction:column;gap:8px;}
-.vc{background:white;border:1px solid var(--warm);border-radius:11px;padding:12px 14px;display:grid;grid-template-columns:72px 1fr auto;align-items:center;gap:12px;cursor:pointer;transition:all .18s;box-shadow:0 1px 5px rgba(0,0,0,.04);}
-.vc:hover{border-color:var(--red);box-shadow:0 3px 12px rgba(181,40,28,.12);}
-.vc-char{font-family:'Noto Serif SC',serif;font-size:26px;color:var(--red);text-align:center;line-height:1.2;}
-.vc-py{font-size:12px;color:var(--red);font-weight:500;margin-bottom:2px;}
-.vc-vi{font-size:13px;color:var(--ink);font-weight:500;}
-.vc-ex{font-size:11px;color:var(--muted);margin-top:5px;line-height:1.6;display:none;grid-column:1/-1;background:var(--rice);border-radius:6px;padding:7px 10px;}
-.vc-ex.open{display:block;}
-.vc-pos{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:2px 7px;border-radius:10px;background:var(--warm);color:var(--muted);align-self:flex-start;white-space:nowrap;}
-.new-tag{font-size:9px;font-weight:700;letter-spacing:1px;background:var(--red);color:white;padding:2px 6px;border-radius:8px;text-transform:uppercase;}
+/* Dialogue Style */
+.dlg-card{background:white;border-radius:15px;border:1px solid var(--warm);margin-bottom:20px;overflow:hidden;}
+.dlg-header{background:var(--red);color:white;padding:12px 18px;font-size:14px;font-weight:600;display:flex;justify-content:space-between;}
+.dl-row{padding:12px 18px;border-bottom:1px solid var(--rice);display:flex;gap:15px;}
+.dl-row:last-child{border-bottom:none;}
+.dl-sp{width:32px;height:32px;border-radius:50%;background:var(--warm);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0;}
+.dl-sp.A{background:var(--red);color:white;}
+.dl-sp.B{background:var(--teal);color:white;}
+.dl-cn{font-family:'Noto Serif SC',serif;font-size:17px;margin-bottom:4px;}
+.dl-py{font-size:12px;color:var(--red);}
+.dl-vi{font-size:12px;color:var(--muted);}
 
-.dlg-box{background:white;border-radius:12px;border:1px solid var(--warm);overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.04);margin-bottom:14px;}
-.dlg-head{background:var(--red);color:white;padding:9px 15px;font-size:12px;font-weight:500;display:flex;align-items:center;justify-content:space-between;}
-.scene-tag{font-size:10px;background:rgba(255,255,255,.18);padding:2px 8px;border-radius:8px;}
-.dl{display:flex;gap:10px;padding:12px 14px;border-bottom:1px solid var(--warm);align-items:flex-start;transition:background .12s;}
-.dl.r{flex-direction:row-reverse;}
-.sp{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif SC',serif;font-size:11px;font-weight:700;color:white;flex-shrink:0;}
-.sp.a{background:var(--red);}
-.sp.b{background:var(--teal);}
-.dl-body{flex:1;}
-.dl.r .dl-body{text-align:right;}
-.dl-cn{font-family:'Noto Serif SC',serif;font-size:17px;color:var(--ink);line-height:1.4;margin-bottom:2px;}
-.dl-py{font-size:11px;color:var(--red);margin-bottom:1px;}
-.dl-vi{font-size:11px;color:var(--muted);}
+/* Grammar Style */
+.gram-box{background:white;border-left:5px solid var(--gold);padding:20px;border-radius:0 12px 12px 0;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);}
+.gram-title{color:var(--gold);font-weight:700;font-size:16px;margin-bottom:10px;display:flex;align-items:center;gap:10px;}
+.gram-title span{background:var(--gold);color:white;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;}
+.gram-patt{background:var(--gold-bg);padding:10px;border-radius:6px;font-family:monospace;margin-bottom:10px;font-size:14px;}
 
-.gram-card{background:white;border-radius:12px;border:1px solid var(--warm);margin-bottom:13px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.04);}
-.gram-head{background:var(--ink);color:white;padding:11px 15px;display:flex;align-items:center;gap:9px;}
-.gram-n{width:24px;height:24px;border-radius:50%;background:var(--gold);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;}
-.gram-title{font-size:13px;font-weight:500;line-height:1.4;}
-.gram-body{padding:15px;}
-.gram-pattern{background:var(--gold-bg);border-left:4px solid var(--gold);padding:8px 12px;border-radius:0 7px 7px 0;font-family:'Noto Serif SC',serif;font-size:14px;margin-bottom:10px;color:var(--ink);}
-.gram-note{font-size:12px;color:#333;line-height:1.75;margin-bottom:10px;}
-.gram-exs{display:flex;flex-direction:column;gap:6px;}
-.gex{background:var(--rice);border-radius:7px;padding:8px 11px;}
-.gex-cn{font-family:'Noto Serif SC',serif;font-size:15px;color:var(--ink);}
-.gex-py{font-size:11px;color:var(--red);margin:2px 0;}
-.gex-vi{font-size:11px;color:var(--muted);}
+/* Workbook Style */
+.wb-q{background:white;border:1.5px solid var(--warm);border-radius:12px;padding:20px;margin-bottom:15px;}
+.wb-q-title{font-weight:700;margin-bottom:15px;color:var(--purple);font-size:14px;}
+.opt-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.opt-btn{padding:10px;border:1px solid var(--warm);border-radius:8px;background:var(--rice);cursor:pointer;text-align:left;font-size:14px;transition:0.2s;}
+.opt-btn:hover{border-color:var(--purple);}
+.opt-btn.correct{background:var(--green-bg);border-color:var(--green);color:var(--green);}
+.opt-btn.wrong{background:var(--red-l);border-color:var(--red);color:var(--red);}
 
-/* Các thành phần Workbook */
-.match-item{background:white;border:1.5px solid var(--warm);border-radius:10px;padding:11px 13px;margin-bottom:8px;}
-.mopt{border:1.5px solid var(--warm);background:var(--rice);border-radius:7px;padding:6px 11px;font-size:12px;cursor:pointer;margin:4px 0; display:inline-block;}
-.mopt.correct{border-color:var(--green);background:var(--green-bg);color:var(--green);font-weight:600;}
-.mopt.wrong{border-color:var(--red);background:var(--red-l);color:var(--red);}
-
-.reorder-card{background:white;border:1.5px solid var(--warm);border-radius:10px;padding:13px;margin-bottom:8px;}
-.piece{background:var(--purple-bg);border:1.5px solid #d4c8f8;border-radius:6px;padding:5px 11px;font-family:'Noto Serif SC',serif;font-size:14px;color:var(--purple);cursor:pointer;display:inline-block;margin:3px;}
-.piece.used{opacity:.3;}
-.ans-area{min-height:38px;border:2px dashed var(--warm);border-radius:7px;padding:6px 10px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px;}
-.placed{background:var(--purple);color:white;border-radius:6px;padding:5px 11px;font-family:'Noto Serif SC',serif;font-size:14px;cursor:pointer;}
+.reorder-zone{border:2px dashed var(--warm);min-height:50px;border-radius:8px;padding:10px;display:flex;flex-wrap:wrap;gap:8px;margin:15px 0;}
+.word-piece{background:var(--purple-bg);padding:6px 12px;border-radius:6px;cursor:pointer;border:1px solid var(--purple-l);font-family:'Noto Serif SC',serif;}
+.word-piece.used{opacity:0.3;pointer-events:none;}
+.placed-word{background:var(--purple);color:white;padding:6px 12px;border-radius:6px;cursor:pointer;}
 </style>
 </head>
 <body>
 
 <div class="hero">
-  <div class="hero-badge">HSK Standard Course 2 · 第3课</div>
-  <h1>左边那个红色的是我的</h1>
-  <div class="hero-en">The red one on the left is mine</div>
-  <div class="hero-pills">
-    <div class="hero-pill">13 từ mới</div>
-    <div class="hero-pill">Ngữ pháp chữ 的</div>
-    <div class="hero-pill">Màu sắc & Đồ vật</div>
-  </div>
+  <div class="hero-badge">HSK Standard Course 2</div>
+  <h1>第三课：左边那个红色的是我的</h1>
+  <div class="hero-en">Lesson 3: The red one on the left is mine</div>
 </div>
 
-<div class="prog-wrap"><div class="prog-bar" id="progBar" style="width:10%"></div></div>
+<div class="prog-wrap"><div class="prog-bar" id="progBar"></div></div>
 
 <div class="tabs-wrap">
   <div class="tabs">
-    <div class="tab-label">📗 Sách GK</div>
-    <div class="tab active" data-tab="vocab">📝 Từ mới</div>
-    <div class="tab" data-tab="dialog">💬 Hội thoại</div>
-    <div class="tab" data-tab="grammar">📖 Ngữ pháp</div>
-    <div class="tab-sep"></div>
-    <div class="tab-label">📘 Bài tập</div>
-    <div class="tab wb" data-tab="wb-read">📄 Đọc</div>
-    <div class="tab wb" data-tab="wb-write">✏️ Viết</div>
+    <div class="tab active" data-tab="vocab">Từ mới</div>
+    <div class="tab" data-tab="dialog">Hội thoại</div>
+    <div class="tab" data-tab="grammar">Ngữ pháp</div>
+    <div class="tab" data-tab="hanzi">Chữ Hán</div>
+    <div class="tab wb" data-tab="wb-read">Bài tập Đọc</div>
+    <div class="tab wb" data-tab="wb-write">Bài tập Viết</div>
   </div>
 </div>
 
 <div class="section active" id="sec-vocab">
-  <div class="book-banner tb">📗 SÁCH GIÁO KHOA — 교재</div>
-  <div class="sec-title">📝 Từ mới — 新词语</div>
-  <div class="ctx-sec">
-    <div class="vlist" id="vNew"></div>
-  </div>
+  <div class="book-banner tb-banner">📗 Danh sách từ vựng chuẩn (13 từ)</div>
+  <div class="v-grid" id="vocabList"></div>
 </div>
 
 <div class="section" id="sec-dialog">
-  <div class="book-banner tb">📗 SÁCH GIÁO KHOA — 教材</div>
-  <div class="sec-title">💬 Hội thoại — 课文</div>
-  <div class="dlg-box">
-    <div class="dlg-head">对话一：在商店 <span class="scene-tag">📍 Ở cửa hàng</span></div>
-    <div id="dlg1"></div>
-  </div>
-  <div class="dlg-box">
-    <div class="dlg-head">对话二：在家 <span class="scene-tag">📍 Ở nhà</span></div>
-    <div id="dlg2"></div>
-  </div>
+  <div class="book-banner tb-banner">💬 Các bài khóa (Texts)</div>
+  <div id="dialogsContainer"></div>
 </div>
 
 <div class="section" id="sec-grammar">
-  <div class="book-banner tb">📗 SÁCH GIÁO KHOA — 教材</div>
-  <div class="sec-title">📖 Ngữ pháp — 语法</div>
-  <div id="gramContent"></div>
+  <div class="book-banner tb-banner">📖 Điểm ngữ pháp trọng tâm</div>
+  <div id="grammarContainer"></div>
+</div>
+
+<div class="section" id="sec-hanzi">
+  <div class="book-banner tb-banner">✍️ Cách viết và Bộ thủ</div>
+  <div class="gram-box">
+    <div class="gram-title"><span>1</span> Bộ thủ mới</div>
+    <p><b>Bộ Đao (刀 - 刂):</b> Thường liên quan đến việc cắt, chém, vũ khí sắc bén.</p>
+    <p><b>Bộ Lực (力):</b> Thường liên quan đến sức mạnh, lao động.</p>
+  </div>
+  <div class="gram-box">
+    <div class="gram-title"><span>2</span> Phân biệt chữ gần giống</div>
+    <p><b>千 (qiān - nghìn)</b> vs <b>干 (gàn - làm)</b></p>
+    <p><b>办 (bàn - làm)</b> vs <b>为 (wèi - vì)</b></p>
+  </div>
 </div>
 
 <div class="section" id="sec-wb-read">
-  <div class="book-banner wb">📘 BÀI TẬP — ĐỌC HIỂU</div>
-  <div id="readP1"></div>
+  <div class="book-banner wb-banner">📘 Workbook: Phần Đọc hiểu</div>
+  <div id="readContainer"></div>
 </div>
 
 <div class="section" id="sec-wb-write">
-  <div class="book-banner wb">📘 BÀI TẬP — SẮP XẾP CÂU</div>
-  <div id="reorderCards"></div>
+  <div class="book-banner wb-banner">📘 Workbook: Phần Viết (Sắp xếp câu)</div>
+  <div id="writeContainer"></div>
 </div>
 
 <script>
-// DATA BÀI 3 HSK2
-const vNew=[
-  {char:'手表',py:'shǒubiǎo',vi:'Đồng hồ đeo tay',pos:'Danh từ',ex:'这块手表是你的吗？\nChiếc đồng hồ này là của bạn à?'},
-  {char:'千',py:'qiān',vi:'Nghìn / Ngàn',pos:'Số từ',ex:'三千多块。\nHơn ba nghìn tệ.'},
-  {char:'报纸',py:'bàozhǐ',vi:'Tờ báo',pos:'Danh từ',ex:'这是今天早上的报纸吗？\nĐây là tờ báo sáng nay phải không?'},
-  {char:'送',py:'sòng',vi:'Tặng / Đưa / Tiễn',pos:'Động từ',ex:'送牛奶的来了。\nNgười giao sữa đến rồi.'},
-  {char:'牛奶',py:'niúnǎi',vi:'Sữa bò',pos:'Danh từ',ex:'我每天早上喝牛奶。'},
-  {char:'房间',py:'fángjiān',vi:'Căn phòng',pos:'Danh từ',ex:'这是谁的房间？'},
-  {char:'丈夫',py:'zhàngfu',vi:'Chồng',pos:'Danh từ',ex:'我丈夫不在家。'},
-  {char:'旁边',py:'pángbiān',vi:'Bên cạnh',pos:'Danh từ',ex:'丈夫旁边那个人是谁？'},
-  {char:'真',py:'zhēn',vi:'Thật / Thật là',pos:'Phó từ',ex:'真漂亮！\nThật đẹp!'},
-  {char:'粉色',py:'fěnsè',vi:'Màu hồng',pos:'Danh từ',ex:'粉色是我女儿最喜欢的颜色。'},
-  {char:'颜色',py:'yánsè',vi:'Màu sắc',pos:'Danh từ',ex:'你喜欢什么颜色？'},
-  {char:'一下',py:'yíxià',vi:'Một chút / Một lát',pos:'Lượng từ',ex:'我看一下。'}
+// DỮ LIỆU CHUẨN HSK2 BÀI 3
+const vocabData = [
+  {char:'手表', py:'shǒubiǎo', vi:'đồng hồ đeo tay', pos:'n', ex:'这块手表是你的吗？'},
+  {char:'千', py:'qiān', vi:'nghìn, ngàn', pos:'num', ex:'三千多块钱。'},
+  {char:'报纸', py:'bàozhǐ', vi:'tờ báo', pos:'n', ex:'我每天看报纸。'},
+  {char:'送', py:'sòng', vi:'tặng, đưa, giao', pos:'v', ex:'送报纸的来了。'},
+  {char:'一下', py:'yíxià', vi:'một chút, một lát', pos:'m', ex:'我看一下。'},
+  {char:'牛奶', py:'niúnǎi', vi:'sữa bò', pos:'n', ex:'喝杯牛奶吧。'},
+  {char:'房间', py:'fángjiān', vi:'căn phòng', pos:'n', ex:'这是我的房间。'},
+  {char:'丈夫', py:'zhàngfu', vi:'chồng', pos:'n', ex:'她丈夫在医院工作。'},
+  {char:'旁边', py:'pángbiān', vi:'bên cạnh', pos:'n', ex:'我旁边没有人。'},
+  {char:'真', py:'zhēn', vi:'thật, thật là', pos:'adv', ex:'今天天气真好！'},
+  {char:'粉色', py:'fěnsè', vi:'màu hồng', pos:'n', ex:'粉色是我喜欢的颜色。'},
+  {char:'颜色', py:'yánsè', vi:'màu sắc', pos:'n', ex:'你喜欢什么颜色？'},
+  {char:'红色', py:'hóngsè', vi:'màu đỏ', pos:'n', ex:'红色的是我的。'}
 ];
 
-const d1=[
-  {sp:'a',cn:'这块手表是你的吗？',py:'Zhè kuài shǒubiǎo shì nǐ de ma?',vi:'Chiếc đồng hồ này là của bạn à?'},
-  {sp:'b',cn:'不是我的。是我爸爸的。',py:'Bú shì wǒ de. Shì wǒ bàba de.',vi:'Không phải của tôi. Là của bố tôi.'},
-  {sp:'a',cn:'多少钱买的？',py:'Duōshǎo qián mǎi de?',vi:'Mua bao nhiêu tiền vậy?'},
-  {sp:'b',cn:'三千多块。',py:'Sānqiān duō kuài.',vi:'Hơn ba nghìn tệ.'},
+const dialogData = [
+  {
+    title: 'Bài khóa 1: Ở cửa hàng (在商店)',
+    lines: [
+      {s:'A', cn:'这块手表是你的吗？', py:'Zhè kuài shǒubiǎo shì nǐ de ma?', vi:'Chiếc đồng hồ này là của bạn à?'},
+      {s:'B', cn:'不是我的。是我爸爸的。', py:'Bú shì wǒ de. Shì wǒ bàba de.', vi:'Không phải của tôi. Là của bố tôi.'},
+      {s:'A', cn:'多少钱买的？', py:'Duōshǎo qián mǎi de?', vi:'Mua bao nhiêu tiền vậy?'},
+      {s:'B', cn:'三千多块。', py:'Sānqiān duō kuài.', vi:'Hơn 3 nghìn tệ.'}
+    ]
+  },
+  {
+    title: 'Bài khóa 2: Ở nhà (在家)',
+    lines: [
+      {s:'A', cn:'这是今天早上的报纸吗？', py:'Zhè shì jīntiān zǎoshang de bàozhǐ ma?', vi:'Đây là tờ báo sáng nay phải không?'},
+      {s:'B', cn:'不是，是昨天的。', py:'Bú shì, shì zuótiān de.', vi:'Không, của ngày hôm qua đấy.'},
+      {s:'A', cn:'你听，是不是送牛奶的来了？', py:'Nǐ tīng, shì bú shì sòng niúnǎi de lái le?', vi:'Bạn nghe xem, có phải người giao sữa đến rồi không?'},
+      {s:'B', cn:'我看一下，不是，是送报纸的。', py:'Wǒ kàn yíxià, bú shì, shì sòng bàozhǐ de.', vi:'Để tôi xem chút, không phải, là người đưa báo.'}
+    ]
+  }
 ];
 
-const d2=[
-  {sp:'a',cn:'这是今天早上的报纸吗？',py:'Zhè shì jīntiān zǎoshang de bàozhǐ ma?',vi:'Đây là tờ báo sáng nay phải không?'},
-  {sp:'b',cn:'不是，是昨天的。',py:'Bú shì, shì zuótiān de.',vi:'Không, là của hôm qua.'},
-  {sp:'a',cn:'你听，是不是送牛奶的来了？',py:'Nǐ tīng, shì bú shì sòng niúnǎi de lái le?',vi:'Bạn nghe xem, có phải người giao sữa đến rồi không?'},
-  {sp:'b',cn:'我看一下，不是，是送报지의。',py:'Wǒ kàn yíxià, bú shì, shì sòng bàozhǐ de.',vi:'Để tôi xem một chút, không phải, là người đưa báo.'},
+const grammarData = [
+  {
+    n: 1, title: 'Cấu trúc "的" (Trợ từ kết cấu)',
+    patt: 'Thiết lập: Danh từ/Đại từ/Tính từ + 的',
+    note: 'Dùng để nhấn mạnh sở hữu hoặc thay thế danh từ đã được nhắc đến phía trước để tránh lặp lại.',
+    exs: [
+      {cn:'这本书是我的。', py:'Zhè běn shū shì wǒ de.', vi:'Cuốn sách này là của tôi.'},
+      {cn:'那个红色的是我的。', py:'Nàge hóngsè de shì wǒ de.', vi:'Cái màu đỏ kia là của tôi.'}
+    ]
+  },
+  {
+    n: 2, title: 'Số từ + "多" (Hơn...)',
+    patt: 'Số lượng + 多 + Lượng từ',
+    note: 'Dùng để biểu thị một số lượng ước chừng lớn hơn số được nhắc đến.',
+    exs: [
+      {cn:'十多个。', py:'Shí duō gè.', vi:'Hơn 10 cái (tầm 11-19).'},
+      {cn:'三千多块。', py:'Sānqiān duō kuài.', vi:'Hơn 3 nghìn tệ.'}
+    ]
+  }
 ];
 
-const grammar=[
-  {n:1, title:'Cấu trúc chữ "的"', pattern:'Danh từ/Đại từ + 的', note:'Dùng để thay thế danh từ đã nhắc đến.', exs:[
-    {cn:'这块手表是我的。', py:'Zhè kuài shǒubiǎo shì wǒ de.', vi:'Đồng hồ này là của tôi.'}
-  ]},
-  {n:2, title:'"一下"', pattern:'Động từ + 一下', note:'Hành động ngắn, thử nghiệm.', exs:[
-    {cn:'我看一下。', py:'Wǒ kàn yíxià.', vi:'Để tôi xem chút.'}
-  ]}
+const readingQs = [
+  {q:'哪块手表是你的？', opts:['A. 三千多块','B. 红色那个','C. 在商店','D. 我爸爸的'], ans:1},
+  {q:'送牛奶的来了吗？', opts:['A. 来了','B. 没来，是送报纸的','C. 在外面','D. 喝牛奶'], ans:1},
+  {q:'这个房间是谁的？', opts:['A. 我丈夫的','B. 旁边的','C. 很漂亮','D. 颜色'], ans:0}
 ];
 
-const readP1Data=[
-  {n:1, cn:'你喜欢什么颜色？', py:'Nǐ xǐhuān shénme yánsè?', opts:['A. 红色','B. 丈夫','C. 房间'], ans:0}
+const writingQs = [
+  {pieces:['那个','红色','是','的','我的'], ans:'那个红色的是我的'},
+  {pieces:['这块','是','手表','爸爸','的'], ans:'这块手表是爸爸的'}
 ];
 
-const reorderData=[
-  {pieces:['红色','的','那个','是','我的'], answer:'那个红色的是我的', py:'Nàge hóngsè de shì wǒ de.', vi:'Cái màu đỏ kia là của tôi.'}
-];
-
-// RENDER LOGIC (GIỮ NGUYÊN TỪ BÀI 2)
-function renderVocab(arr,id){
-  document.getElementById(id).innerHTML=arr.map((v,i)=>`
-    <div class="vc" onclick="toggleEx('${id}',${i})">
-      <div class="vc-char">${v.char}</div>
-      <div style="flex:1"><div class="vc-py">${v.py}</div><div class="vc-vi">${v.vi}</div>
-        <div class="vc-ex" id="${id}-${i}">${v.ex.replace(/\n/g,'<br>')}</div></div>
-      <div class="vc-tags"><div class="vc-pos">${v.pos}</div><div class="new-tag">★</div></div>
-    </div>`).join('');
+// RENDER FUNCTIONS
+function init(){
+  renderVocab();
+  renderDialogs();
+  renderGrammar();
+  renderReading();
+  renderWriting();
 }
-function toggleEx(id,i){document.getElementById(`${id}-${i}`).classList.toggle('open');}
 
-function renderDlg(arr,id){
-  document.getElementById(id).innerHTML=arr.map((d,i)=>`
-    <div class="dl ${i%2===1?'r':''}">
-      <div class="sp ${d.sp}">${d.sp.toUpperCase()}</div>
-      <div class="dl-body"><div class="dl-cn">${d.cn}</div><div class="dl-py">${d.py}</div><div class="dl-vi">${d.vi}</div></div>
-    </div>`).join('');
+function renderVocab(){
+  document.getElementById('vocabList').innerHTML = vocabData.map(v => `
+    <div class="vc">
+      <div class="vc-char">${v.char}</div>
+      <div class="vc-main">
+        <div class="vc-py">${v.py} <span class="vc-pos">${v.pos}</span></div>
+        <div class="vc-vi">${v.vi}</div>
+        <div style="font-size:11px; color:#999 italic">${v.ex}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderDialogs(){
+  document.getElementById('dialogsContainer').innerHTML = dialogData.map(d => `
+    <div class="dlg-card">
+      <div class="dlg-header">${d.title} <span>🔊</span></div>
+      ${d.lines.map(l => `
+        <div class="dl-row">
+          <div class="dl-sp ${l.s}">${l.s}</div>
+          <div class="dl-body">
+            <div class="dl-cn">${l.cn}</div>
+            <div class="dl-py">${l.py}</div>
+            <div class="dl-vi">${l.vi}</div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `).join('');
 }
 
 function renderGrammar(){
-  document.getElementById('gramContent').innerHTML=grammar.map(g=>`
-    <div class="gram-card">
-      <div class="gram-head"><div class="gram-n">${g.n}</div><div class="gram-title">${g.title}</div></div>
-      <div class="gram-body">
-        <div class="gram-pattern">${g.pattern}</div>
-        <div class="gram-note">${g.note}</div>
-        <div class="gram-exs">${g.exs.map(e=>`<div class="gex"><div class="gex-cn">${e.cn}</div><div class="gex-py">${e.py}</div><div class="gex-vi">${e.vi}</div></div>`).join('')}</div>
+  document.getElementById('grammarContainer').innerHTML = grammarData.map(g => `
+    <div class="gram-box">
+      <div class="gram-title"><span>${g.n}</span> ${g.title}</div>
+      <div class="gram-patt">${g.patt}</div>
+      <p style="font-size:13px; margin-bottom:10px;">${g.note}</p>
+      ${g.exs.map(e => `
+        <div style="border-left:2px solid var(--warm); padding-left:10px; margin-bottom:5px;">
+          <div style="font-size:14px; font-family:'Noto Serif SC'">${e.cn}</div>
+          <div style="font-size:12px; color:var(--red)">${e.py}</div>
+          <div style="font-size:12px; color:var(--muted)">${e.vi}</div>
+        </div>
+      `).join('')}
+    </div>
+  `).join('');
+}
+
+function renderReading(){
+  document.getElementById('readContainer').innerHTML = readingQs.map((q, i) => `
+    <div class="wb-q">
+      <div class="wb-q-title">Câu hỏi ${i+1}: ${q.q}</div>
+      <div class="opt-grid">
+        ${q.opts.map((o, idx) => `
+          <button class="opt-btn" onclick="checkRead(this, ${idx}, ${q.ans})">${o}</button>
+        `).join('')}
       </div>
-    </div>`).join('');
+    </div>
+  `).join('');
 }
 
-function renderRead(){
-  document.getElementById('readP1').innerHTML=readP1Data.map((q,i)=>`
-    <div class="match-item">
-      <div>${q.cn}</div>
-      <div>${q.opts.map((o,j)=>`<button class="mopt" onclick="this.className=( ${j}===${q.ans}?'mopt correct':'mopt wrong')">${o}</button>`).join(' ')}</div>
-    </div>`).join('');
+function checkRead(btn, idx, ans){
+  if(idx === ans) btn.className = 'opt-btn correct';
+  else btn.className = 'opt-btn wrong';
 }
 
-let roState=reorderData.map(()=>({placed:[]}));
-function renderReorder(){
-  document.getElementById('reorderCards').innerHTML=reorderData.map((r,i)=>`
-    <div class="reorder-card">
-      <div class="pieces" id="pc-${i}">${r.pieces.map((p,j)=>`<div class="piece" id="p-${i}-${j}" onclick="clickP(${i},'${p}',this)">${p}</div>`).join('')}</div>
-      <div class="ans-area" id="aa-${i}"></div>
-      <button class="mopt" onclick="checkRO(${i})">Kiểm tra</button>
-    </div>`).join('');
+let writingState = writingQs.map(q => ({placed: []}));
+
+function renderWriting(){
+  document.getElementById('writeContainer').innerHTML = writingQs.map((q, i) => `
+    <div class="wb-q">
+      <div class="wb-q-title">Sắp xếp câu ${i+1}:</div>
+      <div class="reorder-zone" id="zone-${i}"></div>
+      <div id="pieces-${i}">
+        ${q.pieces.map((p, pidx) => `<span class="word-piece" id="p-${i}-${pidx}" onclick="placeWord(${i}, ${pidx}, '${p}')">${p}</span>`).join(' ')}
+      </div>
+      <button class="opt-btn" style="margin-top:10px; width:100%; text-align:center;" onclick="checkWrite(${i})">Kiểm tra đáp án</button>
+    </div>
+  `).join('');
 }
-function clickP(ci,w,el){ if(el.classList.contains('used'))return; el.classList.add('used'); roState[ci].placed.push(w); renderAA(ci);}
-function renderAA(ci){ document.getElementById(`aa-${ci}`).innerHTML=roState[ci].placed.map(w=>`<span class="placed">${w}</span>`).join(' ');}
-function checkRO(i){ if(roState[i].placed.join('')===reorderData[i].answer.replace(/\s/g,'')) alert('Chính xác!'); else alert('Thử lại nhé!');}
+
+function placeWord(qi, pi, word){
+  writingState[qi].placed.push({id: pi, word: word});
+  document.getElementById(`p-${qi}-${pi}`).classList.add('used');
+  updateZone(qi);
+}
+
+function updateZone(qi){
+  const zone = document.getElementById(`zone-${qi}`);
+  zone.innerHTML = writingState[qi].placed.map((item, idx) => `
+    <span class="placed-word" onclick="removeWord(${qi}, ${idx})">${item.word}</span>
+  `).join('');
+}
+
+function removeWord(qi, idx){
+  const item = writingState[qi].placed[idx];
+  document.getElementById(`p-${qi}-${item.id}`).classList.remove('used');
+  writingState[qi].placed.splice(idx, 1);
+  updateZone(qi);
+}
+
+function checkWrite(qi){
+  const userAns = writingState[qi].placed.map(i => i.word).join('');
+  if(userAns === writingQs[qi].ans.replace(/\s/g,'')) alert('Chính xác! 太棒 rồi!');
+  else alert('Chưa đúng, hãy thử lại nhé.');
+}
 
 // TABS LOGIC
-document.querySelectorAll('.tab[data-tab]').forEach(tab=>{
-  tab.addEventListener('click',function(){
-    const name=this.getAttribute('data-tab');
-    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-    document.getElementById('sec-'+name).classList.add('active');
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', function(){
+    const target = this.getAttribute('data-tab');
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
     this.classList.add('active');
+    document.getElementById('sec-' + target).classList.add('active');
   });
 });
 
-// INIT
-renderVocab(vNew,'vNew');
-renderDlg(d1,'dlg1');
-renderDlg(d2,'dlg2');
-renderGrammar();
-renderRead();
-renderReorder();
+init();
 </script>
 </body>
 </html>

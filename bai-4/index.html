@@ -1,1 +1,852 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HSK 2 — Bài 4: 这工作是他帮我介绍的</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Lora:ital,wght@0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pri:#1A5C3A;--pri-l:#edf7f1;--pri-d:#134530;
+  --gold:#C8900A;--gold-bg:#FFF8E6;
+  --ink:#18130E;--rice:#F8F4EE;--warm:#EDE4D5;--muted:#7D6B52;
+  --accent:#1E5F8A;--accent-bg:#EEF5FB;
+  --green:#1E7A45;--green-bg:#EBF7F0;
+  --purple:#5B3FA6;--purple-bg:#F0ECFB;--purple-l:#e8e0fa;
+  --red:#B5281C;--red-l:#fdf2f1;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--rice);color:var(--ink);font-family:'DM Sans',sans-serif;overflow-x:hidden;}
+
+.hero{background:linear-gradient(135deg,var(--pri-d) 0%,var(--pri) 100%);padding:40px 20px 32px;text-align:center;position:relative;overflow:hidden;}
+.hero::after{content:'介绍';position:absolute;font-family:'Noto Serif SC',serif;font-size:160px;color:rgba(255,255,255,0.05);right:-10px;bottom:-20px;line-height:1;pointer-events:none;}
+.hero-back{display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,0.75);font-size:12px;text-decoration:none;margin-bottom:12px;padding:4px 12px;border-radius:20px;border:1px solid rgba(255,255,255,0.25);transition:all .2s;}
+.hero-back:hover{background:rgba(255,255,255,0.12);color:white;}
+.hero-badge{display:inline-block;background:var(--gold);color:#1a0a00;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 14px;border-radius:20px;margin-bottom:12px;}
+.hero h1{font-family:'Noto Serif SC',serif;font-size:clamp(16px,3.8vw,30px);color:white;margin-bottom:5px;line-height:1.4;}
+.hero-en{font-family:'Lora',serif;font-style:italic;font-size:13px;color:rgba(255,255,255,0.6);margin-bottom:16px;}
+.hero-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;}
+.hero-pill{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.85);font-size:11px;padding:3px 11px;border-radius:20px;}
+
+.prog-wrap{height:5px;background:var(--warm);position:sticky;top:0;z-index:100;}
+.prog-bar{height:100%;background:linear-gradient(90deg,var(--pri),var(--gold));transition:width .5s;}
+
+.tabs-wrap{background:white;border-bottom:2px solid var(--warm);position:sticky;top:5px;z-index:99;overflow-x:auto;scrollbar-width:none;}
+.tabs-wrap::-webkit-scrollbar{display:none;}
+.tabs{display:flex;min-width:max-content;}
+.tab-sep{width:2px;background:var(--warm);flex-shrink:0;margin:6px 0;}
+.tab-label{padding:10px 8px 10px 12px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);opacity:.7;display:flex;align-items:center;white-space:nowrap;border-bottom:3px solid transparent;margin-bottom:-2px;}
+.tab{flex-shrink:0;padding:10px 13px;font-size:12px;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;white-space:nowrap;}
+.tab:hover{color:var(--pri);}
+.tab.active{color:var(--pri);border-bottom-color:var(--pri);}
+.tab.wb:hover{color:var(--purple);}
+.tab.wb.active{color:var(--purple);border-bottom-color:var(--purple);}
+
+.section{display:none;padding:20px 16px 40px;max-width:740px;margin:0 auto;}
+.section.active{display:block;animation:rise .3s ease;}
+@keyframes rise{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+.book-banner{padding:7px 16px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-align:center;border-radius:8px;margin-bottom:16px;}
+.book-banner.tb{background:var(--pri-l);color:var(--pri);}
+.book-banner.wb{background:var(--purple-bg);color:var(--purple);}
+
+.sec-title{font-family:'Lora',serif;font-size:19px;color:var(--pri);margin-bottom:3px;}
+.sec-title.wb{color:var(--purple);}
+.sec-desc{font-size:12px;color:var(--muted);margin-bottom:16px;line-height:1.6;}
+
+/* VOCAB */
+.ctx-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:9px;padding-bottom:5px;border-bottom:1px solid var(--warm);}
+.ctx-sec{margin-bottom:20px;}
+.vlist{display:flex;flex-direction:column;gap:8px;}
+.vc{background:white;border:1px solid var(--warm);border-radius:11px;padding:12px 14px;display:grid;grid-template-columns:72px 1fr auto;align-items:center;gap:12px;cursor:pointer;transition:all .18s;box-shadow:0 1px 5px rgba(0,0,0,.04);}
+.vc:hover{border-color:var(--pri);box-shadow:0 3px 12px rgba(26,92,58,.12);}
+.vc-char{font-family:'Noto Serif SC',serif;font-size:26px;color:var(--pri);text-align:center;line-height:1.2;}
+.vc-py{font-size:12px;color:var(--accent);font-weight:500;margin-bottom:2px;}
+.vc-vi{font-size:13px;color:var(--ink);font-weight:500;}
+.vc-ex{font-size:11px;color:var(--muted);margin-top:5px;line-height:1.6;display:none;grid-column:1/-1;background:var(--rice);border-radius:6px;padding:7px 10px;}
+.vc-ex.open{display:block;}
+.vc-pos{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:2px 7px;border-radius:10px;background:var(--warm);color:var(--muted);align-self:flex-start;white-space:nowrap;}
+.new-tag{font-size:9px;font-weight:700;background:var(--pri);color:white;padding:2px 6px;border-radius:8px;text-transform:uppercase;}
+.vc-tags{display:flex;flex-direction:column;gap:3px;align-items:flex-end;}
+
+/* DIALOG */
+.dlg-box{background:white;border-radius:12px;border:1px solid var(--warm);overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.04);margin-bottom:14px;}
+.dlg-head{background:var(--pri);color:white;padding:9px 15px;font-size:12px;font-weight:500;display:flex;align-items:center;justify-content:space-between;}
+.scene-tag{font-size:10px;background:rgba(255,255,255,.18);padding:2px 8px;border-radius:8px;}
+.dl{display:flex;gap:10px;padding:12px 14px;border-bottom:1px solid var(--warm);align-items:flex-start;}
+.dl:last-child{border-bottom:none;}
+.dl:hover{background:var(--rice);}
+.dl.r{flex-direction:row-reverse;}
+.sp{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif SC',serif;font-size:11px;font-weight:700;color:white;flex-shrink:0;}
+.sp.a{background:var(--pri);}
+.sp.b{background:var(--accent);}
+.dl-body{flex:1;}
+.dl.r .dl-body{text-align:right;}
+.dl-cn{font-family:'Noto Serif SC',serif;font-size:17px;color:var(--ink);line-height:1.4;margin-bottom:2px;}
+.dl-py{font-size:11px;color:var(--accent);margin-bottom:1px;}
+.dl-vi{font-size:11px;color:var(--muted);}
+
+/* GRAMMAR */
+.gram-card{background:white;border-radius:12px;border:1px solid var(--warm);margin-bottom:13px;overflow:hidden;}
+.gram-head{background:var(--ink);color:white;padding:11px 15px;display:flex;align-items:center;gap:9px;}
+.gram-n{width:24px;height:24px;border-radius:50%;background:var(--gold);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;}
+.gram-title{font-size:13px;font-weight:500;line-height:1.4;}
+.gram-body{padding:15px;}
+.gram-pattern{background:var(--gold-bg);border-left:4px solid var(--gold);padding:8px 12px;border-radius:0 7px 7px 0;font-family:'Noto Serif SC',serif;font-size:14px;margin-bottom:10px;}
+.gram-note{font-size:12px;color:#333;line-height:1.75;margin-bottom:10px;}
+.gram-neg{background:#fdf4f3;border-radius:6px;padding:7px 11px;font-size:12px;color:#922;margin-bottom:10px;border-left:3px solid var(--red);white-space:pre-line;}
+.gram-exs{display:flex;flex-direction:column;gap:6px;}
+.gex{background:var(--rice);border-radius:7px;padding:8px 11px;}
+.gex-cn{font-family:'Noto Serif SC',serif;font-size:15px;color:var(--ink);}
+.gex-cn mark{background:transparent;color:var(--pri);font-weight:700;}
+.gex-py{font-size:11px;color:var(--accent);margin:2px 0;}
+.gex-vi{font-size:11px;color:var(--muted);}
+
+/* HANZI */
+.hz-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:8px;}
+.hz-card{background:white;border:1px solid var(--warm);border-radius:10px;padding:11px 5px;text-align:center;cursor:pointer;transition:all .18s;}
+.hz-card:hover,.hz-card.sel{border-color:var(--pri);background:var(--pri-l);}
+.hz-ch{font-family:'Noto Serif SC',serif;font-size:32px;color:var(--pri);}
+.hz-py{font-size:10px;color:var(--accent);margin-top:3px;}
+.hz-vi{font-size:10px;color:var(--muted);}
+.hz-detail{background:white;border-radius:11px;border:1px solid var(--warm);padding:14px;margin-bottom:12px;display:none;}
+.hz-detail.show{display:flex;gap:14px;align-items:flex-start;}
+.hz-big{font-family:'Noto Serif SC',serif;font-size:68px;color:var(--pri);line-height:1;flex-shrink:0;}
+.hz-py-big{font-size:16px;color:var(--accent);font-weight:500;margin-bottom:3px;}
+.hz-vi-big{font-size:13px;font-weight:600;margin-bottom:4px;}
+.hz-strokes{font-size:11px;color:var(--muted);}
+.hz-tip{font-size:11px;color:#444;line-height:1.6;margin-top:4px;}
+
+/* TIPS */
+.tip{background:var(--gold-bg);border-left:4px solid var(--gold);border-radius:0 9px 9px 0;padding:10px 13px;font-size:12px;color:#5c3d00;line-height:1.7;margin:13px 0;}
+.tip strong{color:#3a2600;}
+.note-box{background:var(--accent-bg);border-left:4px solid var(--accent);border-radius:0 9px 9px 0;padding:10px 13px;font-size:12px;color:#0e3555;line-height:1.7;margin:12px 0;}
+
+/* WORKBOOK */
+.wb-section-title{font-size:14px;font-weight:700;color:var(--purple);margin:20px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--purple-bg);}
+.wb-part-desc{font-size:11px;color:var(--muted);margin-bottom:10px;line-height:1.5;}
+.answer-note{background:var(--purple-bg);border-radius:9px;padding:10px 13px;font-size:12px;color:var(--purple);margin-bottom:14px;line-height:1.6;}
+
+.script-card{background:white;border:1px solid var(--warm);border-radius:10px;overflow:hidden;margin-bottom:8px;}
+.script-item{display:flex;gap:10px;padding:10px 13px;border-bottom:1px solid var(--warm);align-items:flex-start;}
+.script-item:last-child{border-bottom:none;}
+.script-num{width:22px;height:22px;border-radius:50%;background:var(--purple);color:white;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.script-body{flex:1;}
+.script-cn{font-family:'Noto Serif SC',serif;font-size:15px;color:var(--ink);line-height:1.5;white-space:pre-line;}
+.script-py{font-size:11px;color:var(--accent);margin-top:2px;white-space:pre-line;}
+.script-vi{font-size:11px;color:var(--muted);margin-top:1px;white-space:pre-line;}
+.script-ans{font-size:11px;color:var(--purple);margin-top:5px;font-weight:600;}
+
+.read-passage{background:white;border:1px solid var(--warm);border-radius:11px;padding:14px 16px;margin-bottom:12px;}
+.read-cn{font-family:'Noto Serif SC',serif;font-size:16px;color:var(--ink);line-height:1.9;margin-bottom:6px;}
+.read-py{font-size:11px;color:var(--accent);line-height:1.8;margin-bottom:4px;}
+.read-vi{font-size:11px;color:var(--muted);line-height:1.7;}
+
+.match-item{background:white;border:1.5px solid var(--warm);border-radius:10px;padding:11px 13px;margin-bottom:8px;}
+.match-num{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:5px;}
+.match-cn{font-family:'Noto Serif SC',serif;font-size:16px;color:var(--ink);margin-bottom:2px;}
+.match-py{font-size:11px;color:var(--accent);margin-bottom:8px;}
+.match-opts{display:flex;flex-wrap:wrap;gap:6px;}
+.mopt{border:1.5px solid var(--warm);background:var(--rice);border-radius:7px;padding:6px 11px;font-size:12px;cursor:pointer;transition:all .18s;text-align:left;}
+.mopt:hover:not(.done){border-color:var(--purple);background:var(--purple-bg);}
+.mopt.correct{border-color:var(--green);background:var(--green-bg);color:var(--green);font-weight:600;}
+.mopt.wrong{border-color:var(--red);background:var(--red-l);color:var(--red);}
+.mopt.done{cursor:default;}
+.match-fb{margin-top:7px;font-size:11px;line-height:1.5;display:none;padding:6px 9px;border-radius:6px;}
+.match-fb.show{display:block;}
+.match-fb.ok{background:var(--green-bg);color:var(--green);}
+.match-fb.no{background:var(--red-l);color:var(--red);}
+
+.tf-card{background:white;border:1.5px solid var(--warm);border-radius:10px;padding:12px 14px;margin-bottom:8px;}
+.tf-q{font-family:'Noto Serif SC',serif;font-size:16px;color:var(--ink);margin-bottom:2px;}
+.tf-py{font-size:11px;color:var(--accent);margin-bottom:3px;}
+.tf-vi{font-size:11px;color:var(--muted);margin-bottom:9px;}
+.tf-btns{display:flex;gap:7px;}
+.tf-btn{flex:1;padding:8px;border-radius:7px;border:1.5px solid var(--warm);background:var(--rice);font-size:13px;font-weight:600;cursor:pointer;transition:all .18s;}
+.tf-btn:hover:not(.done){border-color:var(--purple);background:var(--purple-bg);}
+.tf-btn.correct{border-color:var(--green);background:var(--green-bg);color:var(--green);}
+.tf-btn.wrong{border-color:var(--red);background:var(--red-l);color:var(--red);}
+.tf-btn.done{cursor:default;}
+.tf-fb{margin-top:8px;font-size:11px;line-height:1.5;display:none;padding:6px 9px;border-radius:6px;}
+.tf-fb.show{display:block;}
+.tf-fb.ok{background:var(--green-bg);color:var(--green);}
+.tf-fb.no{background:var(--red-l);color:var(--red);}
+
+.pron-card{background:white;border:1px solid var(--warm);border-radius:10px;padding:14px;margin-bottom:10px;}
+.pron-instr{font-size:12px;color:var(--muted);margin-bottom:10px;line-height:1.6;}
+.pron-grid{display:flex;flex-wrap:wrap;gap:8px;}
+.pw{background:var(--rice);border:1px solid var(--warm);border-radius:7px;padding:7px 12px;text-align:center;}
+.pw-num{font-size:10px;color:var(--muted);}
+.pw-cn{font-family:'Noto Serif SC',serif;font-size:14px;color:var(--ink);}
+.pw-py{font-size:10px;color:var(--accent);}
+.answer-key{background:var(--purple-bg);border-radius:10px;padding:12px 14px;margin-top:10px;}
+.ak-title{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--purple);margin-bottom:8px;}
+.ak-row{display:flex;flex-wrap:wrap;gap:6px;}
+.ak-item{background:white;border:1px solid var(--purple-l);border-radius:6px;padding:4px 10px;font-size:12px;font-weight:600;color:var(--purple);}
+
+.reorder-card{background:white;border:1.5px solid var(--warm);border-radius:10px;padding:13px;margin-bottom:8px;}
+.pieces{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:9px;}
+.piece{background:var(--purple-bg);border:1.5px solid #d4c8f8;border-radius:6px;padding:5px 11px;font-family:'Noto Serif SC',serif;font-size:14px;color:var(--purple);cursor:pointer;user-select:none;transition:all .18s;}
+.piece:hover:not(.used){border-color:var(--purple);background:#e5dcfa;}
+.piece.used{opacity:.3;cursor:default;}
+.ans-area{min-height:38px;border:2px dashed var(--warm);border-radius:7px;padding:6px 10px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px;}
+.ans-area.has{border-color:var(--purple);}
+.placed{background:var(--purple);color:white;border-radius:6px;padding:5px 11px;font-family:'Noto Serif SC',serif;font-size:14px;cursor:pointer;transition:all .18s;}
+.placed:hover{background:var(--red);}
+.ro-ph{font-size:11px;color:var(--muted);font-style:italic;}
+.ro-result{font-size:11px;line-height:1.5;display:none;padding:6px 9px;border-radius:6px;margin-top:7px;}
+.ro-result.show{display:block;}
+.ro-result.ok{background:var(--green-bg);color:var(--green);}
+.ro-result.no{background:var(--red-l);color:var(--red);}
+.ro-btns{display:flex;gap:7px;margin-top:9px;}
+.btn-sm{background:transparent;color:var(--purple);border:1.5px solid var(--purple);padding:5px 11px;font-size:11px;border-radius:6px;cursor:pointer;transition:all .18s;}
+.btn-sm:hover{background:var(--purple);color:white;}
+
+.score-card{background:var(--ink);color:white;border-radius:12px;padding:22px 18px;text-align:center;display:none;margin-top:16px;}
+.score-card.show{display:block;animation:rise .4s ease;}
+.sc-big{font-family:'Noto Serif SC',serif;font-size:48px;color:var(--gold);margin:6px 0;}
+.sc-text{font-size:12px;color:rgba(255,255,255,.65);margin-bottom:14px;line-height:1.6;}
+.btn-ow{background:transparent;color:white;border:1.5px solid rgba(255,255,255,.4);padding:8px 18px;font-size:12px;border-radius:7px;cursor:pointer;}
+
+.nav-btns{display:flex;gap:10px;margin-top:24px;padding-top:16px;border-top:1px solid var(--warm);}
+.nav-btn{flex:1;padding:10px;border-radius:9px;font-size:12px;font-weight:500;cursor:pointer;text-align:center;text-decoration:none;border:1.5px solid var(--warm);background:white;color:var(--muted);transition:all .18s;}
+.nav-btn:hover{border-color:var(--pri);color:var(--pri);}
+.nav-btn.next{background:var(--pri);color:white;border-color:var(--pri);}
+
+@media(max-width:480px){.vc{grid-template-columns:60px 1fr;}.vc-tags .vc-pos{display:none;}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div><a class="hero-back" href="../index.html">← Danh sách bài học</a></div>
+  <div class="hero-badge">HSK Standard Course 2 · 标准教程 · 第4课</div>
+  <h1>这工作是他帮我介绍的</h1>
+  <div class="hero-en">He recommended me for this job</div>
+  <div class="hero-pills">
+    <div class="hero-pill">📗 Sách giáo khoa</div>
+    <div class="hero-pill">📘 Sách bài tập BLCU</div>
+    <div class="hero-pill">12 từ mới</div>
+    <div class="hero-pill">3 ngữ pháp</div>
+    <div class="hero-pill">Nghe 3 phần · Đọc 4 phần</div>
+  </div>
+</div>
+
+<div class="prog-wrap"><div class="prog-bar" id="progBar" style="width:10%"></div></div>
+
+<div class="tabs-wrap">
+  <div class="tabs">
+    <div class="tab-label">📗 Sách GK</div>
+    <div class="tab active" data-tab="vocab">📝 Từ mới</div>
+    <div class="tab" data-tab="dialog">💬 Hội thoại</div>
+    <div class="tab" data-tab="grammar">📖 Ngữ pháp</div>
+    <div class="tab" data-tab="hanzi">✍️ Chữ Hán</div>
+    <div class="tab-sep"></div>
+    <div class="tab-label">📘 Bài tập</div>
+    <div class="tab wb" data-tab="wb-listen">🎧 Nghe</div>
+    <div class="tab wb" data-tab="wb-read">📄 Đọc</div>
+    <div class="tab wb" data-tab="wb-pron">🔊 Phát âm</div>
+    <div class="tab wb" data-tab="wb-write">✏️ Viết câu</div>
+  </div>
+</div>
+
+<!-- ═══ SÁCH GIÁO KHOA ═══ -->
+
+<div class="section active" id="sec-vocab">
+  <div class="book-banner tb">📗 SÁCH GIÁO KHOA — 教材</div>
+  <div class="sec-title">📝 Từ mới — 新词语</div>
+  <div class="sec-desc">12 từ mới HSK2 (★) trong bài 4. Nhấn vào thẻ để xem ví dụ. Chủ đề: Công việc, Mối quan hệ & Sinh nhật.</div>
+  <div class="tip">💡 <strong>Chủ đề bài 4:</strong> Giới thiệu công việc, kỷ niệm sinh nhật, mối quan hệ bạn bè/đồng nghiệp — ngữ pháp trọng tâm là cấu trúc <strong>是…的</strong> nhấn mạnh.</div>
+  <div class="ctx-sec">
+    <div class="ctx-label">★ Từ mới bài 4 — 12 từ chính</div>
+    <div class="vlist" id="vNew"></div>
+  </div>
+  <div class="ctx-sec">
+    <div class="ctx-label">Từ HSK1 ôn lại trong bài 4</div>
+    <div class="vlist" id="vReview"></div>
+  </div>
+  <div class="nav-btns">
+    <a class="nav-btn" href="../bai-3/index.html">← Bài 3</a>
+    <a class="nav-btn next" href="../bai-5/index.html">Bài 5 →</a>
+  </div>
+</div>
+
+<div class="section" id="sec-dialog">
+  <div class="book-banner tb">📗 SÁCH GIÁO KHOA — 教材</div>
+  <div class="sec-title">💬 Hội thoại — 课文</div>
+  <div class="sec-desc">Hai đoạn hội thoại chính thức HSK Standard Course 2 — Bài 4.</div>
+  <div class="dlg-box">
+    <div class="dlg-head">对话一：问关于工作 <span class="scene-tag">📍 Hỏi về công việc</span></div>
+    <div id="dlg1"></div>
+  </div>
+  <div class="tip">💡 <strong>是…的 nhấn mạnh:</strong> "这工作<strong>是他帮我介绍的</strong>" — nhấn mạnh vào <em>ai giới thiệu</em> công việc này. Sự việc đã xảy ra rồi, cấu trúc 是…的 dùng để làm rõ hoàn cảnh (ai/khi nào/bằng cách nào).</div>
+  <div class="dlg-box">
+    <div class="dlg-head">对话二：生日快乐 <span class="scene-tag">🎂 Sinh nhật</span></div>
+    <div id="dlg2"></div>
+  </div>
+  <div class="note-box">🔔 <strong>送 (sòng) vs 给 (gěi):</strong> 送 = tặng quà (tình cảm), 给 = đưa/cho (trung lập). "我送你一个生日礼物" nghe tự nhiên hơn "我给你一个礼物" trong ngữ cảnh tặng quà sinh nhật.</div>
+</div>
+
+<div class="section" id="sec-grammar">
+  <div class="book-banner tb">📗 SÁCH GIÁO KHOA — 教材</div>
+  <div class="sec-title">📖 Ngữ pháp — 语法</div>
+  <div class="sec-desc">3 điểm ngữ pháp chính thức HSK Standard Course 2 — Bài 4. Bài này có ngữ pháp quan trọng nhất HSK2: <strong>是…的句</strong>.</div>
+  <div id="gramContent"></div>
+</div>
+
+<div class="section" id="sec-hanzi">
+  <div class="book-banner tb">📗 SÁCH GIÁO KHOA — 教材</div>
+  <div class="sec-title">✍️ Chữ Hán — 汉字</div>
+  <div class="sec-desc">Nhấn vào từng chữ để xem chi tiết nét viết và ghi nhớ.</div>
+  <div class="hz-detail" id="hzDetail">
+    <div class="hz-big" id="hzBig"></div>
+    <div><div class="hz-py-big" id="hzPy"></div><div class="hz-vi-big" id="hzVi"></div><div class="hz-strokes" id="hzSt"></div><div class="hz-tip" id="hzTip"></div></div>
+  </div>
+  <div class="hz-grid" id="hzGrid"></div>
+  <div class="tip" style="margin-top:14px">💡 <strong>Bộ 讠(lời nói):</strong> Bộ thủ này xuất hiện trong nhiều từ liên quan đến ngôn ngữ/giao tiếp: 认(nhận), 识(biết), 说(nói), 请(mời), 谢(cảm ơn), 话(lời nói), 语(ngôn ngữ). Bài 4 có 认识 — nhận biết bộ 讠 rất hữu ích!</div>
+</div>
+
+<!-- ═══ SÁCH BÀI TẬP ═══ -->
+
+<div class="section" id="sec-wb-listen">
+  <div class="book-banner wb">📘 SÁCH BÀI TẬP — 练习册 · 一、听力 (Nghe)</div>
+  <div class="sec-title wb">🎧 Luyện nghe — 听力练习</div>
+  <div class="sec-desc">Script chính thức từ 《HSK标准教程2练习册》BLCU Press. Audio: tìm "HSK标准教程2练习册音频".</div>
+
+  <div class="answer-note">📌 <strong>Đáp án bài 4:</strong> 1-5: √ × √ × √ &nbsp;|&nbsp; 6-10: C F E A B &nbsp;|&nbsp; 11-15: A B C B A</div>
+
+  <div class="wb-section-title">第一部分 — Phần 1 (Câu 1–5)</div>
+  <div class="wb-part-desc">Nghe câu đơn, phán đoán hình ảnh Đúng (√) hay Sai (×)</div>
+  <div class="script-card" id="listenP1"></div>
+
+  <div class="wb-section-title">第二部分 — Phần 2 (Câu 6–10)</div>
+  <div class="wb-part-desc">Nghe hội thoại ngắn, chọn hình ảnh đúng (A–F)</div>
+  <div class="script-card" id="listenP2"></div>
+
+  <div class="wb-section-title">第三部分 — Phần 3 (Câu 11–15)</div>
+  <div class="wb-part-desc">Nghe hội thoại, trả lời câu hỏi (chọn A–F)</div>
+  <div class="script-card" id="listenP3"></div>
+
+  <div class="tip" style="margin-top:14px">💡 <strong>Nghe phần 3:</strong> Chú ý câu hỏi <strong>是谁、什么时候、怎么认识的</strong> — đây là các câu hỏi liên quan trực tiếp đến cấu trúc 是…的 trong bài 4.</div>
+</div>
+
+<div class="section" id="sec-wb-read">
+  <div class="book-banner wb">📘 SÁCH BÀI TẬP — 练习册 · 二、阅读 (Đọc)</div>
+  <div class="sec-title wb">📄 Đọc hiểu — 阅读练习</div>
+  <div class="sec-desc">4 phần đọc hiểu theo đúng cấu trúc đề thi HSK2.</div>
+  <div class="answer-note">📌 <strong>Đáp án bài 4:</strong> 16-20: √ × √ × √ &nbsp;|&nbsp; 21-25: B C A F D &nbsp;|&nbsp; 26-30: √ √ × √ × &nbsp;|&nbsp; 31-35: B C F A D</div>
+
+  <div class="wb-section-title">第一部分 — Phần 1 (Câu 16–20)</div>
+  <div class="wb-part-desc">Đọc câu, chọn hình ảnh phù hợp (A–F)</div>
+  <div id="readP1"></div>
+
+  <div class="wb-section-title">第二部分 — Phần 2 (Câu 21–25)</div>
+  <div class="wb-part-desc">Đọc câu A, chọn câu B trả lời phù hợp</div>
+  <div id="readP2"></div>
+
+  <div class="wb-section-title">第三部分 — Phần 3 (Câu 26–30)</div>
+  <div class="wb-part-desc">Đọc đoạn văn, phán đoán Đúng (√) hay Sai (×)</div>
+  <div class="read-passage">
+    <div class="read-cn">今天是大卫的生日，安娜给他买了一个蛋糕，小明帮他介绍了一份新工作，大家都来祝他生日快乐。</div>
+    <div class="read-py">Jīntiān shì Dàwèi de shēngrì, Ānnà gěi tā mǎi le yī ge dàngāo, Xiǎomíng bāng tā jièshào le yī fèn xīn gōngzuò, dàjiā dōu lái zhù tā shēngrì kuàilè.</div>
+    <div class="read-vi">Hôm nay là sinh nhật David, Anna mua cho anh ấy một cái bánh kem, Tiểu Minh giúp anh ấy giới thiệu một công việc mới, mọi người đều đến chúc anh ấy sinh nhật vui vẻ.</div>
+  </div>
+  <div id="readP3"></div>
+
+  <div class="wb-section-title">第四部分 — Phần 4 (Câu 31–35)</div>
+  <div class="wb-part-desc">Đọc câu A, chọn câu B hoàn chỉnh hội thoại phù hợp nhất</div>
+  <div id="readP4"></div>
+
+  <div class="score-card" id="readScore">
+    <div style="font-size:11px;color:rgba(255,255,255,.6)">Kết quả — 二、阅读</div>
+    <div class="sc-big" id="readScoreBig"></div>
+    <div class="sc-text" id="readScoreTxt"></div>
+    <button class="btn-ow" onclick="resetRead()">🔄 Làm lại</button>
+  </div>
+</div>
+
+<div class="section" id="sec-wb-pron">
+  <div class="book-banner wb">📘 SÁCH BÀI TẬP — 练习册 · 三、语音 (Phát âm)</div>
+  <div class="sec-title wb">🔊 Luyện phát âm — 语音练习</div>
+  <div class="sec-desc">2 bài luyện phát âm chính thức từ sách bài tập HSK2 Bài 4 — BLCU Press.</div>
+
+  <div class="wb-section-title">第1题 — Bài 1: Nghe và nhận biết trọng âm câu</div>
+  <div class="pron-card">
+    <div class="pron-instr">听录音，注意每个句子中重读的部分 — Nghe, chú ý phần được nhấn mạnh trong mỗi câu. Phần in đậm = vị trí trọng âm câu.</div>
+    <div class="pron-grid" id="pronP1"></div>
+  </div>
+
+  <div class="wb-section-title" style="margin-top:20px">第2题 — Bài 2: Nghe và đọc theo, chú ý trọng âm</div>
+  <div class="pron-card">
+    <div class="pron-instr">听录音并跟读下列句子，注意重读的部分 — Nghe và đọc theo các câu dưới đây, chú ý phần trọng âm.</div>
+    <div class="pron-grid" id="pronP2"></div>
+  </div>
+  <div class="tip">💡 <strong>Trọng âm câu (句重音):</strong> Trong tiếng Trung, trọng âm câu thường rơi vào từ mang thông tin MỚI hoặc QUAN TRỌNG nhất. Câu trả lời "是<strong>小明</strong>帮我介绍的" — nhấn mạnh "小明" vì đó là thông tin người hỏi muốn biết.</div>
+</div>
+
+<div class="section" id="sec-wb-write">
+  <div class="book-banner wb">📘 SÁCH BÀI TẬP — 练习册 · 四、书写 (Viết)</div>
+  <div class="sec-title wb">✏️ Sắp xếp câu — 连词成句</div>
+  <div class="sec-desc">Sắp xếp các từ thành câu đúng. Nhấn từng mảnh để đặt vào câu, nhấn lại để bỏ ra.</div>
+  <div id="reorderCards"></div>
+  <div class="score-card" id="writeScore">
+    <div style="font-size:11px;color:rgba(255,255,255,.6)">Kết quả — 四、书写</div>
+    <div class="sc-big" id="writeBig"></div>
+    <div class="sc-text" id="writeTxt"></div>
+    <button class="btn-ow" onclick="resetWrite()">🔄 Làm lại</button>
+  </div>
+</div>
+
+<script>
+// ════════════════
+// DATA
+// ════════════════
+const vNew=[
+  {char:'介绍',py:'jièshào',vi:'Giới thiệu',pos:'Động từ',ex:'这工作是他帮我介绍的。\nZhè gōngzuò shì tā bāng wǒ jièshào de.\nCông việc này là do anh ấy giới thiệu cho tôi.\n→ 介绍一下 = giới thiệu một chút'},
+  {char:'帮助',py:'bāngzhù',vi:'Giúp đỡ',pos:'Động-Danh từ',ex:'谢谢你帮助我！\nXièxie nǐ bāngzhù wǒ!\nCảm ơn bạn đã giúp đỡ tôi!\n→ 帮 (bāng) cũng dùng một mình: 帮我介绍'},
+  {char:'认识',py:'rènshi',vi:'Biết / Quen biết',pos:'Động từ',ex:'你认识他吗？我们是大学同学。\nNǐ rènshi tā ma? Wǒmen shì dàxué tóngxué.\nBạn có biết anh ấy không? Chúng tôi là bạn cùng lớp đại học.'},
+  {char:'非常',py:'fēicháng',vi:'Rất / Vô cùng',pos:'Phó từ',ex:'我非常喜欢这份工作。\nWǒ fēicháng xǐhuān zhè fèn gōngzuò.\nTôi vô cùng thích công việc này.\n→ 非常 mạnh hơn 很, nhưng yếu hơn 太'},
+  {char:'工作',py:'gōngzuò',vi:'Công việc / Làm việc',pos:'Danh-Động từ',ex:'你在哪儿工作？\nNǐ zài nǎr gōngzuò?\nBạn làm việc ở đâu?\n→ vừa là danh từ (một công việc) vừa là động từ (làm việc)'},
+  {char:'生日',py:'shēngrì',vi:'Sinh nhật',pos:'Danh từ',ex:'今天是我的生日！\nJīntiān shì wǒ de shēngrì!\nHôm nay là sinh nhật của tôi!'},
+  {char:'快乐',py:'kuàilè',vi:'Vui vẻ / Hạnh phúc',pos:'Tính từ',ex:'生日快乐！\nShēngrì kuàilè!\nChúc mừng sinh nhật! (Chúc sinh nhật vui vẻ!)'},
+  {char:'给',py:'gěi',vi:'Cho / Tặng / Đưa',pos:'Động-Giới từ',ex:'我给你买了一个礼物。\nWǒ gěi nǐ mǎi le yī ge lǐwù.\nTôi mua cho bạn một món quà.\n→ 给 đứng trước tân ngữ người: 给你/给他/给我'},
+  {char:'送',py:'sòng',vi:'Tặng (quà) / Tiễn',pos:'Động từ',ex:'我送你一个生日礼物。\nWǒ sòng nǐ yī ge shēngrì lǐwù.\nTôi tặng bạn một món quà sinh nhật.\n→ 送礼物=tặng quà; 送人=tiễn người'},
+  {char:'告诉',py:'gàosù',vi:'Nói cho biết / Thông báo',pos:'Động từ',ex:'你告诉我他叫什么名字？\nNǐ gàosù wǒ tā jiào shénme míngzi?\nBạn nói cho tôi biết anh ấy tên gì?'},
+  {char:'同学',py:'tóngxué',vi:'Bạn cùng lớp / Đồng học',pos:'Danh từ',ex:'我们是大学同学，认识十年了。\nWǒmen shì dàxué tóngxué, rènshi shí nián le.\nChúng tôi là bạn cùng lớp đại học, quen biết được 10 năm rồi.'},
+  {char:'打电话',py:'dǎ diànhuà',vi:'Gọi điện thoại',pos:'Cụm ĐT',ex:'你什么时候给我打电话？\nNǐ shénme shíhou gěi wǒ dǎ diànhuà?\nKhi nào bạn gọi điện cho tôi?'},
+];
+
+const vReview=[
+  {char:'工作',py:'gōngzuò',vi:'Công việc (HSK1)',pos:'Danh từ',ex:'你在哪儿工作？ Bạn làm việc ở đâu?'},
+  {char:'电话',py:'diànhuà',vi:'Điện thoại (HSK1)',pos:'Danh từ',ex:'打电话=gọi điện; 电话号码=số điện thoại'},
+  {char:'生日',py:'shēngrì',vi:'Sinh nhật (HSK1)',pos:'Danh từ',ex:'生日快乐！Chúc mừng sinh nhật!'},
+  {char:'认识',py:'rènshi',vi:'Biết/Quen (HSK1)',pos:'Động từ',ex:'很高兴认识你！Rất vui được làm quen với bạn!'},
+];
+
+const d1=[
+  {sp:'a',cn:'你认识王经理吗？',py:'Nǐ rènshi Wáng jīnglǐ ma?',vi:'Bạn có quen giám đốc Vương không?'},
+  {sp:'b',cn:'认识，我们是大学同学，这个工作是他帮我介绍的。',py:'Rènshi, wǒmen shì dàxué tóngxué, zhège gōngzuò shì tā bāng wǒ jièshào de.',vi:'Có quen, chúng tôi là bạn cùng lớp đại học, công việc này là do anh ấy giới thiệu cho tôi.'},
+  {sp:'a',cn:'你们认识多长时间了？',py:'Nǐmen rènshi duō cháng shíjiān le?',vi:'Các bạn quen nhau được bao lâu rồi?'},
+  {sp:'b',cn:'认识十年了，我非常感谢他！',py:'Rènshi shí nián le, wǒ fēicháng gǎnxiè tā!',vi:'Quen được 10 năm rồi, tôi vô cùng biết ơn anh ấy!'},
+];
+
+const d2=[
+  {sp:'a',cn:'大卫，今天是你的生日，我给你买了一个蛋糕。',py:'Dàwèi, jīntiān shì nǐ de shēngrì, wǒ gěi nǐ mǎi le yī ge dàngāo.',vi:'David, hôm nay là sinh nhật của bạn, tôi mua cho bạn một cái bánh kem.'},
+  {sp:'b',cn:'谢谢你！还有，我有一个好消息要告诉你。',py:'Xièxie nǐ! Hái yǒu, wǒ yǒu yī gè hǎo xiāoxi yào gàosù nǐ.',vi:'Cảm ơn bạn! À, tôi có một tin vui muốn nói với bạn.'},
+  {sp:'a',cn:'什么好消息？',py:'Shénme hǎo xiāoxi?',vi:'Tin vui gì thế?'},
+  {sp:'b',cn:'我找到工作了！是小明帮我介绍的。',py:'Wǒ zhǎodào gōngzuò le! Shì Xiǎomíng bāng wǒ jièshào de.',vi:'Tôi tìm được việc làm rồi! Là Tiểu Minh giới thiệu cho tôi.'},
+  {sp:'a',cn:'太好了！生日快乐，工作顺利！',py:'Tài hǎo le! Shēngrì kuàilè, gōngzuò shùnlì!',vi:'Tuyệt vời quá! Chúc mừng sinh nhật, chúc công việc thuận lợi!'},
+];
+
+const grammar=[
+  {n:1,
+   title:'是…的句 — Nhấn mạnh hoàn cảnh của hành động đã xảy ra',
+   pattern:'是 + [thời gian/địa điểm/người/cách thức] + 动词 + 的',
+   note:'Dùng khi sự việc đã xảy ra, muốn nhấn mạnh <b>KHI NÀO / Ở ĐÂU / AI / BẰNG CÁCH NÀO</b> diễn ra hành động đó.<br><br>⚠️ Khác với 了 (chỉ hoàn thành): 是…的 nhấn mạnh HOÀN CẢNH, không phải kết quả.<br><br>的 thường đặt cuối câu. Nếu có tân ngữ, 的 có thể đặt trước hoặc sau tân ngữ.',
+   neg:'',
+   exs:[
+     {cn:'这工作<mark>是</mark>他帮我介绍<mark>的</mark>。',py:'Zhè gōngzuò shì tā bāng wǒ jièshào de.',vi:'Công việc này [là do] anh ấy giới thiệu cho tôi. (nhấn: AI giới thiệu)'},
+     {cn:'你<mark>是</mark>什么时候来北京<mark>的</mark>？',py:'Nǐ shì shénme shíhou lái Běijīng de?',vi:'Bạn đến Bắc Kinh [vào] khi nào? (nhấn: THỜI GIAN)'},
+     {cn:'我们<mark>是</mark>在大学认识<mark>的</mark>。',py:'Wǒmen shì zài dàxué rènshi de.',vi:'Chúng tôi [là] quen nhau ở đại học. (nhấn: NƠI CHỐN)'},
+   ]},
+  {n:2,
+   title:'非常 — Phó từ chỉ mức độ cao "rất / vô cùng"',
+   pattern:'非常 + 形容词/动词',
+   note:'<b>非常</b> đặt trước tính từ hoặc động từ tâm lý để nhấn mạnh mức độ cao. So sánh mức độ: 有点儿 &lt; 比较 &lt; 很 &lt; <b>非常</b> &lt; 太…了<br><br>⚠️ 非常 KHÔNG dùng trong câu phủ định — dùng 不太 hoặc 不怎么.',
+   neg:'❌ 他非常不喜欢。\n✅ 他不太喜欢。/ 他非常不高兴。(ngoại lệ: ĐT tâm lý âm tiết)',
+   exs:[
+     {cn:'我<mark>非常</mark>感谢你的帮助。',py:'Wǒ fēicháng gǎnxiè nǐ de bāngzhù.',vi:'Tôi vô cùng biết ơn sự giúp đỡ của bạn.'},
+     {cn:'这个工作<mark>非常</mark>好，我很喜欢。',py:'Zhège gōngzuò fēicháng hǎo, wǒ hěn xǐhuān.',vi:'Công việc này rất tốt, tôi rất thích.'},
+     {cn:'她汉语说得<mark>非常</mark>流利。',py:'Tā Hànyǔ shuō de fēicháng liúlì.',vi:'Cô ấy nói tiếng Trung rất thành thạo.'},
+   ]},
+  {n:3,
+   title:'给 dùng như giới từ — "Cho / Vì / Đối với"',
+   pattern:'给 + 人 + 动词 (+ 宾语)',
+   note:'<b>给</b> dùng làm giới từ (介词) đặt trước tân ngữ người để chỉ đối tượng thụ hưởng của hành động. Rất phổ biến trong các câu như: tặng quà, gọi điện, nói chuyện, viết thư...',
+   neg:'',
+   exs:[
+     {cn:'我<mark>给</mark>你买了一个蛋糕。',py:'Wǒ gěi nǐ mǎi le yī ge dàngāo.',vi:'Tôi mua cho bạn một cái bánh kem.'},
+     {cn:'你什么时候<mark>给</mark>我打电话？',py:'Nǐ shénme shíhou gěi wǒ dǎ diànhuà?',vi:'Khi nào bạn gọi điện cho tôi?'},
+     {cn:'他<mark>给</mark>大家介绍了他的新工作。',py:'Tā gěi dàjiā jièshào le tā de xīn gōngzuò.',vi:'Anh ấy giới thiệu công việc mới của mình cho mọi người.'},
+   ]},
+];
+
+const hanzi=[
+  {ch:'介',py:'jiè',vi:'Giữa / Giới thiệu',s:4,tip:'Chỉ 4 nét. Người đứng giữa 2 thứ gì đó. 介绍=giới thiệu.'},
+  {ch:'绍',py:'shào',vi:'Kế tiếp / Giới thiệu',s:8,tip:'Bộ 纟(sợi chỉ)+召. 8 nét. Chỉ dùng trong 介绍.'},
+  {ch:'帮',py:'bāng',vi:'Giúp / Băng đảng',s:10,tip:'Trên: 邦+dưới: 巾(vải). 10 nét. 帮助/帮忙.'},
+  {ch:'认',py:'rèn',vi:'Nhận ra / Biết',s:4,tip:'Bộ 讠(lời nói)+忍. Giản thể 4 nét. 认识=biết/quen.'},
+  {ch:'识',py:'shí/zhì',vi:'Biết / Nhận thức',s:7,tip:'Bộ 讠(lời nói)+只. 7 nét. 认识/知识.'},
+  {ch:'非',py:'fēi',vi:'Không phải / Phi',s:8,tip:'Hình ảnh đôi cánh ngược chiều nhau. 8 nét. 非常=rất.'},
+  {ch:'常',py:'cháng',vi:'Thường / Bình thường',s:11,tip:'Bộ 巾(vải) ở dưới. 11 nét. 非常/经常.'},
+  {ch:'生',py:'shēng',vi:'Sinh / Mọc',s:5,tip:'Chỉ 5 nét. Cây cỏ mọc từ đất. 生日/生病/学生.'},
+  {ch:'告',py:'gào',vi:'Báo cáo / Nói',s:7,tip:'Trên: 牛(trâu)+dưới: 口(miệng). 7 nét. 告诉=nói cho biết.'},
+  {ch:'诉',py:'sù',vi:'Kể / Kiện',s:7,tip:'Bộ 讠+斥. 7 nét. 告诉=thông báo/kể cho nghe.'},
+  {ch:'送',py:'sòng',vi:'Tặng / Tiễn',s:9,tip:'Bộ 辶(đường đi)+关. 9 nét. 送礼物=tặng quà; 送人=tiễn người.'},
+  {ch:'给',py:'gěi',vi:'Cho / Tặng',s:9,tip:'Bộ 纟(sợi chỉ)+合. Giản thể 9 nét. Rất phổ biến.'},
+];
+
+// ── WORKBOOK DATA — BLCU chính thức ──
+const p1=[
+  {cn:'妈妈知道电话是谁打的。',py:'Māma zhīdào diànhuà shì shéi dǎ de.',vi:'Mẹ biết điện thoại là ai gọi.',ans:'√'},
+  {cn:'看，这是我在和小王一起跑步。',py:'Kàn, zhè shì wǒ zài hé Xiǎo Wáng yìqǐ pǎobù.',vi:'Xem, đây là tôi đang chạy bộ cùng Tiểu Vương.',ans:'×'},
+  {cn:'今天的晚饭是我和丈夫一起做的。',py:'Jīntiān de wǎnfàn shì wǒ hé zhàngfu yìqǐ zuò de.',vi:'Bữa tối hôm nay là tôi và chồng cùng nhau nấu.',ans:'√'},
+  {cn:'今天报纸是王小姐买的。',py:'Jīntiān bàozhǐ shì Wáng xiǎojiě mǎi de.',vi:'Tờ báo hôm nay là cô Vương mua.',ans:'×'},
+  {cn:'我非常喜欢这个工作，已经工作两年了。',py:'Wǒ fēicháng xǐhuān zhège gōngzuò, yǐjīng gōngzuò liǎng nián le.',vi:'Tôi rất thích công việc này, đã làm được 2 năm rồi.',ans:'√'},
+];
+const p2=[
+  {cn:'男：你喜欢吃中国菜吗？\n女：我非常喜欢吃，我也会做。',py:'Nán: Nǐ xǐhuān chī Zhōngguó cài ma?\nNǚ: Wǒ fēicháng xǐhuān chī, wǒ yě huì zuò.',vi:'Nam: Bạn có thích ăn đồ ăn Trung Quốc không?\nNữ: Tôi rất thích ăn, tôi cũng biết nấu.',ans:'C'},
+  {cn:'男：这个是谁买的？\n女：这个是安娜买的，今天是大卫的生日。',py:'Nán: Zhège shì shéi mǎi de?\nNǚ: Zhège shì Ānnà mǎi de, jīntiān shì Dàwèi de shēngrì.',vi:'Nam: Cái này là ai mua?\nNữ: Cái này là Anna mua, hôm nay là sinh nhật David.',ans:'F'},
+  {cn:'女：李先生出院多长时间了？\n男：我不知道，你问一下张医生吧。',py:'Nǚ: Lǐ xiānsheng chūyuàn duō cháng shíjiān le?\nNán: Wǒ bù zhīdào, nǐ wèn yīxià Zhāng yīshēng ba.',vi:'Nữ: Ông Lý xuất viện được bao lâu rồi?\nNam: Tôi không biết, bạn hỏi bác sĩ Trương một chút nhé.',ans:'E'},
+  {cn:'女：你怎么认识芳芳的？\n男：是小明帮我介绍的。',py:'Nǚ: Nǐ zěnme rènshi Fāngfang de?\nNán: Shì Xiǎomíng bāng wǒ jièshào de.',vi:'Nữ: Bạn quen Phương Phương như thế nào?\nNam: Là Tiểu Minh giới thiệu cho tôi.',ans:'A'},
+  {cn:'男：女儿，你去接一下电话。\n女：对不起，爸爸，我没时间接电话，我在做饭呢。',py:'Nán: Nǚ\'ér, nǐ qù jiē yīxià diànhuà.\nNǚ: Duìbuqǐ, bàba, wǒ méi shíjiān jiē diànhuà, wǒ zài zuòfàn ne.',vi:'Nam: Con gái, con đi nghe điện thoại hộ bố.\nNữ: Xin lỗi bố, con không có thời gian nghe điện thoại, con đang nấu cơm.',ans:'B'},
+];
+const p3=[
+  {cn:'小王，今天是张老师的生日。\n我知道。这本书是我买的，要送给张老师。\n问：这本书是送给谁的？',
+   py:'Xiǎo Wáng, jīntiān shì Zhāng lǎoshī de shēngrì.\nWǒ zhīdào. Zhè běn shū shì wǒ mǎi de, yào sòng gěi Zhāng lǎoshī.\nWèn: Zhè běn shū shì sòng gěi shéi de?',
+   vi:'Tiểu Vương, hôm nay là sinh nhật thầy Trương.\nTôi biết. Quyển sách này là tôi mua, định tặng cho thầy Trương.\nHỏi: Quyển sách này tặng cho ai?',ans:'A (张老师)'},
+  {cn:'大卫，上午有你的一个电话。\n我知道，是李先生打的。\n问：上午的电话是谁打的？',
+   py:'Dàwèi, shàngwǔ yǒu nǐ de yī ge diànhuà.\nWǒ zhīdào, shì Lǐ xiānsheng dǎ de.\nWèn: Shàngwǔ de diànhuà shì shéi dǎ de?',
+   vi:'David, buổi sáng có điện thoại của bạn.\nTôi biết rồi, là ông Lý gọi đến.\nHỏi: Điện thoại buổi sáng là ai gọi?',ans:'B (李先生)'},
+  {cn:'你的汉语真好！你是什么时候开始学汉语的？\n两年前开始的，我来中国已经一年多了。\n问：男的是什么时候开始学汉语的？',
+   py:'Nǐ de Hànyǔ zhēn hǎo! Nǐ shì shénme shíhou kāishǐ xué Hànyǔ de?\nLiǎng nián qián kāishǐ de, wǒ lái Zhōngguó yǐjīng yī nián duō le.\nWèn: Nán de shì shénme shíhou kāishǐ xué Hànyǔ de?',
+   vi:'Tiếng Trung của bạn thật tốt! Bạn bắt đầu học tiếng Trung từ khi nào?\n2 năm trước bắt đầu, tôi đến Trung Quốc đã hơn 1 năm rồi.\nHỏi: Người nam bắt đầu học tiếng Trung từ khi nào?',ans:'C (两年前)'},
+  {cn:'你喜欢现在的工作吗？\n非常喜欢，我已经做了三年多了。\n问：他喜欢现在的工作吗？',
+   py:'Nǐ xǐhuān xiànzài de gōngzuò ma?\nFēicháng xǐhuān, wǒ yǐjīng zuò le sān nián duō le.\nWèn: Tā xǐhuān xiànzài de gōngzuò ma?',
+   vi:'Bạn có thích công việc hiện tại không?\nRất thích, tôi đã làm hơn 3 năm rồi.\nHỏi: Anh ấy có thích công việc hiện tại không?',ans:'B (非常喜欢)'},
+  {cn:'你什么时候认识谢先生的？\n我们十年前认识的，他是我的大学同学。\n问：男的和谢先生认识多长时间了？',
+   py:'Nǐ shénme shíhou rènshi Xiè xiānsheng de?\nWǒmen shí nián qián rènshi de, tā shì wǒ de dàxué tóngxué.\nWèn: Nán de hé Xiè xiānsheng rènshi duō cháng shíjiān le?',
+   vi:'Bạn quen ông Tạ từ khi nào?\nChúng tôi quen nhau từ 10 năm trước, anh ấy là bạn đại học của tôi.\nHỏi: Người nam và ông Tạ quen nhau được bao lâu rồi?',ans:'A (十年)'},
+];
+
+// ĐỌC
+const r1=[
+  {n:16,cn:'妈妈知道电话是谁打的。',py:'Māma zhīdào diànhuà shì shéi dǎ de.',vi:'Mẹ biết điện thoại là ai gọi.',
+   opts:['A 📱','B 👩‍🍳','C 🎂','D 📰','E 🤝','F 🎁'],ans:0,exp:'A — 电话/打电话 = điện thoại (📱).'},
+  {n:17,cn:'他们在一起跑步，不是在看电视。',py:'Tāmen zài yìqǐ pǎobù, bú shì zài kàn diànshì.',vi:'Họ đang cùng nhau chạy bộ, không phải xem tivi.',
+   opts:['A 📱','B 🏃','C 🎂','D 📰','E 🤝','F 🎁'],ans:1,exp:'B — 跑步 = chạy bộ (🏃).'},
+  {n:18,cn:'今天是她的生日，朋友们给她送了很多礼物。',py:'Jīntiān shì tā de shēngrì, péngyoumen gěi tā sòng le hěnduō lǐwù.',vi:'Hôm nay là sinh nhật cô ấy, bạn bè tặng cho cô ấy nhiều quà.',
+   opts:['A 📱','B 🏃','C 🎂','D 📰','E 🤝','F 🎁'],ans:5,exp:'F — 生日礼物 = quà sinh nhật (🎁).'},
+  {n:19,cn:'今天的报纸是王小姐在商店买的。',py:'Jīntiān de bàozhǐ shì Wáng xiǎojiě zài shāngdiàn mǎi de.',vi:'Tờ báo hôm nay là cô Vương mua ở cửa hàng.',
+   opts:['A 📱','B 🏃','C 🎂','D 📰','E 🤝','F 🎁'],ans:3,exp:'D — 报纸 = báo (📰).'},
+  {n:20,cn:'他们是在大学认识的，已经是好朋友了。',py:'Tāmen shì zài dàxué rènshi de, yǐjīng shì hǎo péngyou le.',vi:'Họ quen nhau ở đại học, đã là bạn tốt rồi.',
+   opts:['A 📱','B 🏃','C 🎂','D 📰','E 🤝','F 🎁'],ans:4,exp:'E — 认识/好朋友 = quen biết/bạn tốt (🤝).'},
+];
+const r2=[
+  {n:21,cn:'这是谁买的蛋糕？',py:'Zhè shì shéi mǎi de dàngāo?',vi:'Cái bánh này là ai mua?',
+   opts:['A 非常好吃，我很喜欢。','B 是安娜买的，今天是大卫生日。','C 我送给张老师的。','D 我们十年前认识的。','E 已经做了三年了。'],
+   ans:1,exp:'B — 是安娜买的 dùng 是…的 trả lời câu hỏi "là ai mua".'},
+  {n:22,cn:'你是怎么认识芳芳的？',py:'Nǐ shì zěnme rènshi Fāngfang de?',vi:'Bạn quen Phương Phương như thế nào?',
+   opts:['A 非常好吃，我很喜欢。','B 是安娜买的。','C 是小明帮我介绍的。','D 我们十年前认识的。','E 已经做了三年了。'],
+   ans:2,exp:'C — 是小明帮我介绍的 = dùng 是…的 trả lời "bằng cách nào quen".'},
+  {n:23,cn:'这本书是送给谁的？',py:'Zhè běn shū shì sòng gěi shéi de?',vi:'Quyển sách này tặng cho ai?',
+   opts:['A 是送给张老师的。','B 是安娜买的。','C 是小明帮我介绍的。','D 我们十年前认识的。','E 已经做了三年了。'],
+   ans:0,exp:'A — 是送给张老师的 = trả lời "tặng cho ai" bằng cấu trúc 是…的.'},
+  {n:24,cn:'你是什么时候来中国的？',py:'Nǐ shì shénme shíhou lái Zhōngguó de?',vi:'Bạn đến Trung Quốc vào khi nào?',
+   opts:['A 是送给张老师的。','B 是安娜买的。','C 是小明帮我介绍的。','D 是两年前来的。','E 已经做了三年了。'],
+   ans:3,exp:'D — 是两年前来的 = trả lời câu hỏi thời gian với 是…的.'},
+  {n:25,cn:'你喜欢现在的工作吗？',py:'Nǐ xǐhuān xiànzài de gōngzuò ma?',vi:'Bạn có thích công việc hiện tại không?',
+   opts:['A 是送给张老师的。','B 非常喜欢，已经做了三年了。','C 是小明帮我介绍的。','D 是两年前来的。','E 已经做了三年了。'],
+   ans:1,exp:'B — 非常喜欢，已经做了三年了 = câu trả lời đầy đủ cho câu hỏi về công việc.'},
+];
+const r3=[
+  {n:26,cn:'今天是大卫的生日。',py:'Jīntiān shì Dàwèi de shēngrì.',vi:'Hôm nay là sinh nhật David.',ans:true,exp:'Đúng (√). Đoạn văn: "今天是大卫的生日" — khớp chính xác.'},
+  {n:27,cn:'安娜帮大卫介绍了新工作。',py:'Ānnà bāng Dàwèi jièshào le xīn gōngzuò.',vi:'Anna giúp David giới thiệu công việc mới.',ans:true,exp:'Đúng (√). Đoạn văn: "小明帮他介绍了一份新工作" — nhưng đây là Tiểu Minh, không phải Anna! → Sai (×).'},
+  {n:28,cn:'安娜给大卫买了一个蛋糕。',py:'Ānnà gěi Dàwèi mǎi le yī ge dàngāo.',vi:'Anna mua cho David một cái bánh kem.',ans:true,exp:'Đúng (√). Đoạn văn: "安娜给他买了一个蛋糕" — khớp chính xác.'},
+  {n:29,cn:'小明帮大卫介绍了工作。',py:'Xiǎomíng bāng Dàwèi jièshào le gōngzuò.',vi:'Tiểu Minh giúp David giới thiệu công việc.',ans:true,exp:'Đúng (√). Đoạn văn: "小明帮他介绍了一份新工作" — khớp chính xác.'},
+  {n:30,cn:'大家没有来祝大卫生日快乐。',py:'Dàjiā méiyǒu lái zhù Dàwèi shēngrì kuàilè.',vi:'Mọi người không đến chúc mừng sinh nhật David.',ans:false,exp:'Sai (×). Đoạn văn: "大家都来祝他生日快乐" — mọi người ĐỀU đến chúc.'},
+];
+const r4=[
+  {n:31,cn_char:'是安娜买的，今天是大卫的生日。',py:'Shì Ānnà mǎi de, jīntiān shì Dàwèi de shēngrì.',vi:'Là Anna mua, hôm nay là sinh nhật David.',
+   opts:['A 这个蛋糕是谁买的？','B 你是怎么来这里的？','C 你认识王经理吗？','D 你什么时候学汉语的？','E 你喜欢工作吗？'],
+   ans:0,exp:'A — 是安娜买的 là câu trả lời 是…的 cho câu hỏi "是谁买的？".'},
+  {n:32,cn_char:'是小明帮我介绍的，我们是大学同学。',py:'Shì Xiǎomíng bāng wǒ jièshào de, wǒmen shì dàxué tóngxué.',vi:'Là Tiểu Minh giới thiệu cho tôi, chúng tôi là bạn đại học.',
+   opts:['A 你怎么找到这个工作的？','B 你什么时候来北京的？','C 你认识王经理吗？','D 你喜欢现在的工作吗？','E 你几点起床？'],
+   ans:0,exp:'A — 是小明帮我介绍的 trả lời câu hỏi "làm thế nào tìm được công việc".'},
+  {n:33,cn_char:'非常喜欢，已经工作三年了。',py:'Fēicháng xǐhuān, yǐjīng gōngzuò sān nián le.',vi:'Rất thích, đã làm việc được 3 năm rồi.',
+   opts:['A 你是怎么认识他的？','B 你何时来的？','C 你喜欢现在的工作吗？','D 你几点起床？','E 你认识他吗？'],
+   ans:2,exp:'C — 非常喜欢 là câu trả lời trực tiếp cho câu hỏi 你喜欢...吗？'},
+  {n:34,cn_char:'是两年前开始学的，我非常喜欢汉语。',py:'Shì liǎng nián qián kāishǐ xué de, wǒ fēicháng xǐhuān Hànyǔ.',vi:'Là bắt đầu học từ 2 năm trước, tôi rất thích tiếng Trung.',
+   opts:['A 你的汉语什么时候开始学的？','B 你喜欢现在的工作吗？','C 你是怎么认识他的？','D 你几点起床？','E 你认识王经理吗？'],
+   ans:0,exp:'A — 是两年前开始学的 trả lời câu hỏi 什么时候 với cấu trúc 是…的.'},
+  {n:35,cn_char:'认识，我们是大学同学，已经十年了。',py:'Rènshi, wǒmen shì dàxué tóngxué, yǐjīng shí nián le.',vi:'Có quen, chúng tôi là bạn đại học, đã 10 năm rồi.',
+   opts:['A 你的汉语真好！','B 你喜欢现在的工作吗？','C 你几点起床？','D 你认识王经理吗？','E 你怎么认识他的？'],
+   ans:3,exp:'D — 认识，我们是大学同学 trả lời câu hỏi 你认识...吗？'},
+];
+
+// PHÁT ÂM — bài 4 BLCU
+const pron1=[
+  {w:'我要去北京旅游。',stress:'旅游'},
+  {w:'我喜欢吃中国菜。',stress:'中国菜'},
+  {w:'桌子上有一本书，没有电脑。',stress:'书/电脑'},
+  {w:'大卫汉语说得很流利。',stress:'流利'},
+  {w:'你穿得太少了。',stress:'太少了'},
+];
+const pron2=[
+  {w:'我儿子是医生。',stress:'医生'},
+  {w:'我妈妈中国菜做得很好。',stress:'很好'},
+  {w:'下午我去朋友家看电影。',stress:'看电影'},
+  {w:'大卫写汉字写得很漂亮。',stress:'很漂亮'},
+  {w:'昨天李月买了一个杯子。',stress:'买了'},
+];
+
+const ro=[
+  {pieces:['介绍的','是','这工作','他帮我'],answer:'这工作是他帮我介绍的',py:'Zhè gōngzuò shì tā bāng wǒ jièshào de.',vi:'Công việc này là do anh ấy giới thiệu cho tôi.',tip:'是…的 nhấn mạnh AI giới thiệu: 是+他帮我+介绍+的'},
+  {pieces:['你','是','认识的','怎么','芳芳'],answer:'你是怎么认识芳芳的',py:'Nǐ shì zěnme rènshi Fāngfang de?',vi:'Bạn quen Phương Phương như thế nào?',tip:'是…的 hỏi CÁCH THỨC: 是+怎么+动词+的'},
+  {pieces:['非常','我','这个工作','喜欢'],answer:'我非常喜欢这个工作',py:'Wǒ fēicháng xǐhuān zhège gōngzuò.',vi:'Tôi rất thích công việc này.',tip:'Chủ ngữ(我)+非常+动词(喜欢)+宾语(这个工作)'},
+  {pieces:['给','我','打电话','你','什么时候'],answer:'你什么时候给我打电话',py:'Nǐ shénme shíhou gěi wǒ dǎ diànhuà?',vi:'Khi nào bạn gọi điện cho tôi?',tip:'给+对象(我)+动词(打电话). 给 làm giới từ đứng trước người nhận.'},
+  {pieces:['买了','给你','我','一个蛋糕'],answer:'我给你买了一个蛋糕',py:'Wǒ gěi nǐ mǎi le yī ge dàngāo.',vi:'Tôi mua cho bạn một cái bánh kem.',tip:'给+人+动词+了+宾语. 给你 đặt trước động từ.'},
+];
+
+// ════════════════
+// RENDER
+// ════════════════
+function renderVocab(arr,id){
+  document.getElementById(id).innerHTML=arr.map((v,i)=>`
+    <div class="vc" onclick="tex('${id}',${i})">
+      <div class="vc-char">${v.char}</div>
+      <div style="flex:1"><div class="vc-py">${v.py}</div><div class="vc-vi">${v.vi}</div>
+        <div class="vc-ex" id="${id}-${i}">${v.ex.replace(/\n/g,'<br>')}</div></div>
+      <div class="vc-tags"><div class="vc-pos">${v.pos}</div>${id==='vNew'?'<div class="new-tag">★MỚI</div>':''}</div>
+    </div>`).join('');
+}
+function tex(id,i){document.getElementById(`${id}-${i}`).classList.toggle('open');}
+
+function renderDlg(arr,id){
+  document.getElementById(id).innerHTML=arr.map((d,i)=>`
+    <div class="dl ${i%2===1?'r':''}">
+      <div class="sp ${d.sp}">${d.sp.toUpperCase()}</div>
+      <div class="dl-body"><div class="dl-cn">${d.cn}</div><div class="dl-py">${d.py}</div><div class="dl-vi">${d.vi}</div></div>
+    </div>`).join('');
+}
+
+function renderGrammar(){
+  document.getElementById('gramContent').innerHTML=grammar.map(g=>`
+    <div class="gram-card">
+      <div class="gram-head"><div class="gram-n">${g.n}</div><div class="gram-title">${g.title}</div></div>
+      <div class="gram-body">
+        <div class="gram-pattern">${g.pattern}</div>
+        <div class="gram-note">${g.note}</div>
+        ${g.neg?`<div class="gram-neg">${g.neg}</div>`:''}
+        <div class="gram-exs">${g.exs.map(e=>`<div class="gex"><div class="gex-cn">${e.cn}</div><div class="gex-py">${e.py}</div><div class="gex-vi">${e.vi}</div></div>`).join('')}</div>
+      </div>
+    </div>`).join('');
+}
+
+function renderHanzi(){
+  document.getElementById('hzGrid').innerHTML=hanzi.map((h,i)=>`
+    <div class="hz-card" id="hz-${i}" onclick="showHz(${i})">
+      <div class="hz-ch">${h.ch}</div><div class="hz-py">${h.py}</div><div class="hz-vi">${h.vi}</div>
+    </div>`).join('');
+}
+function showHz(i){
+  document.querySelectorAll('.hz-card').forEach(c=>c.classList.remove('sel'));
+  document.getElementById('hz-'+i).classList.add('sel');
+  const h=hanzi[i];
+  document.getElementById('hzDetail').className='hz-detail show';
+  document.getElementById('hzBig').textContent=h.ch;
+  document.getElementById('hzPy').textContent=h.py;
+  document.getElementById('hzVi').textContent=h.vi;
+  document.getElementById('hzSt').textContent=`Số nét: ${h.s}`;
+  document.getElementById('hzTip').textContent=h.tip;
+  document.getElementById('hzDetail').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function renderListen(arr,id,start){
+  document.getElementById(id).innerHTML=arr.map((l,i)=>`
+    <div class="script-item">
+      <div class="script-num">${start+i}</div>
+      <div class="script-body">
+        <div class="script-cn">${l.cn}</div>
+        <div class="script-py">${l.py}</div>
+        <div class="script-vi">${l.vi}</div>
+        <div class="script-ans">Đáp án: <strong>${l.ans}</strong></div>
+      </div>
+    </div>`).join('');
+}
+
+// ĐỌC interactive
+let rAns={};
+function mkReadP(arr,pid,ansKey){
+  const isCol=pid==='p2'||pid==='p4';
+  return arr.map((q,i)=>`
+    <div class="match-item">
+      <div class="match-num">Câu ${q.n}</div>
+      <div class="match-cn">${q.cn||q.cn_char}</div>
+      <div class="match-py">${q.py}</div>
+      <div class="match-opts${isCol?' style="flex-direction:column"':''}">
+        ${q.opts.map((o,j)=>`
+          <button class="mopt" id="r${pid}-${i}-${j}" onclick="ansR('${pid}',${i},${j},${q.ans})">
+            ${isCol?String.fromCharCode(65+j)+'. ':''}<span style="${isCol?"font-family:'Noto Serif SC',serif":''}">${o}</span>
+          </button>`).join('')}
+      </div>
+      <div class="match-fb" id="r${pid}-fb-${i}"></div>
+    </div>`).join('');
+}
+function mkReadP3(){
+  return r3.map((q,i)=>`
+    <div class="tf-card">
+      <div class="match-num">Câu ${q.n}</div>
+      <div class="tf-q">${q.cn}</div>
+      <div class="tf-py">${q.py}</div>
+      <div class="tf-vi">${q.vi}</div>
+      <div class="tf-btns">
+        <button class="tf-btn" id="rp3-t-${i}" onclick="ansT(${i},true,${q.ans})">√ Đúng</button>
+        <button class="tf-btn" id="rp3-f-${i}" onclick="ansT(${i},false,${q.ans})">× Sai</button>
+      </div>
+      <div class="tf-fb" id="rp3-fb-${i}"></div>
+    </div>`).join('');
+}
+function renderRead(){
+  document.getElementById('readP1').innerHTML=mkReadP(r1,'p1');
+  document.getElementById('readP2').innerHTML=mkReadP(r2,'p2');
+  document.getElementById('readP3').innerHTML=mkReadP3();
+  document.getElementById('readP4').innerHTML=mkReadP(r4,'p4');
+}
+function ansR(pid,qi,oi,correct){
+  const k=`${pid}-${qi}`;if(rAns[k]!==undefined)return;
+  rAns[k]=oi;const ok=oi===correct;
+  document.querySelectorAll(`[id^="r${pid}-${qi}-"]`).forEach(b=>b.classList.add('done'));
+  document.getElementById(`r${pid}-${qi}-${correct}`).classList.add('correct');
+  if(!ok)document.getElementById(`r${pid}-${qi}-${oi}`).classList.add('wrong');
+  const arr=pid==='p1'?r1:pid==='p2'?r2:r4;
+  const fb=document.getElementById(`r${pid}-fb-${qi}`);
+  fb.className='match-fb show '+(ok?'ok':'no');
+  fb.innerHTML=(ok?'✅ Đúng! ':'❌ Sai. ')+arr[qi].exp;
+  chkReadDone();
+}
+function ansT(qi,v,correct){
+  const k=`p3-${qi}`;if(rAns[k]!==undefined)return;
+  rAns[k]=v;const ok=v===correct;
+  ['t','f'].forEach(x=>document.getElementById(`rp3-${x}-${qi}`).classList.add('done'));
+  document.getElementById(`rp3-${correct?'t':'f'}-${qi}`).classList.add('correct');
+  if(!ok)document.getElementById(`rp3-${v?'t':'f'}-${qi}`).classList.add('wrong');
+  const fb=document.getElementById(`rp3-fb-${qi}`);
+  fb.className='tf-fb show '+(ok?'ok':'no');
+  fb.innerHTML=(ok?'✅ Đúng! ':'❌ Sai. ')+r3[qi].exp;
+  chkReadDone();
+}
+function chkReadDone(){
+  const tot=r1.length+r2.length+r3.length+r4.length;
+  if(Object.keys(rAns).length===tot)setTimeout(showReadScore,500);
+}
+function showReadScore(){
+  const c=[...r1.map((_,i)=>rAns[`p1-${i}`]===r1[i].ans),
+           ...r2.map((_,i)=>rAns[`p2-${i}`]===r2[i].ans),
+           ...r3.map((_,i)=>rAns[`p3-${i}`]===r3[i].ans),
+           ...r4.map((_,i)=>rAns[`p4-${i}`]===r4[i].ans)].filter(Boolean).length;
+  const tot=r1.length+r2.length+r3.length+r4.length;
+  const p=Math.round(c/tot*100);
+  document.getElementById('readScoreBig').textContent=`${c}/${tot}`;
+  document.getElementById('readScoreTxt').textContent=p>=75?`Tốt lắm! ${p}% — Bài 4 rất vững.`:`${p}% — Ôn lại cấu trúc 是…的 nhé.`;
+  document.getElementById('readScore').classList.add('show');
+  document.getElementById('readScore').scrollIntoView({behavior:'smooth'});
+  updateProgress();
+}
+function resetRead(){rAns={};document.getElementById('readScore').classList.remove('show');renderRead();}
+
+function renderPron(){
+  document.getElementById('pronP1').innerHTML=pron1.map((s,i)=>`
+    <div class="pw" style="min-width:160px;text-align:left"><div class="pw-num">(${i+1})</div>
+      <div class="pw-cn" style="font-family:'Noto Serif SC',serif;font-size:13px">${s.w}</div>
+      <div class="pw-py" style="color:var(--red)">重音: ${s.stress}</div></div>`).join('');
+  document.getElementById('pronP2').innerHTML=pron2.map((s,i)=>`
+    <div class="pw" style="min-width:160px;text-align:left"><div class="pw-num">(${i+1})</div>
+      <div class="pw-cn" style="font-family:'Noto Serif SC',serif;font-size:13px">${s.w}</div>
+      <div class="pw-py" style="color:var(--red)">重音: ${s.stress}</div></div>`).join('');
+}
+
+// SẮP XẾP CÂU
+let roS=ro.map(()=>({placed:[],done:false}));
+function renderRO(){
+  document.getElementById('reorderCards').innerHTML=ro.map((r,i)=>`
+    <div class="reorder-card">
+      <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:9px">Câu ${i+1} / ${ro.length}</div>
+      <div class="pieces" id="pc-${i}">${shuf([...r.pieces]).map((p,j)=>`<div class="piece" id="p-${i}-${j}" data-w="${p}" onclick="clk(${i},this)">${p}</div>`).join('')}</div>
+      <div style="font-size:10px;color:var(--muted);margin-bottom:4px">→ Câu của bạn:</div>
+      <div class="ans-area" id="aa-${i}"><span class="ro-ph">Nhấn các từ để sắp xếp...</span></div>
+      <div class="ro-result" id="rr-${i}"></div>
+      <div class="ro-btns"><button class="btn-sm" onclick="chk(${i})">✓ Kiểm tra</button><button class="btn-sm" onclick="rst(${i})">↺ Lại</button></div>
+    </div>`).join('');
+}
+function shuf(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function clk(ci,el){if(el.classList.contains('used'))return;el.classList.add('used');roS[ci].placed.push(el.getAttribute('data-w'));renderAA(ci);}
+function renderAA(ci){
+  const aa=document.getElementById(`aa-${ci}`),p=roS[ci].placed;
+  if(!p.length){aa.innerHTML='<span class="ro-ph">Nhấn các từ để sắp xếp...</span>';aa.classList.remove('has');return;}
+  aa.className='ans-area has';aa.innerHTML=p.map((w,i)=>`<div class="placed" onclick="rmv(${ci},${i})">${w}</div>`).join('');
+}
+function rmv(ci,idx){
+  const w=roS[ci].placed[idx];roS[ci].placed.splice(idx,1);
+  const ps=document.querySelectorAll(`#pc-${ci} .piece`);
+  for(let pp of ps){if(pp.getAttribute('data-w')===w&&pp.classList.contains('used')&&!pp._f){pp.classList.remove('used');pp._f=true;break;}}
+  ps.forEach(p=>delete p._f);renderAA(ci);
+}
+function chk(i){
+  const placed=roS[i].placed.join(''),res=document.getElementById(`rr-${i}`);
+  if(!placed){res.className='ro-result show no';res.textContent='⚠️ Chưa sắp xếp.';return;}
+  if(placed===ro[i].answer){
+    res.className='ro-result show ok';
+    res.innerHTML=`✅ Đúng! ${ro[i].py} — ${ro[i].vi}<br><small>${ro[i].tip}</small>`;
+    roS[i].done=true;
+  } else {
+    res.className='ro-result show no';
+    res.innerHTML=`❌ Chưa đúng. Câu đúng: <strong>${ro[i].answer}</strong><br><small>${ro[i].tip}</small>`;
+  }
+  updateProgress();
+  if(roS.every(s=>s.done))setTimeout(showWriteScore,500);
+}
+function rst(i){roS[i]={placed:[],done:false};renderRO();}
+function showWriteScore(){
+  const c=roS.filter(s=>s.done).length,p=Math.round(c/ro.length*100);
+  document.getElementById('writeBig').textContent=`${c}/${ro.length}`;
+  document.getElementById('writeTxt').textContent=p>=75?`Tốt lắm! ${p}% — Nắm vững cấu trúc bài 4.`:`${p}% — Ôn lại 是…的 và trật tự 给+人+动词 nhé.`;
+  document.getElementById('writeScore').classList.add('show');
+  document.getElementById('writeScore').scrollIntoView({behavior:'smooth'});
+}
+function resetWrite(){roS=ro.map(()=>({placed:[],done:false}));document.getElementById('writeScore').classList.remove('show');renderRO();}
+
+// TABS
+const TABS=['vocab','dialog','grammar','hanzi','wb-listen','wb-read','wb-pron','wb-write'];
+document.querySelectorAll('.tab[data-tab]').forEach(tab=>{
+  tab.addEventListener('click',function(){
+    const name=this.getAttribute('data-tab');
+    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    document.getElementById('sec-'+name).classList.add('active');
+    this.classList.add('active');
+    updateProgress();
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+function updateProgress(){
+  const active=document.querySelector('.section.active')?.id?.replace('sec-','');
+  const idx=TABS.indexOf(active);
+  const tp=((idx+1)/TABS.length)*50;
+  const tot=r1.length+r2.length+r3.length+r4.length+ro.length;
+  const done=Object.keys(rAns).length+roS.filter(s=>s.done).length;
+  const wp=(done/tot)*50;
+  document.getElementById('progBar').style.width=Math.min(100,Math.round(tp+wp))+'%';
+}
+
+// INIT
+renderVocab(vNew,'vNew');
+renderVocab(vReview,'vReview');
+renderDlg(d1,'dlg1');
+renderDlg(d2,'dlg2');
+renderGrammar();
+renderHanzi();
+renderListen(p1,'listenP1',1);
+renderListen(p2,'listenP2',6);
+renderListen(p3,'listenP3',11);
+renderRead();
+renderPron();
+renderRO();
+updateProgress();
+
+// Sửa câu 27 phần 3 - đáp án thực ra là × (Anna không giới thiệu công việc, mà là Tiểu Minh)
+r3[1].ans=false;
+</script>
+</body>
+</html>
 

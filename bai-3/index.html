@@ -53,7 +53,7 @@ body{background:var(--rice);color:var(--ink);font-family:'DM Sans',sans-serif;mi
 .sec-title.wb{color:var(--purple);}
 .sec-desc{font-size:12px;color:var(--muted);margin-bottom:16px;line-height:1.6;}
 
-/* VOCAB */
+/* Cấu trúc các thành phần giống Bài 2 */
 .ctx-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:9px;padding-bottom:5px;border-bottom:1px solid var(--warm);}
 .ctx-sec{margin-bottom:20px;}
 .vlist{display:flex;flex-direction:column;gap:8px;}
@@ -66,15 +66,11 @@ body{background:var(--rice);color:var(--ink);font-family:'DM Sans',sans-serif;mi
 .vc-ex.open{display:block;}
 .vc-pos{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:2px 7px;border-radius:10px;background:var(--warm);color:var(--muted);align-self:flex-start;white-space:nowrap;}
 .new-tag{font-size:9px;font-weight:700;letter-spacing:1px;background:var(--red);color:white;padding:2px 6px;border-radius:8px;text-transform:uppercase;}
-.vc-tags{display:flex;flex-direction:column;gap:3px;align-items:flex-end;}
 
-/* DIALOG */
 .dlg-box{background:white;border-radius:12px;border:1px solid var(--warm);overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.04);margin-bottom:14px;}
 .dlg-head{background:var(--red);color:white;padding:9px 15px;font-size:12px;font-weight:500;display:flex;align-items:center;justify-content:space-between;}
 .scene-tag{font-size:10px;background:rgba(255,255,255,.18);padding:2px 8px;border-radius:8px;}
 .dl{display:flex;gap:10px;padding:12px 14px;border-bottom:1px solid var(--warm);align-items:flex-start;transition:background .12s;}
-.dl:last-child{border-bottom:none;}
-.dl:hover{background:var(--rice);}
 .dl.r{flex-direction:row-reverse;}
 .sp{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif SC',serif;font-size:11px;font-weight:700;color:white;flex-shrink:0;}
 .sp.a{background:var(--red);}
@@ -85,7 +81,6 @@ body{background:var(--rice);color:var(--ink);font-family:'DM Sans',sans-serif;mi
 .dl-py{font-size:11px;color:var(--red);margin-bottom:1px;}
 .dl-vi{font-size:11px;color:var(--muted);}
 
-/* GRAMMAR */
 .gram-card{background:white;border-radius:12px;border:1px solid var(--warm);margin-bottom:13px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.04);}
 .gram-head{background:var(--ink);color:white;padding:11px 15px;display:flex;align-items:center;gap:9px;}
 .gram-n{width:24px;height:24px;border-radius:50%;background:var(--gold);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;}
@@ -93,151 +88,35 @@ body{background:var(--rice);color:var(--ink);font-family:'DM Sans',sans-serif;mi
 .gram-body{padding:15px;}
 .gram-pattern{background:var(--gold-bg);border-left:4px solid var(--gold);padding:8px 12px;border-radius:0 7px 7px 0;font-family:'Noto Serif SC',serif;font-size:14px;margin-bottom:10px;color:var(--ink);}
 .gram-note{font-size:12px;color:#333;line-height:1.75;margin-bottom:10px;}
-.gram-neg{background:#fdf4f3;border-radius:6px;padding:7px 11px;font-size:12px;color:#922;margin-bottom:10px;border-left:3px solid var(--red);white-space:pre-line;}
 .gram-exs{display:flex;flex-direction:column;gap:6px;}
 .gex{background:var(--rice);border-radius:7px;padding:8px 11px;}
 .gex-cn{font-family:'Noto Serif SC',serif;font-size:15px;color:var(--ink);}
-.gex-cn mark{background:transparent;color:var(--red);font-weight:700;}
 .gex-py{font-size:11px;color:var(--red);margin:2px 0;}
 .gex-vi{font-size:11px;color:var(--muted);}
 
-/* HANZI */
-.hz-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(95px,1fr));gap:8px;}
-.hz-card{background:white;border:1px solid var(--warm);border-radius:10px;padding:12px 6px;text-align:center;cursor:pointer;transition:all .18s;}
-.hz-card:hover,.hz-card.sel{border-color:var(--red);background:var(--red-l);}
-.hz-ch{font-family:'Noto Serif SC',serif;font-size:34px;color:var(--red);}
-.hz-py{font-size:10px;color:var(--red);margin-top:3px;}
-.hz-vi{font-size:10px;color:var(--muted);}
-.hz-detail{background:white;border-radius:11px;border:1px solid var(--warm);padding:14px;margin-bottom:12px;display:none;box-shadow:0 2px 8px rgba(0,0,0,.05);}
-.hz-detail.show{display:flex;gap:14px;align-items:flex-start;}
-.hz-big{font-family:'Noto Serif SC',serif;font-size:70px;color:var(--red);line-height:1;flex-shrink:0;}
-.hz-py-big{font-size:16px;color:var(--red);font-weight:500;margin-bottom:3px;}
-.hz-vi-big{font-size:13px;font-weight:600;margin-bottom:4px;}
-.hz-strokes{font-size:11px;color:var(--muted);}
-.hz-tip{font-size:11px;color:#444;line-height:1.6;margin-top:4px;}
-
-/* TIPS */
-.tip{background:var(--gold-bg);border-left:4px solid var(--gold);border-radius:0 9px 9px 0;padding:10px 13px;font-size:12px;color:#5c3d00;line-height:1.7;margin:13px 0;}
-.tip strong{color:#3a2600;}
-.note-box{background:var(--red-l);border-left:4px solid var(--red);border-radius:0 9px 9px 0;padding:10px 13px;font-size:12px;color:#6b1010;line-height:1.7;margin:12px 0;}
-.warn-box{background:var(--red-l);border-left:4px solid var(--red);border-radius:0 9px 9px 0;padding:10px 13px;font-size:12px;color:#6b1010;line-height:1.7;margin:12px 0;}
-
-/* ══ WORKBOOK ══ */
-.wb-section-title{font-size:14px;font-weight:700;color:var(--purple);margin:20px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--purple-bg);}
-.wb-part-desc{font-size:11px;color:var(--muted);margin-bottom:10px;line-height:1.5;}
-.answer-note{background:var(--purple-bg);border-radius:9px;padding:10px 13px;font-size:12px;color:var(--purple);margin-bottom:14px;line-height:1.6;}
-
-.script-card{background:white;border:1px solid var(--warm);border-radius:10px;overflow:hidden;margin-bottom:8px;box-shadow:0 1px 5px rgba(0,0,0,.04);}
-.script-item{display:flex;gap:10px;padding:10px 13px;border-bottom:1px solid var(--warm);align-items:flex-start;}
-.script-item:last-child{border-bottom:none;}
-.script-num{width:22px;height:22px;border-radius:50%;background:var(--purple);color:white;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
-.script-cn{font-family:'Noto Serif SC',serif;font-size:15px;color:var(--ink);line-height:1.5;white-space:pre-line;}
-.script-py{font-size:11px;color:var(--red);margin-top:2px;white-space:pre-line;}
-.script-vi{font-size:11px;color:var(--muted);margin-top:1px;white-space:pre-line;}
-.script-ans{font-size:11px;color:var(--purple);margin-top:4px;font-weight:600;}
-
-/* Reading */
-.read-passage{background:white;border:1px solid var(--warm);border-radius:11px;padding:14px 16px;margin-bottom:12px;box-shadow:0 1px 6px rgba(0,0,0,.04);}
-.read-cn{font-family:'Noto Serif SC',serif;font-size:16px;color:var(--ink);line-height:1.9;margin-bottom:6px;}
-.read-py{font-size:11px;color:var(--red);line-height:1.8;margin-bottom:4px;}
-.read-vi{font-size:11px;color:var(--muted);line-height:1.7;}
-
-/* Interactive items */
+/* Các thành phần Workbook */
 .match-item{background:white;border:1.5px solid var(--warm);border-radius:10px;padding:11px 13px;margin-bottom:8px;}
-.match-num{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:5px;}
-.match-cn{font-family:'Noto Serif SC',serif;font-size:16px;color:var(--ink);margin-bottom:2px;}
-.match-py{font-size:11px;color:var(--red);margin-bottom:8px;}
-.match-opts{display:flex;flex-wrap:wrap;gap:6px;}
-.mopt{border:1.5px solid var(--warm);background:var(--rice);border-radius:7px;padding:6px 11px;font-size:12px;cursor:pointer;transition:all .18s;}
-.mopt:hover:not(.done){border-color:var(--purple);background:var(--purple-bg);}
+.mopt{border:1.5px solid var(--warm);background:var(--rice);border-radius:7px;padding:6px 11px;font-size:12px;cursor:pointer;margin:4px 0; display:inline-block;}
 .mopt.correct{border-color:var(--green);background:var(--green-bg);color:var(--green);font-weight:600;}
 .mopt.wrong{border-color:var(--red);background:var(--red-l);color:var(--red);}
-.mopt.done{cursor:default;}
-.mopt-col{flex-direction:column;}
-.mopt-col .mopt{text-align:left;justify-content:flex-start;font-family:'Noto Serif SC',serif;}
-.match-fb{margin-top:7px;font-size:11px;line-height:1.5;display:none;padding:6px 9px;border-radius:6px;}
-.match-fb.show{display:block;}
-.match-fb.ok{background:var(--green-bg);color:var(--green);}
-.match-fb.no{background:var(--red-l);color:var(--red);}
 
-.tf-card{background:white;border:1.5px solid var(--warm);border-radius:10px;padding:12px 14px;margin-bottom:8px;}
-.tf-q{font-family:'Noto Serif SC',serif;font-size:16px;color:var(--ink);margin-bottom:2px;}
-.tf-py{font-size:11px;color:var(--red);margin-bottom:9px;}
-.tf-vi{font-size:11px;color:var(--muted);margin-bottom:9px;}
-.tf-btns{display:flex;gap:7px;}
-.tf-btn{flex:1;padding:8px;border-radius:7px;border:1.5px solid var(--warm);background:var(--rice);font-size:13px;font-weight:600;cursor:pointer;transition:all .18s;}
-.tf-btn:hover:not(.done){border-color:var(--purple);background:var(--purple-bg);}
-.tf-btn.correct{border-color:var(--green);background:var(--green-bg);color:var(--green);}
-.tf-btn.wrong{border-color:var(--red);background:var(--red-l);color:var(--red);}
-.tf-btn.done{cursor:default;}
-.tf-fb{margin-top:8px;font-size:11px;line-height:1.5;display:none;padding:6px 9px;border-radius:6px;}
-.tf-fb.show{display:block;}
-.tf-fb.ok{background:var(--green-bg);color:var(--green);}
-.tf-fb.no{background:var(--red-l);color:var(--red);}
-
-/* Pronunciation */
-.pron-card{background:white;border:1px solid var(--warm);border-radius:10px;padding:14px;margin-bottom:10px;}
-.pron-instr{font-size:12px;color:var(--muted);margin-bottom:10px;line-height:1.6;}
-.pron-grid{display:flex;flex-wrap:wrap;gap:8px;}
-.pw{background:var(--rice);border:1px solid var(--warm);border-radius:7px;padding:6px 12px;text-align:center;min-width:80px;}
-.pw-num{font-size:10px;color:var(--muted);}
-.pw-cn{font-family:'Noto Serif SC',serif;font-size:14px;color:var(--ink);}
-.pw-py{font-size:10px;color:var(--red);}
-.answer-key{background:var(--purple-bg);border-radius:10px;padding:12px 14px;margin-top:10px;}
-.ak-title{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--purple);margin-bottom:8px;}
-.ak-row{display:flex;flex-wrap:wrap;gap:6px;}
-.ak-item{background:white;border:1px solid var(--purple-l);border-radius:6px;padding:4px 10px;font-size:12px;font-weight:600;color:var(--purple);}
-
-/* Reorder */
 .reorder-card{background:white;border:1.5px solid var(--warm);border-radius:10px;padding:13px;margin-bottom:8px;}
-.pieces{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:9px;}
-.piece{background:var(--purple-bg);border:1.5px solid #d4c8f8;border-radius:6px;padding:5px 11px;font-family:'Noto Serif SC',serif;font-size:14px;color:var(--purple);cursor:pointer;transition:all .18s;user-select:none;}
-.piece:hover:not(.used){border-color:var(--purple);background:#e5dcfa;}
-.piece.used{opacity:.3;cursor:default;}
-.ans-area{min-height:38px;border:2px dashed var(--warm);border-radius:7px;padding:6px 10px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px;transition:border-color .2s;}
-.ans-area.has{border-color:var(--purple);}
-.placed{background:var(--purple);color:white;border-radius:6px;padding:5px 11px;font-family:'Noto Serif SC',serif;font-size:14px;cursor:pointer;transition:all .18s;}
-.placed:hover{background:var(--red);}
-.ro-ph{font-size:11px;color:var(--muted);font-style:italic;}
-.ro-result{font-size:11px;line-height:1.5;display:none;padding:6px 9px;border-radius:6px;margin-top:7px;}
-.ro-result.show{display:block;}
-.ro-result.ok{background:var(--green-bg);color:var(--green);}
-.ro-result.no{background:var(--red-l);color:var(--red);}
-.ro-btns{display:flex;gap:7px;margin-top:9px;}
-.btn-sm{background:transparent;color:var(--purple);border:1.5px solid var(--purple);padding:5px 11px;font-size:11px;border-radius:6px;cursor:pointer;transition:all .18s;}
-.btn-sm:hover{background:var(--purple);color:white;}
-
-/* Score */
-.score-card{background:var(--ink);color:white;border-radius:12px;padding:22px 18px;text-align:center;display:none;margin-top:16px;}
-.score-card.show{display:block;animation:rise .4s ease;}
-.sc-big{font-family:'Noto Serif SC',serif;font-size:48px;color:var(--gold);margin:6px 0;}
-.sc-text{font-size:12px;color:rgba(255,255,255,.65);margin-bottom:14px;line-height:1.6;}
-.btn-ow{background:transparent;color:white;border:1.5px solid rgba(255,255,255,.4);padding:8px 18px;font-size:12px;border-radius:7px;cursor:pointer;transition:all .18s;}
-.btn-ow:hover{background:rgba(255,255,255,.1);}
-
-/* Nav btns */
-.nav-btns{display:flex;gap:10px;margin-top:24px;padding-top:16px;border-top:1px solid var(--warm);}
-.nav-btn{flex:1;padding:10px;border-radius:9px;font-size:12px;font-weight:500;cursor:pointer;text-align:center;text-decoration:none;border:1.5px solid var(--warm);background:white;color:var(--muted);transition:all .18s;}
-.nav-btn:hover{border-color:var(--red);color:var(--red);}
-.nav-btn.next{background:var(--red);color:white;border-color:var(--red);}
-.nav-btn.next:hover{background:#9e1f15;}
-
-@media(max-width:480px){.vc{grid-template-columns:60px 1fr;}.vc-tags .vc-pos{display:none;}}
+.piece{background:var(--purple-bg);border:1.5px solid #d4c8f8;border-radius:6px;padding:5px 11px;font-family:'Noto Serif SC',serif;font-size:14px;color:var(--purple);cursor:pointer;display:inline-block;margin:3px;}
+.piece.used{opacity:.3;}
+.ans-area{min-height:38px;border:2px dashed var(--warm);border-radius:7px;padding:6px 10px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px;}
+.placed{background:var(--purple);color:white;border-radius:6px;padding:5px 11px;font-family:'Noto Serif SC',serif;font-size:14px;cursor:pointer;}
 </style>
 </head>
 <body>
 
 <div class="hero">
-  <div><a class="hero-back" href="../index.html">← Danh sách bài học</a></div>
-  <div class="hero-badge">HSK Standard Course 2 · 标准教程 · 第3课</div>
+  <div class="hero-badge">HSK Standard Course 2 · 第3课</div>
   <h1>左边那个红色的是我的</h1>
   <div class="hero-en">The red one on the left is mine</div>
   <div class="hero-pills">
-    <div class="hero-pill">📗 Sách giáo khoa</div>
-    <div class="hero-pill">📘 Sách bài tập BLCU</div>
     <div class="hero-pill">13 từ mới</div>
-    <div class="hero-pill">3 ngữ pháp</div>
-    <div class="hero-pill">Nghe 3 phần · Đọc 4 phần</div>
+    <div class="hero-pill">Ngữ pháp chữ 的</div>
+    <div class="hero-pill">Màu sắc & Đồ vật</div>
   </div>
 </div>
 
@@ -249,147 +128,169 @@ body{background:var(--rice);color:var(--ink);font-family:'DM Sans',sans-serif;mi
     <div class="tab active" data-tab="vocab">📝 Từ mới</div>
     <div class="tab" data-tab="dialog">💬 Hội thoại</div>
     <div class="tab" data-tab="grammar">📖 Ngữ pháp</div>
-    <div class="tab" data-tab="hanzi">✍️ Chữ Hán</div>
     <div class="tab-sep"></div>
     <div class="tab-label">📘 Bài tập</div>
-    <div class="tab wb" data-tab="wb-listen">🎧 Nghe</div>
     <div class="tab wb" data-tab="wb-read">📄 Đọc</div>
-    <div class="tab wb" data-tab="wb-pron">🔊 Phát âm</div>
-    <div class="tab wb" data-tab="wb-write">✏️ Viết câu</div>
+    <div class="tab wb" data-tab="wb-write">✏️ Viết</div>
   </div>
 </div>
 
 <div class="section active" id="sec-vocab">
-  <div class="book-banner tb">📗 SÁCH GIÁO KHOA — 教材</div>
+  <div class="book-banner tb">📗 SÁCH GIÁO KHOA — 교재</div>
   <div class="sec-title">📝 Từ mới — 新词语</div>
-  <div class="sec-desc">13 từ mới HSK2 (★) trong bài 3. Nhấn vào thẻ để xem ví dụ. Chủ đề: Miêu tả đồ vật & Màu sắc.</div>
-  <div class="tip">💡 <strong>Chủ đề bài 3:</strong> Sở hữu, giá cả, miêu tả đồ vật (màu sắc, vị trí) — thường gặp trong phần đọc hiểu và viết của đề thi HSK2.</div>
   <div class="ctx-sec">
-    <div class="ctx-label">★ Từ mới bài 3 — 13 từ chính</div>
     <div class="vlist" id="vNew"></div>
-  </div>
-  <div class="ctx-sec">
-    <div class="ctx-label">Từ HSK1 ôn lại trong bài 3</div>
-    <div class="vlist" id="vReview"></div>
-  </div>
-  <div class="nav-btns">
-    <a class="nav-btn" href="../bai-2/index.html">← Bài 2</a>
-    <a class="nav-btn next" href="../bai-4/index.html">Bài 4 →</a>
   </div>
 </div>
 
 <div class="section" id="sec-dialog">
   <div class="book-banner tb">📗 SÁCH GIÁO KHOA — 教材</div>
   <div class="sec-title">💬 Hội thoại — 课文</div>
-  <div class="sec-desc">Bốn đoạn hội thoại chính thức HSK Standard Course 2 — Bài 3.</div>
   <div class="dlg-box">
     <div class="dlg-head">对话一：在商店 <span class="scene-tag">📍 Ở cửa hàng</span></div>
     <div id="dlg1"></div>
   </div>
-  <div class="tip">💡 <strong>Cấu trúc chữ 的:</strong> "是...的" 用来强调 hoặc thay thế danh từ. Ví dụ: "是我的" = "là của tôi" (thay cho "是我的手表").</div>
   <div class="dlg-box">
     <div class="dlg-head">对话二：在家 <span class="scene-tag">📍 Ở nhà</span></div>
     <div id="dlg2"></div>
-  </div>
-  <div class="note-box">🔔 <strong>一下:</strong> Dùng sau động từ để biểu thị hành động diễn ra trong thời gian ngắn, mang tính thử nghiệm.</div>
-   <div class="dlg-box">
-    <div class="dlg-head">对话三：在房间 <span class="scene-tag">📍 Ở trong phòng</span></div>
-    <div id="dlg3"></div>
-  </div>
-   <div class="dlg-box">
-    <div class="dlg-head">对话四：在办公室 <span class="scene-tag">📍 Ở văn phòng</span></div>
-    <div id="dlg4"></div>
   </div>
 </div>
 
 <div class="section" id="sec-grammar">
   <div class="book-banner tb">📗 SÁCH GIÁO KHOA — 教材</div>
   <div class="sec-title">📖 Ngữ pháp — 语法</div>
-  <div class="sec-desc">3 điểm ngữ pháp chính thức HSK Standard Course 2 — Bài 3.</div>
   <div id="gramContent"></div>
 </div>
 
-<div class="section" id="sec-hanzi">
-  <div class="book-banner tb">📗 SÁCH GIÁO KHOA — 教材</div>
-  <div class="sec-title">✍️ Chữ Hán — 汉字</div>
-  <div class="sec-desc">Nhấn vào từng chữ để xem chi tiết nét viết và ghi nhớ.</div>
-  <div class="hz-detail" id="hzDetail">
-    <div class="hz-big" id="hzBig"></div>
-    <div><div class="hz-py-big" id="hzPy"></div><div class="hz-vi-big" id="hzVi"></div><div class="hz-strokes" id="hzSt"></div><div class="hz-tip" id="hzTip"></div></div>
-  </div>
-  <div class="hz-grid" id="hzGrid"></div>
-  <div class="tip" style="margin-top:14px">💡 <strong>Bộ 纟(mịch):</strong> Bộ thủ này xuất hiện trong các chữ liên quan đến tơ lụa, màu sắc: 红(đỏ), 绿(xanh), 粉(hồng), 颜(màu). Nhận ra bộ 纟giúp đoán nghĩa từ.</div>
-</div>
-
-<div class="section" id="sec-wb-listen">
-  <div class="book-banner wb">📘 SÁCH BÀI TẬP — 练习册 · 一、听力 (Nghe)</div>
-  <div class="sec-title wb">🎧 Luyện nghe — 听力练习</div>
-  <div class="sec-desc">Script chính thức từ 《HSK标准教程2练习册》BLCU Press. Audio: tìm "HSK标准教程2练习册音频".</div>
-
-  <div class="answer-note">📌 <strong>Đáp án bài 3:</strong> 1-5: √ × √ √ √ &nbsp;|&nbsp; 6-10: C A E B F &nbsp;|&nbsp; 11-15: B A C A B</div>
-
-  <div class="wb-section-title">第一部分 — Phần 1 (Câu 1–5)</div>
-  <div class="wb-part-desc">Nghe câu đơn, phán đoán hình ảnh Đúng (√) hay Sai (×)</div>
-  <div class="script-card" id="listenP1"></div>
-
-  <div class="wb-section-title">第二部分 — Phần 2 (Câu 6–10)</div>
-  <div class="wb-part-desc">Nghe hội thoại ngắn, chọn hình ảnh đúng (A–F)</div>
-  <div class="script-card" id="listenP2"></div>
-
-  <div class="wb-section-title">第三部分 — Phần 3 (Câu 11–15)</div>
-  <div class="wb-part-desc">Nghe hội thoại, trả lời câu hỏi (chọn A–F)</div>
-  <div class="script-card" id="listenP3"></div>
-
-  <div class="tip" style="margin-top:14px">💡 <strong>Luyện nghe bài 3:</strong> Chú ý các từ khóa về <strong>màu sắc</strong> (红色, 粉色) và <strong>đồ vật</strong> (手表, 报纸) để chọn hình ảnh hoặc câu trả lời đúng.</div>
-</div>
-
 <div class="section" id="sec-wb-read">
-  <div class="book-banner wb">📘 SÁCH BÀI TẬP — 练习册 · 二、阅读 (Đọc)</div>
-  <div class="sec-title wb">📄 Đọc hiểu — 阅读练习</div>
-  <div class="sec-desc">4 phần đọc hiểu theo đúng cấu trúc đề thi HSK2.</div>
-  <div class="answer-note">📌 <strong>Đáp án bài 3:</strong> 16-20: E C A B D &nbsp;|&nbsp; 21-25: B C A A B &nbsp;|&nbsp; 26-30: √ × √ × √ &nbsp;|&nbsp; 31-35: F C A D B</div>
-
-  <div class="wb-section-title">第一部分 — Phần 1 (Câu 16–20)</div>
-  <div class="wb-part-desc">Đọc câu, chọn hình ảnh phù hợp (A–F)</div>
+  <div class="book-banner wb">📘 BÀI TẬP — ĐỌC HIỂU</div>
   <div id="readP1"></div>
-
-  <div class="wb-section-title">第二部分 — Phần 2 (Câu 21–25)</div>
-  <div class="wb-part-desc">Đọc câu A, chọn câu B trả lời phù hợp</div>
-  <div id="readP2"></div>
-
-  <div class="wb-section-title">第三部分 — Phần 3 (Câu 26–30)</div>
-  <div class="wb-part-desc">Đọc đoạn văn, phán đoán câu phát biểu Đúng (√) hay Sai (×)</div>
-  <div class="read-passage">
-    <div class="read-cn">这块手表不是我的，是我爸爸的。这是他三千多块买的。</div>
-    <div class="read-py">Zhè kuài shǒubiǎo bú shì wǒ de, shì wǒ bàba de. Zhè shì tā sānqiān duō kuài mǎi de.</div>
-    <div class="read-vi">Chiếc đồng hồ này không phải của tôi, là của bố tôi. Đây là ông ấy mua hơn 3 nghìn tệ.</div>
-  </div>
-  <div id="readP3"></div>
-
-  <div class="wb-section-title">第四部分 — Phần 4 (Câu 31–35)</div>
-  <div class="wb-part-desc">Đọc câu A, chọn câu B hoàn chỉnh hội thoại phù hợp nhất</div>
-  <div id="readP4"></div>
-
-  <div class="score-card" id="readScore">
-    <div style="font-size:11px;color:rgba(255,255,255,.6)">Kết quả — 二、阅读</div>
-    <div class="sc-big" id="readScoreBig"></div>
-    <div class="sc-text" id="readScoreTxt"></div>
-    <button class="btn-ow" onclick="resetRead()">🔄 Làm lại</button>
-  </div>
 </div>
 
-<div class="section" id="sec-wb-pron">
-  <div class="book-banner wb">📘 SÁCH BÀI TẬP — 练习册 · 三、语音 (Phát âm)</div>
-  <div class="sec-title wb">🔊 Luyện phát âm — 语音练习</div>
-  <div class="sec-desc">2 bài luyện phát âm chính thức từ sách bài tập HSK2 Bài 3 — BLCU Press.</div>
+<div class="section" id="sec-wb-write">
+  <div class="book-banner wb">📘 BÀI TẬP — SẮP XẾP CÂU</div>
+  <div id="reorderCards"></div>
+</div>
 
-  <div class="wb-section-title">第1题 — Bài 1: Nghe và chọn từ đúng</div>
-  <div class="pron-card">
-    <div class="pron-instr">听录音，选择听到的词语 — Luyện phân biệt từ 3 âm tiết có trọng âm ở giữa.</div>
-    <div class="pron-grid" id="pronP1"></div>
-  </div>
-  <div class="answer-key">
-    <div class="ak-title">Đáp án bài 1</div>
-    <div class="ak-row">
-      <div class="ak-item">1. 吃不饱</div><div class="ak-item">2. 来不及</div><div class="ak-item">3. 差不多</div><div class="ak-item">4. 没关系</div>
-      <div class="ak-item">5. 说不定</div><div class="ak-item">6. 挡不住</div><div class="ak-item">7.
+<script>
+// DATA BÀI 3 HSK2
+const vNew=[
+  {char:'手表',py:'shǒubiǎo',vi:'Đồng hồ đeo tay',pos:'Danh từ',ex:'这块手表是你的吗？\nChiếc đồng hồ này là của bạn à?'},
+  {char:'千',py:'qiān',vi:'Nghìn / Ngàn',pos:'Số từ',ex:'三千多块。\nHơn ba nghìn tệ.'},
+  {char:'报纸',py:'bàozhǐ',vi:'Tờ báo',pos:'Danh từ',ex:'这是今天早上的报纸吗？\nĐây là tờ báo sáng nay phải không?'},
+  {char:'送',py:'sòng',vi:'Tặng / Đưa / Tiễn',pos:'Động từ',ex:'送牛奶的来了。\nNgười giao sữa đến rồi.'},
+  {char:'牛奶',py:'niúnǎi',vi:'Sữa bò',pos:'Danh từ',ex:'我每天早上喝牛奶。'},
+  {char:'房间',py:'fángjiān',vi:'Căn phòng',pos:'Danh từ',ex:'这是谁的房间？'},
+  {char:'丈夫',py:'zhàngfu',vi:'Chồng',pos:'Danh từ',ex:'我丈夫不在家。'},
+  {char:'旁边',py:'pángbiān',vi:'Bên cạnh',pos:'Danh từ',ex:'丈夫旁边那个人是谁？'},
+  {char:'真',py:'zhēn',vi:'Thật / Thật là',pos:'Phó từ',ex:'真漂亮！\nThật đẹp!'},
+  {char:'粉色',py:'fěnsè',vi:'Màu hồng',pos:'Danh từ',ex:'粉色是我女儿最喜欢的颜色。'},
+  {char:'颜色',py:'yánsè',vi:'Màu sắc',pos:'Danh từ',ex:'你喜欢什么颜色？'},
+  {char:'一下',py:'yíxià',vi:'Một chút / Một lát',pos:'Lượng từ',ex:'我看一下。'}
+];
+
+const d1=[
+  {sp:'a',cn:'这块手表是你的吗？',py:'Zhè kuài shǒubiǎo shì nǐ de ma?',vi:'Chiếc đồng hồ này là của bạn à?'},
+  {sp:'b',cn:'不是我的。是我爸爸的。',py:'Bú shì wǒ de. Shì wǒ bàba de.',vi:'Không phải của tôi. Là của bố tôi.'},
+  {sp:'a',cn:'多少钱买的？',py:'Duōshǎo qián mǎi de?',vi:'Mua bao nhiêu tiền vậy?'},
+  {sp:'b',cn:'三千多块。',py:'Sānqiān duō kuài.',vi:'Hơn ba nghìn tệ.'},
+];
+
+const d2=[
+  {sp:'a',cn:'这是今天早上的报纸吗？',py:'Zhè shì jīntiān zǎoshang de bàozhǐ ma?',vi:'Đây là tờ báo sáng nay phải không?'},
+  {sp:'b',cn:'不是，是昨天的。',py:'Bú shì, shì zuótiān de.',vi:'Không, là của hôm qua.'},
+  {sp:'a',cn:'你听，是不是送牛奶的来了？',py:'Nǐ tīng, shì bú shì sòng niúnǎi de lái le?',vi:'Bạn nghe xem, có phải người giao sữa đến rồi không?'},
+  {sp:'b',cn:'我看一下，不是，是送报지의。',py:'Wǒ kàn yíxià, bú shì, shì sòng bàozhǐ de.',vi:'Để tôi xem một chút, không phải, là người đưa báo.'},
+];
+
+const grammar=[
+  {n:1, title:'Cấu trúc chữ "的"', pattern:'Danh từ/Đại từ + 的', note:'Dùng để thay thế danh từ đã nhắc đến.', exs:[
+    {cn:'这块手表是我的。', py:'Zhè kuài shǒubiǎo shì wǒ de.', vi:'Đồng hồ này là của tôi.'}
+  ]},
+  {n:2, title:'"一下"', pattern:'Động từ + 一下', note:'Hành động ngắn, thử nghiệm.', exs:[
+    {cn:'我看一下。', py:'Wǒ kàn yíxià.', vi:'Để tôi xem chút.'}
+  ]}
+];
+
+const readP1Data=[
+  {n:1, cn:'你喜欢什么颜色？', py:'Nǐ xǐhuān shénme yánsè?', opts:['A. 红色','B. 丈夫','C. 房间'], ans:0}
+];
+
+const reorderData=[
+  {pieces:['红色','的','那个','是','我的'], answer:'那个红色的是我的', py:'Nàge hóngsè de shì wǒ de.', vi:'Cái màu đỏ kia là của tôi.'}
+];
+
+// RENDER LOGIC (GIỮ NGUYÊN TỪ BÀI 2)
+function renderVocab(arr,id){
+  document.getElementById(id).innerHTML=arr.map((v,i)=>`
+    <div class="vc" onclick="toggleEx('${id}',${i})">
+      <div class="vc-char">${v.char}</div>
+      <div style="flex:1"><div class="vc-py">${v.py}</div><div class="vc-vi">${v.vi}</div>
+        <div class="vc-ex" id="${id}-${i}">${v.ex.replace(/\n/g,'<br>')}</div></div>
+      <div class="vc-tags"><div class="vc-pos">${v.pos}</div><div class="new-tag">★</div></div>
+    </div>`).join('');
+}
+function toggleEx(id,i){document.getElementById(`${id}-${i}`).classList.toggle('open');}
+
+function renderDlg(arr,id){
+  document.getElementById(id).innerHTML=arr.map((d,i)=>`
+    <div class="dl ${i%2===1?'r':''}">
+      <div class="sp ${d.sp}">${d.sp.toUpperCase()}</div>
+      <div class="dl-body"><div class="dl-cn">${d.cn}</div><div class="dl-py">${d.py}</div><div class="dl-vi">${d.vi}</div></div>
+    </div>`).join('');
+}
+
+function renderGrammar(){
+  document.getElementById('gramContent').innerHTML=grammar.map(g=>`
+    <div class="gram-card">
+      <div class="gram-head"><div class="gram-n">${g.n}</div><div class="gram-title">${g.title}</div></div>
+      <div class="gram-body">
+        <div class="gram-pattern">${g.pattern}</div>
+        <div class="gram-note">${g.note}</div>
+        <div class="gram-exs">${g.exs.map(e=>`<div class="gex"><div class="gex-cn">${e.cn}</div><div class="gex-py">${e.py}</div><div class="gex-vi">${e.vi}</div></div>`).join('')}</div>
+      </div>
+    </div>`).join('');
+}
+
+function renderRead(){
+  document.getElementById('readP1').innerHTML=readP1Data.map((q,i)=>`
+    <div class="match-item">
+      <div>${q.cn}</div>
+      <div>${q.opts.map((o,j)=>`<button class="mopt" onclick="this.className=( ${j}===${q.ans}?'mopt correct':'mopt wrong')">${o}</button>`).join(' ')}</div>
+    </div>`).join('');
+}
+
+let roState=reorderData.map(()=>({placed:[]}));
+function renderReorder(){
+  document.getElementById('reorderCards').innerHTML=reorderData.map((r,i)=>`
+    <div class="reorder-card">
+      <div class="pieces" id="pc-${i}">${r.pieces.map((p,j)=>`<div class="piece" id="p-${i}-${j}" onclick="clickP(${i},'${p}',this)">${p}</div>`).join('')}</div>
+      <div class="ans-area" id="aa-${i}"></div>
+      <button class="mopt" onclick="checkRO(${i})">Kiểm tra</button>
+    </div>`).join('');
+}
+function clickP(ci,w,el){ if(el.classList.contains('used'))return; el.classList.add('used'); roState[ci].placed.push(w); renderAA(ci);}
+function renderAA(ci){ document.getElementById(`aa-${ci}`).innerHTML=roState[ci].placed.map(w=>`<span class="placed">${w}</span>`).join(' ');}
+function checkRO(i){ if(roState[i].placed.join('')===reorderData[i].answer.replace(/\s/g,'')) alert('Chính xác!'); else alert('Thử lại nhé!');}
+
+// TABS LOGIC
+document.querySelectorAll('.tab[data-tab]').forEach(tab=>{
+  tab.addEventListener('click',function(){
+    const name=this.getAttribute('data-tab');
+    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    document.getElementById('sec-'+name).classList.add('active');
+    this.classList.add('active');
+  });
+});
+
+// INIT
+renderVocab(vNew,'vNew');
+renderDlg(d1,'dlg1');
+renderDlg(d2,'dlg2');
+renderGrammar();
+renderRead();
+renderReorder();
+</script>
+</body>
+</html>

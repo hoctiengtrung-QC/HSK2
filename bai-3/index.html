@@ -1,1 +1,214 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HSK 2 — Bài 3: 左边那个红色的是我的</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Lora:ital,wght@0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#B5281C;--red-l:#fdf2f1;--gold:#C8900A;--gold-bg:#FFF8E6;
+  --ink:#18130E;--rice:#F8F4EE;--warm:#EDE4D5;--muted:#7D6B52;
+  --accent:#1E5F8A;--accent-bg:#EEF5FB;
+  --green:#1E7A45;--green-bg:#EBF7F0;
+  --purple:#5B3FA6;--purple-bg:#F0ECFB;--purple-l:#e8e0fa;
+  --teal:#0E7C7B;--teal-bg:#E8F6F6;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--rice);color:var(--ink);font-family:'DM Sans',sans-serif;line-height:1.6;}
+.zh{font-family:'Noto Serif SC',serif;font-weight:600;}
 
+/* HEADER & NAV */
+header{background:white;padding:1rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,0.05);}
+.prog-container{height:4px;background:var(--warm);width:100%;margin-top:10px;border-radius:2px;}
+.prog-bar{height:100%;background:linear-gradient(90deg, var(--red), var(--gold));width:0%;transition:width 0.4s ease;}
+
+.tabs-wrap{overflow-x:auto;display:flex;gap:8px;padding:10px 0;scrollbar-width:none;}
+.tab{white-space:nowrap;padding:8px 16px;border-radius:20px;font-size:0.9rem;cursor:pointer;background:var(--warm);color:var(--muted);transition:0.3s;border:1px solid transparent;}
+.tab.active{background:var(--red);color:white;font-weight:600;}
+.tab[data-tab^="wb"].active{background:var(--purple);}
+
+/* CONTENT SECTIONS */
+.container{max-width:800px;margin:20px auto;padding:0 15px;padding-bottom:80px;}
+.section{display:none;animation:fadeIn 0.4s ease forwards;}
+.section.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+
+.hero{text-align:center;padding:40px 20px;background:white;border-radius:24px;margin-bottom:20px;box-shadow:0 4px 15px rgba(0,0,0,0.03);}
+.hero h1{font-size:2.2rem;color:var(--red);margin-bottom:8px;}
+.hero-en{font-family:'Lora',serif;font-style:italic;color:var(--muted);font-size:1.1rem;}
+
+/* VOCABULARY CARD */
+.card{background:white;border-radius:20px;padding:25px;margin-bottom:20px;box-shadow:0 2px 12px rgba(0,0,0,0.02);border:1px solid var(--warm);}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(160px, 1fr));gap:15px;}
+.v-item{padding:15px;background:var(--red-l);border-radius:16px;text-align:center;transition:0.2s;}
+.v-zh{font-size:1.6rem;display:block;margin-bottom:4px;color:var(--red);}
+.v-py{color:var(--gold);font-weight:500;font-size:0.9rem;display:block;}
+.v-vi{color:var(--muted);font-size:0.85rem;}
+
+/* DIALOGUE */
+.dlg-line{margin-bottom:20px;display:flex;flex-direction:column;}
+.dlg-zh{font-size:1.2rem;background:var(--accent-bg);padding:12px 18px;border-radius:18px;width:fit-content;max-width:90%;position:relative;}
+.dlg-zh::after{content:attr(data-py);display:block;font-size:0.8rem;color:var(--accent);margin-top:4px;font-weight:normal;}
+.dlg-vi{font-size:0.9rem;color:var(--muted);margin-top:5px;padding-left:10px;}
+.dlg-right{align-items:flex-end;}
+.dlg-right .dlg-zh{background:var(--gold-bg);border-bottom-right-radius:4px;}
+.dlg-right .dlg-vi{padding-right:10px;text-align:right;}
+
+/* GRAMMAR */
+.g-card{border-left:5px solid var(--red);padding-left:20px;}
+.g-title{color:var(--red);font-weight:700;margin-bottom:10px;font-size:1.1rem;}
+.g-ex{background:var(--rice);padding:10px;border-radius:8px;margin-top:10px;font-size:0.95rem;}
+
+/* WORKBOOK INTERACTIVE */
+.wb-q{background:white;padding:20px;border-radius:20px;margin-bottom:15px;border:1px solid var(--purple-l);}
+.opt-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;}
+.opt{padding:12px;border:2px solid var(--warm);border-radius:12px;cursor:pointer;text-align:center;transition:0.2s;}
+.opt:hover{background:var(--purple-bg);}
+.opt.correct{background:var(--green);color:white;border-color:var(--green);}
+.opt.wrong{background:var(--red);color:white;border-color:var(--red);}
+
+/* WORD REORDERING */
+.ans-area{min-height:50px;border-bottom:2px dashed var(--purple);margin-bottom:15px;display:flex;flex-wrap:wrap;gap:8px;padding:10px;}
+.piece-box{display:flex;flex-wrap:wrap;gap:8px;}
+.piece{padding:8px 15px;background:var(--purple-bg);border:1px solid var(--purple-l);border-radius:10px;cursor:pointer;font-family:'Noto Serif SC';}
+.piece.used{opacity:0.3;pointer-events:none;}
+
+/* FOOTER NAV */
+.nav-btns{display:flex;justify-content:space-between;margin-top:30px;}
+.nav-btn{padding:12px 24px;border-radius:15px;text-decoration:none;font-weight:600;transition:0.2s;}
+.nav-btn:not(.next){background:var(--warm);color:var(--muted);}
+.nav-btn.next{background:var(--red);color:white;}
+.next-purple{background:var(--purple)!important;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="tabs-wrap">
+    <div class="tab active" data-tab="vocab">Từ vựng</div>
+    <div class="tab" data-tab="dialog">Bài khóa</div>
+    <div class="tab" data-tab="grammar">Ngữ pháp</div>
+    <div class="tab" data-tab="hanzi">Chữ Hán</div>
+    <div class="tab" data-tab="wb-listen">Nghe (WB)</div>
+    <div class="tab" data-tab="wb-read">Đọc (WB)</div>
+    <div class="tab" data-tab="wb-pron">Phát âm</div>
+    <div class="tab" data-tab="wb-write">Viết (WB)</div>
+  </div>
+  <div class="prog-container"><div class="prog-bar" id="progBar"></div></div>
+</header>
+
+<div class="container">
+  
+  <div class="section active" id="sec-vocab">
+    <div class="hero">
+      <h1>第3课：左边那个红色的是我的</h1>
+      <div class="hero-en">Lesson 3: The red one on the left is mine</div>
+    </div>
+    <div class="card">
+      <h3 style="margin-bottom:15px; color:var(--red)">Từ mới HSK 2 (13 từ)</h3>
+      <div class="vocab-grid" id="vNew"></div>
+    </div>
+    <div class="nav-btns"><div style="flex:1"></div><button class="nav-btn next" onclick="goTab('dialog')">Học Bài khóa →</button></div>
+  </div>
+
+  <div class="section" id="sec-dialog">
+    <h2 class="zh" style="color:var(--accent); margin-bottom:20px;">Hội thoại & Ngữ cảnh</h2>
+    <div class="card">
+      <p style="margin-bottom:15px; font-weight:bold; color:var(--muted)">1. Ở cửa hàng (在商店)</p>
+      <div id="dlg1"></div>
+    </div>
+    <div class="card">
+      <p style="margin-bottom:15px; font-weight:bold; color:var(--muted)">2. Ở nhà (在家)</p>
+      <div id="dlg2"></div>
+    </div>
+    <div class="nav-btns">
+      <button class="nav-btn" onclick="goTab('vocab')">← Từ vựng</button>
+      <button class="nav-btn next" onclick="goTab('grammar')">Ngữ pháp →</button>
+    </div>
+  </div>
+
+  <div class="section" id="sec-grammar">
+    <h2 style="color:var(--red); margin-bottom:20px;">Trọng tâm Ngôn ngữ</h2>
+    <div class="card g-card">
+      <div class="g-title">1. Cấu trúc chữ "的" (The "de" Phrase)</div>
+      <p>Dùng để thay thế cho một danh từ đã được nhắc đến trước đó để tránh lặp lại.</p>
+      <div class="g-ex">
+        <b>Ví dụ:</b> 这本书是我的 (zhè běn shū shì wǒ de) - Cuốn sách này là của tôi. <br>
+        <i>(Thay cho: 这本书是我的书)</i>
+      </div>
+    </div>
+    <div class="card g-card">
+      <div class="g-title">2. Số từ "一下" (Numeral-Measure Word "一下")</div>
+      <p>Biểu thị hành động diễn ra trong thời gian ngắn hoặc mang tính chất thử nghiệm.</p>
+      <div class="g-ex"><b>Ví dụ:</b> 你看一下 (Nǐ kàn yíxià) - Bạn xem một chút đi.</div>
+    </div>
+    <div class="nav-btns">
+      <button class="nav-btn" onclick="goTab('dialog')">← Bài khóa</button>
+      <button class="nav-btn next" onclick="goTab('hanzi')">Chữ Hán →</button>
+    </div>
+  </div>
+
+  <div class="section" id="sec-hanzi">
+    <div class="card">
+      <h2 style="color:var(--teal); margin-bottom:15px;">Tập viết & Bộ thủ</h2>
+      <p>Bài này tập trung vào các chữ có bộ <b>亻(Nhân đứng)</b> và <b>口 (Khẩu)</b>.</p>
+      <div class="vocab-grid" id="vHanzi" style="margin-top:20px;"></div>
+    </div>
+    <div class="nav-btns">
+      <button class="nav-btn" onclick="goTab('grammar')">← Ngữ pháp</button>
+      <button class="nav-btn next next-purple" onclick="goTab('wb-listen')">Làm Bài tập →</button>
+    </div>
+  </div>
+
+  <div class="section" id="sec-wb-listen">
+    <h2 style="color:var(--purple); margin-bottom:20px;">Phần Nghe (Workbook)</h2>
+    <div class="card" style="border:2px dashed var(--purple-l);">
+      <p>🔊 <i>Nội dung nghe bài 3 bao gồm việc xác định màu sắc (粉色 - hồng, 红色 - đỏ) và đồ vật (手表 - đồng hồ).</i></p>
+    </div>
+    <div id="wb-l-list"></div>
+    <div class="nav-btns">
+      <button class="nav-btn" onclick="goTab('hanzi')">← Chữ Hán</button>
+      <button class="nav-btn next next-purple" onclick="goTab('wb-read')">Phần Đọc →</button>
+    </div>
+  </div>
+
+  <div class="section" id="sec-wb-read">
+    <h2 style="color:var(--purple); margin-bottom:20px;">Phần Đọc (Workbook)</h2>
+    <div id="wb-r-list"></div>
+    <div class="nav-btns">
+      <button class="nav-btn" onclick="goTab('wb-listen')">← Nghe</button>
+      <button class="nav-btn next next-purple" onclick="goTab('wb-write')">Phần Viết →</button>
+    </div>
+  </div>
+
+  <div class="section" id="sec-wb-write">
+    <h2 style="color:var(--purple); margin-bottom:20px;">Phần Viết (Sắp xếp câu)</h2>
+    <div id="wb-w-list"></div>
+    <div class="card" style="text-align:center; background:var(--green-bg); border:none;">
+      <h3 style="color:var(--green)">Chúc mừng! Bạn đã hoàn thành Bài 3.</h3>
+      <p style="font-size:0.9rem; color:var(--muted); margin-top:5px;">Hãy tiếp tục ôn luyện để chuẩn bị cho Bài 4 nhé!</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// DỮ LIỆU BÀI 3
+const vNew = [
+  {z:'手表', p:'shǒubiǎo', v:'Đồng hồ đeo tay'},
+  {z:'千', p:'qiān', v:'Nghìn, ngàn'},
+  {z:'报纸', p:'bàozhǐ', v:'Tờ báo'},
+  {z:'送', p:'sòng', v:'Tặng, đưa, tiễn'},
+  {z:'牛奶', p:'niúnǎi', v:'Sữa bò'},
+  {z:'房间', p:'fángjiān', v:'Căn phòng'},
+  {z:'丈夫', p:'zhàngfu', v:'Người chồng'},
+  {z:'旁边', p:'pángbiān', v:'Bên cạnh'},
+  {z:'真', p:'zhēn', v:'Thật, thật là'},
+  {z:'粉色', p:'fěnsè', v:'Màu hồng'},
+  {z:'颜色', p:'yánsè', v:'Màu sắc'}
+];
+
+const d1 = [
+  {z:'这块手表是你的吗？', p:'Zhè kuài shǒubiǎo shì nǐ de ma?', v:'Chiếc đồng hồ này là của bạn à?', r:false},
+  {z:'不是我的。是我爸爸的。', p:'Bú shì

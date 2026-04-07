@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Lora:ital,wght@0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --red:#B5281C;--red-l:#fdf2f1;--gold:#C8900A;--gold-bg:#FFF8E6;
+  --red:#B5281C;--red-l:#fdf2f1;--red-d:#8C1E14;--gold:#C8900A;--gold-bg:#FFF8E6;
   --ink:#18130E;--rice:#F8F4EE;--warm:#EDE4D5;--muted:#7D6B52;
   --accent:#1E5F8A;--accent-bg:#EEF5FB;
   --green:#1E7A45;--green-bg:#EBF7F0;
@@ -236,6 +236,12 @@ body{background:var(--rice);color:var(--ink);font-family:'DM Sans',sans-serif;mi
 .btn-sm:hover{background:var(--purple);color:white;}
 
 @media(max-width:480px){.vc{grid-template-columns:60px 1fr;}.vc-tags .vc-pos{display:none;}}
+
+.nav-btns{display:flex;gap:10px;margin-top:24px;padding-top:16px;border-top:1px solid var(--warm);}
+.nav-btn{flex:1;padding:10px;border-radius:9px;font-size:12px;font-weight:500;cursor:pointer;text-align:center;text-decoration:none;border:1.5px solid var(--warm);background:white;color:var(--muted);transition:all .18s;}
+.nav-btn:hover{border-color:var(--red);color:var(--red);}
+.nav-btn.next{background:var(--red);color:white;border-color:var(--red);}
+.nav-btn.next:hover{background:var(--red-d);}
 </style>
 </head>
 <body>
@@ -288,6 +294,10 @@ body{background:var(--rice);color:var(--ink);font-family:'DM Sans',sans-serif;mi
   <div class="ctx-sec">
     <div class="ctx-label">Từ HSK1 ôn lại trong bài</div>
     <div class="vlist" id="vReview"></div>
+  </div>
+  <div class="nav-btns">
+    <a class="nav-btn" href="../index.html">🏠 Trang chủ</a>
+    <a class="nav-btn next" href="../bai-2/index.html">Bài 2 →</a>
   </div>
 </div>
 

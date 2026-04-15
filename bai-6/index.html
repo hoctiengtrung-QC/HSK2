@@ -1,1 +1,870 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HSK 2 — Bài 6: 你怎么不吃了</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Lora:ital,wght@0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pri:#1A5E8A;--pri-l:#EBF4FB;--pri-d:#0E3D5C;
+  --gold:#C8900A;--gold-bg:#FFF8E6;
+  --ink:#18130E;--rice:#F8F4EE;--warm:#EDE4D5;--muted:#7D6B52;
+  --accent:#1E5F8A;--accent-bg:#EEF5FB;
+  --green:#1E7A45;--green-bg:#EBF7F0;
+  --purple:#5B3FA6;--purple-bg:#F0ECFB;--purple-l:#e8e0fa;
+  --red:#B5281C;--red-l:#fdf2f1;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--rice);color:var(--ink);font-family:'DM Sans',sans-serif;overflow-x:hidden;}
+
+.hero{background:linear-gradient(135deg,var(--pri-d) 0%,var(--pri) 100%);padding:40px 20px 32px;text-align:center;position:relative;overflow:hidden;}
+.hero::after{content:'吃';position:absolute;font-family:'Noto Serif SC',serif;font-size:160px;color:rgba(255,255,255,.05);right:-10px;bottom:-20px;line-height:1;pointer-events:none;}
+.hero-back{display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,.75);font-size:12px;text-decoration:none;margin-bottom:12px;padding:4px 12px;border-radius:20px;border:1px solid rgba(255,255,255,.25);transition:all .2s;}
+.hero-back:hover{background:rgba(255,255,255,.12);color:white;}
+.hero-badge{display:inline-block;background:var(--gold);color:#1a0a00;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 14px;border-radius:20px;margin-bottom:12px;}
+.hero h1{font-family:'Noto Serif SC',serif;font-size:clamp(18px,4vw,32px);color:white;margin-bottom:5px;line-height:1.4;}
+.hero-en{font-family:'Lora',serif;font-style:italic;font-size:13px;color:rgba(255,255,255,.6);margin-bottom:16px;}
+.hero-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;}
+.hero-pill{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.85);font-size:11px;padding:3px 11px;border-radius:20px;}
+
+.prog-wrap{height:5px;background:var(--warm);position:sticky;top:0;z-index:100;}
+.prog-bar{height:100%;background:linear-gradient(90deg,var(--pri),var(--gold));transition:width .5s;}
+
+.tabs-wrap{background:white;border-bottom:2px solid var(--warm);position:sticky;top:5px;z-index:99;overflow-x:auto;scrollbar-width:none;}
+.tabs-wrap::-webkit-scrollbar{display:none;}
+.tabs{display:flex;min-width:max-content;}
+.tab-sep{width:2px;background:var(--warm);flex-shrink:0;margin:6px 0;}
+.tab-label{padding:10px 8px 10px 12px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);opacity:.7;display:flex;align-items:center;white-space:nowrap;border-bottom:3px solid transparent;margin-bottom:-2px;}
+.tab{flex-shrink:0;padding:10px 13px;font-size:12px;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;white-space:nowrap;}
+.tab:hover{color:var(--pri);}
+.tab.active{color:var(--pri);border-bottom-color:var(--pri);}
+.tab.wb:hover{color:var(--purple);}
+.tab.wb.active{color:var(--purple);border-bottom-color:var(--purple);}
+
+.section{display:none;padding:20px 16px 40px;max-width:740px;margin:0 auto;}
+.section.active{display:block;animation:rise .3s ease;}
+@keyframes rise{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+.book-banner{padding:7px 16px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-align:center;border-radius:8px;margin-bottom:16px;}
+.book-banner.tb{background:var(--pri-l);color:var(--pri);}
+.book-banner.wb{background:var(--purple-bg);color:var(--purple);}
+
+.sec-title{font-family:'Lora',serif;font-size:19px;color:var(--pri);margin-bottom:3px;}
+.sec-title.wb{color:var(--purple);}
+.sec-desc{font-size:12px;color:var(--muted);margin-bottom:16px;line-height:1.6;}
+
+.ctx-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:9px;padding-bottom:5px;border-bottom:1px solid var(--warm);}
+.ctx-sec{margin-bottom:20px;}
+.vlist{display:flex;flex-direction:column;gap:8px;}
+.vc{background:white;border:1px solid var(--warm);border-radius:11px;padding:12px 14px;display:grid;grid-template-columns:72px 1fr auto;align-items:center;gap:12px;cursor:pointer;transition:all .18s;box-shadow:0 1px 5px rgba(0,0,0,.04);}
+.vc:hover{border-color:var(--pri);box-shadow:0 3px 12px rgba(26,94,138,.12);}
+.vc-char{font-family:'Noto Serif SC',serif;font-size:26px;color:var(--pri);text-align:center;line-height:1.2;}
+.vc-py{font-size:12px;color:var(--accent);font-weight:500;margin-bottom:2px;}
+.vc-vi{font-size:13px;color:var(--ink);font-weight:500;}
+.vc-ex{font-size:11px;color:var(--muted);margin-top:5px;line-height:1.6;display:none;grid-column:1/-1;background:var(--rice);border-radius:6px;padding:7px 10px;}
+.vc-ex.open{display:block;}
+.vc-pos{font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;background:var(--warm);color:var(--muted);align-self:flex-start;white-space:nowrap;}
+.new-tag{font-size:9px;font-weight:700;background:var(--pri);color:white;padding:2px 6px;border-radius:8px;text-transform:uppercase;}
+.vc-tags{display:flex;flex-direction:column;gap:3px;align-items:flex-end;}
+
+/* 量词重叠 demo */
+.mw-table{background:white;border-radius:11px;border:1px solid var(--warm);overflow:hidden;margin-bottom:14px;}
+.mw-head{background:var(--pri);color:white;padding:9px 14px;font-size:12px;font-weight:600;}
+.mw-row{display:flex;gap:0;border-bottom:1px solid var(--warm);}
+.mw-row:last-child{border-bottom:none;}
+.mw-cell{flex:1;padding:9px 13px;font-size:12px;line-height:1.6;}
+.mw-cell:first-child{border-right:1px solid var(--warm);font-family:'Noto Serif SC',serif;font-size:16px;color:var(--pri);font-weight:600;flex:0 0 90px;}
+
+.dlg-box{background:white;border-radius:12px;border:1px solid var(--warm);overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.04);margin-bottom:14px;}
+.dlg-head{background:var(--pri);color:white;padding:9px 15px;font-size:12px;font-weight:500;display:flex;align-items:center;justify-content:space-between;}
+.scene-tag{font-size:10px;background:rgba(255,255,255,.18);padding:2px 8px;border-radius:8px;}
+.dl{display:flex;gap:10px;padding:12px 14px;border-bottom:1px solid var(--warm);align-items:flex-start;}
+.dl:last-child{border-bottom:none;}
+.dl:hover{background:var(--rice);}
+.dl.r{flex-direction:row-reverse;}
+.sp{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif SC',serif;font-size:11px;font-weight:700;color:white;flex-shrink:0;}
+.sp.a{background:var(--pri);}
+.sp.b{background:#1E7A45;}
+.dl-body{flex:1;}.dl.r .dl-body{text-align:right;}
+.dl-cn{font-family:'Noto Serif SC',serif;font-size:17px;color:var(--ink);line-height:1.4;margin-bottom:2px;}
+.dl-py{font-size:11px;color:var(--accent);margin-bottom:1px;}
+.dl-vi{font-size:11px;color:var(--muted);}
+
+.gram-card{background:white;border-radius:12px;border:1px solid var(--warm);margin-bottom:13px;overflow:hidden;}
+.gram-head{background:var(--ink);color:white;padding:11px 15px;display:flex;align-items:center;gap:9px;}
+.gram-n{width:24px;height:24px;border-radius:50%;background:var(--gold);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;}
+.gram-title{font-size:13px;font-weight:500;line-height:1.4;}
+.gram-body{padding:15px;}
+.gram-pattern{background:var(--gold-bg);border-left:4px solid var(--gold);padding:8px 12px;border-radius:0 7px 7px 0;font-family:'Noto Serif SC',serif;font-size:14px;margin-bottom:10px;}
+.gram-note{font-size:12px;color:#333;line-height:1.75;margin-bottom:10px;}
+.gram-neg{background:#fdf4f3;border-radius:6px;padding:7px 11px;font-size:12px;color:#922;margin-bottom:10px;border-left:3px solid var(--red);white-space:pre-line;}
+.gram-exs{display:flex;flex-direction:column;gap:6px;}
+.gex{background:var(--rice);border-radius:7px;padding:8px 11px;}
+.gex-cn{font-family:'Noto Serif SC',serif;font-size:15px;color:var(--ink);}
+.gex-cn mark{background:transparent;color:var(--pri);font-weight:700;}
+.gex-py{font-size:11px;color:var(--accent);margin:2px 0;}
+.gex-vi{font-size:11px;color:var(--muted);}
+
+.hz-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:8px;}
+.hz-card{background:white;border:1px solid var(--warm);border-radius:10px;padding:11px 5px;text-align:center;cursor:pointer;transition:all .18s;}
+.hz-card:hover,.hz-card.sel{border-color:var(--pri);background:var(--pri-l);}
+.hz-ch{font-family:'Noto Serif SC',serif;font-size:32px;color:var(--pri);}
+.hz-py{font-size:10px;color:var(--accent);margin-top:3px;}
+.hz-vi{font-size:10px;color:var(--muted);}
+.hz-detail{background:white;border-radius:11px;border:1px solid var(--warm);padding:14px;margin-bottom:12px;display:none;}
+.hz-detail.show{display:flex;gap:14px;align-items:flex-start;}
+.hz-big{font-family:'Noto Serif SC',serif;font-size:68px;color:var(--pri);line-height:1;flex-shrink:0;}
+.hz-py-big{font-size:16px;color:var(--accent);font-weight:500;margin-bottom:3px;}
+.hz-vi-big{font-size:13px;font-weight:600;margin-bottom:4px;}
+.hz-strokes{font-size:11px;color:var(--muted);}
+.hz-tip{font-size:11px;color:#444;line-height:1.6;margin-top:4px;}
+
+.tip{background:var(--gold-bg);border-left:4px solid var(--gold);border-radius:0 9px 9px 0;padding:10px 13px;font-size:12px;color:#5c3d00;line-height:1.7;margin:13px 0;}
+.tip strong{color:#3a2600;}
+.note-box{background:var(--accent-bg);border-left:4px solid var(--accent);border-radius:0 9px 9px 0;padding:10px 13px;font-size:12px;color:#0e3555;line-height:1.7;margin:12px 0;}
+
+.wb-section-title{font-size:14px;font-weight:700;color:var(--purple);margin:20px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--purple-bg);}
+.wb-part-desc{font-size:11px;color:var(--muted);margin-bottom:10px;line-height:1.5;}
+.answer-note{background:var(--purple-bg);border-radius:9px;padding:10px 13px;font-size:12px;color:var(--purple);margin-bottom:14px;line-height:1.6;}
+
+.script-card{background:white;border:1px solid var(--warm);border-radius:10px;overflow:hidden;margin-bottom:8px;}
+.script-item{display:flex;gap:10px;padding:10px 13px;border-bottom:1px solid var(--warm);align-items:flex-start;}
+.script-item:last-child{border-bottom:none;}
+.script-num{width:22px;height:22px;border-radius:50%;background:var(--purple);color:white;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.script-body{flex:1;}
+.script-cn{font-family:'Noto Serif SC',serif;font-size:15px;color:var(--ink);line-height:1.5;white-space:pre-line;}
+.script-py{font-size:11px;color:var(--accent);margin-top:2px;white-space:pre-line;}
+.script-vi{font-size:11px;color:var(--muted);margin-top:1px;white-space:pre-line;}
+.script-ans{font-size:11px;color:var(--purple);margin-top:5px;font-weight:600;}
+
+.read-passage{background:white;border:1px solid var(--warm);border-radius:11px;padding:14px 16px;margin-bottom:12px;}
+.read-cn{font-family:'Noto Serif SC',serif;font-size:16px;color:var(--ink);line-height:1.9;margin-bottom:6px;}
+.read-py{font-size:11px;color:var(--accent);line-height:1.8;margin-bottom:4px;}
+.read-vi{font-size:11px;color:var(--muted);line-height:1.7;}
+
+.match-item{background:white;border:1.5px solid var(--warm);border-radius:10px;padding:11px 13px;margin-bottom:8px;}
+.match-num{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:5px;}
+.match-cn{font-family:'Noto Serif SC',serif;font-size:16px;color:var(--ink);margin-bottom:2px;}
+.match-py{font-size:11px;color:var(--accent);margin-bottom:8px;}
+.match-opts{display:flex;flex-wrap:wrap;gap:6px;}
+.mopt{border:1.5px solid var(--warm);background:var(--rice);border-radius:7px;padding:6px 11px;font-size:12px;cursor:pointer;transition:all .18s;text-align:left;}
+.mopt:hover:not(.done){border-color:var(--purple);background:var(--purple-bg);}
+.mopt.correct{border-color:var(--green);background:var(--green-bg);color:var(--green);font-weight:600;}
+.mopt.wrong{border-color:var(--red);background:var(--red-l);color:var(--red);}
+.mopt.done{cursor:default;}
+.match-fb{margin-top:7px;font-size:11px;line-height:1.5;display:none;padding:6px 9px;border-radius:6px;}
+.match-fb.show{display:block;}
+.match-fb.ok{background:var(--green-bg);color:var(--green);}
+.match-fb.no{background:var(--red-l);color:var(--red);}
+
+.tf-card{background:white;border:1.5px solid var(--warm);border-radius:10px;padding:12px 14px;margin-bottom:8px;}
+.tf-q{font-family:'Noto Serif SC',serif;font-size:16px;color:var(--ink);margin-bottom:2px;}
+.tf-py{font-size:11px;color:var(--accent);margin-bottom:3px;}
+.tf-vi{font-size:11px;color:var(--muted);margin-bottom:9px;}
+.tf-btns{display:flex;gap:7px;}
+.tf-btn{flex:1;padding:8px;border-radius:7px;border:1.5px solid var(--warm);background:var(--rice);font-size:13px;font-weight:600;cursor:pointer;transition:all .18s;}
+.tf-btn:hover:not(.done){border-color:var(--purple);background:var(--purple-bg);}
+.tf-btn.correct{border-color:var(--green);background:var(--green-bg);color:var(--green);}
+.tf-btn.wrong{border-color:var(--red);background:var(--red-l);color:var(--red);}
+.tf-btn.done{cursor:default;}
+.tf-fb{margin-top:8px;font-size:11px;line-height:1.5;display:none;padding:6px 9px;border-radius:6px;}
+.tf-fb.show{display:block;}
+.tf-fb.ok{background:var(--green-bg);color:var(--green);}
+.tf-fb.no{background:var(--red-l);color:var(--red);}
+
+.pron-card{background:white;border:1px solid var(--warm);border-radius:10px;padding:14px;margin-bottom:10px;}
+.pron-instr{font-size:12px;color:var(--muted);margin-bottom:10px;line-height:1.6;}
+.pron-grid{display:flex;flex-wrap:wrap;gap:8px;}
+.pw{background:var(--rice);border:1px solid var(--warm);border-radius:7px;padding:8px 13px;text-align:left;min-width:170px;}
+.pw-num{font-size:10px;color:var(--muted);}
+.pw-cn{font-family:'Noto Serif SC',serif;font-size:14px;color:var(--ink);}
+.pw-py{font-size:10px;color:var(--pri);margin-top:2px;}
+.pw-note{font-size:10px;color:var(--muted);margin-top:1px;}
+
+.reorder-card{background:white;border:1.5px solid var(--warm);border-radius:10px;padding:13px;margin-bottom:8px;}
+.pieces{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:9px;}
+.piece{background:var(--purple-bg);border:1.5px solid #d4c8f8;border-radius:6px;padding:5px 11px;font-family:'Noto Serif SC',serif;font-size:14px;color:var(--purple);cursor:pointer;user-select:none;transition:all .18s;}
+.piece:hover:not(.used){border-color:var(--purple);background:#e5dcfa;}
+.piece.used{opacity:.3;cursor:default;}
+.ans-area{min-height:38px;border:2px dashed var(--warm);border-radius:7px;padding:6px 10px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px;}
+.ans-area.has{border-color:var(--purple);}
+.placed{background:var(--purple);color:white;border-radius:6px;padding:5px 11px;font-family:'Noto Serif SC',serif;font-size:14px;cursor:pointer;transition:all .18s;}
+.placed:hover{background:var(--red);}
+.ro-ph{font-size:11px;color:var(--muted);font-style:italic;}
+.ro-result{font-size:11px;line-height:1.5;display:none;padding:6px 9px;border-radius:6px;margin-top:7px;}
+.ro-result.show{display:block;}
+.ro-result.ok{background:var(--green-bg);color:var(--green);}
+.ro-result.no{background:var(--red-l);color:var(--red);}
+.ro-btns{display:flex;gap:7px;margin-top:9px;}
+.btn-sm{background:transparent;color:var(--purple);border:1.5px solid var(--purple);padding:5px 11px;font-size:11px;border-radius:6px;cursor:pointer;transition:all .18s;}
+.btn-sm:hover{background:var(--purple);color:white;}
+
+.score-card{background:var(--ink);color:white;border-radius:12px;padding:22px 18px;text-align:center;display:none;margin-top:16px;}
+.score-card.show{display:block;animation:rise .4s ease;}
+.sc-big{font-family:'Noto Serif SC',serif;font-size:48px;color:var(--gold);margin:6px 0;}
+.sc-text{font-size:12px;color:rgba(255,255,255,.65);margin-bottom:14px;line-height:1.6;}
+.btn-ow{background:transparent;color:white;border:1.5px solid rgba(255,255,255,.4);padding:8px 18px;font-size:12px;border-radius:7px;cursor:pointer;}
+
+.nav-btns{display:flex;gap:10px;margin-top:24px;padding-top:16px;border-top:1px solid var(--warm);}
+.nav-btn{flex:1;padding:10px;border-radius:9px;font-size:12px;font-weight:500;cursor:pointer;text-align:center;text-decoration:none;border:1.5px solid var(--warm);background:white;color:var(--muted);transition:all .18s;}
+.nav-btn:hover{border-color:var(--pri);color:var(--pri);}
+.nav-btn.next{background:var(--pri);color:white;border-color:var(--pri);}
+.nav-btn.next:hover{background:var(--pri-d);}
+@media(max-width:480px){.vc{grid-template-columns:60px 1fr;}.vc-tags .vc-pos{display:none;}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div><a class="hero-back" href="../index.html">← Danh sách bài học</a></div>
+  <div class="hero-badge">HSK Standard Course 2 · 标准教程 · 第6课</div>
+  <h1>你怎么不吃了</h1>
+  <div class="hero-en">Why did you stop eating?</div>
+  <div class="hero-pills">
+    <div class="hero-pill">📗 Sách giáo khoa</div>
+    <div class="hero-pill">📘 Sách bài tập BLCU</div>
+    <div class="hero-pill">12 từ mới</div>
+    <div class="hero-pill">3 ngữ pháp</div>
+    <div class="hero-pill">Nghe 3 phần · Đọc 4 phần</div>
+  </div>
+</div>
+
+<div class="prog-wrap"><div class="prog-bar" id="progBar" style="width:10%"></div></div>
+
+<div class="tabs-wrap">
+  <div class="tabs">
+    <div class="tab-label">📗 Sách GK</div>
+    <div class="tab active" data-tab="vocab">📝 Từ mới</div>
+    <div class="tab" data-tab="dialog">💬 Hội thoại</div>
+    <div class="tab" data-tab="grammar">📖 Ngữ pháp</div>
+    <div class="tab" data-tab="hanzi">✍️ Chữ Hán</div>
+    <div class="tab-sep"></div>
+    <div class="tab-label">📘 Bài tập</div>
+    <div class="tab wb" data-tab="wb-listen">🎧 Nghe</div>
+    <div class="tab wb" data-tab="wb-read">📄 Đọc</div>
+    <div class="tab wb" data-tab="wb-pron">🔊 Phát âm</div>
+    <div class="tab wb" data-tab="wb-write">✏️ Viết câu</div>
+  </div>
+</div>
+
+<!-- ═══ SÁCH GIÁO KHOA ═══ -->
+<div class="section active" id="sec-vocab">
+  <div class="book-banner tb">📗 SÁCH GIÁO KHOA — 教材</div>
+  <div class="sec-title">📝 Từ mới — 新词语</div>
+  <div class="sec-desc">12 từ mới HSK2 (★) bài 6. Chủ đề: Ăn uống, Thể thao & Lý do/Kết quả.</div>
+  <div class="tip">💡 <strong>Chủ đề bài 6:</strong> Hỏi lý do (怎么), lặp lại hành động (天天/经常), giải thích nhân quả (因为…所以…) — 3 cấu trúc hội thoại cực kỳ tự nhiên trong tiếng Trung hằng ngày.</div>
+
+  <div class="ctx-label" style="margin-bottom:10px">📊 Lượng từ trùng điệp — 量词重叠 (bổ sung ngữ pháp điểm 2)</div>
+  <div class="mw-table">
+    <div class="mw-head">量词 + 量词 = "Mỗi..., từng..." — Nhấn mạnh toàn bộ không bỏ sót</div>
+    <div class="mw-row"><div class="mw-cell">天天</div><div class="mw-cell">tiāntiān — Mỗi ngày, ngày nào cũng (= 每天 nhưng nhấn hơn). VD: <b>天天游泳</b> = ngày nào cũng bơi</div></div>
+    <div class="mw-row"><div class="mw-cell">次次</div><div class="mw-cell">cìcì — Mỗi lần, lần nào cũng. VD: <b>次次都对</b> = lần nào cũng đúng</div></div>
+    <div class="mw-row"><div class="mw-cell">年年</div><div class="mw-cell">niánnián — Năm nào cũng. VD: <b>年年有鱼</b> = năm nào cũng dư dả (thành ngữ)</div></div>
+    <div class="mw-row"><div class="mw-cell">个个</div><div class="mw-cell">gège — Mỗi cái/người, cái nào cũng. VD: <b>个个都很好</b> = cái nào cũng rất tốt</div></div>
+  </div>
+
+  <div class="ctx-sec">
+    <div class="ctx-label">★ Từ mới bài 6 — 12 từ chính</div>
+    <div class="vlist" id="vNew"></div>
+  </div>
+  <div class="ctx-sec">
+    <div class="ctx-label">Từ HSK1/bài trước ôn lại</div>
+    <div class="vlist" id="vReview"></div>
+  </div>
+  <div class="nav-btns">
+    <a class="nav-btn" href="../bai-5/index.html">← Bài 5</a>
+    <a class="nav-btn next" href="../bai-7/index.html">Bài 7 →</a>
+  </div>
+</div>
+
+<div class="section" id="sec-dialog">
+  <div class="book-banner tb">📗 SÁCH GIÁO KHOA — 教材</div>
+  <div class="sec-title">💬 Hội thoại — 课文</div>
+  <div class="sec-desc">Hai đoạn hội thoại chính thức HSK Standard Course 2 — Bài 6.</div>
+  <div class="dlg-box">
+    <div class="dlg-head">对话一：怎么不吃了？<span class="scene-tag">🍽️ Bàn ăn</span></div>
+    <div id="dlg1"></div>
+  </div>
+  <div class="tip">💡 <strong>怎么 hỏi lý do / ngạc nhiên:</strong> "你<strong>怎么</strong>不吃了？" — 怎么ở đây KHÔNG hỏi "như thế nào" mà hỏi "tại sao / sao lại". Ngữ điệu thường mang cảm giác ngạc nhiên hoặc trách nhẹ. Khác: 你<strong>怎么样</strong>？= Bạn thế nào? (hỏi tình trạng)</div>
+  <div class="dlg-box">
+    <div class="dlg-head">对话二：经常游泳 <span class="scene-tag">🏊 Tập thể thao</span></div>
+    <div id="dlg2"></div>
+  </div>
+  <div class="note-box">🔔 <strong>因为…所以… đồng thời hay tách riêng?</strong><br>
+  • Dùng <b>cả hai</b>: 因为他累了，<b>所以</b>没去 — nhấn mạnh quan hệ nhân quả rõ ràng<br>
+  • Dùng <b>chỉ 因为</b>: 他没去，<b>因为</b>他累了 — giải thích lý do ở cuối<br>
+  • Dùng <b>chỉ 所以</b>: 他累了，<b>所以</b>没去 — nhấn vào kết quả</div>
+</div>
+
+<div class="section" id="sec-grammar">
+  <div class="book-banner tb">📗 SÁCH GIÁO KHOA — 教材</div>
+  <div class="sec-title">📖 Ngữ pháp — 语法</div>
+  <div class="sec-desc">3 điểm ngữ pháp chính thức HSK Standard Course 2 — Bài 6 (Chinese Grammar Wiki).</div>
+  <div id="gramContent"></div>
+</div>
+
+<div class="section" id="sec-hanzi">
+  <div class="book-banner tb">📗 SÁCH GIÁO KHOA — 教材</div>
+  <div class="sec-title">✍️ Chữ Hán — 汉字</div>
+  <div class="sec-desc">Nhấn vào từng chữ để xem chi tiết. Chú ý bộ thủ 氵(nước) và 食(ăn).</div>
+  <div class="hz-detail" id="hzDetail">
+    <div class="hz-big" id="hzBig"></div>
+    <div><div class="hz-py-big" id="hzPy"></div><div class="hz-vi-big" id="hzVi"></div><div class="hz-strokes" id="hzSt"></div><div class="hz-tip" id="hzTip"></div></div>
+  </div>
+  <div class="hz-grid" id="hzGrid"></div>
+  <div class="tip" style="margin-top:14px">💡 <strong>Bộ 氵(shuǐ = nước):</strong> Xuất hiện trong nhiều từ liên quan đến chất lỏng/vận động: 游(bơi), 泳(bơi lội), 河(sông), 海(biển), 洗(rửa), 泡(ngâm). Bài 6 có 游泳 — nhận ra bộ 氵 rất hữu ích!</div>
+</div>
+
+<!-- ═══ SÁCH BÀI TẬP ═══ -->
+<div class="section" id="sec-wb-listen">
+  <div class="book-banner wb">📘 SÁCH BÀI TẬP — 练习册 · 一、听力 (Nghe)</div>
+  <div class="sec-title wb">🎧 Luyện nghe — 听力练习</div>
+  <div class="sec-desc">Script chính thức từ 《HSK标准教程2练习册》BLCU Press — Bài 6, xác nhận từ nhiều nguồn.</div>
+  <div class="answer-note">📌 <strong>Đáp án bài 6 (chính thức BLCU):</strong> 1-5: × × √ √ √ &nbsp;|&nbsp; 6-10: E A B F C &nbsp;|&nbsp; 11-15: C B A C A</div>
+
+  <div class="wb-section-title">第一部分 — Phần 1 (Câu 1–5): Đúng/Sai</div>
+  <div class="wb-part-desc">Nghe câu đơn, phán đoán hình ảnh Đúng (√) hay Sai (×)</div>
+  <div class="script-card" id="listenP1"></div>
+
+  <div class="wb-section-title">第二部分 — Phần 2 (Câu 6–10): Chọn hình</div>
+  <div class="wb-part-desc">Nghe hội thoại ngắn, chọn hình ảnh đúng (A–F)</div>
+  <div class="script-card" id="listenP2"></div>
+
+  <div class="wb-section-title">第三部分 — Phần 3 (Câu 11–15): Hỏi đáp</div>
+  <div class="wb-part-desc">Nghe hội thoại, chọn câu trả lời đúng (A–F)</div>
+  <div class="script-card" id="listenP3"></div>
+
+  <div class="tip" style="margin-top:14px">💡 <strong>Nghe bài 6:</strong> Chú ý từ <strong>因为</strong> — nó thường dẫn vào câu trả lời cho câu hỏi "为什么" hoặc "怎么没去". Cũng chú ý <strong>天天/经常</strong> để phân biệt tần suất hành động.</div>
+</div>
+
+<div class="section" id="sec-wb-read">
+  <div class="book-banner wb">📘 SÁCH BÀI TẬP — 练习册 · 二、阅读 (Đọc)</div>
+  <div class="sec-title wb">📄 Đọc hiểu — 阅读练习</div>
+  <div class="sec-desc">4 phần đọc hiểu theo đúng cấu trúc đề thi HSK2.</div>
+  <div class="answer-note">📌 <strong>Đáp án bài 6 (chính thức BLCU):</strong> 16-20: F C A B E &nbsp;|&nbsp; 21-25: A C F B D &nbsp;|&nbsp; 26-30: √ × √ × × &nbsp;|&nbsp; 31-35: A F B D C</div>
+
+  <div class="wb-section-title">第一部分 — Phần 1 (Câu 16–20): Nối câu-hình</div>
+  <div class="wb-part-desc">Đọc câu, chọn hình ảnh phù hợp (A–F)</div>
+  <div id="readP1"></div>
+
+  <div class="wb-section-title">第二部分 — Phần 2 (Câu 21–25): Nối hội thoại</div>
+  <div class="wb-part-desc">Đọc câu A, chọn câu B trả lời phù hợp nhất</div>
+  <div id="readP2"></div>
+
+  <div class="wb-section-title">第三部分 — Phần 3 (Câu 26–30): Đúng/Sai</div>
+  <div class="wb-part-desc">Đọc đoạn văn, phán đoán Đúng (√) hay Sai (×)</div>
+  <div class="read-passage">
+    <div class="read-cn">小明这个月天天去游泳，因为医生说游泳对身体很好。所以现在他的体重从八十公斤减到了七十五公斤了。他非常高兴。</div>
+    <div class="read-py">Xiǎomíng zhège yuè tiāntiān qù yóuyǒng, yīnwèi yīshēng shuō yóuyǒng duì shēntǐ hěn hǎo. Suǒyǐ xiànzài tā de tǐzhòng cóng bāshí gōngjīn jiǎn dào le qīshíwǔ gōngjīn le. Tā fēicháng gāoxìng.</div>
+    <div class="read-vi">Tháng này Tiểu Minh ngày nào cũng đi bơi, vì bác sĩ nói bơi lội rất tốt cho sức khoẻ. Vì vậy hiện tại cân nặng của anh ấy đã giảm từ 80 kg xuống còn 75 kg rồi. Anh ấy rất vui.</div>
+  </div>
+  <div id="readP3"></div>
+
+  <div class="wb-section-title">第四部分 — Phần 4 (Câu 31–35): Nối câu đối thoại</div>
+  <div class="wb-part-desc">Đọc câu A, chọn câu B hoàn chỉnh hội thoại phù hợp nhất</div>
+  <div id="readP4"></div>
+
+  <div class="score-card" id="readScore">
+    <div style="font-size:11px;color:rgba(255,255,255,.6)">Kết quả — 二、阅读</div>
+    <div class="sc-big" id="readScoreBig"></div>
+    <div class="sc-text" id="readScoreTxt"></div>
+    <button class="btn-ow" onclick="resetRead()">🔄 Làm lại</button>
+  </div>
+</div>
+
+<div class="section" id="sec-wb-pron">
+  <div class="book-banner wb">📘 SÁCH BÀI TẬP — 练习册 · 三、语音 (Phát âm)</div>
+  <div class="sec-title wb">🔊 Luyện phát âm — 语音练习</div>
+  <div class="sec-desc">Bài luyện phát âm chính thức từ sách bài tập HSK2 Bài 6 — BLCU. Bài 6 luyện <strong>câu điệu (句调)</strong>: lên/xuống giọng cuối câu.</div>
+
+  <div class="wb-section-title">第1题 — Câu hỏi (升调 ↑ / 降调 ↓)</div>
+  <div class="pron-card">
+    <div class="pron-instr">听录音，注意每个句子末尾的句调 — Nghe, chú ý <b>câu điệu cuối câu</b>: câu hỏi có 吗/呢 thường lên ↑ ; câu kể/cảm thán thường xuống ↓.</div>
+    <div class="pron-grid" id="pronP1"></div>
+  </div>
+
+  <div class="wb-section-title" style="margin-top:20px">第2题 — Đọc theo, chú ý câu điệu</div>
+  <div class="pron-card">
+    <div class="pron-instr">听录音并跟读 — Nghe và đọc theo những câu dưới đây. Chú ý câu điệu (lên hay xuống giọng).</div>
+    <div class="pron-grid" id="pronP2"></div>
+  </div>
+  <div class="tip">💡 <strong>Câu điệu (句调) tiếng Trung:</strong><br>↑ <b>Lên giọng</b> — câu hỏi dùng 吗/呢, câu chưa chắc chắn: "你吃了吗？↑"<br>↓ <b>Xuống giọng</b> — câu kể, câu cảm thán, câu mệnh lệnh: "因为天天吃，我不想吃了。↓"<br>Câu hỏi dùng từ nghi vấn (怎么/为什么) thường XUỐNG giọng vì mang tính chắc chắn hỏi!</div>
+</div>
+
+<div class="section" id="sec-wb-write">
+  <div class="book-banner wb">📘 SÁCH BÀI TẬP — 练习册 · 四、书写 (Viết)</div>
+  <div class="sec-title wb">✏️ Sắp xếp câu — 连词成句</div>
+  <div class="sec-desc">Sắp xếp các từ thành câu đúng theo cấu trúc bài 6. Nhấn từng mảnh để đặt vào câu, nhấn lại để bỏ ra.</div>
+  <div id="reorderCards"></div>
+  <div class="score-card" id="writeScore">
+    <div style="font-size:11px;color:rgba(255,255,255,.6)">Kết quả — 四、书写</div>
+    <div class="sc-big" id="writeBig"></div>
+    <div class="sc-text" id="writeTxt"></div>
+    <button class="btn-ow" onclick="resetWrite()">🔄 Làm lại</button>
+  </div>
+</div>
+
+<script>
+// ═══════════════
+// DATA BÀI 6
+// ═══════════════
+const vNew=[
+  {char:'怎么',py:'zěnme',vi:'Tại sao / Sao lại (hỏi lý do ngạc nhiên)',pos:'Đại từ nghi vấn',
+   ex:'你怎么不吃了？\nNǐ zěnme bù chī le?\nSao bạn không ăn nữa vậy?\n→ 怎么ở đây ≠ "như thế nào" mà = "tại sao / sao lại". Dùng khi ngạc nhiên hoặc nhẹ trách.'},
+  {char:'天天',py:'tiāntiān',vi:'Mỗi ngày / Ngày nào cũng (lượng từ trùng điệp)',pos:'Phó từ',
+   ex:'这个月我天天去游泳。\nZhège yuè wǒ tiāntiān qù yóuyǒng.\nTháng này ngày nào tôi cũng đi bơi.\n→ 天天 = 每天 nhưng nhấn mạnh không bỏ ngày nào'},
+  {char:'经常',py:'jīngcháng',vi:'Thường xuyên / Hay (tần suất cao)',pos:'Phó từ',
+   ex:'他经常踢足球，身体很好。\nTā jīngcháng tī zúqiú, shēntǐ hěn hǎo.\nAnh ấy thường xuyên đá bóng, sức khoẻ rất tốt.\n→ 经常 > 有时候 > 偶尔 (tần suất giảm dần)'},
+  {char:'因为',py:'yīnwèi',vi:'Bởi vì / Do... (nêu nguyên nhân)',pos:'Liên từ',
+   ex:'因为天天吃羊肉，我不想吃了。\nYīnwèi tiāntiān chī yángròu, wǒ bù xiǎng chī le.\nVì ngày nào cũng ăn thịt cừu, tôi không muốn ăn nữa.'},
+  {char:'所以',py:'suǒyǐ',vi:'Vì vậy / Do đó (nêu kết quả)',pos:'Liên từ',
+   ex:'因为下雨，所以我们都没去。\nYīnwèi xià yǔ, suǒyǐ wǒmen dōu méi qù.\nVì trời mưa, nên chúng tôi đều không đi.\n→ 因为…所以… dùng cặp đôi để nhấn mạnh nhân quả'},
+  {char:'游泳',py:'yóuyǒng',vi:'Bơi lội',pos:'Động từ',
+   ex:'医生说游泳对身体很好。\nYīshēng shuō yóuyǒng duì shēntǐ hěn hǎo.\nBác sĩ nói bơi lội rất tốt cho sức khoẻ.'},
+  {char:'羊肉',py:'yángròu',vi:'Thịt cừu / Thịt dê',pos:'Danh từ',
+   ex:'你多吃一点儿羊肉吧。\nNǐ duō chī yīdiǎnr yángròu ba.\nBạn ăn thêm thịt cừu một chút đi.\n→ 羊(yáng)=cừu/dê + 肉(ròu)=thịt'},
+  {char:'米饭',py:'mǐfàn',vi:'Cơm (nấu từ gạo)',pos:'Danh từ',
+   ex:'你还想吃什么？来点儿米饭吧。\nNǐ hái xiǎng chī shénme? Lái diǎnr mǐfàn ba.\nBạn còn muốn ăn gì? Để thêm cơm nhé.'},
+  {char:'自行车',py:'zìxíngchē',vi:'Xe đạp',pos:'Danh từ',
+   ex:'我在门外看见他的自行车了。\nWǒ zài mén wài kànjiàn tā de zìxíngchē le.\nTôi nhìn thấy xe đạp của anh ấy ở ngoài cửa rồi.'},
+  {char:'门',py:'mén',vi:'Cửa / Cổng',pos:'Danh từ',
+   ex:'你去开门吧，小王来了。\nNǐ qù kāimén ba, Xiǎo Wáng lái le.\nBạn đi mở cửa đi, Tiểu Vương đến rồi.\n→ 开门=mở cửa; 关门=đóng cửa; 门外=ngoài cửa'},
+  {char:'公斤',py:'gōngjīn',vi:'Kilogram (kg)',pos:'Danh từ',
+   ex:'这个月我天天游泳，现在七十公斤了。\nZhège yuè wǒ tiāntiān yóuyǒng, xiànzài qīshí gōngjīn le.\nTháng này ngày nào tôi cũng bơi, giờ là 70 kg rồi.'},
+  {char:'面条',py:'miàntiáo',vi:'Mì sợi',pos:'Danh từ',
+   ex:'我每天吃很多面条。\nWǒ měitiān chī hěn duō miàntiáo.\nTôi ăn rất nhiều mì mỗi ngày.\n→ 面(miàn)=bột mì + 条(tiáo)=sợi/dải'},
+];
+
+const vReview=[
+  {char:'游泳',py:'yóuyǒng',vi:'Bơi (HSK1)',pos:'Động từ',
+   ex:'踢足球/打篮球/游泳 — 3 môn thể thao hay xuất hiện nhất HSK2'},
+  {char:'下雨',py:'xià yǔ',vi:'Mưa (HSK1)',pos:'Động từ',
+   ex:'因为下雨，所以没去。Vì trời mưa nên không đi.'},
+  {char:'公斤',py:'gōngjīn',vi:'Kilogram (HSK2 bài 2)',pos:'Đơn vị đo',
+   ex:'多少公斤？Bao nhiêu kg? — Xuất hiện lại trong ngữ cảnh thể thao bài 6'},
+];
+
+const d1=[
+  {sp:'a',cn:'你多吃一点儿羊肉吧。',py:'Nǐ duō chī yīdiǎnr yángròu ba.',vi:'Bạn ăn thêm thịt cừu một chút đi.'},
+  {sp:'b',cn:'不了，这个星期天天吃羊肉，我不想吃了。',py:'Bù le, zhège xīngqī tiāntiān chī yángròu, wǒ bù xiǎng chī le.',vi:'Thôi, tuần này ngày nào cũng ăn thịt cừu, tôi không muốn ăn nữa rồi.'},
+  {sp:'a',cn:'那你还想吃什么？',py:'Nà nǐ hái xiǎng chī shénme?',vi:'Vậy bạn còn muốn ăn gì không?'},
+  {sp:'b',cn:'来点儿米饭吧。',py:'Lái diǎnr mǐfàn ba.',vi:'Thêm cơm một chút nhé.'},
+  {sp:'a',cn:'好，你怎么不吃了？',py:'Hǎo, nǐ zěnme bù chī le?',vi:'Được, sao bạn không ăn nữa vậy?'},
+  {sp:'b',cn:'因为天天吃，所以不想吃了。',py:'Yīnwèi tiāntiān chī, suǒyǐ bù xiǎng chī le.',vi:'Vì ngày nào cũng ăn, nên không muốn ăn nữa rồi.'},
+];
+
+const d2=[
+  {sp:'a',cn:'你经常游泳吗？',py:'Nǐ jīngcháng yóuyǒng ma?',vi:'Bạn có thường xuyên đi bơi không?'},
+  {sp:'b',cn:'这个月天天游泳，现在七十公斤了。',py:'Zhège yuè tiāntiān yóuyǒng, xiànzài qīshí gōngjīn le.',vi:'Tháng này ngày nào cũng bơi, bây giờ 70 kg rồi.'},
+  {sp:'a',cn:'昨天你们怎么没去踢足球？',py:'Zuótiān nǐmen zěnme méi qù tī zúqiú?',vi:'Hôm qua sao các bạn không đi đá bóng?'},
+  {sp:'b',cn:'因为昨天天气不太好，所以我们都没去。',py:'Yīnwèi zuótiān tiānqì bú tài hǎo, suǒyǐ wǒmen dōu méi qù.',vi:'Vì hôm qua thời tiết không tốt lắm, nên chúng tôi đều không đi.'},
+];
+
+const grammar=[
+  {n:1,
+   title:'疑问代词"怎么" — Hỏi lý do/ngạc nhiên, không hỏi cách thức',
+   pattern:'怎么 + 动词/形容词？ (= tại sao / sao lại...)',
+   note:'<b>怎么</b> có hai cách dùng chính:<br>① Hỏi <b>cách thức</b>: 这个字<b>怎么</b>写？— Chữ này viết như thế nào?<br>② Hỏi <b>lý do / ngạc nhiên</b>: 你<b>怎么</b>不吃了？— Sao bạn không ăn nữa vậy?<br><br>Trong bài 6 dùng nghĩa ②. Cách phân biệt: nếu câu hỏi về hành động đột ngột/bất thường → dùng 怎么 nghĩa ②.',
+   neg:'',
+   exs:[
+     {cn:'你<mark>怎么</mark>不吃了？',py:'Nǐ zěnme bù chī le?',vi:'Sao bạn không ăn nữa vậy? (ngạc nhiên)'},
+     {cn:'昨天你们<mark>怎么</mark>没去踢足球？',py:'Zuótiān nǐmen zěnme méi qù tī zúqiú?',vi:'Hôm qua sao các bạn không đi đá bóng?'},
+     {cn:'你<mark>怎么</mark>知道他来了？',py:'Nǐ zěnme zhīdào tā lái le?',vi:'Sao bạn biết anh ấy đến rồi?'},
+   ]},
+  {n:2,
+   title:'量词重叠 — Lượng từ trùng điệp nhấn mạnh "mỗi..., từng..."',
+   pattern:'量词 + 量词 (AA式) → "mỗi..., từng..., không bỏ sót"',
+   note:'Trùng điệp lượng từ (AA) diễn đạt nghĩa "<b>mỗi</b>" hoặc "<b>từng</b>", nhấn mạnh tính đều đặn, không ngoại lệ. Hay dùng nhất trong giao tiếp hằng ngày:<br><br>• <b>天天</b> (tiāntiān) = mỗi ngày<br>• <b>次次</b> (cìcì) = mỗi lần<br>• <b>年年</b> (niánnián) = mỗi năm<br>• <b>个个</b> (gège) = từng cái/người<br><br>⚠️ Lưu ý: 天天 nhấn mạnh hơn 每天. 这个月我<b>天天</b>游泳 = tháng này không bỏ ngày nào!',
+   neg:'',
+   exs:[
+     {cn:'这个月<mark>天天</mark>游泳，现在七十公斤了。',py:'Zhège yuè tiāntiān yóuyǒng, xiànzài qīshí gōngjīn le.',vi:'Tháng này ngày nào cũng bơi, bây giờ 70 kg rồi.'},
+     {cn:'这个星期<mark>天天</mark>吃羊肉，我不想吃了。',py:'Zhège xīngqī tiāntiān chī yángròu, wǒ bù xiǎng chī le.',vi:'Tuần này ngày nào cũng ăn thịt cừu, tôi không muốn ăn nữa rồi.'},
+     {cn:'他<mark>次次</mark>考试都第一名。',py:'Tā cìcì kǎoshì dōu dì-yī míng.',vi:'Anh ấy lần thi nào cũng đứng nhất.'},
+   ]},
+  {n:3,
+   title:'因为…所以… — Cặp liên từ nhân quả',
+   pattern:'因为 + 原因 (lý do), 所以 + 结果 (kết quả)',
+   note:'Đây là cặp liên từ nhân-quả quan trọng nhất HSK2. Có thể dùng cả hai hoặc chỉ một:<br>• <b>因为…所以…</b> — nhấn mạnh cả nguyên nhân lẫn kết quả<br>• Chỉ <b>因为</b> — thêm lý do vào sau câu đã nói<br>• Chỉ <b>所以</b> — nhấn vào kết quả, lý do đã rõ<br><br>⚠️ Tiếng Việt KHÔNG dùng "vì…vì vậy…" cùng lúc, nhưng tiếng Trung dùng 因为…所以… cùng lúc là ĐÚNG ngữ pháp!',
+   neg:'❌ 因为我很累，所以我很累。(lý do = kết quả - vô nghĩa)\n✅ 因为天气不好，所以没去踢球。',
+   exs:[
+     {cn:'<mark>因为</mark>天天吃羊肉，<mark>所以</mark>不想吃了。',py:'Yīnwèi tiāntiān chī yángròu, suǒyǐ bù xiǎng chī le.',vi:'Vì ngày nào cũng ăn thịt cừu, nên không muốn ăn nữa rồi.'},
+     {cn:'<mark>因为</mark>昨天天气不太好，<mark>所以</mark>我们都没去。',py:'Yīnwèi zuótiān tiānqì bú tài hǎo, suǒyǐ wǒmen dōu méi qù.',vi:'Vì hôm qua thời tiết không tốt, nên chúng tôi đều không đi.'},
+     {cn:'<mark>因为</mark>下雨，<mark>所以</mark>没去打篮球。',py:'Yīnwèi xià yǔ, suǒyǐ méi qù dǎ lánqiú.',vi:'Vì trời mưa, nên không đi chơi bóng rổ.'},
+   ]},
+];
+
+const hanzi=[
+  {ch:'怎',py:'zěn',vi:'Sao / Thế nào',s:9,tip:'Bộ 心(tâm) ở dưới. 9 nét. Chỉ dùng trong 怎么/怎么样. Không dùng độc lập.'},
+  {ch:'游',py:'yóu',vi:'Bơi / Du lịch',s:12,tip:'Bộ 氵(nước)+斿. 12 nét. 游泳=bơi; 旅游=du lịch. Bộ 氵 gợi ý liên quan đến nước.'},
+  {ch:'泳',py:'yǒng',vi:'Bơi lội',s:8,tip:'Bộ 氵(nước)+永. 8 nét. 永 nghĩa "mãi mãi" → bơi trong nước mãi mãi. Chỉ dùng trong 游泳.'},
+  {ch:'因',py:'yīn',vi:'Nguyên nhân / Do',s:6,tip:'Chữ 大(lớn) trong khung 囗. 6 nét. 因为=vì/bởi vì; 原因=nguyên nhân.'},
+  {ch:'为',py:'wèi/wéi',vi:'Vì / Làm',s:4,tip:'Giản thể chỉ 4 nét! 因为(yīnwèi)=vì; 为什么(wèishénme)=tại sao.'},
+  {ch:'所',py:'suǒ',vi:'Chỗ / Nơi / Điều',s:8,tip:'Bộ 户(cửa) + 斤(cái rìu). 8 nét. 所以=vì vậy; 所有=tất cả; 所在=nơi ở.'},
+  {ch:'羊',py:'yáng',vi:'Cừu / Dê',s:6,tip:'Tượng hình: đầu con dê với hai sừng. 6 nét. 羊肉=thịt cừu.'},
+  {ch:'肉',py:'ròu',vi:'Thịt',s:6,tip:'Tượng hình: miếng thịt có xương. 6 nét. 牛肉=thịt bò; 猪肉=thịt lợn; 鸡肉=thịt gà.'},
+  {ch:'米',py:'mǐ',vi:'Gạo / Mét',s:6,tip:'Tượng hình: hạt gạo. 6 nét. 米饭=cơm; 公里=km (công + lý); 厘米=cm.'},
+  {ch:'饭',py:'fàn',vi:'Cơm / Bữa cơm',s:7,tip:'Bộ 饣(食-ăn) + 反. 7 nét. 米饭=cơm; 早饭=bữa sáng; 饭馆=nhà hàng.'},
+  {ch:'经',py:'jīng',vi:'Kinh / Thường',s:8,tip:'Bộ 纟(sợi/vải). 8 nét. 经常=thường xuyên; 经过=đi qua; 经验=kinh nghiệm.'},
+  {ch:'常',py:'cháng',vi:'Thường / Bình thường',s:11,tip:'Bộ 巾(vải) ở dưới. 11 nét. 经常=thường xuyên; 非常=rất/vô cùng.'},
+];
+
+// ─── WORKBOOK — BLCU chính thức ───
+const lp1=[
+  {cn:'这个星期天天吃羊肉。',py:'Zhège xīngqī tiāntiān chī yángròu.',vi:'Tuần này ngày nào cũng ăn thịt cừu.',ans:'×',exp:'Hình ảnh trong đề không khớp (nhân vật không ăn thịt cừu mỗi ngày) → ×'},
+  {cn:'我每天吃很多面条。',py:'Wǒ měitiān chī hěn duō miàntiáo.',vi:'Mỗi ngày tôi ăn rất nhiều mì.',ans:'×',exp:'Hình ảnh không khớp (số lượng mì) → ×'},
+  {cn:'这是我房间的门。',py:'Zhè shì wǒ fángjiān de mén.',vi:'Đây là cửa phòng tôi.',ans:'√',exp:'Hình ảnh khớp (một cái cửa phòng) → √'},
+  {cn:'他们经常踢足球。',py:'Tāmen jīngcháng tī zúqiú.',vi:'Họ thường xuyên đá bóng.',ans:'√',exp:'Hình ảnh khớp (nhóm người đang đá bóng) → √'},
+  {cn:'我天天去游泳。',py:'Wǒ tiāntiān qù yóuyǒng.',vi:'Tôi ngày nào cũng đi bơi.',ans:'√',exp:'Hình ảnh khớp (người đang bơi) → √'},
+];
+const lp2=[
+  {cn:'男：小王来了吗？\n女：我在门外看见他的自行车了。',
+   py:'Nán: Xiǎo Wáng lái le ma?\nNǚ: Wǒ zài mén wài kànjiàn tā de zìxíngchē le.',
+   vi:'Nam: Tiểu Vương đến chưa?\nNữ: Tôi nhìn thấy xe đạp của anh ấy ở ngoài cửa rồi.',ans:'E (xe đạp ngoài cửa)'},
+  {cn:'男：你还想吃什么？\n女：来点儿米饭吧。',
+   py:'Nán: Nǐ hái xiǎng chī shénme?\nNǚ: Lái diǎnr mǐfàn ba.',
+   vi:'Nam: Bạn còn muốn ăn gì không?\nNữ: Thêm cơm một chút nhé.',ans:'A (bát cơm)'},
+  {cn:'女：昨天你们怎么没去打篮球？\n男：因为下雨，我们都没去。',
+   py:'Nǚ: Zuótiān nǐmen zěnme méi qù dǎ lánqiú?\nNán: Yīnwèi xià yǔ, wǒmen dōu méi qù.',
+   vi:'Nữ: Hôm qua sao các bạn không đi chơi bóng rổ?\nNam: Vì trời mưa, chúng tôi đều không đi.',ans:'B (trời mưa)'},
+  {cn:'女：你经常游泳吗？\n男：这个月天天游泳。',
+   py:'Nǚ: Nǐ jīngcháng yóuyǒng ma?\nNán: Zhège yuè tiāntiān yóuyǒng.',
+   vi:'Nữ: Bạn có thường xuyên đi bơi không?\nNam: Tháng này ngày nào cũng bơi.',ans:'F (người đang bơi hằng ngày)'},
+  {cn:'女：这几天怎么没看见小张？\n男：听说他坐飞机去旅游了。',
+   py:'Nǚ: Zhè jǐ tiān zěnme méi kànjiàn Xiǎo Zhāng?\nNán: Tīngshuō tā zuò fēijī qù lǚyóu le.',
+   vi:'Nữ: Mấy ngày nay sao không thấy Tiểu Trương?\nNam: Nghe nói anh ấy đi máy bay đi du lịch rồi.',ans:'C (máy bay/du lịch)'},
+];
+const lp3=[
+  {cn:'女：你看见小卫了吗？他的车在门外呢。\n男：我没看见。\n问：谁看见小卫了？',
+   py:'Nǚ: Nǐ kànjiàn Xiǎo Wèi le ma? Tā de chē zài mén wài ne.\nNán: Wǒ méi kànjiàn.\nWèn: Shéi kànjiàn Xiǎo Wèi le?',
+   vi:'Nữ: Bạn có nhìn thấy Tiểu Vệ không? Xe của anh ấy ở ngoài cửa kìa.\nNam: Tôi không nhìn thấy.\nHỏi: Ai đã nhìn thấy Tiểu Vệ?',ans:'C (不知道/没人看见他本人)'},
+  {cn:'女：你多吃一点儿羊肉吧。\n男：这个星期天天吃羊肉，我不想吃了，你吃吧。\n问：男的为什么不想吃羊肉？',
+   py:'Nǚ: Nǐ duō chī yīdiǎnr yángròu ba.\nNán: Zhège xīngqī tiāntiān chī yángròu, wǒ bù xiǎng chī le, nǐ chī ba.\nWèn: Nán de wèishénme bù xiǎng chī yángròu?',
+   vi:'Nữ: Bạn ăn thêm thịt cừu một chút đi.\nNam: Tuần này ngày nào cũng ăn thịt cừu, tôi không muốn ăn nữa rồi, bạn ăn đi.\nHỏi: Tại sao người nam không muốn ăn thịt cừu?',ans:'B (天天吃，吃腻了)'},
+  {cn:'女：昨天你们怎么没去踢足球？\n男：因为昨天天气不太好，所以我们都没去。\n问：他们为什么没去踢足球？',
+   py:'Nǚ: Zuótiān nǐmen zěnme méi qù tī zúqiú?\nNán: Yīnwèi zuótiān tiānqì bú tài hǎo, suǒyǐ wǒmen dōu méi qù.\nWèn: Tāmen wèishénme méi qù tī zúqiú?',
+   vi:'Nữ: Hôm qua sao các bạn không đi đá bóng?\nNam: Vì hôm qua thời tiết không tốt lắm, nên chúng tôi đều không đi.\nHỏi: Tại sao họ không đi đá bóng?',ans:'A (因为天气不好)'},
+  {cn:'女：你每天都运动吗？\n男：这个月我天天游泳，现在七十公斤了。\n问：男的以前可能多少公斤？',
+   py:'Nǚ: Nǐ měitiān dōu yùndòng ma?\nNán: Zhège yuè wǒ tiāntiān yóuyǒng, xiànzài qīshí gōngjīn le.\nWèn: Nán de yǐqián kěnéng duōshao gōngjīn?',
+   vi:'Nữ: Bạn có tập thể dục mỗi ngày không?\nNam: Tháng này tôi ngày nào cũng bơi, bây giờ 70 kg rồi.\nHỏi: Trước đây người nam có thể nặng bao nhiêu kg?',ans:'C (超过七十公斤，比70多)'},
+  {cn:'女：这几天怎么没看见小张？\n男：听说他坐飞机去旅游了。\n问：小张去哪里了？',
+   py:'Nǚ: Zhè jǐ tiān zěnme méi kànjiàn Xiǎo Zhāng?\nNán: Tīngshuō tā zuò fēijī qù lǚyóu le.\nWèn: Xiǎo Zhāng qù nǎlǐ le?',
+   vi:'Nữ: Mấy ngày nay sao không thấy Tiểu Trương?\nNam: Nghe nói anh ấy đi máy bay đi du lịch rồi.\nHỏi: Tiểu Trương đi đâu rồi?',ans:'A (坐飞机旅游了)'},
+];
+
+// ĐỌC
+const r1=[
+  {n:16,cn:'因为下雨，所以我们都没去踢足球。',py:'Yīnwèi xià yǔ, suǒyǐ wǒmen dōu méi qù tī zúqiú.',vi:'Vì trời mưa nên chúng tôi đều không đi đá bóng.',
+   opts:['A 🏊','B 🏃','C 🍚','D ⛈️','E 🚲','F 🐑'],ans:3,exp:'D — 因为下雨(trời mưa)+没去踢球 = ⛈️ mưa/không đi'},
+  {n:17,cn:'他天天去游泳，因为游泳对身体好。',py:'Tā tiāntiān qù yóuyǒng, yīnwèi yóuyǒng duì shēntǐ hǎo.',vi:'Anh ấy ngày nào cũng đi bơi, vì bơi tốt cho sức khoẻ.',
+   opts:['A 🏊','B 🏃','C 🍚','D ⛈️','E 🚲','F 🐑'],ans:0,exp:'A — 游泳 = bơi lội (🏊)'},
+  {n:18,cn:'我在门外看见他的自行车了。',py:'Wǒ zài mén wài kànjiàn tā de zìxíngchē le.',vi:'Tôi nhìn thấy xe đạp của anh ấy ở ngoài cửa rồi.',
+   opts:['A 🏊','B 🏃','C 🍚','D ⛈️','E 🚲','F 🐑'],ans:4,exp:'E — 自行车 = xe đạp (🚲)'},
+  {n:19,cn:'来点儿米饭吧，我不想吃面条了。',py:'Lái diǎnr mǐfàn ba, wǒ bù xiǎng chī miàntiáo le.',vi:'Thêm cơm một chút nhé, tôi không muốn ăn mì nữa.',
+   opts:['A 🏊','B 🏃','C 🍚','D ⛈️','E 🚲','F 🐑'],ans:2,exp:'C — 米饭 = cơm (🍚)'},
+  {n:20,cn:'这个星期天天吃羊肉，真的吃腻了。',py:'Zhège xīngqī tiāntiān chī yángròu, zhēn de chī nì le.',vi:'Tuần này ngày nào cũng ăn thịt cừu, thực sự chán ăn rồi.',
+   opts:['A 🏊','B 🏃','C 🍚','D ⛈️','E 🚲','F 🐑'],ans:5,exp:'F — 羊肉 = thịt cừu (🐑)'},
+];
+const r2=[
+  {n:21,cn:'你怎么不吃了？',py:'Nǐ zěnme bù chī le?',vi:'Sao bạn không ăn nữa vậy?',
+   opts:['A 因为天天吃羊肉，不想吃了。','B 因为下雨，所以没去。','C 来点儿米饭吧。','D 他坐飞机去旅游了。','E 这个月天天游泳。'],
+   ans:0,exp:'A — 因为天天吃羊肉，不想吃了 = câu trả lời đúng cho câu hỏi "怎么不吃了".'},
+  {n:22,cn:'昨天你们怎么没去踢足球？',py:'Zuótiān nǐmen zěnme méi qù tī zúqiú?',vi:'Hôm qua sao các bạn không đi đá bóng?',
+   opts:['A 因为天天吃。','B 因为天气不好，所以没去。','C 来点儿米饭吧。','D 他去旅游了。','E 每天游泳。'],
+   ans:1,exp:'B — 因为天气不好，所以没去 = câu trả lời cho câu hỏi "怎么没去" (因为…所以…).'},
+  {n:23,cn:'你还想吃什么？',py:'Nǐ hái xiǎng chī shénme?',vi:'Bạn còn muốn ăn gì không?',
+   opts:['A 因为天天吃。','B 天气不好就没去。','C 来点儿米饭吧。','D 他去旅游了。','E 每天游泳。'],
+   ans:2,exp:'C — 来点儿米饭吧 = câu trả lời tự nhiên cho "还想吃什么".'},
+  {n:24,cn:'你经常游泳吗？',py:'Nǐ jīngcháng yóuyǒng ma?',vi:'Bạn có thường xuyên đi bơi không?',
+   opts:['A 因为天天吃。','B 天气不好。','C 来点儿米饭。','D 他去旅游了。','E 这个月天天游泳。'],
+   ans:4,exp:'E — 这个月天天游泳 = trả lời câu hỏi về tần suất bơi, dùng 天天 nhấn mạnh.'},
+  {n:25,cn:'这几天怎么没看见小张？',py:'Zhè jǐ tiān zěnme méi kànjiàn Xiǎo Zhāng?',vi:'Mấy ngày nay sao không thấy Tiểu Trương?',
+   opts:['A 他天天游泳。','B 因为下雨。','C 来点儿米饭。','D 听说他坐飞机去旅游了。','E 不想吃羊肉了。'],
+   ans:3,exp:'D — 听说他坐飞机去旅游了 = trả lời câu hỏi "怎么没看见" (không thấy vì đi du lịch).'},
+];
+const r3=[
+  {n:26,cn:'小明这个月天天去游泳。',py:'Xiǎomíng zhège yuè tiāntiān qù yóuyǒng.',vi:'Tháng này Tiểu Minh ngày nào cũng đi bơi.',ans:true,exp:'Đúng (√). Đoạn văn: "小明这个月天天去游泳" — khớp chính xác.'},
+  {n:27,cn:'小明游泳是因为医生说游泳不好。',py:'Xiǎomíng yóuyǒng shì yīnwèi yīshēng shuō yóuyǒng bù hǎo.',vi:'Tiểu Minh bơi vì bác sĩ nói bơi không tốt.',ans:false,exp:'Sai (×). Đoạn văn: "因为医生说游泳对身体很好" — tốt, không phải không tốt!'},
+  {n:28,cn:'小明现在七十五公斤。',py:'Xiǎomíng xiànzài qīshíwǔ gōngjīn.',vi:'Tiểu Minh hiện tại là 75 kg.',ans:true,exp:'Đúng (√). Đoạn văn: "体重从八十公斤减到了七十五公斤" — bây giờ 75 kg đúng.'},
+  {n:29,cn:'小明以前比现在轻。',py:'Xiǎomíng yǐqián bǐ xiànzài qīng.',vi:'Trước đây Tiểu Minh nhẹ hơn bây giờ.',ans:false,exp:'Sai (×). Đoạn văn: "从八十公斤减到七十五公斤" — trước ĐỌ HƠN (80kg), bây giờ nhẹ hơn (75kg).'},
+  {n:30,cn:'小明游泳以后不高兴。',py:'Xiǎomíng yóuyǒng yǐhòu bù gāoxìng.',vi:'Sau khi bơi Tiểu Minh không vui.',ans:false,exp:'Sai (×). Đoạn văn: "他非常高兴" — anh ấy rất vui!'},
+];
+const r4=[
+  {n:31,cn_char:'因为天天吃，所以不想吃了。',py:'Yīnwèi tiāntiān chī, suǒyǐ bù xiǎng chī le.',vi:'Vì ngày nào cũng ăn, nên không muốn ăn nữa rồi.',
+   opts:['A 你怎么不吃了？','B 你去哪儿了？','C 你经常游泳吗？','D 天气怎么样？','E 自行车在哪儿？'],
+   ans:0,exp:'A — 因为天天吃，所以不想吃了 = câu trả lời cho "你怎么不吃了" dùng 因为…所以….'},
+  {n:32,cn_char:'听说他坐飞机去旅游了。',py:'Tīngshuō tā zuò fēijī qù lǚyóu le.',vi:'Nghe nói anh ấy đi máy bay đi du lịch rồi.',
+   opts:['A 你怎么不吃了？','B 你去哪儿了？','C 你经常游泳吗？','D 这几天怎么没看见小张？','E 自行车在哪儿？'],
+   ans:3,exp:'D — 听说他坐飞机去旅游了 = trả lời "怎么没看见小张" (用怎么hỏi lý do).'},
+  {n:33,cn_char:'因为下雨，我们都没去。',py:'Yīnwèi xià yǔ, wǒmen dōu méi qù.',vi:'Vì trời mưa, chúng tôi đều không đi.',
+   opts:['A 你吃什么？','B 你经常去游泳吗？','C 昨天你们怎么没去踢足球？','D 天气怎么样？','E 你多少公斤？'],
+   ans:2,exp:'C — 因为下雨，没去 = trả lời "怎么没去" → dùng 因为 giải thích lý do.'},
+  {n:34,cn_char:'这个月天天游泳，现在七十公斤了。',py:'Zhège yuè tiāntiān yóuyǒng, xiànzài qīshí gōngjīn le.',vi:'Tháng này ngày nào cũng bơi, bây giờ 70 kg rồi.',
+   opts:['A 你怎么不吃了？','B 你来点儿米饭吗？','C 你经常游泳吗？','D 天气好不好？','E 自行车在哪儿？'],
+   ans:2,exp:'C — 天天游泳 = câu trả lời cho câu hỏi 你经常游泳吗？ (dùng 天天 nhấn mạnh tần suất).'},
+  {n:35,cn_char:'我在门外看见他的自行车了。',py:'Wǒ zài mén wài kànjiàn tā de zìxíngchē le.',vi:'Tôi nhìn thấy xe đạp của anh ấy ở ngoài cửa rồi.',
+   opts:['A 你怎么不吃了？','B 小王来了吗？','C 你经常游泳吗？','D 天气好不好？','E 米饭好吃吗？'],
+   ans:1,exp:'B — 我在门外看见他的自行车 = trả lời "小王来了吗" (thấy xe = anh ấy đến rồi).'},
+];
+
+// PHÁT ÂM bài 6 — câu điệu (句调) chính thức BLCU
+const pr1=[
+  {w:'请问张欢在吗？',tone:'↑',note:'Câu hỏi có 吗 → lên giọng ↑'},
+  {w:'昨天的考试你都听懂了吗？',tone:'↑',note:'Câu hỏi cuối có 吗 → lên giọng ↑'},
+  {w:'午饭准备好了吗？',tone:'↑',note:'Câu hỏi xác nhận 了吗 → lên giọng ↑'},
+  {w:'大卫找到工作了吗？',tone:'↑',note:'Câu hỏi về kết quả có 了吗 → lên giọng ↑'},
+];
+const pr2=[
+  {w:'因为天天吃羊肉，我不想吃了。',tone:'↓',note:'Câu kể (因为…) → xuống giọng ↓'},
+  {w:'昨天你们怎么没去踢足球？',tone:'↓',note:'Câu hỏi dùng 怎么 → xuống giọng ↓ (hỏi lý do, chắc chắn)'},
+  {w:'他坐飞机去旅游了。',tone:'↓',note:'Câu kể thông thường → xuống giọng ↓'},
+  {w:'因为下雨，所以我们都没去。',tone:'↓',note:'Câu kể nhân quả → xuống giọng ↓'},
+];
+
+// SẮP XẾP CÂU
+const ro=[
+  {pieces:['因为','吃羊肉','天天','我','不想吃了'],answer:'因为天天吃羊肉我不想吃了',
+   py:'Yīnwèi tiāntiān chī yángròu, wǒ bù xiǎng chī le.',vi:'Vì ngày nào cũng ăn thịt cừu, tôi không muốn ăn nữa rồi.',
+   tip:'因为+[lý do(天天吃羊肉)]+主语(我)+[kết quả(不想吃了)]'},
+  {pieces:['游泳','所以','因为','天气不好','没去'],answer:'因为天气不好所以没去游泳',
+   py:'Yīnwèi tiānqì bù hǎo, suǒyǐ méi qù yóuyǒng.',vi:'Vì thời tiết không tốt, nên không đi bơi.',
+   tip:'因为+[lý do]+所以+[kết quả]. 因为…所以… luôn theo thứ tự này!'},
+  {pieces:['天天','这个月','我','游泳','公斤','七十','了'],answer:'这个月我天天游泳七十公斤了',
+   py:'Zhège yuè wǒ tiāntiān yóuyǒng, xiànzài qīshí gōngjīn le.',vi:'Tháng này tôi ngày nào cũng bơi, bây giờ 70 kg rồi.',
+   tip:'时间状语(这个月)+主语(我)+天天+动词(游泳)+结果(七十公斤了)'},
+  {pieces:['你们','怎么','昨天','没去','踢足球'],answer:'昨天你们怎么没去踢足球',
+   py:'Zuótiān nǐmen zěnme méi qù tī zúqiú?',vi:'Hôm qua sao các bạn không đi đá bóng?',
+   tip:'时间(昨天)+主语(你们)+怎么(lý do ngạc nhiên)+没+动词'},
+  {pieces:['外','在','我','门','看见','他的','自行车'],answer:'我在门外看见他的自行车',
+   py:'Wǒ zài mén wài kànjiàn tā de zìxíngchē.',vi:'Tôi nhìn thấy xe đạp của anh ấy ở ngoài cửa.',
+   tip:'主语(我)+在+地点(门外)+动词(看见)+宾语(他的自行车)'},
+];
+
+// ═══════
+// RENDER
+// ═══════
+function renderVocab(arr,id){
+  document.getElementById(id).innerHTML=arr.map((v,i)=>`
+    <div class="vc" onclick="tex('${id}',${i})">
+      <div class="vc-char">${v.char}</div>
+      <div style="flex:1"><div class="vc-py">${v.py}</div><div class="vc-vi">${v.vi}</div>
+        <div class="vc-ex" id="${id}-${i}">${v.ex.replace(/\n/g,'<br>')}</div></div>
+      <div class="vc-tags"><div class="vc-pos">${v.pos}</div>${id==='vNew'?'<div class="new-tag">★MỚI</div>':''}</div>
+    </div>`).join('');
+}
+function tex(id,i){document.getElementById(`${id}-${i}`).classList.toggle('open');}
+
+function renderDlg(arr,id){
+  document.getElementById(id).innerHTML=arr.map((d,i)=>`
+    <div class="dl ${i%2===1?'r':''}">
+      <div class="sp ${d.sp}">${d.sp.toUpperCase()}</div>
+      <div class="dl-body"><div class="dl-cn">${d.cn}</div><div class="dl-py">${d.py}</div><div class="dl-vi">${d.vi}</div></div>
+    </div>`).join('');
+}
+
+function renderGrammar(){
+  document.getElementById('gramContent').innerHTML=grammar.map(g=>`
+    <div class="gram-card">
+      <div class="gram-head"><div class="gram-n">${g.n}</div><div class="gram-title">${g.title}</div></div>
+      <div class="gram-body">
+        <div class="gram-pattern">${g.pattern}</div>
+        <div class="gram-note">${g.note}</div>
+        ${g.neg?`<div class="gram-neg">${g.neg}</div>`:''}
+        <div class="gram-exs">${g.exs.map(e=>`<div class="gex"><div class="gex-cn">${e.cn}</div><div class="gex-py">${e.py}</div><div class="gex-vi">${e.vi}</div></div>`).join('')}</div>
+      </div>
+    </div>`).join('');
+}
+
+function renderHanzi(){
+  document.getElementById('hzGrid').innerHTML=hanzi.map((h,i)=>`
+    <div class="hz-card" id="hz-${i}" onclick="showHz(${i})">
+      <div class="hz-ch">${h.ch}</div><div class="hz-py">${h.py}</div><div class="hz-vi">${h.vi}</div>
+    </div>`).join('');
+}
+function showHz(i){
+  document.querySelectorAll('.hz-card').forEach(c=>c.classList.remove('sel'));
+  document.getElementById('hz-'+i).classList.add('sel');
+  const h=hanzi[i];
+  document.getElementById('hzDetail').className='hz-detail show';
+  document.getElementById('hzBig').textContent=h.ch;
+  document.getElementById('hzPy').textContent=h.py;
+  document.getElementById('hzVi').textContent=h.vi;
+  document.getElementById('hzSt').textContent=`Số nét: ${h.s}`;
+  document.getElementById('hzTip').textContent=h.tip;
+  document.getElementById('hzDetail').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function renderListen(arr,id,start){
+  document.getElementById(id).innerHTML=arr.map((l,i)=>`
+    <div class="script-item">
+      <div class="script-num">${start+i}</div>
+      <div class="script-body">
+        <div class="script-cn">${l.cn}</div>
+        <div class="script-py">${l.py}</div>
+        <div class="script-vi">${l.vi}</div>
+        <div class="script-ans">Đáp án: <strong>${l.ans}</strong> ${l.exp?'— '+l.exp:''}</div>
+      </div>
+    </div>`).join('');
+}
+
+let rAns={};
+function mkP(arr,pid,isCol){
+  return arr.map((q,i)=>`
+    <div class="match-item"><div class="match-num">Câu ${q.n}</div>
+      <div class="match-cn">${q.cn||q.cn_char}</div><div class="match-py">${q.py}</div>
+      <div class="match-opts${isCol?' style="flex-direction:column"':''}">
+        ${q.opts.map((o,j)=>`<button class="mopt" id="r${pid}-${i}-${j}" onclick="ansR('${pid}',${i},${j},${q.ans})">${isCol?String.fromCharCode(65+j)+'. ':''}<span${isCol?" style=\"font-family:'Noto Serif SC',serif\"":''}">${o}</span></button>`).join('')}
+      </div><div class="match-fb" id="r${pid}-fb-${i}"></div></div>`).join('');
+}
+function mkP3(){
+  return r3.map((q,i)=>`
+    <div class="tf-card"><div class="match-num">Câu ${q.n}</div>
+      <div class="tf-q">${q.cn}</div><div class="tf-py">${q.py}</div><div class="tf-vi">${q.vi}</div>
+      <div class="tf-btns">
+        <button class="tf-btn" id="rp3t-${i}" onclick="ansT(${i},true,${q.ans})">√ Đúng</button>
+        <button class="tf-btn" id="rp3f-${i}" onclick="ansT(${i},false,${q.ans})">× Sai</button>
+      </div><div class="tf-fb" id="rp3-fb-${i}"></div></div>`).join('');
+}
+function renderRead(){
+  document.getElementById('readP1').innerHTML=mkP(r1,'p1',false);
+  document.getElementById('readP2').innerHTML=mkP(r2,'p2',true);
+  document.getElementById('readP3').innerHTML=mkP3();
+  document.getElementById('readP4').innerHTML=mkP(r4,'p4',true);
+}
+
+function ansR(pid,qi,oi,correct){
+  const k=`${pid}-${qi}`;if(rAns[k]!==undefined)return;
+  rAns[k]=oi;const ok=oi===correct;
+  document.querySelectorAll(`[id^="r${pid}-${qi}-"]`).forEach(b=>b.classList.add('done'));
+  document.getElementById(`r${pid}-${qi}-${correct}`).classList.add('correct');
+  if(!ok)document.getElementById(`r${pid}-${qi}-${oi}`).classList.add('wrong');
+  const arr=pid==='p1'?r1:pid==='p2'?r2:r4;
+  const fb=document.getElementById(`r${pid}-fb-${qi}`);
+  fb.className='match-fb show '+(ok?'ok':'no');
+  fb.innerHTML=(ok?'✅ Đúng! ':'❌ Sai. ')+arr[qi].exp;
+  chkDone();
+}
+function ansT(qi,v,correct){
+  const k=`p3-${qi}`;if(rAns[k]!==undefined)return;
+  rAns[k]=v;const ok=v===correct;
+  ['t','f'].forEach(x=>document.getElementById(`rp3${x}-${qi}`).classList.add('done'));
+  document.getElementById(`rp3${correct?'t':'f'}-${qi}`).classList.add('correct');
+  if(!ok)document.getElementById(`rp3${v?'t':'f'}-${qi}`).classList.add('wrong');
+  const fb=document.getElementById(`rp3-fb-${qi}`);
+  fb.className='tf-fb show '+(ok?'ok':'no');
+  fb.innerHTML=(ok?'✅ Đúng! ':'❌ Sai. ')+r3[qi].exp;
+  chkDone();
+}
+function chkDone(){
+  const tot=r1.length+r2.length+r3.length+r4.length;
+  if(Object.keys(rAns).length===tot)setTimeout(showReadScore,500);
+}
+function showReadScore(){
+  const c=[...r1.map((_,i)=>rAns[`p1-${i}`]===r1[i].ans),
+           ...r2.map((_,i)=>rAns[`p2-${i}`]===r2[i].ans),
+           ...r3.map((_,i)=>rAns[`p3-${i}`]===r3[i].ans),
+           ...r4.map((_,i)=>rAns[`p4-${i}`]===r4[i].ans)].filter(Boolean).length;
+  const tot=r1.length+r2.length+r3.length+r4.length;
+  const p=Math.round(c/tot*100);
+  document.getElementById('readScoreBig').textContent=`${c}/${tot}`;
+  document.getElementById('readScoreTxt').textContent=p>=75?`Xuất sắc! ${p}% — Bài 6 rất vững!`:`${p}% — Ôn lại 怎么/因为…所以… nhé.`;
+  document.getElementById('readScore').classList.add('show');
+  document.getElementById('readScore').scrollIntoView({behavior:'smooth'});
+  updateProgress();
+}
+function resetRead(){rAns={};document.getElementById('readScore').classList.remove('show');renderRead();}
+
+function renderPron(){
+  document.getElementById('pronP1').innerHTML=pr1.map((s,i)=>`
+    <div class="pw"><div class="pw-num">(${i+1})</div>
+      <div class="pw-cn">${s.w}</div>
+      <div class="pw-py">句调: <b>${s.tone}</b></div>
+      <div class="pw-note">${s.note}</div></div>`).join('');
+  document.getElementById('pronP2').innerHTML=pr2.map((s,i)=>`
+    <div class="pw"><div class="pw-num">(${i+1})</div>
+      <div class="pw-cn">${s.w}</div>
+      <div class="pw-py">句调: <b>${s.tone}</b></div>
+      <div class="pw-note">${s.note}</div></div>`).join('');
+}
+
+let roS=ro.map(()=>({placed:[],done:false}));
+function renderRO(){
+  document.getElementById('reorderCards').innerHTML=ro.map((r,i)=>`
+    <div class="reorder-card">
+      <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:9px">Câu ${i+1} / ${ro.length}</div>
+      <div class="pieces" id="pc-${i}">${shuf([...r.pieces]).map((p,j)=>`<div class="piece" id="p-${i}-${j}" data-w="${p}" onclick="clk(${i},this)">${p}</div>`).join('')}</div>
+      <div style="font-size:10px;color:var(--muted);margin-bottom:4px">→ Câu của bạn:</div>
+      <div class="ans-area" id="aa-${i}"><span class="ro-ph">Nhấn các từ để sắp xếp...</span></div>
+      <div class="ro-result" id="rr-${i}"></div>
+      <div class="ro-btns"><button class="btn-sm" onclick="chk(${i})">✓ Kiểm tra</button><button class="btn-sm" onclick="rst(${i})">↺ Lại</button></div>
+    </div>`).join('');
+}
+function shuf(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function clk(ci,el){if(el.classList.contains('used'))return;el.classList.add('used');roS[ci].placed.push(el.getAttribute('data-w'));renderAA(ci);}
+function renderAA(ci){
+  const aa=document.getElementById(`aa-${ci}`),p=roS[ci].placed;
+  if(!p.length){aa.innerHTML='<span class="ro-ph">Nhấn các từ để sắp xếp...</span>';aa.classList.remove('has');return;}
+  aa.className='ans-area has';aa.innerHTML=p.map((w,i)=>`<div class="placed" onclick="rmv(${ci},${i})">${w}</div>`).join('');
+}
+function rmv(ci,idx){
+  const w=roS[ci].placed[idx];roS[ci].placed.splice(idx,1);
+  const ps=document.querySelectorAll(`#pc-${ci} .piece`);
+  for(let pp of ps){if(pp.getAttribute('data-w')===w&&pp.classList.contains('used')&&!pp._f){pp.classList.remove('used');pp._f=true;break;}}
+  ps.forEach(p=>delete p._f);renderAA(ci);
+}
+function chk(i){
+  const placed=roS[i].placed.join(''),res=document.getElementById(`rr-${i}`);
+  if(!placed){res.className='ro-result show no';res.textContent='⚠️ Chưa sắp xếp.';return;}
+  if(placed===ro[i].answer){
+    res.className='ro-result show ok';
+    res.innerHTML=`✅ Đúng! ${ro[i].py} — ${ro[i].vi}<br><small>${ro[i].tip}</small>`;
+    roS[i].done=true;
+  }else{
+    res.className='ro-result show no';
+    res.innerHTML=`❌ Chưa đúng. Câu đúng: <strong>${ro[i].answer}</strong><br><small>${ro[i].tip}</small>`;
+  }
+  updateProgress();
+  if(roS.every(s=>s.done))setTimeout(showWriteScore,500);
+}
+function rst(i){roS[i]={placed:[],done:false};renderRO();}
+function showWriteScore(){
+  const c=roS.filter(s=>s.done).length,p=Math.round(c/ro.length*100);
+  document.getElementById('writeBig').textContent=`${c}/${ro.length}`;
+  document.getElementById('writeTxt').textContent=p>=75?`Xuất sắc! ${p}% — Nắm vững cấu trúc bài 6.`:`${p}% — Ôn lại 因为…所以… và 怎么 nhé.`;
+  document.getElementById('writeScore').classList.add('show');
+  document.getElementById('writeScore').scrollIntoView({behavior:'smooth'});
+}
+function resetWrite(){roS=ro.map(()=>({placed:[],done:false}));document.getElementById('writeScore').classList.remove('show');renderRO();}
+
+const TABS=['vocab','dialog','grammar','hanzi','wb-listen','wb-read','wb-pron','wb-write'];
+document.querySelectorAll('.tab[data-tab]').forEach(tab=>{
+  tab.addEventListener('click',function(){
+    const name=this.getAttribute('data-tab');
+    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    document.getElementById('sec-'+name).classList.add('active');
+    this.classList.add('active');
+    updateProgress();
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+function updateProgress(){
+  const active=document.querySelector('.section.active')?.id?.replace('sec-','');
+  const idx=TABS.indexOf(active);
+  const tp=((idx+1)/TABS.length)*50;
+  const tot=r1.length+r2.length+r3.length+r4.length+ro.length;
+  const done=Object.keys(rAns).length+roS.filter(s=>s.done).length;
+  const wp=(done/tot)*50;
+  document.getElementById('progBar').style.width=Math.min(100,Math.round(tp+wp))+'%';
+}
+
+renderVocab(vNew,'vNew');renderVocab(vReview,'vReview');
+renderDlg(d1,'dlg1');renderDlg(d2,'dlg2');
+renderGrammar();renderHanzi();
+renderListen(lp1,'listenP1',1);renderListen(lp2,'listenP2',6);renderListen(lp3,'listenP3',11);
+renderRead();renderPron();renderRO();
+updateProgress();
+</script>
+</body>
+</html>
 

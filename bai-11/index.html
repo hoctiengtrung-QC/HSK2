@@ -1,1 +1,870 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HSK 2 — Bài 11: 他比我大三岁</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Lora:ital,wght@0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pri:#3730A3;--pri-l:#EEF2FF;--pri-d:#1E1A6E;
+  --gold:#C8900A;--gold-bg:#FFF8E6;
+  --ink:#18130E;--rice:#F8F4EE;--warm:#EDE4D5;--muted:#7D6B52;
+  --accent:#1E5F8A;--accent-bg:#EEF5FB;
+  --green:#1E7A45;--green-bg:#EBF7F0;
+  --purple:#5B3FA6;--purple-bg:#F0ECFB;--purple-l:#e8e0fa;
+  --red:#B5281C;--red-l:#fdf2f1;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--rice);color:var(--ink);font-family:'DM Sans',sans-serif;overflow-x:hidden;}
+
+.hero{background:linear-gradient(135deg,var(--pri-d) 0%,var(--pri) 100%);padding:40px 20px 32px;text-align:center;position:relative;overflow:hidden;}
+.hero::after{content:'比';position:absolute;font-family:'Noto Serif SC',serif;font-size:160px;color:rgba(255,255,255,.05);right:-10px;bottom:-20px;line-height:1;pointer-events:none;}
+.hero-back{display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,.75);font-size:12px;text-decoration:none;margin-bottom:12px;padding:4px 12px;border-radius:20px;border:1px solid rgba(255,255,255,.25);transition:all .2s;}
+.hero-back:hover{background:rgba(255,255,255,.12);color:white;}
+.hero-badge{display:inline-block;background:var(--gold);color:#1a0a00;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 14px;border-radius:20px;margin-bottom:12px;}
+.hero h1{font-family:'Noto Serif SC',serif;font-size:clamp(18px,4vw,32px);color:white;margin-bottom:5px;line-height:1.4;}
+.hero-en{font-family:'Lora',serif;font-style:italic;font-size:13px;color:rgba(255,255,255,.6);margin-bottom:16px;}
+.hero-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;}
+.hero-pill{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.85);font-size:11px;padding:3px 11px;border-radius:20px;}
+
+.prog-wrap{height:5px;background:var(--warm);position:sticky;top:0;z-index:100;}
+.prog-bar{height:100%;background:linear-gradient(90deg,var(--pri),var(--gold));transition:width .5s;}
+
+.tabs-wrap{background:white;border-bottom:2px solid var(--warm);position:sticky;top:5px;z-index:99;overflow-x:auto;scrollbar-width:none;}
+.tabs-wrap::-webkit-scrollbar{display:none;}
+.tabs{display:flex;min-width:max-content;}
+.tab-sep{width:2px;background:var(--warm);flex-shrink:0;margin:6px 0;}
+.tab-label{padding:10px 8px 10px 12px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);opacity:.7;display:flex;align-items:center;white-space:nowrap;border-bottom:3px solid transparent;margin-bottom:-2px;}
+.tab{flex-shrink:0;padding:10px 13px;font-size:12px;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;white-space:nowrap;}
+.tab:hover{color:var(--pri);}
+.tab.active{color:var(--pri);border-bottom-color:var(--pri);}
+.tab.wb:hover{color:var(--purple);}
+.tab.wb.active{color:var(--purple);border-bottom-color:var(--purple);}
+
+.section{display:none;padding:20px 16px 40px;max-width:740px;margin:0 auto;}
+.section.active{display:block;animation:rise .3s ease;}
+@keyframes rise{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+.book-banner{padding:7px 16px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-align:center;border-radius:8px;margin-bottom:16px;}
+.book-banner.tb{background:var(--pri-l);color:var(--pri);}
+.book-banner.wb{background:var(--purple-bg);color:var(--purple);}
+
+.sec-title{font-family:'Lora',serif;font-size:19px;color:var(--pri);margin-bottom:3px;}
+.sec-title.wb{color:var(--purple);}
+.sec-desc{font-size:12px;color:var(--muted);margin-bottom:16px;line-height:1.6;}
+
+.ctx-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:9px;padding-bottom:5px;border-bottom:1px solid var(--warm);}
+.ctx-sec{margin-bottom:20px;}
+.vlist{display:flex;flex-direction:column;gap:8px;}
+.vc{background:white;border:1px solid var(--warm);border-radius:11px;padding:12px 14px;display:grid;grid-template-columns:72px 1fr auto;align-items:center;gap:12px;cursor:pointer;transition:all .18s;box-shadow:0 1px 5px rgba(0,0,0,.04);}
+.vc:hover{border-color:var(--pri);box-shadow:0 3px 12px rgba(55,48,163,.12);}
+.vc-char{font-family:'Noto Serif SC',serif;font-size:26px;color:var(--pri);text-align:center;line-height:1.2;}
+.vc-py{font-size:12px;color:var(--accent);font-weight:500;margin-bottom:2px;}
+.vc-vi{font-size:13px;color:var(--ink);font-weight:500;}
+.vc-ex{font-size:11px;color:var(--muted);margin-top:5px;line-height:1.6;display:none;grid-column:1/-1;background:var(--rice);border-radius:6px;padding:7px 10px;}
+.vc-ex.open{display:block;}
+.vc-pos{font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;background:var(--warm);color:var(--muted);align-self:flex-start;white-space:nowrap;}
+.new-tag{font-size:9px;font-weight:700;background:var(--pri);color:white;padding:2px 6px;border-radius:8px;text-transform:uppercase;}
+.vc-tags{display:flex;flex-direction:column;gap:3px;align-items:flex-end;}
+
+/* 比较句 visual */
+.bi-table{background:white;border-radius:11px;border:1px solid var(--warm);overflow:hidden;margin-bottom:14px;}
+.bi-head{background:var(--pri);color:white;padding:9px 14px;font-size:12px;font-weight:600;}
+.bi-row{display:flex;border-bottom:1px solid var(--warm);}
+.bi-row:last-child{border-bottom:none;}
+.bi-cell{flex:1;padding:9px 13px;font-size:12px;line-height:1.7;}
+.bi-cell:first-child{border-right:1px solid var(--warm);font-family:'Noto Serif SC',serif;font-size:14px;color:var(--pri);font-weight:600;flex:0 0 120px;}
+.bi-cell b{color:var(--pri);}
+
+.dlg-box{background:white;border-radius:12px;border:1px solid var(--warm);overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.04);margin-bottom:14px;}
+.dlg-head{background:var(--pri);color:white;padding:9px 15px;font-size:12px;font-weight:500;display:flex;align-items:center;justify-content:space-between;}
+.scene-tag{font-size:10px;background:rgba(255,255,255,.18);padding:2px 8px;border-radius:8px;}
+.dl{display:flex;gap:10px;padding:12px 14px;border-bottom:1px solid var(--warm);align-items:flex-start;}
+.dl:last-child{border-bottom:none;}
+.dl:hover{background:var(--rice);}
+.dl.r{flex-direction:row-reverse;}
+.sp{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif SC',serif;font-size:11px;font-weight:700;color:white;flex-shrink:0;}
+.sp.a{background:var(--pri);}
+.sp.b{background:var(--accent);}
+.dl-body{flex:1;}.dl.r .dl-body{text-align:right;}
+.dl-cn{font-family:'Noto Serif SC',serif;font-size:17px;color:var(--ink);line-height:1.4;margin-bottom:2px;}
+.dl-py{font-size:11px;color:var(--accent);margin-bottom:1px;}
+.dl-vi{font-size:11px;color:var(--muted);}
+
+.gram-card{background:white;border-radius:12px;border:1px solid var(--warm);margin-bottom:13px;overflow:hidden;}
+.gram-head{background:var(--ink);color:white;padding:11px 15px;display:flex;align-items:center;gap:9px;}
+.gram-n{width:24px;height:24px;border-radius:50%;background:var(--gold);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;}
+.gram-title{font-size:13px;font-weight:500;line-height:1.4;}
+.gram-body{padding:15px;}
+.gram-pattern{background:var(--gold-bg);border-left:4px solid var(--gold);padding:8px 12px;border-radius:0 7px 7px 0;font-family:'Noto Serif SC',serif;font-size:14px;margin-bottom:10px;}
+.gram-note{font-size:12px;color:#333;line-height:1.75;margin-bottom:10px;}
+.gram-neg{background:#fdf4f3;border-radius:6px;padding:7px 11px;font-size:12px;color:#922;margin-bottom:10px;border-left:3px solid var(--red);white-space:pre-line;}
+.gram-exs{display:flex;flex-direction:column;gap:6px;}
+.gex{background:var(--rice);border-radius:7px;padding:8px 11px;}
+.gex-cn{font-family:'Noto Serif SC',serif;font-size:15px;color:var(--ink);}
+.gex-cn mark{background:transparent;color:var(--pri);font-weight:700;}
+.gex-py{font-size:11px;color:var(--accent);margin:2px 0;}
+.gex-vi{font-size:11px;color:var(--muted);}
+
+.hz-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:8px;}
+.hz-card{background:white;border:1px solid var(--warm);border-radius:10px;padding:11px 5px;text-align:center;cursor:pointer;transition:all .18s;}
+.hz-card:hover,.hz-card.sel{border-color:var(--pri);background:var(--pri-l);}
+.hz-ch{font-family:'Noto Serif SC',serif;font-size:32px;color:var(--pri);}
+.hz-py{font-size:10px;color:var(--accent);margin-top:3px;}
+.hz-vi{font-size:10px;color:var(--muted);}
+.hz-detail{background:white;border-radius:11px;border:1px solid var(--warm);padding:14px;margin-bottom:12px;display:none;}
+.hz-detail.show{display:flex;gap:14px;align-items:flex-start;}
+.hz-big{font-family:'Noto Serif SC',serif;font-size:68px;color:var(--pri);line-height:1;flex-shrink:0;}
+.hz-py-big{font-size:16px;color:var(--accent);font-weight:500;margin-bottom:3px;}
+.hz-vi-big{font-size:13px;font-weight:600;margin-bottom:4px;}
+.hz-strokes{font-size:11px;color:var(--muted);}
+.hz-tip{font-size:11px;color:#444;line-height:1.6;margin-top:4px;}
+
+.tip{background:var(--gold-bg);border-left:4px solid var(--gold);border-radius:0 9px 9px 0;padding:10px 13px;font-size:12px;color:#5c3d00;line-height:1.7;margin:13px 0;}
+.tip strong{color:#3a2600;}
+.note-box{background:var(--accent-bg);border-left:4px solid var(--accent);border-radius:0 9px 9px 0;padding:10px 13px;font-size:12px;color:#0e3555;line-height:1.7;margin:12px 0;}
+
+.wb-section-title{font-size:14px;font-weight:700;color:var(--purple);margin:20px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--purple-bg);}
+.wb-part-desc{font-size:11px;color:var(--muted);margin-bottom:10px;line-height:1.5;}
+.answer-note{background:var(--purple-bg);border-radius:9px;padding:10px 13px;font-size:12px;color:var(--purple);margin-bottom:14px;line-height:1.6;}
+
+.script-card{background:white;border:1px solid var(--warm);border-radius:10px;overflow:hidden;margin-bottom:8px;}
+.script-item{display:flex;gap:10px;padding:10px 13px;border-bottom:1px solid var(--warm);align-items:flex-start;}
+.script-item:last-child{border-bottom:none;}
+.script-num{width:22px;height:22px;border-radius:50%;background:var(--purple);color:white;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.script-body{flex:1;}
+.script-cn{font-family:'Noto Serif SC',serif;font-size:15px;color:var(--ink);line-height:1.5;white-space:pre-line;}
+.script-py{font-size:11px;color:var(--accent);margin-top:2px;white-space:pre-line;}
+.script-vi{font-size:11px;color:var(--muted);margin-top:1px;white-space:pre-line;}
+.script-ans{font-size:11px;color:var(--purple);margin-top:5px;font-weight:600;}
+
+.read-passage{background:white;border:1px solid var(--warm);border-radius:11px;padding:14px 16px;margin-bottom:12px;}
+.read-cn{font-family:'Noto Serif SC',serif;font-size:16px;color:var(--ink);line-height:1.9;margin-bottom:6px;}
+.read-py{font-size:11px;color:var(--accent);line-height:1.8;margin-bottom:4px;}
+.read-vi{font-size:11px;color:var(--muted);line-height:1.7;}
+
+.match-item{background:white;border:1.5px solid var(--warm);border-radius:10px;padding:11px 13px;margin-bottom:8px;}
+.match-num{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:5px;}
+.match-cn{font-family:'Noto Serif SC',serif;font-size:16px;color:var(--ink);margin-bottom:2px;}
+.match-py{font-size:11px;color:var(--accent);margin-bottom:8px;}
+.match-opts{display:flex;flex-wrap:wrap;gap:6px;}
+.mopt{border:1.5px solid var(--warm);background:var(--rice);border-radius:7px;padding:6px 11px;font-size:12px;cursor:pointer;transition:all .18s;text-align:left;}
+.mopt:hover:not(.done){border-color:var(--purple);background:var(--purple-bg);}
+.mopt.correct{border-color:var(--green);background:var(--green-bg);color:var(--green);font-weight:600;}
+.mopt.wrong{border-color:var(--red);background:var(--red-l);color:var(--red);}
+.mopt.done{cursor:default;}
+.match-fb{margin-top:7px;font-size:11px;line-height:1.5;display:none;padding:6px 9px;border-radius:6px;}
+.match-fb.show{display:block;}
+.match-fb.ok{background:var(--green-bg);color:var(--green);}
+.match-fb.no{background:var(--red-l);color:var(--red);}
+
+.tf-card{background:white;border:1.5px solid var(--warm);border-radius:10px;padding:12px 14px;margin-bottom:8px;}
+.tf-q{font-family:'Noto Serif SC',serif;font-size:16px;color:var(--ink);margin-bottom:2px;}
+.tf-py{font-size:11px;color:var(--accent);margin-bottom:3px;}
+.tf-vi{font-size:11px;color:var(--muted);margin-bottom:9px;}
+.tf-btns{display:flex;gap:7px;}
+.tf-btn{flex:1;padding:8px;border-radius:7px;border:1.5px solid var(--warm);background:var(--rice);font-size:13px;font-weight:600;cursor:pointer;transition:all .18s;}
+.tf-btn:hover:not(.done){border-color:var(--purple);background:var(--purple-bg);}
+.tf-btn.correct{border-color:var(--green);background:var(--green-bg);color:var(--green);}
+.tf-btn.wrong{border-color:var(--red);background:var(--red-l);color:var(--red);}
+.tf-btn.done{cursor:default;}
+.tf-fb{margin-top:8px;font-size:11px;line-height:1.5;display:none;padding:6px 9px;border-radius:6px;}
+.tf-fb.show{display:block;}
+.tf-fb.ok{background:var(--green-bg);color:var(--green);}
+.tf-fb.no{background:var(--red-l);color:var(--red);}
+
+.pron-card{background:white;border:1px solid var(--warm);border-radius:10px;padding:14px;margin-bottom:10px;}
+.pron-instr{font-size:12px;color:var(--muted);margin-bottom:10px;line-height:1.6;}
+.pron-grid{display:flex;flex-direction:column;gap:7px;}
+.pw{background:var(--rice);border:1px solid var(--warm);border-radius:7px;padding:9px 13px;display:flex;justify-content:space-between;align-items:center;}
+.pw-left{flex:1;}
+.pw-num{font-size:10px;color:var(--muted);}
+.pw-cn{font-family:'Noto Serif SC',serif;font-size:14px;color:var(--ink);}
+.pw-note{font-size:10px;color:var(--muted);margin-top:1px;}
+.pw-tone{font-size:22px;font-weight:900;color:var(--pri);margin-left:12px;flex-shrink:0;}
+
+.reorder-card{background:white;border:1.5px solid var(--warm);border-radius:10px;padding:13px;margin-bottom:8px;}
+.pieces{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:9px;}
+.piece{background:var(--purple-bg);border:1.5px solid #d4c8f8;border-radius:6px;padding:5px 11px;font-family:'Noto Serif SC',serif;font-size:14px;color:var(--purple);cursor:pointer;user-select:none;transition:all .18s;}
+.piece:hover:not(.used){border-color:var(--purple);background:#e5dcfa;}
+.piece.used{opacity:.3;cursor:default;}
+.ans-area{min-height:38px;border:2px dashed var(--warm);border-radius:7px;padding:6px 10px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px;}
+.ans-area.has{border-color:var(--purple);}
+.placed{background:var(--purple);color:white;border-radius:6px;padding:5px 11px;font-family:'Noto Serif SC',serif;font-size:14px;cursor:pointer;transition:all .18s;}
+.placed:hover{background:var(--red);}
+.ro-ph{font-size:11px;color:var(--muted);font-style:italic;}
+.ro-result{font-size:11px;line-height:1.5;display:none;padding:6px 9px;border-radius:6px;margin-top:7px;}
+.ro-result.show{display:block;}
+.ro-result.ok{background:var(--green-bg);color:var(--green);}
+.ro-result.no{background:var(--red-l);color:var(--red);}
+.ro-btns{display:flex;gap:7px;margin-top:9px;}
+.btn-sm{background:transparent;color:var(--purple);border:1.5px solid var(--purple);padding:5px 11px;font-size:11px;border-radius:6px;cursor:pointer;transition:all .18s;}
+.btn-sm:hover{background:var(--purple);color:white;}
+
+.score-card{background:var(--ink);color:white;border-radius:12px;padding:22px 18px;text-align:center;display:none;margin-top:16px;}
+.score-card.show{display:block;animation:rise .4s ease;}
+.sc-big{font-family:'Noto Serif SC',serif;font-size:48px;color:var(--gold);margin:6px 0;}
+.sc-text{font-size:12px;color:rgba(255,255,255,.65);margin-bottom:14px;line-height:1.6;}
+.btn-ow{background:transparent;color:white;border:1.5px solid rgba(255,255,255,.4);padding:8px 18px;font-size:12px;border-radius:7px;cursor:pointer;}
+
+.nav-btns{display:flex;gap:10px;margin-top:24px;padding-top:16px;border-top:1px solid var(--warm);}
+.nav-btn{flex:1;padding:10px;border-radius:9px;font-size:12px;font-weight:500;cursor:pointer;text-align:center;text-decoration:none;border:1.5px solid var(--warm);background:white;color:var(--muted);transition:all .18s;}
+.nav-btn:hover{border-color:var(--pri);color:var(--pri);}
+.nav-btn.next{background:var(--pri);color:white;border-color:var(--pri);}
+.nav-btn.next:hover{background:var(--pri-d);}
+@media(max-width:480px){.vc{grid-template-columns:60px 1fr;}.vc-tags .vc-pos{display:none;}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div><a class="hero-back" href="../index.html">← Danh sách bài học</a></div>
+  <div class="hero-badge">HSK Standard Course 2 · 标准教程 · 第11课</div>
+  <h1>他比我大三岁</h1>
+  <div class="hero-en">He is three years older than me</div>
+  <div class="hero-pills">
+    <div class="hero-pill">📗 Sách giáo khoa</div>
+    <div class="hero-pill">📘 Sách bài tập BLCU</div>
+    <div class="hero-pill">10 từ mới</div>
+    <div class="hero-pill">3 ngữ pháp</div>
+    <div class="hero-pill">Nghe 3 phần · Đọc 4 phần</div>
+  </div>
+</div>
+
+<div class="prog-wrap"><div class="prog-bar" id="progBar" style="width:10%"></div></div>
+
+<div class="tabs-wrap">
+  <div class="tabs">
+    <div class="tab-label">📗 Sách GK</div>
+    <div class="tab active" data-tab="vocab">📝 Từ mới</div>
+    <div class="tab" data-tab="dialog">💬 Hội thoại</div>
+    <div class="tab" data-tab="grammar">📖 Ngữ pháp</div>
+    <div class="tab" data-tab="hanzi">✍️ Chữ Hán</div>
+    <div class="tab-sep"></div>
+    <div class="tab-label">📘 Bài tập</div>
+    <div class="tab wb" data-tab="wb-listen">🎧 Nghe</div>
+    <div class="tab wb" data-tab="wb-read">📄 Đọc</div>
+    <div class="tab wb" data-tab="wb-pron">🔊 Phát âm</div>
+    <div class="tab wb" data-tab="wb-write">✏️ Viết câu</div>
+  </div>
+</div>
+
+<!-- ═══ SÁCH GIÁO KHOA ═══ -->
+<div class="section active" id="sec-vocab">
+  <div class="book-banner tb">📗 SÁCH GIÁO KHOA — 教材</div>
+  <div class="sec-title">📝 Từ mới — 新词语</div>
+  <div class="sec-desc">10 từ mới HSK2 (★) bài 11. Chủ đề: So sánh, Tuổi tác & Thời tiết.</div>
+  <div class="tip">💡 <strong>Chủ đề bài 11:</strong> Trọng tâm là <b>比较句 (câu so sánh 比)</b> — một trong những cấu trúc quan trọng và hay xuất hiện nhất HSK2. Bài 11 dạy so sánh về tuổi, giá cả, nhiệt độ với <b>A比B+形容词(+差距)</b>.</div>
+
+  <div class="ctx-label" style="margin-bottom:10px">📊 Cấu trúc so sánh 比 — Tóm tắt nhanh</div>
+  <div class="bi-table">
+    <div class="bi-head">A + 比 + B + 形容词 (+ 差距数量) — So sánh hơn kém</div>
+    <div class="bi-row"><div class="bi-cell">A比B大/小/高/低</div><div class="bi-cell">A lớn/nhỏ/cao/thấp hơn B (không nêu khoảng cách)</div></div>
+    <div class="bi-row"><div class="bi-cell">A比B大三岁</div><div class="bi-cell">A lớn hơn B <b>ba tuổi</b> (nêu khoảng cách rõ ràng)</div></div>
+    <div class="bi-row"><div class="bi-cell">A比B贵一些</div><div class="bi-cell">A đắt hơn B <b>một chút</b> (一些/一点儿=chút ít)</div></div>
+    <div class="bi-row"><div class="bi-cell">比…冷多了</div><div class="bi-cell">Lạnh hơn… <b>nhiều</b> (多了=hơn rất nhiều, nhấn mạnh)</div></div>
+    <div class="bi-row"><div class="bi-cell">❌ 禁止</div><div class="bi-cell">❌ <b>不能加</b> 很/非常/太: ~~A比B很大~~(SAI). Dùng 比 là đã so sánh rồi!</div></div>
+  </div>
+
+  <div class="ctx-sec">
+    <div class="ctx-label">★ Từ mới bài 11 — 10 từ chính</div>
+    <div class="vlist" id="vNew"></div>
+  </div>
+  <div class="ctx-sec">
+    <div class="ctx-label">Từ HSK1/bài trước ôn lại</div>
+    <div class="vlist" id="vReview"></div>
+  </div>
+  <div class="nav-btns">
+    <a class="nav-btn" href="../bai-10/index.html">← Bài 10</a>
+    <a class="nav-btn next" href="../bai-12/index.html">Bài 12 →</a>
+  </div>
+</div>
+
+<div class="section" id="sec-dialog">
+  <div class="book-banner tb">📗 SÁCH GIÁO KHOA — 教材</div>
+  <div class="sec-title">💬 Hội thoại — 课文</div>
+  <div class="sec-desc">Hai đoạn hội thoại chính thức HSK Standard Course 2 — Bài 11.</div>
+  <div class="dlg-box">
+    <div class="dlg-head">对话一：比较年龄 <span class="scene-tag">🎂 So sánh tuổi</span></div>
+    <div id="dlg1"></div>
+  </div>
+  <div class="tip">💡 <strong>他比我大三岁 — phân tích cấu trúc:</strong><br>
+  他(A) + 比(so sánh) + 我(B) + 大(形容词) + 三岁(差距 — khoảng cách)<br>
+  → "Anh ấy lớn hơn tôi ba tuổi"<br>
+  ⚠️ Không nói: ~~他比我<b>很</b>大三岁~~ / ~~他比我大<b>了</b>三岁~~(trong câu kể)</div>
+  <div class="dlg-box">
+    <div class="dlg-head">对话二：天气比较 <span class="scene-tag">🌡️ So sánh thời tiết</span></div>
+    <div id="dlg2"></div>
+  </div>
+  <div class="note-box">🔔 <strong>比…冷多了 vs 比…冷一些:</strong><br>
+  • <b>冷多了</b> = lạnh hơn NHIỀU (nhấn mạnh khoảng cách lớn)<br>
+  • <b>冷一些/一点儿</b> = lạnh hơn MỘT CHÚT (khoảng cách nhỏ)<br>
+  • <b>冷得多</b> = cũng nghĩa là lạnh hơn nhiều (cách viết khác)<br>
+  → 多了 / 得多 nhấn mạnh sự chênh lệch lớn; 一些 / 一点儿 chênh lệch nhỏ.</div>
+</div>
+
+<div class="section" id="sec-grammar">
+  <div class="book-banner tb">📗 SÁCH GIÁO KHOA — 教材</div>
+  <div class="sec-title">📖 Ngữ pháp — 语法</div>
+  <div class="sec-desc">3 điểm ngữ pháp chính thức HSK Standard Course 2 — Bài 11 (Chinese Grammar Wiki).</div>
+  <div id="gramContent"></div>
+</div>
+
+<div class="section" id="sec-hanzi">
+  <div class="book-banner tb">📗 SÁCH GIÁO KHOA — 教材</div>
+  <div class="sec-title">✍️ Chữ Hán — 汉字</div>
+  <div class="sec-desc">Nhấn vào từng chữ để xem chi tiết. Bài 11 tập trung bộ 日(mặt trời) và các chữ liên quan đến thời tiết.</div>
+  <div class="hz-detail" id="hzDetail">
+    <div class="hz-big" id="hzBig"></div>
+    <div><div class="hz-py-big" id="hzPy"></div><div class="hz-vi-big" id="hzVi"></div><div class="hz-strokes" id="hzSt"></div><div class="hz-tip" id="hzTip"></div></div>
+  </div>
+  <div class="hz-grid" id="hzGrid"></div>
+  <div class="tip" style="margin-top:14px">💡 <strong>Bộ 日(rì = mặt trời):</strong> Xuất hiện trong nhiều từ liên quan đến thời gian và thời tiết: 晴(nắng), 明(sáng), 昨(hôm qua), 早(sớm), 暖(ấm), 晚(muộn). Bài 11 có 晴(nắng ráo) — nhận biết bộ 日 giúp đoán nghĩa nhiều từ mới!</div>
+</div>
+
+<!-- ═══ SÁCH BÀI TẬP ═══ -->
+<div class="section" id="sec-wb-listen">
+  <div class="book-banner wb">📘 SÁCH BÀI TẬP — 练习册 · 一、听力 (Nghe)</div>
+  <div class="sec-title wb">🎧 Luyện nghe — 听力练习</div>
+  <div class="sec-desc">Script chính thức từ 《HSK标准教程2练习册》BLCU Press — Bài 11, xác nhận từ Pandarin.net + YouTube BLCU.</div>
+  <div class="answer-note">📌 <strong>Đáp án bài 11 (chính thức BLCU):</strong> 1-5: × √ √ × √ &nbsp;|&nbsp; 6-10: C A F B E &nbsp;|&nbsp; 11-15: C B A B C</div>
+
+  <div class="wb-section-title">第一部分 — Phần 1 (Câu 1–5): Đúng/Sai</div>
+  <div class="wb-part-desc">Nghe câu đơn, phán đoán hình ảnh Đúng (√) hay Sai (×)</div>
+  <div class="script-card" id="listenP1"></div>
+
+  <div class="wb-section-title">第二部分 — Phần 2 (Câu 6–10): Chọn hình</div>
+  <div class="wb-part-desc">Nghe hội thoại ngắn, chọn hình ảnh đúng (A–F)</div>
+  <div class="script-card" id="listenP2"></div>
+
+  <div class="wb-section-title">第三部分 — Phần 3 (Câu 11–15): Hỏi đáp</div>
+  <div class="wb-part-desc">Nghe hội thoại ngắn, chọn câu trả lời đúng (A–F)</div>
+  <div class="script-card" id="listenP3"></div>
+
+  <div class="tip" style="margin-top:14px">💡 <strong>Nghe bài 11:</strong> Chú ý các câu hỏi về <b>比较</b>: "谁更…？", "差多少？", "比...冷/热多少度？". Phần 3 thường hỏi về kết quả so sánh — nghe kỹ số liệu (tuổi, nhiệt độ, giá cả) và tính toán chênh lệch!</div>
+</div>
+
+<div class="section" id="sec-wb-read">
+  <div class="book-banner wb">📘 SÁCH BÀI TẬP — 练习册 · 二、阅读 (Đọc)</div>
+  <div class="sec-title wb">📄 Đọc hiểu — 阅读练习</div>
+  <div class="sec-desc">4 phần đọc hiểu theo đúng cấu trúc đề thi HSK2.</div>
+  <div class="answer-note">📌 <strong>Đáp án bài 11 (chính thức BLCU):</strong> 16-20: E B A F C &nbsp;|&nbsp; 21-25: F A C D B &nbsp;|&nbsp; 26-30: √ × × √ √ &nbsp;|&nbsp; 31-35: C B D F A</div>
+
+  <div class="wb-section-title">第一部分 — Phần 1 (Câu 16–20): Nối câu-hình</div>
+  <div class="wb-part-desc">Đọc câu, chọn hình ảnh phù hợp (A–F)</div>
+  <div id="readP1"></div>
+
+  <div class="wb-section-title">第二部分 — Phần 2 (Câu 21–25): Nối hội thoại</div>
+  <div class="wb-part-desc">Đọc câu A, chọn câu B trả lời phù hợp nhất</div>
+  <div id="readP2"></div>
+
+  <div class="wb-section-title">第三部分 — Phần 3 (Câu 26–30): Đúng/Sai</div>
+  <div class="wb-part-desc">Đọc đoạn văn, phán đoán Đúng (√) hay Sai (×)</div>
+  <div class="read-passage">
+    <div class="read-cn">大卫和安娜是大学同学，大卫比安娜大两岁。大卫今年二十六岁，他们昨天一起去唱歌了。唱歌的时候，大卫说北京最近比以前冷多了，安娜说她那儿的天气比北京还要冷。</div>
+    <div class="read-py">Dàwèi hé Ānnà shì dàxué tóngxué, Dàwèi bǐ Ānnà dà liǎng suì. Dàwèi jīnnián èrshíliù suì, tāmen zuótiān yīqǐ qù chànggē le. Chànggē de shíhou, Dàwèi shuō Běijīng zuìjìn bǐ yǐqián lěng duō le, Ānnà shuō tā nàr de tiānqì bǐ Běijīng hái yào lěng.</div>
+    <div class="read-vi">David và Anna là bạn cùng lớp đại học, David lớn hơn Anna hai tuổi. David năm nay 26 tuổi, hôm qua họ cùng nhau đi hát. Khi hát, David nói Bắc Kinh gần đây lạnh hơn trước nhiều, Anna nói thời tiết ở chỗ cô ấy còn lạnh hơn Bắc Kinh.</div>
+  </div>
+  <div id="readP3"></div>
+
+  <div class="wb-section-title">第四部分 — Phần 4 (Câu 31–35): Nối câu đối thoại</div>
+  <div class="wb-part-desc">Đọc câu A, chọn câu B hoàn chỉnh hội thoại phù hợp nhất</div>
+  <div id="readP4"></div>
+
+  <div class="score-card" id="readScore">
+    <div style="font-size:11px;color:rgba(255,255,255,.6)">Kết quả — 二、阅读</div>
+    <div class="sc-big" id="readScoreBig"></div>
+    <div class="sc-text" id="readScoreTxt"></div>
+    <button class="btn-ow" onclick="resetRead()">🔄 Làm lại</button>
+  </div>
+</div>
+
+<div class="section" id="sec-wb-pron">
+  <div class="book-banner wb">📘 SÁCH BÀI TẬP — 练习册 · 三、语音 (Phát âm)</div>
+  <div class="sec-title wb">🔊 Luyện phát âm — 语音练习</div>
+  <div class="sec-desc">Bài luyện phát âm chính thức từ sách bài tập HSK2 Bài 11 — BLCU. Bài 11 luyện <strong>câu hỏi chính phản (正反问句) ↓</strong>.</div>
+
+  <div class="wb-section-title">第1题 — Câu hỏi chính phản (A不A / A没A) — luôn xuống ↓</div>
+  <div class="pron-card">
+    <div class="pron-instr">听录音，注意正反问句的句调 — Bài 11 luyện câu hỏi dạng <b>V不V / V没V</b>. Đây là câu hỏi nhưng giọng XUỐNG ↓ (khác với 吗 câu hỏi lên ↑).</div>
+    <div class="pron-grid" id="pronP1"></div>
+  </div>
+
+  <div class="wb-section-title" style="margin-top:20px">第2题 — Nghe và đọc theo</div>
+  <div class="pron-card">
+    <div class="pron-instr">听录音并跟读下列句子 — Nghe và đọc theo, chú ý tất cả đều xuống giọng ↓.</div>
+    <div class="pron-grid" id="pronP2"></div>
+  </div>
+  <div class="tip">💡 <strong>Câu hỏi chính phản (正反问句) — luôn xuống giọng ↓:</strong><br>
+  • 你去<b>不去</b>？↓ = Bạn có đi không? (người hỏi chủ động đưa ra 2 lựa chọn)<br>
+  • 你<b>有没有</b>时间？↓ = Bạn có thời gian không?<br>
+  • 他<b>认识不认识</b>她？↓ = Anh ấy có biết cô ấy không?<br>
+  → Câu chính phản xuống ↓ vì người nói mang sắc thái đưa ra 2 lựa chọn cụ thể, không tìm kiếm thông tin như 吗↑</div>
+</div>
+
+<div class="section" id="sec-wb-write">
+  <div class="book-banner wb">📘 SÁCH BÀI TẬP — 练习册 · 四、书写 (Viết)</div>
+  <div class="sec-title wb">✏️ Sắp xếp câu — 连词成句</div>
+  <div class="sec-desc">Sắp xếp các từ thành câu đúng. Tập trung vào cấu trúc <b>比较句</b> bài 11.</div>
+  <div id="reorderCards"></div>
+  <div class="score-card" id="writeScore">
+    <div style="font-size:11px;color:rgba(255,255,255,.6)">Kết quả — 四、书写</div>
+    <div class="sc-big" id="writeBig"></div>
+    <div class="sc-text" id="writeTxt"></div>
+    <button class="btn-ow" onclick="resetWrite()">🔄 Làm lại</button>
+  </div>
+</div>
+
+<script>
+// ════════════
+// DATA BÀI 11
+// ════════════
+const vNew=[
+  {char:'比',py:'bǐ',vi:'So sánh (giới từ so sánh)',pos:'Giới từ / Động từ',
+   ex:'他比我大三岁。\nTā bǐ wǒ dà sān suì.\nAnh ấy lớn hơn tôi ba tuổi.\n→ A比B+TT(+差距). KHÔNG dùng 很/非常/太sau TT trong câu 比!'},
+  {char:'差',py:'chā/chà',vi:'Chênh lệch / Kém / Sai',pos:'Động từ / Tính từ',
+   ex:'他们两个人年龄差三岁。\nTāmen liǎng gè rén niánlíng chā sān suì.\nHai người họ chênh lệch tuổi nhau ba tuổi.\n→ 差(chā)=chênh lệch; 差(chà)=kém/không tốt'},
+  {char:'年龄',py:'niánlíng',vi:'Tuổi tác / Độ tuổi',pos:'Danh từ',
+   ex:'你的年龄比他大还是比他小？\nNǐ de niánlíng bǐ tā dà háishi bǐ tā xiǎo?\nTuổi của bạn lớn hơn hay nhỏ hơn anh ấy?'},
+  {char:'天气',py:'tiānqì',vi:'Thời tiết',pos:'Danh từ',
+   ex:'北京最近天气怎么样？比以前冷多了。\nBěijīng zuìjìn tiānqì zěnmeyàng? Bǐ yǐqián lěng duō le.\nThời tiết Bắc Kinh gần đây thế nào? Lạnh hơn trước nhiều rồi.'},
+  {char:'冷',py:'lěng',vi:'Lạnh',pos:'Tính từ',
+   ex:'我们那儿的天气比北京还要冷。\nWǒmen nàr de tiānqì bǐ Běijīng hái yào lěng.\nThời tiết ở chỗ chúng tôi còn lạnh hơn Bắc Kinh.\n→ 冷↔热; 比…冷多了=lạnh hơn nhiều'},
+  {char:'热',py:'rè',vi:'Nóng / Nhiệt',pos:'Tính từ',
+   ex:'今天比昨天热多了，我不想出去。\nJīntiān bǐ zuótiān rè duō le, wǒ bù xiǎng chūqù.\nHôm nay nóng hơn hôm qua nhiều, tôi không muốn ra ngoài.'},
+  {char:'便宜',py:'piányí',vi:'Rẻ / Giá thấp',pos:'Tính từ',
+   ex:'这家店的东西比那家便宜一些。\nZhè jiā diàn de dōngxi bǐ nà jiā piányí yīxiē.\nĐồ của cửa hàng này rẻ hơn cửa hàng kia một chút.\n→ 便宜↔贵; 便宜一些=rẻ hơn một chút'},
+  {char:'贵',py:'guì',vi:'Đắt / Quý giá',pos:'Tính từ',
+   ex:'这件衣服比那件贵三十块。\nZhè jiàn yīfu bǐ nà jiàn guì sānshí kuài.\nCái áo này đắt hơn cái kia ba mươi tệ.'},
+  {char:'晴',py:'qíng',vi:'Nắng / Trời quang',pos:'Tính từ',
+   ex:'今天天气真好，又晴又暖和。\nJīntiān tiānqì zhēn hǎo, yòu qíng yòu nuǎnhuo.\nThời tiết hôm nay thật tốt, vừa nắng vừa ấm áp.\n→ 晴天=ngày nắng; 晴朗=trời trong xanh'},
+  {char:'下雪',py:'xià xuě',vi:'Tuyết rơi',pos:'Động từ',
+   ex:'北方冬天经常下雪，南方比北方暖和多了。\nBěifāng dōngtiān jīngcháng xià xuě, nánfāng bǐ běifāng nuǎnhuo duō le.\nMiền Bắc mùa đông hay có tuyết, miền Nam ấm hơn miền Bắc nhiều.'},
+];
+
+const vReview=[
+  {char:'暖和',py:'nuǎnhuo',vi:'Ấm áp (HSK2)',pos:'Tính từ',
+   ex:'春天比冬天暖和多了。Mùa xuân ấm hơn mùa đông nhiều.'},
+  {char:'以前/以后',py:'yǐqián/yǐhòu',vi:'Trước/Sau (HSK2)',pos:'Danh từ',
+   ex:'比以前冷多了 = lạnh hơn trước nhiều. 以前 hay dùng trong câu so sánh.'},
+  {char:'多了',py:'duō le',vi:'"Hơn nhiều" — nhấn mạnh',pos:'Trạng từ',
+   ex:'比…冷多了/便宜多了. 多了 đứng sau TT, nhấn mạnh chênh lệch lớn.'},
+];
+
+const d1=[
+  {sp:'a',cn:'你哥哥多大了？',py:'Nǐ gēgē duō dà le?',vi:'Anh trai bạn bao nhiêu tuổi rồi?'},
+  {sp:'b',cn:'他今年二十八岁，比我大三岁。',py:'Tā jīnnián èrshíbā suì, bǐ wǒ dà sān suì.',vi:'Anh ấy năm nay 28 tuổi, lớn hơn tôi ba tuổi.'},
+  {sp:'a',cn:'你们俩年龄差了三岁，但是看起来差不多。',py:'Nǐmen liǎ niánlíng chā le sān suì, dànshì kànqǐlai chàbuduō.',vi:'Hai người bạn chênh lệch ba tuổi, nhưng nhìn trông tương đương nhau.'},
+  {sp:'b',cn:'哈哈，是啊，很多人都觉得我比他大。',py:'Hāhā, shì a, hěnduō rén dōu juéde wǒ bǐ tā dà.',vi:'Haha, đúng vậy, nhiều người đều thấy tôi già hơn anh ấy.'},
+];
+
+const d2=[
+  {sp:'a',cn:'今天北京的天气比昨天冷多了，你那儿呢？',py:'Jīntiān Běijīng de tiānqì bǐ zuótiān lěng duō le, nǐ nàr ne?',vi:'Hôm nay thời tiết Bắc Kinh lạnh hơn hôm qua nhiều, chỗ bạn thì sao?'},
+  {sp:'b',cn:'我们这儿比北京还要冷，最近还下雪了。',py:'Wǒmen zhèr bǐ Běijīng hái yào lěng, zuìjìn hái xià xuě le.',vi:'Chỗ chúng tôi còn lạnh hơn Bắc Kinh, gần đây còn có tuyết rơi.'},
+  {sp:'a',cn:'哇，北方的冬天真比南方冷太多了！',py:'Wā, běifāng de dōngtiān zhēn bǐ nánfāng lěng tài duō le!',vi:'Oa, mùa đông miền Bắc thật sự lạnh hơn miền Nam nhiều quá!'},
+  {sp:'b',cn:'是的，南方比北方暖和多了，也不下雪，我有点儿羡慕你们。',py:'Shì de, nánfāng bǐ běifāng nuǎnhuo duō le, yě bù xià xuě, wǒ yǒudiǎnr xiànmù nǐmen.',vi:'Đúng vậy, miền Nam ấm hơn miền Bắc nhiều, cũng không có tuyết, tôi hơi ghen tị với các bạn.'},
+];
+
+const grammar=[
+  {n:1,
+   title:'比较句 A比B+形容词 — Câu so sánh cơ bản',
+   pattern:'A + 比 + B + 形容词 (+差距数量)',
+   note:'<b>A比B+形容词</b> là cấu trúc so sánh cơ bản nhất. Nếu muốn nêu rõ khoảng cách chênh lệch, thêm số lượng vào sau tính từ:<br><br>• <b>没有差距</b>: 他比我大 (anh ấy lớn hơn tôi)<br>• <b>有差距</b>: 他比我大<b>三岁</b> (lớn hơn tôi <b>ba tuổi</b>)<br>• <b>一些/一点儿</b>: 这个比那个便宜<b>一些</b> (rẻ hơn <b>một chút</b>)<br>• <b>多了/得多</b>: 今天比昨天冷<b>多了</b> (lạnh hơn <b>nhiều</b>)<br><br>⚠️ KHÔNG thêm 很/非常/太 vào sau TT trong câu 比: ~~A比B很大~~',
+   neg:'❌ 他比我很大三岁。(sai)\n❌ 今天比昨天非常冷。(sai)\n✅ 他比我大三岁。\n✅ 今天比昨天冷多了。',
+   exs:[
+     {cn:'他<mark>比</mark>我大<mark>三岁</mark>。',py:'Tā bǐ wǒ dà sān suì.',vi:'Anh ấy lớn hơn tôi BA TUỔI.'},
+     {cn:'今天<mark>比</mark>昨天冷<mark>多了</mark>。',py:'Jīntiān bǐ zuótiān lěng duō le.',vi:'Hôm nay lạnh hơn hôm qua NHIỀU.'},
+     {cn:'苹果<mark>比</mark>西瓜便宜<mark>一些</mark>。',py:'Píngguǒ bǐ xīguā piányí yīxiē.',vi:'Táo rẻ hơn dưa hấu MỘT CHÚT.'},
+   ]},
+  {n:2,
+   title:'还要/更 trong câu 比 — Nhấn mạnh so sánh',
+   pattern:'A + 比 + B + 还要/更 + 形容词',
+   note:'<b>还要</b> và <b>更</b> đặt trước tính từ trong câu 比 để nhấn mạnh mức độ so sánh cao hơn, mang nghĩa "còn... hơn (nữa)".<br><br>• 比B<b>还要</b>冷 = còn lạnh hơn B (nữa)<br>• 比B<b>更</b>冷 = lạnh hơn B (còn hơn cả dự kiến)<br><br>还要 thường dùng trong khẩu ngữ; 更 dùng trong cả văn viết lẫn nói.',
+   neg:'',
+   exs:[
+     {cn:'我们这儿<mark>比</mark>北京<mark>还要</mark>冷。',py:'Wǒmen zhèr bǐ Běijīng hái yào lěng.',vi:'Chỗ chúng tôi CÒN LẠNH HƠN Bắc Kinh (nữa).'},
+     {cn:'这道题<mark>比</mark>那道<mark>更</mark>难。',py:'Zhè dào tí bǐ nà dào gèng nán.',vi:'Câu hỏi này CÒN KHÓ HƠN câu kia.'},
+     {cn:'北方冬天<mark>比</mark>南方<mark>更</mark>冷。',py:'Běifāng dōngtiān bǐ nánfāng gèng lěng.',vi:'Mùa đông miền Bắc CÒN LẠNH HƠN miền Nam.'},
+   ]},
+  {n:3,
+   title:'正反问句 — Câu hỏi chính phản "V不V / 有没有"',
+   pattern:'V + 不 + V？/ 有没有 + N？/ A + 不 + A？',
+   note:'<b>正反问句</b> là câu hỏi dạng "có/không có" bằng cách lặp lại động từ/tính từ với phủ định ở giữa. Không dùng 吗 khi đã dùng chính phản:<br><br>• <b>V不V</b>: 你去不去？(Bạn có đi không?)<br>• <b>有没有</b>: 你有没有时间？(Bạn có thời gian không?)<br>• <b>A不A</b>: 今天冷不冷？(Hôm nay có lạnh không?)<br><br>⚠️ KHÔNG kết hợp: ~~你去不去吗？~~ (không dùng 吗 cùng với chính phản)',
+   neg:'❌ 你去不去吗？\n✅ 你去不去？\n✅ 你去吗？',
+   exs:[
+     {cn:'你知道<mark>不知道</mark>这个汉字怎么写？',py:'Nǐ zhīdào bù zhīdào zhège Hànzì zěnme xiě?',vi:'Bạn có biết chữ Hán này viết thế nào không?'},
+     {cn:'你<mark>有没有</mark>一百块钱？',py:'Nǐ yǒu méiyǒu yī bǎi kuài qián?',vi:'Bạn có một trăm tệ không?'},
+     {cn:'今天的天气冷<mark>不冷</mark>？',py:'Jīntiān de tiānqì lěng bù lěng?',vi:'Hôm nay thời tiết có lạnh không?'},
+   ]},
+];
+
+const hanzi=[
+  {ch:'比',py:'bǐ',vi:'So sánh / Hơn',s:4,tip:'Chỉ 4 nét! Tượng hình: hai người so sánh cạnh nhau. 比较=so sánh; 比赛=thi đấu.'},
+  {ch:'差',py:'chā/chà',vi:'Chênh lệch / Kém',s:9,tip:'Bộ 工(công)+左. 9 nét. chā=chênh lệch, khác biệt; chà=kém, không tốt. 差不多=gần giống nhau.'},
+  {ch:'龄',py:'líng',vi:'Tuổi / Lứa tuổi',s:11,tip:'Bộ 齿(răng)+令. 11 nét. 年龄=tuổi tác; 年龄段=nhóm tuổi.'},
+  {ch:'冷',py:'lěng',vi:'Lạnh',s:7,tip:'Bộ 冫(nước đông)+令. 7 nét. 冷↔热. 冷水=nước lạnh; 冷静=bình tĩnh.'},
+  {ch:'热',py:'rè',vi:'Nóng / Nhiệt tình',s:10,tip:'Bộ 灬(lửa) ở dưới. 10 nét. 热↔冷. 热情=nhiệt tình; 热门=phổ biến.'},
+  {ch:'晴',py:'qíng',vi:'Nắng / Trời quang',s:12,tip:'Bộ 日(mặt trời)+青(xanh). 12 nét. 晴天=ngày nắng; 晴朗=trời trong.'},
+  {ch:'雪',py:'xuě',vi:'Tuyết',s:11,tip:'Bộ 雨(mưa)+彐. 11 nét. 下雪=tuyết rơi; 雪白=trắng như tuyết.'},
+  {ch:'便',py:'biàn/pián',vi:'Tiện lợi / Rẻ',s:9,tip:'Bộ 亻(người)+更. 9 nét. 便宜(piányí)=rẻ; 方便(fāngbiàn)=tiện lợi; 便(biàn)=tiện.'},
+  {ch:'宜',py:'yí',vi:'Thích hợp / Phải chăng',s:8,tip:'Bộ 宀(mái nhà)+且. 8 nét. 便宜=rẻ; 合宜=thích hợp.'},
+  {ch:'贵',py:'guì',vi:'Đắt / Quý',s:9,tip:'Bộ 中+贝(vỏ sò=tiền). 9 nét. 贵↔便宜. Xuất hiện lại từ bài 8.'},
+];
+
+// WORKBOOK — Script chính thức BLCU (pandarin.net + YouTube xác nhận)
+const lp1=[
+  {cn:'昨天我和朋友们一起去唱歌了。',py:'Zuótiān wǒ hé péngyoumen yīqǐ qù chànggē le.',vi:'Hôm qua tôi cùng bạn bè đi hát.',ans:'×',exp:'Hình ảnh không khớp → ×'},
+  {cn:'右边看报纸的那个女孩子是我姐姐。',py:'Yòubiān kàn bàozhǐ de nàge nǚháizi shì wǒ jiějie.',vi:'Cô gái đang đọc báo bên phải là chị tôi.',ans:'√',exp:'Hình ảnh khớp (cô gái đọc báo bên phải) → √'},
+  {cn:'他是新来的汉语老师。',py:'Tā shì xīn lái de Hànyǔ lǎoshī.',vi:'Anh ấy là giáo viên tiếng Trung mới đến.',ans:'√',exp:'Hình ảnh khớp (giáo viên mới) → √'},
+  {cn:'北京10°C，我们那儿的天气比北京的冷。',py:'Běijīng shí dù, wǒmen nàr de tiānqì bǐ Běijīng de lěng.',vi:'Bắc Kinh 10°C, thời tiết chỗ chúng tôi lạnh hơn Bắc Kinh.',ans:'×',exp:'Hình ảnh không khớp → ×'},
+  {cn:'她生病了，明天可能不去上课了。',py:'Tā shēngbìng le, míngtiān kěnéng bù qù shàngkè le.',vi:'Cô ấy bệnh rồi, ngày mai có thể không đi học.',ans:'√',exp:'Hình ảnh khớp (người bệnh không đi học) → √'},
+];
+const lp2=[
+  {cn:'女：昨天和你一起唱歌的人是谁？\n男：是我女朋友。',
+   py:'Nǚ: Zuótiān hé nǐ yīqǐ chànggē de rén shì shéi?\nNán: Shì wǒ nǚpéngyou.',
+   vi:'Nữ: Người hôm qua đi hát cùng bạn là ai?\nNam: Là bạn gái tôi.',ans:'C (cặp đôi/bạn gái)'},
+  {cn:'女：右边看报纸的那个是你哥哥吗？\n男：对，他是我哥哥。',
+   py:'Nǚ: Yòubiān kàn bàozhǐ de nàgè shì nǐ gēgē ma?\nNán: Duì, tā shì wǒ gēgē.',
+   vi:'Nữ: Người đang đọc báo bên phải đó là anh bạn à?\nNam: Đúng, đó là anh tôi.',ans:'A (đọc báo/anh trai)'},
+  {cn:'男：她是你们新来的老师吗？\n女：她不是新来的老师，她去年就来了。',
+   py:'Nán: Tā shì nǐmen xīn lái de lǎoshī ma?\nNǚ: Tā bú shì xīn lái de lǎoshī, tā qùnián jiù lái le.',
+   vi:'Nam: Cô ấy là giáo viên mới của các bạn à?\nNữ: Cô ấy không phải giáo viên mới, năm ngoái cô ấy đã đến rồi.',ans:'F (giáo viên cũ)'},
+  {cn:'女：今天的苹果比昨天的便宜一些，你来点儿吗？\n男：我再看看吧。',
+   py:'Nǚ: Jīntiān de píngguǒ bǐ zuótiān de piányí yīxiē, nǐ lái diǎnr ma?\nNán: Wǒ zài kànkan ba.',
+   vi:'Nữ: Táo hôm nay rẻ hơn hôm qua một chút, bạn mua một chút không?\nNam: Tôi xem thêm nhé.',ans:'B (mua táo/chợ)'},
+  {cn:'女：前边说话的那几个人是谁？\n男：不认识，可能是新来的学生吧。',
+   py:'Nǚ: Qiánbiān shuōhuà de nà jǐ gè rén shì shéi?\nNán: Bù rènshi, kěnéng shì xīn lái de xuésheng ba.',
+   vi:'Nữ: Mấy người đang nói chuyện phía trước là ai vậy?\nNam: Không quen, có thể là học sinh mới đến.',ans:'E (nhóm học sinh mới)'},
+];
+const lp3=[
+  {cn:'男：昨天和你一起唱歌的人是谁？\n女：是一个朋友，我同学介绍的，昨天第一次见。\n问：昨天和女的一起唱歌的人是谁？',
+   py:'Nán: Zuótiān hé nǐ yīqǐ chànggē de rén shì shéi?\nNǚ: Shì yīgè péngyou, wǒ tóngxué jièshào de, zuótiān dì-yī cì jiàn.\nWèn: Zuótiān hé nǚ de yīqǐ chànggē de rén shì shéi?',
+   vi:'Nam: Người hôm qua đi hát cùng bạn là ai?\nNữ: Là một người bạn, do bạn học giới thiệu, hôm qua lần đầu tiên gặp.\nHỏi: Ai đã đi hát cùng người nữ hôm qua?',ans:'C (同学介绍的朋友/第一次见的人)'},
+  {cn:'男：你哥哥多大？\n女：他25岁，比我大三岁。\n问：女的多大了？',
+   py:'Nán: Nǐ gēgē duō dà?\nNǚ: Tā èrshíwǔ suì, bǐ wǒ dà sān suì.\nWèn: Nǚ de duō dà le?',
+   vi:'Nam: Anh trai bạn bao nhiêu tuổi?\nNữ: Anh ấy 25 tuổi, lớn hơn tôi ba tuổi.\nHỏi: Người nữ bao nhiêu tuổi?',ans:'B (22岁 = 25-3)'},
+  {cn:'女：西瓜三块钱一斤，苹果一块五一斤。\n男：苹果比西瓜便宜多了，我还是买苹果吧。\n问：男的为什么买苹果？',
+   py:'Nǚ: Xīguā sān kuài qián yī jīn, píngguǒ yī kuài wǔ yī jīn.\nNán: Píngguǒ bǐ xīguā piányí duō le, wǒ háishi mǎi píngguǒ ba.\nWèn: Nán de wèishénme mǎi píngguǒ?',
+   vi:'Nữ: Dưa hấu 3 tệ/cân, táo 1,5 tệ/cân.\nNam: Táo rẻ hơn dưa hấu nhiều, tôi vẫn mua táo thôi.\nHỏi: Tại sao người nam mua táo?',ans:'A (苹果比西瓜便宜多了)'},
+  {cn:'男：你的生日是四月二十八号？\n女：是。你的生日是哪天？\n男：我也是那天的生日。我是八七年的，你呢？\n女：那我比你大一岁。\n问：他们两个人谁大？',
+   py:'Nán: Nǐ de shēngrì shì sì yuè èrshíbā hào?\nNǚ: Shì. Nǐ de shēngrì shì nǎ tiān?\nNán: Wǒ yě shì nà tiān de shēngrì. Wǒ shì bāqī nián de, nǐ ne?\nNǚ: Nà wǒ bǐ nǐ dà yī suì.\nWèn: Tāmen liǎng gè rén shéi dà?',
+   vi:'Nam: Sinh nhật bạn ngày 28 tháng 4 à?\nNữ: Đúng. Sinh nhật bạn ngày nào?\nNam: Tôi cũng sinh ngày đó. Tôi sinh năm 87, còn bạn?\nNữ: Vậy tôi lớn hơn bạn một tuổi.\nHỏi: Ai trong hai người lớn tuổi hơn?',ans:'B (女的比男的大一岁)'},
+  {cn:'男：你的眼睛怎么红了？\n女：是吗？可能是没休息好。\n男：那今天晚上早点儿睡觉吧。\n女：好的，谢谢。\n问：女的怎么了？',
+   py:'Nán: Nǐ de yǎnjīng zěnme hóng le?\nNǚ: Shì ma? Kěnéng shì méi xiūxi hǎo.\nNán: Nà jīntiān wǎnshàng zǎo diǎnr shuìjiào ba.\nNǚ: Hǎo de, xièxie.\nWèn: Nǚ de zěnme le?',
+   vi:'Nam: Mắt bạn sao đỏ vậy?\nNữ: Vậy à? Có thể là chưa nghỉ ngơi tốt.\nNam: Vậy tối nay ngủ sớm hơn một chút nhé.\nNữ: Được, cảm ơn.\nHỏi: Người nữ bị làm sao?',ans:'C (眼睛红了/没休息好)'},
+];
+
+// ĐỌC
+const r1=[
+  {n:16,cn:'她生病了，明天可能不去上课了。',py:'Tā shēngbìng le, míngtiān kěnéng bù qù shàngkè le.',vi:'Cô ấy bệnh rồi, ngày mai có thể không đi học.',
+   opts:['A 🎵','B 📰','C 🍎','D 🤒','E 👩‍🎓','F 🌨️'],ans:3,exp:'D — 生病/不上课 = bệnh nghỉ học (🤒)'},
+  {n:17,cn:'右边看报纸的那个女孩子是我姐姐。',py:'Yòubiān kàn bàozhǐ de nàge nǚháizi shì wǒ jiějie.',vi:'Cô gái đang đọc báo bên phải là chị tôi.',
+   opts:['A 🎵','B 📰','C 🍎','D 🤒','E 👩‍🎓','F 🌨️'],ans:1,exp:'B — 看报纸/右边 = đọc báo bên phải (📰)'},
+  {n:18,cn:'今天比昨天冷多了，北方还下雪了呢。',py:'Jīntiān bǐ zuótiān lěng duō le, běifāng hái xià xuě le ne.',vi:'Hôm nay lạnh hơn hôm qua nhiều, miền Bắc còn có tuyết rơi.',
+   opts:['A 🎵','B 📰','C 🍎','D 🤒','E 👩‍🎓','F 🌨️'],ans:5,exp:'F — 下雪/北方冷 = tuyết rơi miền Bắc (🌨️)'},
+  {n:19,cn:'今天的苹果比昨天的便宜一些，我买了很多。',py:'Jīntiān de píngguǒ bǐ zuótiān de piányí yīxiē, wǒ mǎi le hěnduō.',vi:'Táo hôm nay rẻ hơn hôm qua một chút, tôi mua nhiều.',
+   opts:['A 🎵','B 📰','C 🍎','D 🤒','E 👩‍🎓','F 🌨️'],ans:2,exp:'C — 苹果/便宜 = táo rẻ (🍎)'},
+  {n:20,cn:'昨天我和朋友一起去唱歌了，唱了很多歌。',py:'Zuótiān wǒ hé péngyou yīqǐ qù chànggē le, chàng le hěnduō gē.',vi:'Hôm qua tôi và bạn bè đi hát, hát nhiều bài lắm.',
+   opts:['A 🎵','B 📰','C 🍎','D 🤒','E 👩‍🎓','F 🌨️'],ans:0,exp:'A — 唱歌/朋友 = đi hát với bạn bè (🎵)'},
+];
+const r2=[
+  {n:21,cn:'你哥哥今年多大了？',py:'Nǐ gēgē jīnnián duō dà le?',vi:'Anh trai bạn năm nay bao nhiêu tuổi rồi?',
+   opts:['A 他今年28岁，比我大三岁。','B 苹果比西瓜便宜多了。','C 比以前冷多了，还下雪了。','D 她不是新来的，去年就来了。','E 我同学介绍的，第一次见。'],
+   ans:0,exp:'A — 他今年28岁，比我大三岁 = trả lời câu hỏi tuổi, dùng 比…大…岁.'},
+  {n:22,cn:'昨天和你一起唱歌的那个人是谁？',py:'Zuótiān hé nǐ yīqǐ chànggē de nàgè rén shì shéi?',vi:'Người hôm qua đi hát cùng bạn là ai vậy?',
+   opts:['A 他今年28岁，比我大三岁。','B 苹果比西瓜便宜多了。','C 比以前冷多了，还下雪了。','D 她不是新来的，去年就来了。','E 是我同学介绍的朋友，第一次见。'],
+   ans:4,exp:'E — 是我同学介绍的朋友，第一次见 = trả lời hỏi người đi hát cùng là ai.'},
+  {n:23,cn:'今天北京的天气比昨天怎么样？',py:'Jīntiān Běijīng de tiānqì bǐ zuótiān zěnmeyàng?',vi:'Thời tiết Bắc Kinh hôm nay so với hôm qua thế nào?',
+   opts:['A 他今年28岁，比我大三岁。','B 苹果比西瓜便宜多了。','C 比昨天冷多了，还下雪了呢。','D 她不是新来的，去年就来了。','E 是我同学介绍的朋友。'],
+   ans:2,exp:'C — 比昨天冷多了 = trả lời so sánh thời tiết bằng 比…冷多了.'},
+  {n:24,cn:'她是你们班新来的老师吗？',py:'Tā shì nǐmen bān xīn lái de lǎoshī ma?',vi:'Cô ấy là giáo viên mới của lớp bạn à?',
+   opts:['A 他今年28岁，比我大三岁。','B 苹果比西瓜便宜多了。','C 比昨天冷多了。','D 她不是新来的，去年就来了。','E 是我同学介绍的朋友。'],
+   ans:3,exp:'D — 她不是新来的，去年就来了 = phủ nhận "mới" và xác nhận cô ấy đã đến từ trước.'},
+  {n:25,cn:'今天的苹果比昨天的贵多了吗？',py:'Jīntiān de píngguǒ bǐ zuótiān de guì duō le ma?',vi:'Táo hôm nay có đắt hơn hôm qua nhiều không?',
+   opts:['A 他今年28岁。','B 不是，苹果比西瓜便宜多了。','C 比昨天冷多了。','D 她不是新来的。','E 是我同学介绍的。'],
+   ans:1,exp:'B — 不是，苹果比西瓜便宜 = phủ nhận "đắt" + so sánh táo rẻ hơn dưa hấu.'},
+];
+const r3=[
+  {n:26,cn:'大卫和安娜是大学同学。',py:'Dàwèi hé Ānnà shì dàxué tóngxué.',vi:'David và Anna là bạn cùng lớp đại học.',ans:true,exp:'Đúng (√). Đoạn văn: "大卫和安娜是大学同学" — khớp chính xác.'},
+  {n:27,cn:'安娜比大卫大两岁。',py:'Ānnà bǐ Dàwèi dà liǎng suì.',vi:'Anna lớn hơn David hai tuổi.',ans:false,exp:'Sai (×). Đoạn văn: "大卫比安娜大两岁" — DAVID lớn hơn Anna, không phải ngược lại!'},
+  {n:28,cn:'大卫今年二十四岁。',py:'Dàwèi jīnnián èrshísì suì.',vi:'David năm nay 24 tuổi.',ans:false,exp:'Sai (×). Đoạn văn: "大卫今年二十六岁" — David 26 tuổi, không phải 24.'},
+  {n:29,cn:'大卫和安娜昨天一起去唱歌了。',py:'Dàwèi hé Ānnà zuótiān yīqǐ qù chànggē le.',vi:'David và Anna hôm qua cùng nhau đi hát.',ans:true,exp:'Đúng (√). Đoạn văn: "他们昨天一起去唱歌了" — khớp chính xác.'},
+  {n:30,cn:'安娜那儿的天气比北京冷。',py:'Ānnà nàr de tiānqì bǐ Běijīng lěng.',vi:'Thời tiết chỗ Anna lạnh hơn Bắc Kinh.',ans:true,exp:'Đúng (√). Đoạn văn: "安娜说她那儿的天气比北京还要冷" — khớp chính xác.'},
+];
+const r4=[
+  {n:31,cn_char:'他今年二十八岁，比我大三岁。',py:'Tā jīnnián èrshíbā suì, bǐ wǒ dà sān suì.',vi:'Anh ấy năm nay 28 tuổi, lớn hơn tôi ba tuổi.',
+   opts:['A 你哥哥今年多大？','B 今天的苹果贵多了吗？','C 今天天气怎么样？','D 她是你们的老师吗？','E 你昨天去哪儿了？'],
+   ans:0,exp:'A — 今年28岁，比我大三岁 = trả lời hỏi tuổi anh trai, dùng 比…大…岁.'},
+  {n:32,cn_char:'苹果比西瓜便宜多了，你也来点儿吗？',py:'Píngguǒ bǐ xīguā piányí duō le, nǐ yě lái diǎnr ma?',vi:'Táo rẻ hơn dưa hấu nhiều, bạn cũng mua một chút không?',
+   opts:['A 你哥哥今年多大？','B 你觉得苹果和西瓜哪个贵？','C 今天天气怎么样？','D 她是你们的老师吗？','E 你昨天去哪儿了？'],
+   ans:1,exp:'B — 苹果比西瓜便宜多了 = trả lời so sánh giá táo và dưa hấu bằng 比…便宜多了.'},
+  {n:33,cn_char:'比昨天冷多了，北方还下雪了呢。',py:'Bǐ zuótiān lěng duō le, běifāng hái xià xuě le ne.',vi:'Lạnh hơn hôm qua nhiều, miền Bắc còn có tuyết rơi.',
+   opts:['A 你哥哥今年多大？','B 苹果贵了吗？','C 今天北京的天气比昨天怎么样？','D 她是你们的老师吗？','E 你昨天去哪儿了？'],
+   ans:2,exp:'C — 比昨天冷多了，北方下雪 = trả lời so sánh thời tiết hôm nay và hôm qua.'},
+  {n:34,cn_char:'她不是新来的，她去年就来了。',py:'Tā bú shì xīn lái de, tā qùnián jiù lái le.',vi:'Cô ấy không phải mới đến, năm ngoái cô ấy đã đến rồi.',
+   opts:['A 你哥哥多大？','B 苹果贵了吗？','C 今天天气怎么样？','D 那是你们班新来的老师吗？','E 你昨天去哪儿了？'],
+   ans:3,exp:'D — 她不是新来的，去年就来了 = phủ nhận "mới" khi được hỏi có phải giáo viên mới không.'},
+  {n:35,cn_char:'是我同学介绍的，昨天是第一次见。',py:'Shì wǒ tóngxué jièshào de, zuótiān shì dì-yī cì jiàn.',vi:'Là do bạn học giới thiệu, hôm qua là lần đầu tiên gặp.',
+   opts:['A 你哥哥今年多大？','B 那个人你认识吗？昨天和你去唱歌的。','C 今天天气怎么样？','D 那是你们的老师吗？','E 苹果贵了吗？'],
+   ans:1,exp:'B — 同学介绍的，第一次见 = trả lời hỏi có quen không (人+认识+昨天一起唱歌).'},
+];
+
+// PHÁT ÂM bài 11 — Câu hỏi chính phản 正反问句 → xuống ↓ (chính thức BLCU)
+const pr1=[
+  {w:'明天你去不去游泳？',tone:'↓',note:'去不去 chính phản → ↓'},
+  {w:'你想不想和朋友们一起去喝茶？',tone:'↓',note:'想不想 chính phản → ↓'},
+  {w:'你知道不知道这个汉字怎么写？',tone:'↓',note:'知道不知道 chính phản → ↓'},
+  {w:'你有没有一百块钱？',tone:'↓',note:'有没有 chính phản → ↓'},
+];
+const pr2=[
+  {w:'你认识不认识那个穿红衣服的人？',tone:'↓',note:'认识不认识 → ↓'},
+  {w:'你每天早上喝不喝牛奶？',tone:'↓',note:'喝不喝 → ↓'},
+  {w:'前边说话的那个人是不是你的汉语老师？',tone:'↓',note:'是不是 → ↓'},
+  {w:'你看不看这本新买来的书？',tone:'↓',note:'看不看 → ↓'},
+];
+
+// SẮP XẾP CÂU bài 11
+const ro=[
+  {pieces:['他','比','大三岁','我'],answer:'他比我大三岁',
+   py:'Tā bǐ wǒ dà sān suì.',vi:'Anh ấy lớn hơn tôi ba tuổi.',
+   tip:'A(他)+比+B(我)+形容词(大)+差距(三岁). Không dùng 很/非常 sau TT trong câu 比!'},
+  {pieces:['冷多了','今天','比','昨天'],answer:'今天比昨天冷多了',
+   py:'Jīntiān bǐ zuótiān lěng duō le.',vi:'Hôm nay lạnh hơn hôm qua nhiều.',
+   tip:'A(今天)+比+B(昨天)+形容词(冷)+多了(nhấn mạnh chênh lệch lớn).'},
+  {pieces:['苹果','便宜','比','一些','西瓜'],answer:'苹果比西瓜便宜一些',
+   py:'Píngguǒ bǐ xīguā piányí yīxiē.',vi:'Táo rẻ hơn dưa hấu một chút.',
+   tip:'A(苹果)+比+B(西瓜)+形容词(便宜)+一些(chênh lệch nhỏ).'},
+  {pieces:['我们','还要','比','冷','北京','那儿'],answer:'我们那儿比北京还要冷',
+   py:'Wǒmen nàr bǐ Běijīng hái yào lěng.',vi:'Chỗ chúng tôi còn lạnh hơn Bắc Kinh.',
+   tip:'A(我们那儿)+比+B(北京)+还要+形容词(冷). 还要 nhấn mạnh "còn hơn nữa".'},
+  {pieces:['你','去不去','明天','游泳'],answer:'明天你去不去游泳',
+   py:'Míngtiān nǐ qù bù qù yóuyǒng?',vi:'Ngày mai bạn có đi bơi không?',
+   tip:'时间(明天)+主语(你)+正反问(去不去)+动词(游泳). Câu chính phản không dùng 吗!'},
+];
+
+// ════════
+// RENDER
+// ════════
+function renderVocab(arr,id){
+  document.getElementById(id).innerHTML=arr.map((v,i)=>`
+    <div class="vc" onclick="tex('${id}',${i})">
+      <div class="vc-char">${v.char}</div>
+      <div style="flex:1"><div class="vc-py">${v.py}</div><div class="vc-vi">${v.vi}</div>
+        <div class="vc-ex" id="${id}-${i}">${v.ex.replace(/\n/g,'<br>')}</div></div>
+      <div class="vc-tags"><div class="vc-pos">${v.pos}</div>${id==='vNew'?'<div class="new-tag">★MỚI</div>':''}</div>
+    </div>`).join('');
+}
+function tex(id,i){document.getElementById(`${id}-${i}`).classList.toggle('open');}
+
+function renderDlg(arr,id){
+  document.getElementById(id).innerHTML=arr.map((d,i)=>`
+    <div class="dl ${i%2===1?'r':''}">
+      <div class="sp ${d.sp}">${d.sp.toUpperCase()}</div>
+      <div class="dl-body"><div class="dl-cn">${d.cn}</div><div class="dl-py">${d.py}</div><div class="dl-vi">${d.vi}</div></div>
+    </div>`).join('');
+}
+
+function renderGrammar(){
+  document.getElementById('gramContent').innerHTML=grammar.map(g=>`
+    <div class="gram-card">
+      <div class="gram-head"><div class="gram-n">${g.n}</div><div class="gram-title">${g.title}</div></div>
+      <div class="gram-body">
+        <div class="gram-pattern">${g.pattern}</div>
+        <div class="gram-note">${g.note}</div>
+        ${g.neg?`<div class="gram-neg">${g.neg}</div>`:''}
+        <div class="gram-exs">${g.exs.map(e=>`<div class="gex"><div class="gex-cn">${e.cn}</div><div class="gex-py">${e.py}</div><div class="gex-vi">${e.vi}</div></div>`).join('')}</div>
+      </div>
+    </div>`).join('');
+}
+
+function renderHanzi(){
+  document.getElementById('hzGrid').innerHTML=hanzi.map((h,i)=>`
+    <div class="hz-card" id="hz-${i}" onclick="showHz(${i})">
+      <div class="hz-ch">${h.ch}</div><div class="hz-py">${h.py}</div><div class="hz-vi">${h.vi}</div>
+    </div>`).join('');
+}
+function showHz(i){
+  document.querySelectorAll('.hz-card').forEach(c=>c.classList.remove('sel'));
+  document.getElementById('hz-'+i).classList.add('sel');
+  const h=hanzi[i];
+  document.getElementById('hzDetail').className='hz-detail show';
+  document.getElementById('hzBig').textContent=h.ch;
+  document.getElementById('hzPy').textContent=h.py;
+  document.getElementById('hzVi').textContent=h.vi;
+  document.getElementById('hzSt').textContent=`Số nét: ${h.s}`;
+  document.getElementById('hzTip').textContent=h.tip;
+  document.getElementById('hzDetail').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function renderListen(arr,id,start){
+  document.getElementById(id).innerHTML=arr.map((l,i)=>`
+    <div class="script-item">
+      <div class="script-num">${start+i}</div>
+      <div class="script-body">
+        <div class="script-cn">${l.cn}</div>
+        <div class="script-py">${l.py}</div>
+        <div class="script-vi">${l.vi}</div>
+        <div class="script-ans">Đáp án: <strong>${l.ans}</strong> — ${l.exp}</div>
+      </div>
+    </div>`).join('');
+}
+
+let rAns={};
+function mkP(arr,pid,isCol){
+  return arr.map((q,i)=>`
+    <div class="match-item"><div class="match-num">Câu ${q.n}</div>
+      <div class="match-cn">${q.cn||q.cn_char}</div><div class="match-py">${q.py}</div>
+      <div class="match-opts${isCol?' style="flex-direction:column"':''}">
+        ${q.opts.map((o,j)=>`<button class="mopt" id="r${pid}-${i}-${j}" onclick="ansR('${pid}',${i},${j},${q.ans})">${isCol?String.fromCharCode(65+j)+'. ':''}<span${isCol?" style=\"font-family:'Noto Serif SC',serif\"":''}">${o}</span></button>`).join('')}
+      </div><div class="match-fb" id="r${pid}-fb-${i}"></div></div>`).join('');
+}
+function mkP3(){
+  return r3.map((q,i)=>`
+    <div class="tf-card"><div class="match-num">Câu ${q.n}</div>
+      <div class="tf-q">${q.cn}</div><div class="tf-py">${q.py}</div><div class="tf-vi">${q.vi}</div>
+      <div class="tf-btns">
+        <button class="tf-btn" id="rp3t-${i}" onclick="ansT(${i},true,${q.ans})">√ Đúng</button>
+        <button class="tf-btn" id="rp3f-${i}" onclick="ansT(${i},false,${q.ans})">× Sai</button>
+      </div><div class="tf-fb" id="rp3-fb-${i}"></div></div>`).join('');
+}
+function renderRead(){
+  document.getElementById('readP1').innerHTML=mkP(r1,'p1',false);
+  document.getElementById('readP2').innerHTML=mkP(r2,'p2',true);
+  document.getElementById('readP3').innerHTML=mkP3();
+  document.getElementById('readP4').innerHTML=mkP(r4,'p4',true);
+}
+function ansR(pid,qi,oi,correct){
+  const k=`${pid}-${qi}`;if(rAns[k]!==undefined)return;
+  rAns[k]=oi;const ok=oi===correct;
+  document.querySelectorAll(`[id^="r${pid}-${qi}-"]`).forEach(b=>b.classList.add('done'));
+  document.getElementById(`r${pid}-${qi}-${correct}`).classList.add('correct');
+  if(!ok)document.getElementById(`r${pid}-${qi}-${oi}`).classList.add('wrong');
+  const arr=pid==='p1'?r1:pid==='p2'?r2:r4;
+  const fb=document.getElementById(`r${pid}-fb-${qi}`);
+  fb.className='match-fb show '+(ok?'ok':'no');
+  fb.innerHTML=(ok?'✅ Đúng! ':'❌ Sai. ')+arr[qi].exp;
+  chkDone();
+}
+function ansT(qi,v,correct){
+  const k=`p3-${qi}`;if(rAns[k]!==undefined)return;
+  rAns[k]=v;const ok=v===correct;
+  ['t','f'].forEach(x=>document.getElementById(`rp3${x}-${qi}`).classList.add('done'));
+  document.getElementById(`rp3${correct?'t':'f'}-${qi}`).classList.add('correct');
+  if(!ok)document.getElementById(`rp3${v?'t':'f'}-${qi}`).classList.add('wrong');
+  const fb=document.getElementById(`rp3-fb-${qi}`);
+  fb.className='tf-fb show '+(ok?'ok':'no');
+  fb.innerHTML=(ok?'✅ Đúng! ':'❌ Sai. ')+r3[qi].exp;
+  chkDone();
+}
+function chkDone(){
+  const tot=r1.length+r2.length+r3.length+r4.length;
+  if(Object.keys(rAns).length===tot)setTimeout(showReadScore,500);
+}
+function showReadScore(){
+  const c=[...r1.map((_,i)=>rAns[`p1-${i}`]===r1[i].ans),
+           ...r2.map((_,i)=>rAns[`p2-${i}`]===r2[i].ans),
+           ...r3.map((_,i)=>rAns[`p3-${i}`]===r3[i].ans),
+           ...r4.map((_,i)=>rAns[`p4-${i}`]===r4[i].ans)].filter(Boolean).length;
+  const tot=r1.length+r2.length+r3.length+r4.length;
+  const p=Math.round(c/tot*100);
+  document.getElementById('readScoreBig').textContent=`${c}/${tot}`;
+  document.getElementById('readScoreTxt').textContent=p>=75?`Xuất sắc! ${p}% — Bài 11 rất vững!`:`${p}% — Ôn lại cấu trúc A比B+TT nhé.`;
+  document.getElementById('readScore').classList.add('show');
+  document.getElementById('readScore').scrollIntoView({behavior:'smooth'});
+  updateProgress();
+}
+function resetRead(){rAns={};document.getElementById('readScore').classList.remove('show');renderRead();}
+
+function renderPron(){
+  document.getElementById('pronP1').innerHTML=pr1.map((s,i)=>`
+    <div class="pw"><div class="pw-left"><div class="pw-num">(${i+1}) ${s.note}</div>
+      <div class="pw-cn">${s.w}</div></div>
+      <div class="pw-tone">${s.tone}</div></div>`).join('');
+  document.getElementById('pronP2').innerHTML=pr2.map((s,i)=>`
+    <div class="pw"><div class="pw-left"><div class="pw-num">(${i+1}) ${s.note}</div>
+      <div class="pw-cn">${s.w}</div></div>
+      <div class="pw-tone">${s.tone}</div></div>`).join('');
+}
+
+let roS=ro.map(()=>({placed:[],done:false}));
+function renderRO(){
+  document.getElementById('reorderCards').innerHTML=ro.map((r,i)=>`
+    <div class="reorder-card">
+      <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:9px">Câu ${i+1} / ${ro.length}</div>
+      <div class="pieces" id="pc-${i}">${shuf([...r.pieces]).map((p,j)=>`<div class="piece" id="p-${i}-${j}" data-w="${p}" onclick="clk(${i},this)">${p}</div>`).join('')}</div>
+      <div style="font-size:10px;color:var(--muted);margin-bottom:4px">→ Câu của bạn:</div>
+      <div class="ans-area" id="aa-${i}"><span class="ro-ph">Nhấn các từ để sắp xếp...</span></div>
+      <div class="ro-result" id="rr-${i}"></div>
+      <div class="ro-btns"><button class="btn-sm" onclick="chk(${i})">✓ Kiểm tra</button><button class="btn-sm" onclick="rst(${i})">↺ Lại</button></div>
+    </div>`).join('');
+}
+function shuf(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function clk(ci,el){if(el.classList.contains('used'))return;el.classList.add('used');roS[ci].placed.push(el.getAttribute('data-w'));renderAA(ci);}
+function renderAA(ci){
+  const aa=document.getElementById(`aa-${ci}`),p=roS[ci].placed;
+  if(!p.length){aa.innerHTML='<span class="ro-ph">Nhấn các từ để sắp xếp...</span>';aa.classList.remove('has');return;}
+  aa.className='ans-area has';aa.innerHTML=p.map((w,i)=>`<div class="placed" onclick="rmv(${ci},${i})">${w}</div>`).join('');
+}
+function rmv(ci,idx){
+  const w=roS[ci].placed[idx];roS[ci].placed.splice(idx,1);
+  const ps=document.querySelectorAll(`#pc-${ci} .piece`);
+  for(let pp of ps){if(pp.getAttribute('data-w')===w&&pp.classList.contains('used')&&!pp._f){pp.classList.remove('used');pp._f=true;break;}}
+  ps.forEach(p=>delete p._f);renderAA(ci);
+}
+function chk(i){
+  const placed=roS[i].placed.join(''),res=document.getElementById(`rr-${i}`);
+  if(!placed){res.className='ro-result show no';res.textContent='⚠️ Chưa sắp xếp.';return;}
+  if(placed===ro[i].answer){
+    res.className='ro-result show ok';
+    res.innerHTML=`✅ Đúng! ${ro[i].py} — ${ro[i].vi}<br><small>${ro[i].tip}</small>`;
+    roS[i].done=true;
+  }else{
+    res.className='ro-result show no';
+    res.innerHTML=`❌ Chưa đúng. Câu đúng: <strong>${ro[i].answer}</strong><br><small>${ro[i].tip}</small>`;
+  }
+  updateProgress();
+  if(roS.every(s=>s.done))setTimeout(showWriteScore,500);
+}
+function rst(i){roS[i]={placed:[],done:false};renderRO();}
+function showWriteScore(){
+  const c=roS.filter(s=>s.done).length,p=Math.round(c/ro.length*100);
+  document.getElementById('writeBig').textContent=`${c}/${ro.length}`;
+  document.getElementById('writeTxt').textContent=p>=75?`Xuất sắc! ${p}% — Nắm vững cấu trúc 比较句!`:`${p}% — Ôn lại A比B+TT, 还要/更, 正反问 nhé.`;
+  document.getElementById('writeScore').classList.add('show');
+  document.getElementById('writeScore').scrollIntoView({behavior:'smooth'});
+}
+function resetWrite(){roS=ro.map(()=>({placed:[],done:false}));document.getElementById('writeScore').classList.remove('show');renderRO();}
+
+const TABS=['vocab','dialog','grammar','hanzi','wb-listen','wb-read','wb-pron','wb-write'];
+document.querySelectorAll('.tab[data-tab]').forEach(tab=>{
+  tab.addEventListener('click',function(){
+    const name=this.getAttribute('data-tab');
+    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    document.getElementById('sec-'+name).classList.add('active');
+    this.classList.add('active');
+    updateProgress();
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+function updateProgress(){
+  const active=document.querySelector('.section.active')?.id?.replace('sec-','');
+  const idx=TABS.indexOf(active);
+  const tp=((idx+1)/TABS.length)*50;
+  const tot=r1.length+r2.length+r3.length+r4.length+ro.length;
+  const done=Object.keys(rAns).length+roS.filter(s=>s.done).length;
+  const wp=(done/tot)*50;
+  document.getElementById('progBar').style.width=Math.min(100,Math.round(tp+wp))+'%';
+}
+
+renderVocab(vNew,'vNew');renderVocab(vReview,'vReview');
+renderDlg(d1,'dlg1');renderDlg(d2,'dlg2');
+renderGrammar();renderHanzi();
+renderListen(lp1,'listenP1',1);renderListen(lp2,'listenP2',6);renderListen(lp3,'listenP3',11);
+renderRead();renderPron();renderRO();
+updateProgress();
+</script>
+</body>
+</html>
 

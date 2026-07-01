@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HSK 2 — Bài 15: 新年就要到了</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Lora:ital,wght@0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pri:#C41E3A;--pri-l:#FEF2F2;--pri-d:#8B0000;
+  --gold:#C8900A;--gold-bg:#FFF8E6;
+  --ink:#18130E;--rice:#F8F4EE;--warm:#EDE4D5;--muted:#7D6B52;
+  --accent:#1E5F8A;--accent-bg:#EEF5FB;
+  --green:#1E7A45;--green-bg:#EBF7F0;
+  --purple:#5B3FA6;--purple-bg:#F0ECFB;--purple-l:#e8e0fa;
+  --red:#B5281C;--red-l:#fdf2f1;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--rice);color:var(--ink);font-family:'DM Sans',sans-serif;overflow-x:hidden;}
+.hero{background:linear-gradient(135deg,var(--pri-d) 0%,var(--pri) 60%,#E85D04 100%);padding:40px 20px 32px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'🎉';position:absolute;font-size:80px;left:10px;top:20px;opacity:.15;pointer-events:none;}
+.hero::after{content:'新年快乐';position:absolute;font-family:'Noto Serif SC',serif;font-size:80px;color:rgba(255,255,255,.06);right:-15px;bottom:-10px;line-height:1;pointer-events:none;}
+.hero-back{display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,.75);font-size:12px;text-decoration:none;margin-bottom:12px;padding:4px 12px;border-radius:20px;border:1px solid rgba(255,255,255,.25);transition:all .2s;}
+.hero-back:hover{background:rgba(255,255,255,.12);color:white;}
+.hero-badge{display:inline-block;background:var(--gold);color:#1a0a00;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 14px;border-radius:20px;margin-bottom:8px;}
+.hero-final{display:inline-block;background:rgba(255,255,255,.2);color:white;font-size:11px;font-weight:700;padding:3px 12px;border-radius:20px;margin-bottom:8px;margin-left:6px;border:1px solid rgba(255,255,255,.3);}
+.hero h1{font-family:'Noto Serif SC',serif;font-size:clamp(20px,4.5vw,36px);color:white;margin-bottom:5px;line-height:1.4;}
+.hero-en{font-family:'Lora',serif;font-style:italic;font-size:13px;color:rgba(255,255,255,.7);margin-bottom:16px;}
+.hero-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;}
+.hero-pill{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.9);font-size:11px;padding:3px 11px;border-radius:20px;}
+.prog-wrap{height:5px;background:var(--warm);position:sticky;top:0;z-index:100;}
+.prog-bar{height:100%;background:linear-gradient(90deg,var(--pri),var(--gold));transition:width .5s;}
+.tabs-wrap{background:white;border-bottom:2px solid var(--warm);position:sticky;top:5px;z-index:99;overflow-x:auto;scrollbar-width:none;}
+.tabs-wrap::-webkit-scrollbar{display:none;}
+.tabs{display:flex;min-width:max-content;}
+.tab-sep{width:2px;background:var(--warm);flex-shrink:0;margin:6px 0;}
+.tab-label{padding:10px 8px 10px 12px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);opacity:.7;display:flex;align-items:center;white-space:nowrap;border-bottom:3px solid transparent;margin-bottom:-2px;}
+.tab{flex-shrink:0;padding:10px 13px;font-size:12px;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;white-space:nowrap;}
+.tab:hover{color:var(--pri);}
+.tab.active{color:var(--pri);border-bottom-color:var(--pri);}
+.tab.wb:hover{color:var(--purple);}
+.tab.wb.active{color:var(--purple);border-bottom-color:var(--purple);}
+.section{display:none;padding:20px 16px 40px;max-width:740px;margin:0 auto;}
+.section.active{display:block;animation:rise .3s ease;}
+@keyframes rise{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.book-banner{padding:7px 16px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-align:center;border-radius:8px;margin-bottom:16px;}
+.book-banner.tb{background:var(--pri-l);color:var(--pri);}
+.book-banner.wb{background:var(--purple-bg);color:var(--purple);}
+.sec-title{font-family:'Lora',serif;font-size:19px;color:var(--pri);margin-bottom:3px;}
+.sec-title.wb{color:var(--purple);}
+.sec-desc{font-size:12px;color:var(--muted);margin-bottom:16px;line-height:1.6;}
+.ctx-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:9px;padding-bottom:5px;border-bottom:1px solid var(--warm);}
+.ctx-sec{margin-bottom:20px;}
+.vlist{display:flex;flex-direction:column;gap:8px;}
+.vc{background:white;border:1px solid var(--warm);border-radius:11px;padding:12px 14px;display:grid;grid-template-columns:72px 1fr auto;align-items:center;gap:12px;cursor:pointer;transition:all .18s;box-shadow:0 1px 5px rgba(0,0,0,.04);}
+.vc:hover{border-color:var(--pri);box-shadow:0 3px 12px rgba(196,30,58,.12);}
+.vc-char{font-family:'Noto Serif SC',serif;font-size:26px;color:var(--pri);text-align:center;line-height:1.2;}
+.vc-py{font-size:12px;color:var(--accent);font-weight:500;margin-bottom:2px;}
+.vc-vi{font-size:13px;color:var(--ink);font-weight:500;}
+.vc-ex{font-size:11px;color:var(--muted);margin-top:5px;line-height:1.6;display:none;grid-column:1/-1;background:var(--rice);border-radius:6px;padding:7px 10px;}
+.vc-ex.open{display:block;}
+.vc-pos{font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;background:var(--warm);color:var(--muted);align-self:flex-start;white-space:nowrap;}
+.new-tag{font-size:9px;font-weight:700;background:var(--pri);color:white;padding:2px 6px;border-radius:8px;text-transform:uppercase;}
+.vc-tags{display:flex;flex-direction:column;gap:3px;align-items:flex-end;}
+/* 就要/快要 table */
+.jy-table{background:white;border-radius:11px;border:1px solid var(--warm);overflow:hidden;margin-bottom:14px;}
+.jy-head{background:var(--pri);color:white;padding:9px 14px;font-size:12px;font-weight:600;}
+.jy-row{display:flex;border-bottom:1px solid var(--warm);}
+.jy-row:last-child{border-bottom:none;}
+.jy-cell{flex:1;padding:9px 13px;font-size:12px;line-height:1.7;}
+.jy-cell:first-child{border-right:1px solid var(--warm);font-family:'Noto Serif SC',serif;font-size:14px;color:var(--pri);font-weight:600;flex:0 0 100px;}
+.jy-cell b{color:var(--pri);}
+/* 复习卡片 */
+.review-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:14px;}
+.review-card{background:white;border:1px solid var(--warm);border-radius:9px;padding:10px 12px;border-left:3px solid var(--pri);}
+.review-bai{font-size:9px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;}
+.review-cn{font-family:'Noto Serif SC',serif;font-size:14px;color:var(--pri);}
+.review-vi{font-size:11px;color:var(--muted);}
+.dlg-box{background:white;border-radius:12px;border:1px solid var(--warm);overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.04);margin-bottom:14px;}
+.dlg-head{background:var(--pri);color:white;padding:9px 15px;font-size:12px;font-weight:500;display:flex;align-items:center;justify-content:space-between;}
+.scene-tag{font-size:10px;background:rgba(255,255,255,.18);padding:2px 8px;border-radius:8px;}
+.dl{display:flex;gap:10px;padding:12px 14px;border-bottom:1px solid var(--warm);align-items:flex-start;}
+.dl:last-child{border-bottom:none;}
+.dl:hover{background:var(--rice);}
+.dl.r{flex-direction:row-reverse;}
+.sp{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif SC',serif;font-size:11px;font-weight:700;color:white;flex-shrink:0;}
+.sp.a{background:var(--pri);}
+.sp.b{background:var(--accent);}
+.dl-body{flex:1;}.dl.r .dl-body{text-align:right;}
+.dl-cn{font-family:'Noto Serif SC',serif;font-size:17px;color:var(--ink);line-height:1.4;margin-bottom:2px;}
+.dl-py{font-size:11px;color:var(--accent);margin-bottom:1px;}
+.dl-vi{font-size:11px;color:var(--muted);}
+.gram-card{background:white;border-radius:12px;border:1px solid var(--warm);margin-bottom:13px;overflow:hidden;}
+.gram-head{background:var(--ink);color:white;padding:11px 15px;display:flex;align-items:center;gap:9px;}
+.gram-n{width:24px;height:24px;border-radius:50%;background:var(--gold);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;}
+.gram-title{font-size:13px;font-weight:500;line-height:1.4;}
+.gram-body{padding:15px;}
+.gram-pattern{background:var(--gold-bg);border-left:4px solid var(--gold);padding:8px 12px;border-radius:0 7px 7px 0;font-family:'Noto Serif SC',serif;font-size:14px;margin-bottom:10px;}
+.gram-note{font-size:12px;color:#333;line-height:1.75;margin-bottom:10px;}
+.gram-neg{background:#fdf4f3;border-radius:6px;padding:7px 11px;font-size:12px;color:#922;margin-bottom:10px;border-left:3px solid var(--red);white-space:pre-line;}
+.gram-exs{display:flex;flex-direction:column;gap:6px;}
+.gex{background:var(--rice);border-radius:7px;padding:8px 11px;}
+.gex-cn{font-family:'Noto Serif SC',serif;font-size:15px;color:var(--ink);}
+.gex-cn mark{background:transparent;color:var(--pri);font-weight:700;}
+.gex-py{font-size:11px;color:var(--accent);margin:2px 0;}
+.gex-vi{font-size:11px;color:var(--muted);}
+.hz-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:8px;}
+.hz-card{background:white;border:1px solid var(--warm);border-radius:10px;padding:11px 5px;text-align:center;cursor:pointer;transition:all .18s;}
+.hz-card:hover,.hz-card.sel{border-color:var(--pri);background:var(--pri-l);}
+.hz-ch{font-family:'Noto Serif SC',serif;font-size:32px;color:var(--pri);}
+.hz-py{font-size:10px;color:var(--accent);margin-top:3px;}
+.hz-vi{font-size:10px;color:var(--muted);}
+.hz-detail{background:white;border-radius:11px;border:1px solid var(--warm);padding:14px;margin-bottom:12px;display:none;}
+.hz-detail.show{display:flex;gap:14px;align-items:flex-start;}
+.hz-big{font-family:'Noto Serif SC',serif;font-size:68px;color:var(--pri);line-height:1;flex-shrink:0;}
+.hz-py-big{font-size:16px;color:var(--accent);font-weight:500;margin-bottom:3px;}
+.hz-vi-big{font-size:13px;font-weight:600;margin-bottom:4px;}
+.hz-strokes{font-size:11px;color:var(--muted);}
+.hz-tip{font-size:11px;color:#444;line-height:1.6;margin-top:4px;}
+.tip{background:var(--gold-bg);border-left:4px solid var(--gold);border-radius:0 9px 9px 0;padding:10px 13px;font-size:12px;color:#5c3d00;line-height:1.7;margin:13px 0;}
+.tip strong{color:#3a2600;}
+.note-box{background:var(--accent-bg);border-left:4px solid var(--accent);border-radius:0 9px 9px 0;padding:10px 13px;font-size:12px;color:#0e3555;line-height:1.7;margin:12px 0;}
+/* Tổng kết bảng */
+.summary-table{background:white;border-radius:11px;border:1px solid var(--warm);overflow:hidden;margin-bottom:14px;}
+.summary-head{background:var(--pri-d);color:white;padding:9px 14px;font-size:12px;font-weight:600;}
+.summary-row{display:flex;border-bottom:1px solid var(--warm);}
+.summary-row:last-child{border-bottom:none;}
+.summary-cell{flex:1;padding:8px 13px;font-size:11px;line-height:1.6;}
+.summary-cell:first-child{border-right:1px solid var(--warm);font-weight:700;color:var(--pri);flex:0 0 50px;font-size:12px;display:flex;align-items:center;justify-content:center;}
+.wb-section-title{font-size:14px;font-weight:700;color:var(--purple);margin:20px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--purple-bg);}
+.wb-part-desc{font-size:11px;color:var(--muted);margin-bottom:10px;line-height:1.5;}
+.answer-note{background:var(--purple-bg);border-radius:9px;padding:10px 13px;font-size:12px;color:var(--purple);margin-bottom:14px;line-height:1.6;}
+.script-card{background:white;border:1px solid var(--warm);border-radius:10px;overflow:hidden;margin-bottom:8px;}
+.script-item{display:flex;gap:10px;padding:10px 13px;border-bottom:1px solid var(--warm);align-items:flex-start;}
+.script-item:last-child{border-bottom:none;}
+.script-num{width:22px;height:22px;border-radius:50%;background:var(--purple);color:white;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.script-body{flex:1;}
+.script-cn{font-family:'Noto Serif SC',serif;font-size:15px;color:var(--ink);line-height:1.5;white-space:pre-line;}
+.script-py{font-size:11px;color:var(--accent);margin-top:2px;white-space:pre-line;}
+.script-vi{font-size:11px;color:var(--muted);margin-top:1px;white-space:pre-line;}
+.script-ans{font-size:11px;color:var(--purple);margin-top:5px;font-weight:600;}
+.read-passage{background:white;border:1px solid var(--warm);border-radius:11px;padding:14px 16px;margin-bottom:12px;}
+.read-cn{font-family:'Noto Serif SC',serif;font-size:16px;color:var(--ink);line-height:1.9;margin-bottom:6px;}
+.read-py{font-size:11px;color:var(--accent);line-height:1.8;margin-bottom:4px;}
+.read-vi{font-size:11px;color:var(--muted);line-height:1.7;}
+.match-item{background:white;border:1.5px solid var(--warm);border-radius:10px;padding:11px 13px;margin-bottom:8px;}
+.match-num{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:5px;}
+.match-cn{font-family:'Noto Serif SC',serif;font-size:16px;color:var(--ink);margin-bottom:2px;}
+.match-py{font-size:11px;color:var(--accent);margin-bottom:8px;}
+.match-opts{display:flex;flex-wrap:wrap;gap:6px;}
+.mopt{border:1.5px solid var(--warm);background:var(--rice);border-radius:7px;padding:6px 11px;font-size:12px;cursor:pointer;transition:all .18s;text-align:left;}
+.mopt:hover:not(.done){border-color:var(--purple);background:var(--purple-bg);}
+.mopt.correct{border-color:var(--green);background:var(--green-bg);color:var(--green);font-weight:600;}
+.mopt.wrong{border-color:var(--red);background:var(--red-l);color:var(--red);}
+.mopt.done{cursor:default;}
+.match-fb{margin-top:7px;font-size:11px;line-height:1.5;display:none;padding:6px 9px;border-radius:6px;}
+.match-fb.show{display:block;}
+.match-fb.ok{background:var(--green-bg);color:var(--green);}
+.match-fb.no{background:var(--red-l);color:var(--red);}
+.tf-card{background:white;border:1.5px solid var(--warm);border-radius:10px;padding:12px 14px;margin-bottom:8px;}
+.tf-q{font-family:'Noto Serif SC',serif;font-size:16px;color:var(--ink);margin-bottom:2px;}
+.tf-py{font-size:11px;color:var(--accent);margin-bottom:3px;}
+.tf-vi{font-size:11px;color:var(--muted);margin-bottom:9px;}
+.tf-btns{display:flex;gap:7px;}
+.tf-btn{flex:1;padding:8px;border-radius:7px;border:1.5px solid var(--warm);background:var(--rice);font-size:13px;font-weight:600;cursor:pointer;transition:all .18s;}
+.tf-btn:hover:not(.done){border-color:var(--purple);background:var(--purple-bg);}
+.tf-btn.correct{border-color:var(--green);background:var(--green-bg);color:var(--green);}
+.tf-btn.wrong{border-color:var(--red);background:var(--red-l);color:var(--red);}
+.tf-btn.done{cursor:default;}
+.tf-fb{margin-top:8px;font-size:11px;line-height:1.5;display:none;padding:6px 9px;border-radius:6px;}
+.tf-fb.show{display:block;}
+.tf-fb.ok{background:var(--green-bg);color:var(--green);}
+.tf-fb.no{background:var(--red-l);color:var(--red);}
+.pron-card{background:white;border:1px solid var(--warm);border-radius:10px;padding:14px;margin-bottom:10px;}
+.pron-instr{font-size:12px;color:var(--muted);margin-bottom:10px;line-height:1.6;}
+.pron-grid{display:flex;flex-direction:column;gap:7px;}
+.pw{background:var(--rice);border:1px solid var(--warm);border-radius:7px;padding:9px 13px;display:flex;justify-content:space-between;align-items:center;}
+.pw-left{flex:1;}
+.pw-num{font-size:10px;color:var(--muted);}
+.pw-cn{font-family:'Noto Serif SC',serif;font-size:14px;color:var(--ink);}
+.pw-note{font-size:10px;color:var(--muted);margin-top:1px;}
+.pw-tone{font-size:22px;font-weight:900;color:var(--pri);margin-left:12px;flex-shrink:0;}
+.reorder-card{background:white;border:1.5px solid var(--warm);border-radius:10px;padding:13px;margin-bottom:8px;}
+.pieces{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:9px;}
+.piece{background:var(--purple-bg);border:1.5px solid #d4c8f8;border-radius:6px;padding:5px 11px;font-family:'Noto Serif SC',serif;font-size:14px;color:var(--purple);cursor:pointer;user-select:none;transition:all .18s;}
+.piece:hover:not(.used){border-color:var(--purple);background:#e5dcfa;}
+.piece.used{opacity:.3;cursor:default;}
+.ans-area{min-height:38px;border:2px dashed var(--warm);border-radius:7px;padding:6px 10px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px;}
+.ans-area.has{border-color:var(--purple);}
+.placed{background:var(--purple);color:white;border-radius:6px;padding:5px 11px;font-family:'Noto Serif SC',serif;font-size:14px;cursor:pointer;transition:all .18s;}
+.placed:hover{background:var(--red);}
+.ro-ph{font-size:11px;color:var(--muted);font-style:italic;}
+.ro-result{font-size:11px;line-height:1.5;display:none;padding:6px 9px;border-radius:6px;margin-top:7px;}
+.ro-result.show{display:block;}
+.ro-result.ok{background:var(--green-bg);color:var(--green);}
+.ro-result.no{background:var(--red-l);color:var(--red);}
+.ro-btns{display:flex;gap:7px;margin-top:9px;}
+.btn-sm{background:transparent;color:var(--purple);border:1.5px solid var(--purple);padding:5px 11px;font-size:11px;border-radius:6px;cursor:pointer;transition:all .18s;}
+.btn-sm:hover{background:var(--purple);color:white;}
+.score-card{background:var(--ink);color:white;border-radius:12px;padding:22px 18px;text-align:center;display:none;margin-top:16px;}
+.score-card.show{display:block;animation:rise .4s ease;}
+.sc-big{font-family:'Noto Serif SC',serif;font-size:48px;color:var(--gold);margin:6px 0;}
+.sc-text{font-size:12px;color:rgba(255,255,255,.65);margin-bottom:14px;line-height:1.6;}
+.btn-ow{background:transparent;color:white;border:1.5px solid rgba(255,255,255,.4);padding:8px 18px;font-size:12px;border-radius:7px;cursor:pointer;}
+/* Final completion card */
+.completion-card{background:linear-gradient(135deg,var(--pri-d),var(--pri));border-radius:14px;padding:24px 20px;text-align:center;margin:20px 0;color:white;}
+.completion-emoji{font-size:48px;margin-bottom:8px;}
+.completion-title{font-family:'Noto Serif SC',serif;font-size:22px;margin-bottom:6px;}
+.completion-text{font-size:12px;color:rgba(255,255,255,.75);line-height:1.7;}
+.nav-btns{display:flex;gap:10px;margin-top:24px;padding-top:16px;border-top:1px solid var(--warm);}
+.nav-btn{flex:1;padding:10px;border-radius:9px;font-size:12px;font-weight:500;cursor:pointer;text-align:center;text-decoration:none;border:1.5px solid var(--warm);background:white;color:var(--muted);transition:all .18s;}
+.nav-btn:hover{border-color:var(--pri);color:var(--pri);}
+.nav-btn.home{background:var(--pri);color:white;border-color:var(--pri);}
+.nav-btn.home:hover{background:var(--pri-d);}
+@media(max-width:480px){.vc{grid-template-columns:60px 1fr;}.vc-tags .vc-pos{display:none;}.review-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div><a class="hero-back" href="../index.html">← Danh sách bài học</a></div>
+  <div>
+    <div class="hero-badge">HSK Standard Course 2 · 标准教程 · 第15课</div>
+    <span class="hero-final">🎉 BÀI CUỐI</span>
+  </div>
+  <h1>新年就要到了</h1>
+  <div class="hero-en">The New Year is almost here</div>
+  <div class="hero-pills">
+    <div class="hero-pill">📗 Sách giáo khoa</div>
+    <div class="hero-pill">📘 Sách bài tập BLCU</div>
+    <div class="hero-pill">10 từ mới</div>
+    <div class="hero-pill">3 ngữ pháp</div>
+    <div class="hero-pill">🏁 Hoàn thành HSK2!</div>
+  </div>
+</div>
+
+<div class="prog-wrap"><div class="prog-bar" id="progBar" style="width:10%"></div></div>
+
+<div class="tabs-wrap">
+  <div class="tabs">
+    <div class="tab-label">📗 Sách GK</div>
+    <div class="tab active" data-tab="vocab">📝 Từ mới</div>
+    <div class="tab" data-tab="dialog">💬 Hội thoại</div>
+    <div class="tab" data-tab="grammar">📖 Ngữ pháp</div>
+    <div class="tab" data-tab="hanzi">✍️ Chữ Hán</div>
+    <div class="tab-sep"></div>
+    <div class="tab-label">📘 Bài tập</div>
+    <div class="tab wb" data-tab="wb-listen">🎧 Nghe</div>
+    <div class="tab wb" data-tab="wb-read">📄 Đọc</div>
+    <div class="tab wb" data-tab="wb-pron">🔊 Phát âm</div>
+    <div class="tab wb" data-tab="wb-write">✏️ Viết câu</div>
+  </div>
+</div>
+
+<!-- ═══ SÁCH GIÁO KHOA ═══ -->
+<div class="section active" id="sec-vocab">
+  <div class="book-banner tb">📗 SÁCH GIÁO KHOA — 教材</div>
+  <div class="sec-title">📝 Từ mới — 新词语</div>
+  <div class="sec-desc">10 từ mới HSK2 (★) bài 15. Chủ đề: Năm mới, Kế hoạch tương lai & Chuẩn bị lễ Tết.</div>
+  <div class="tip">💡 <strong>Chủ đề bài 15:</strong> Trọng tâm là <b>就要/快要/快/要…了</b> — diễn đạt "sắp sửa xảy ra". Đây là bài CUỐI của HSK2, tổng kết toàn bộ hành trình học! Chúc mừng bạn đã đến đây 🎉</div>
+
+  <div class="ctx-label" style="margin-bottom:10px">⏰ Sắp sửa xảy ra — 就要/快要/快/要+了</div>
+  <div class="jy-table">
+    <div class="jy-head">快要/就要/快/要 + 动词/形容词 + 了 — "Sắp/Sắp sắp..." (tương lai gần)</div>
+    <div class="jy-row"><div class="jy-cell">快要…了</div><div class="jy-cell">Sắp sắp... (nhấn tính khẩn cấp): <b>快要</b>下课了 — Sắp hết giờ rồi. <b>快要</b>下雪了 — Sắp có tuyết rồi.</div></div>
+    <div class="jy-row"><div class="jy-cell">就要…了</div><div class="jy-cell">Sắp... (thường có thời gian cụ thể): 新年<b>就要</b>到了 — Năm mới sắp đến rồi. 他明天<b>就要</b>来了.</div></div>
+    <div class="jy-row"><div class="jy-cell">快…了</div><div class="jy-cell">Gần như...: <b>快</b>到了 — Sắp đến rồi. <b>快</b>好了 — Sắp xong rồi. (câu ngắn, thường trong hội thoại)</div></div>
+    <div class="jy-row"><div class="jy-cell">要…了</div><div class="jy-cell">Sẽ...: 天<b>要</b>下雨了 — Trời sắp mưa rồi. (nhẹ hơn快要, thường chỉ dự đoán)</div></div>
+    <div class="jy-row"><div class="jy-cell">❌ Chú ý</div><div class="jy-cell"><b>就要</b> thường đi kèm thời gian cụ thể; <b>快要</b> không bắt buộc. Cả 4 cách đều dùng <b>了</b> ở cuối!</div></div>
+  </div>
+
+  <div class="ctx-sec">
+    <div class="ctx-label">★ Từ mới bài 15 — 10 từ chính</div>
+    <div class="vlist" id="vNew"></div>
+  </div>
+  <div class="ctx-sec">
+    <div class="ctx-label">Ôn lại từ quan trọng xuất hiện trong bài 15</div>
+    <div class="vlist" id="vReview"></div>
+  </div>
+  <div class="nav-btns">
+    <a class="nav-btn" href="../bai-14/index.html">← Bài 14</a>
+    <a class="nav-btn home" href="../index.html">🏠 Trang chủ</a>
+  </div>
+</div>
+
+<div class="section" id="sec-dialog">
+  <div class="book-banner tb">📗 SÁCH GIÁO KHOA — 教材</div>
+  <div class="sec-title">💬 Hội thoại — 课文</div>
+  <div class="sec-desc">Các đoạn hội thoại chính thức HSK Standard Course 2 — Bài 15 (3 đoạn).</div>
+  <div class="dlg-box">
+    <div class="dlg-head">对话一：新年计划 <span class="scene-tag">🎆 Kế hoạch Năm mới</span></div>
+    <div id="dlg1"></div>
+  </div>
+  <div class="tip">💡 <strong>新年就要到了 — phân tích:</strong><br>
+  新年(Năm mới) + <b>就要</b>(sắp) + 到(đến) + <b>了</b>(thay đổi trạng thái)<br>
+  → "Năm mới sắp đến rồi" — dùng 就要 vì Năm mới là sự kiện có thời điểm cố định<br>
+  So sánh: 快要下雪了 (sắp tuyết — tự nhiên, không có thời điểm cố định)</div>
+  <div class="dlg-box">
+    <div class="dlg-head">对话二：买票 <span class="scene-tag">🚂 Mua vé tàu</span></div>
+    <div id="dlg2"></div>
+  </div>
+  <div class="dlg-box">
+    <div class="dlg-head">对话三：唱歌 <span class="scene-tag">🎵 Tài năng hát</span></div>
+    <div id="dlg3"></div>
+  </div>
+  <div class="note-box">🔔 <strong>哪位 (nǎ wèi) — Cách nói lịch sự:</strong><br>
+  • <b>哪位</b> = vị nào / ai (lịch sự, dùng trong lớp học hoặc công cộng)<br>
+  • 快要下课了，还有<b>哪位</b>同学有问题？= Sắp hết giờ rồi, còn bạn nào có câu hỏi không?<br>
+  → 哪位 lịch sự hơn 谁 trong ngữ cảnh trang trọng; 哪位同学 = bạn học nào (kính trọng)</div>
+</div>
+
+<div class="section" id="sec-grammar">
+  <div class="book-banner tb">📗 SÁCH GIÁO KHOA — 教材</div>
+  <div class="sec-title">📖 Ngữ pháp — 语法</div>
+  <div class="sec-desc">3 điểm ngữ pháp chính thức HSK Standard Course 2 — Bài 15 (Chinese Grammar Wiki).</div>
+  <div id="gramContent"></div>
+</div>
+
+<div class="section" id="sec-hanzi">
+  <div class="book-banner tb">📗 SÁCH GIÁO KHOA — 教材</div>
+  <div class="sec-title">✍️ Chữ Hán — 汉字</div>
+  <div class="sec-desc">Nhấn vào từng chữ để xem chi tiết. Bài 15 tổng hợp nhiều bộ thủ đã học.</div>
+  <div class="hz-detail" id="hzDetail">
+    <div class="hz-big" id="hzBig"></div>
+    <div><div class="hz-py-big" id="hzPy"></div><div class="hz-vi-big" id="hzVi"></div><div class="hz-strokes" id="hzSt"></div><div class="hz-tip" id="hzTip"></div></div>
+  </div>
+  <div class="hz-grid" id="hzGrid"></div>
+  <div class="tip" style="margin-top:14px">💡 <strong>Tổng kết bộ thủ đã học HSK2:</strong> 扌(tay: 拿/放/找/帮), 氵(nước: 游/洗/泳), 日(mặt trời: 晴/早/明), 口(miệng: 告/叫/唱), 足(chân: 跳/跑), 心(tâm: 懂/希/意). Nhận biết bộ thủ là kỹ năng quan trọng nhất để học tiếng Trung tự nhiên!</div>
+</div>
+
+<!-- ═══ SÁCH BÀI TẬP ═══ -->
+<div class="section" id="sec-wb-listen">
+  <div class="book-banner wb">📘 SÁCH BÀI TẬP — 练习册 · 一、听力 (Nghe)</div>
+  <div class="sec-title wb">🎧 Luyện nghe — 听力练习</div>
+  <div class="sec-desc">Script chính thức từ 《HSK标准教程2练习册》BLCU Press — Bài 15, nguồn <b>Pandarin.net/belajar/hsk2-chapter15</b> (100% xác nhận).</div>
+  <div class="answer-note">📌 <strong>Đáp án bài 15 (chính thức BLCU — Pandarin.net):</strong> 1-5: × √ √ × √ &nbsp;|&nbsp; 6-10: C A E F B &nbsp;|&nbsp; 11-15: B C B A C</div>
+
+  <div class="wb-section-title">第一部分 — Phần 1 (Câu 1–5): Đúng/Sai</div>
+  <div class="wb-part-desc">Nghe câu đơn, phán đoán hình ảnh Đúng (√) hay Sai (×)</div>
+  <div class="script-card" id="listenP1"></div>
+
+  <div class="wb-section-title">第二部分 — Phần 2 (Câu 6–10): Chọn hình</div>
+  <div class="wb-part-desc">Nghe hội thoại ngắn, chọn hình ảnh đúng (A–F)</div>
+  <div class="script-card" id="listenP2"></div>
+
+  <div class="wb-section-title">第三部分 — Phần 3 (Câu 11–15): Hỏi đáp</div>
+  <div class="wb-part-desc">Nghe hội thoại ngắn, chọn câu trả lời đúng (A–F)</div>
+  <div class="script-card" id="listenP3"></div>
+
+  <div class="tip" style="margin-top:14px">💡 <strong>Nghe bài 15:</strong> Chú ý <b>快要/就要…了</b> chỉ sự sắp xảy ra, <b>哪位</b> cách nói lịch sự, và <b>唱得非常好</b> (程度补语). Phần 3 hay hỏi địa điểm (在哪儿说话) hoặc kế hoạch sắp tới!</div>
+</div>
+
+<div class="section" id="sec-wb-read">
+  <div class="book-banner wb">📘 SÁCH BÀI TẬP — 练习册 · 二、阅读 (Đọc)</div>
+  <div class="sec-title wb">📄 Đọc hiểu — 阅读练习</div>
+  <div class="sec-desc">4 phần đọc hiểu theo đúng cấu trúc đề thi HSK2 — Bài cuối.</div>
+  <div class="answer-note">📌 <strong>Đáp án bài 15 (chính thức BLCU — Pandarin.net):</strong> 16-20: B C E A F &nbsp;|&nbsp; 21-25: F B C D A &nbsp;|&nbsp; 26-30: √ √ × × √ &nbsp;|&nbsp; 31-35: D F C A B</div>
+
+  <div class="wb-section-title">第一部分 — Phần 1 (Câu 16–20): Nối câu-hình</div>
+  <div class="wb-part-desc">Đọc câu, chọn hình ảnh phù hợp (A–F)</div>
+  <div id="readP1"></div>
+
+  <div class="wb-section-title">第二部分 — Phần 2 (Câu 21–25): Nối hội thoại</div>
+  <div class="wb-part-desc">Đọc câu A, chọn câu B trả lời phù hợp nhất</div>
+  <div id="readP2"></div>
+
+  <div class="wb-section-title">第三部分 — Phần 3 (Câu 26–30): Đúng/Sai</div>
+  <div class="wb-part-desc">Đọc đoạn văn, phán đoán Đúng (√) hay Sai (×)</div>
+  <div class="read-passage">
+    <div class="read-cn">新年就要到了，王方想和妈妈一起去北京旅游。她听说北京很不错，虽然去过一次，但是那次时间太短，没好好玩。她让妈妈去火车站买票，票价两百多块，还可以。王方的歌唱得非常好，过新年的时候她要唱歌给大家听。</div>
+    <div class="read-py">Xīnnián jiù yào dào le, Wáng Fāng xiǎng hé māma yīqǐ qù Běijīng lǚyóu. Tā tīngshuō Běijīng hěn búcuò, suīrán qùguò yī cì, dànshì nà cì shíjiān tài duǎn, méi hǎohǎo wán. Tā ràng māma qù huǒchēzhàn mǎi piào, piàojià liǎng bǎi duō kuài, hái kěyǐ. Wáng Fāng de gē chàng de fēicháng hǎo, guò xīnnián de shíhou tā yào chànggē gěi dàjiā tīng.</div>
+    <div class="read-vi">Năm mới sắp đến rồi, Vương Phương muốn cùng mẹ đi du lịch Bắc Kinh. Cô ấy nghe nói Bắc Kinh rất tuyệt, tuy đã đến một lần, nhưng lần đó thời gian quá ngắn, không chơi được đàng hoàng. Cô ấy nhờ mẹ đến ga mua vé, giá vé hơn hai trăm tệ, cũng được. Vương Phương hát rất hay, đến dịp Năm mới cô ấy sẽ hát cho mọi người nghe.</div>
+  </div>
+  <div id="readP3"></div>
+
+  <div class="wb-section-title">第四部分 — Phần 4 (Câu 31–35): Nối câu đối thoại</div>
+  <div class="wb-part-desc">Đọc câu A, chọn câu B hoàn chỉnh hội thoại phù hợp nhất</div>
+  <div id="readP4"></div>
+
+  <div class="score-card" id="readScore">
+    <div style="font-size:11px;color:rgba(255,255,255,.6)">Kết quả — 二、阅读</div>
+    <div class="sc-big" id="readScoreBig"></div>
+    <div class="sc-text" id="readScoreTxt"></div>
+    <button class="btn-ow" onclick="resetRead()">🔄 Làm lại</button>
+  </div>
+</div>
+
+<div class="section" id="sec-wb-pron">
+  <div class="book-banner wb">📘 SÁCH BÀI TẬP — 练习册 · 三、语音 (Phát âm)</div>
+  <div class="sec-title wb">🔊 Luyện phát âm — 语音练习</div>
+  <div class="sec-desc">Bài luyện phát âm chính thức từ sách bài tập HSK2 Bài 15 — BLCU (Pandarin.net). Bài 15 ôn tập <strong>吧 phỏng đoán↓ và 吗 hỏi thật↑</strong> — tổng kết câu điệu HSK2.</div>
+
+  <div class="wb-section-title">第1题 — Tổng ôn câu điệu: 吧↓ vs 吗↑</div>
+  <div class="pron-card">
+    <div class="pron-instr">听录音，注意吧和吗的句调区别 — Nghe phân biệt câu điệu 吧 (phỏng đoán → ↓) và 吗 (hỏi thật → ↑).</div>
+    <div class="pron-grid" id="pronP1"></div>
+  </div>
+
+  <div class="wb-section-title" style="margin-top:20px">第2题 — Nghe và đọc theo (tổng kết)</div>
+  <div class="pron-card">
+    <div class="pron-instr">听录音并跟读下列句子 — Tổng ôn câu điệu bài 15.</div>
+    <div class="pron-grid" id="pronP2"></div>
+  </div>
+
+  <!-- Tổng kết toàn bộ câu điệu -->
+  <div class="ctx-label" style="margin-top:20px;margin-bottom:10px">📊 TỔNG KẾT CÂU ĐIỆU HSK2 — Toàn bộ 14 bài</div>
+  <div class="summary-table">
+    <div class="summary-head">Tổng hợp câu điệu đã học từ bài 6-15 — Chỉ cần nhớ 1 quy tắc!</div>
+    <div class="summary-row"><div class="summary-cell">↑</div><div class="summary-cell"><b>吗 hỏi thật</b> — Người hỏi KHÔNG biết thông tin: 你吃饭了吗？↑</div></div>
+    <div class="summary-row"><div class="summary-cell">↓</div><div class="summary-cell"><b>V不V / A不A 正反问</b> — Đưa ra 2 lựa chọn rõ ràng: 你去不去？↓</div></div>
+    <div class="summary-row"><div class="summary-cell">↓</div><div class="summary-cell"><b>A还是B 选择问</b> — Đã cố định 2 phương án: 喝茶还是咖啡？↓</div></div>
+    <div class="summary-row"><div class="summary-cell">↓</div><div class="summary-cell"><b>吧 phỏng đoán/đề nghị</b> — Người nói ĐÃ có suy nghĩ: 是你的吧？↓ / 休息吧。↓</div></div>
+    <div class="summary-row"><div class="summary-cell">↓</div><div class="summary-cell"><b>啊/呀 感叹</b> — Cảm xúc mạnh mẽ: 多好啊！↓ / 这么大呀！↓</div></div>
+    <div class="summary-row"><div class="summary-cell">↓</div><div class="summary-cell"><b>WH 疑问 (什么/哪里/谁)</b> — Chắc chắn hỏi thông tin cụ thể: 你在哪儿？↓</div></div>
+    <div class="summary-row"><div class="summary-cell" style="background:var(--gold-bg);color:var(--gold);font-weight:900">★</div><div class="summary-cell" style="background:var(--gold-bg)"><b>Quy tắc vàng:</b> Chỉ có 吗 câu hỏi thật mới lên ↑. Tất cả câu còn lại đều xuống ↓!</div></div>
+  </div>
+</div>
+
+<div class="section" id="sec-wb-write">
+  <div class="book-banner wb">📘 SÁCH BÀI TẬP — 练习册 · 四、书写 (Viết)</div>
+  <div class="sec-title wb">✏️ Sắp xếp câu — 连词成句</div>
+  <div class="sec-desc">Bài viết cuối cùng! Tổng hợp cấu trúc <b>就要/快要…了</b> và các điểm ngữ pháp bài 15.</div>
+  <div id="reorderCards"></div>
+  <div class="score-card" id="writeScore">
+    <div style="font-size:11px;color:rgba(255,255,255,.6)">Kết quả — 四、书写</div>
+    <div class="sc-big" id="writeBig"></div>
+    <div class="sc-text" id="writeTxt"></div>
+    <button class="btn-ow" onclick="resetWrite()">🔄 Làm lại</button>
+  </div>
+
+  <!-- Completion card -->
+  <div class="completion-card" id="completionCard" style="display:none">
+    <div class="completion-emoji">🎉</div>
+    <div class="completion-title">恭喜完成 HSK2！</div>
+    <div class="completion-text">
+      Bạn đã hoàn thành toàn bộ 15 bài học HSK Standard Course 2!<br>
+      15 bài · 150 từ mới · 45+ điểm ngữ pháp · 225 câu nghe · 300 câu đọc<br><br>
+      <b>新年快乐！继续加油！🎆</b>
+    </div>
+  </div>
+</div>
+
+<script>
+// ════════════
+// DATA BÀI 15
+// ════════════
+const vNew=[
+  {char:'就要',py:'jiù yào',vi:'"Sắp..." (có thời gian cụ thể)',pos:'Cụm phó từ',
+   ex:'新年就要到了！\nXīnnián jiù yào dào le!\nNăm mới sắp đến rồi!\n→ 就要…了 thường kèm thời điểm cụ thể: 他明天就要来了。'},
+  {char:'快要',py:'kuài yào',vi:'"Sắp sắp..." (nhấn tính khẩn cấp)',pos:'Cụm phó từ',
+   ex:'快要下课了，还有问题吗？\nKuài yào xiàkè le, hái yǒu wèntí ma?\nSắp hết giờ rồi, còn câu hỏi nào không?\n→ 快要…了 không cần thời điểm cụ thể'},
+  {char:'新年',py:'xīnnián',vi:'Năm mới',pos:'Danh từ',
+   ex:'新年就要到了，你有什么计划？\nXīnnián jiù yào dào le, nǐ yǒu shénme jìhuà?\nNăm mới sắp đến rồi, bạn có kế hoạch gì?\n→ 新年快乐！= Chúc mừng Năm mới!'},
+  {char:'旅游',py:'lǚyóu',vi:'Du lịch',pos:'Động-Danh từ',
+   ex:'我打算和妈妈去北京旅游。\nWǒ dǎsuàn hé māma qù Běijīng lǚyóu.\nTôi dự tính cùng mẹ đi du lịch Bắc Kinh.\n→ 去旅游=đi du lịch; 旅游的地方=địa điểm du lịch'},
+  {char:'火车站',py:'huǒchēzhàn',vi:'Ga tàu / Nhà ga xe lửa',pos:'Danh từ',
+   ex:'你能帮我去火车站买票吗？\nNǐ néng bāng wǒ qù huǒchēzhàn mǎi piào ma?\nBạn có thể giúp tôi đến ga mua vé không?\n→ 火车=tàu hỏa; 站=trạm/ga; 火车站=nhà ga'},
+  {char:'阴',py:'yīn',vi:'Âm u / Trời nhiều mây',pos:'Tính từ',
+   ex:'今天天气不太好，有点儿阴。\nJīntiān tiānqì bú tài hǎo, yǒudiǎnr yīn.\nHôm nay thời tiết không tốt lắm, hơi âm u.\n→ 阴天=ngày nhiều mây; 阴↔晴(nắng)'},
+  {char:'唱歌',py:'chànggē',vi:'Hát',pos:'Động từ',
+   ex:'她的歌唱得非常好。\nTā de gē chàng de fēicháng hǎo.\nCô ấy hát rất hay.\n→ 唱得好/不好=hát hay/dở; 程度补语bài 12'},
+  {char:'哪位',py:'nǎ wèi',vi:'Vị nào / Ai (lịch sự)',pos:'Đại từ nghi vấn',
+   ex:'快要下课了，还有哪位同学有问题？\nKuài yào xiàkè le, hái yǒu nǎ wèi tóngxué yǒu wèntí?\nSắp hết giờ rồi, còn bạn học nào có câu hỏi không?\n→ 哪位 lịch sự hơn 谁/哪个'},
+  {char:'问题',py:'wèntí',vi:'Câu hỏi / Vấn đề (bài 9 ôn lại)',pos:'Danh từ',
+   ex:'你有没有问题？没有问题！\nNǐ yǒu méiyǒu wèntí? Méiyǒu wèntí!\nBạn có câu hỏi không? Không có vấn đề!'},
+  {char:'到了',py:'dào le',vi:'Đến rồi / Đã đến',pos:'Cụm động từ',
+   ex:'新年就要到了！我们去旅游吧。\nXīnnián jiù yào dào le! Wǒmen qù lǚyóu ba.\nNăm mới sắp đến rồi! Chúng ta đi du lịch nhé.\n→ 到了 = đến nơi rồi hoặc thời điểm đó đến rồi'},
+];
+
+const vReview=[
+  {char:'快乐',py:'kuàilè',vi:'Vui mừng / Hạnh phúc (HSK2)',pos:'Tính từ',
+   ex:'新年快乐！= Chúc mừng Năm mới! (cụm chúc tết quan trọng nhất!)'},
+  {char:'过新年',py:'guò xīnnián',vi:'Đón Năm mới / Ăn Tết',pos:'Cụm ĐT',
+   ex:'你打算在哪儿过新年？Bạn dự tính đón Năm mới ở đâu?'},
+  {char:'打算',py:'dǎsuàn',vi:'Dự tính / Có kế hoạch',pos:'Động từ',
+   ex:'你打算怎么过新年？Bạn dự tính đón Năm mới thế nào?'},
+];
+
+const d1=[
+  {sp:'a',cn:'新年就要到了，你打算怎么过？',py:'Xīnnián jiù yào dào le, nǐ dǎsuàn zěnme guò?',vi:'Năm mới sắp đến rồi, bạn dự tính đón thế nào?'},
+  {sp:'b',cn:'我听说北京很不错，我想和妈妈一起去旅游。你呢？',py:'Wǒ tīngshuō Běijīng hěn búcuò, wǒ xiǎng hé māma yīqǐ qù lǚyóu. Nǐ ne?',vi:'Tôi nghe nói Bắc Kinh rất tuyệt, tôi muốn cùng mẹ đi du lịch. Còn bạn?'},
+  {sp:'a',cn:'我要回家和家人一起过新年。',py:'Wǒ yào huí jiā hé jiārén yīqǐ guò xīnnián.',vi:'Tôi sẽ về nhà đón Năm mới cùng gia đình.'},
+  {sp:'b',cn:'那你需要买火车票吗？快要没有票了。',py:'Nà nǐ xūyào mǎi huǒchē piào ma? Kuài yào méiyǒu piào le.',vi:'Vậy bạn có cần mua vé tàu không? Sắp hết vé rồi đó.'},
+  {sp:'a',cn:'是吗？我明天就去火车站买票。',py:'Shì ma? Wǒ míngtiān jiù qù huǒchēzhàn mǎi piào.',vi:'Vậy à? Ngày mai tôi sẽ đến ga mua vé ngay.'},
+];
+const d2=[
+  {sp:'a',cn:'你能帮我去买一下火车票吗？',py:'Nǐ néng bāng wǒ qù mǎi yīxià huǒchē piào ma?',vi:'Bạn có thể giúp tôi đi mua vé tàu không?'},
+  {sp:'b',cn:'好的，去哪儿的票？什么时候的？',py:'Hǎo de, qù nǎr de piào? Shénme shíhou de?',vi:'Được, vé đi đâu? Thời gian nào?'},
+  {sp:'a',cn:'北京的，三十号出发，票价不要太贵的。',py:'Běijīng de, sānshí hào chūfā, piàojià bú yào tài guì de.',vi:'Đi Bắc Kinh, xuất phát ngày 30, giá vé đừng quá đắt.'},
+  {sp:'b',cn:'好，我帮你看看，两百多块还可以吧。',py:'Hǎo, wǒ bāng nǐ kànkan, liǎng bǎi duō kuài hái kěyǐ ba.',vi:'Được, tôi giúp bạn xem, hơn hai trăm tệ cũng được nhỉ.'},
+];
+const d3=[
+  {sp:'a',cn:'你妹妹的歌唱得怎么样？',py:'Nǐ mèimei de gē chàng de zěnmeyàng?',vi:'Em gái bạn hát thế nào?'},
+  {sp:'b',cn:'她的歌唱得非常好！她从小就喜欢唱歌。',py:'Tā de gē chàng de fēicháng hǎo! Tā cóng xiǎo jiù xǐhuān chànggē.',vi:'Cô ấy hát rất hay! Cô ấy từ nhỏ đã thích hát.'},
+  {sp:'a',cn:'过新年的时候，她要唱歌给大家听吗？',py:'Guò xīnnián de shíhou, tā yào chànggē gěi dàjiā tīng ma?',vi:'Đến dịp Năm mới, cô ấy có hát cho mọi người nghe không?'},
+  {sp:'b',cn:'当然！大家都喜欢听她唱歌。',py:'Dāngrán! Dàjiā dōu xǐhuān tīng tā chànggē.',vi:'Tất nhiên rồi! Mọi người đều thích nghe cô ấy hát.'},
+];
+
+const grammar=[
+  {n:1,
+   title:'就要/快要/快/要+了 — "Sắp..." Tương lai gần',
+   pattern:'就要/快要/快/要 + 动词/形容词 + 了',
+   note:'Cấu trúc <b>就要/快要/快/要+了</b> diễn đạt sự kiện SẮP xảy ra trong tương lai gần. Đây là cách quan trọng để nói về tương lai trong tiếng Trung hằng ngày.<br><br>• <b>就要</b>…了: thường đi kèm thời điểm cụ thể (明天/下个星期)<br>• <b>快要</b>…了: không cần thời điểm, nhấn tính khẩn cấp<br>• <b>快</b>…了: dạng rút gọn, thường dùng trong hội thoại ngắn<br>• <b>要</b>…了: nhẹ nhất, có thể chỉ dự đoán<br><br>⚠️ Đều cần 了 ở cuối câu! Khác với 要 bình thường: 我<b>要</b>喝水 (muốn uống nước) ≠ 水<b>要</b>开了 (nước sắp sôi rồi)',
+   neg:'',
+   exs:[
+     {cn:'新年<mark>就要</mark>到<mark>了</mark>！',py:'Xīnnián jiù yào dào le!',vi:'Năm mới SẮP ĐẾN RỒI!'},
+     {cn:'<mark>快要</mark>下课<mark>了</mark>，还有哪位同学有问题？',py:'Kuài yào xiàkè le, hái yǒu nǎ wèi tóngxué yǒu wèntí?',vi:'SẮP hết giờ rồi, còn bạn học nào có câu hỏi không?'},
+     {cn:'<mark>快</mark>要没有票<mark>了</mark>，你要买就快去。',py:'Kuài yào méiyǒu piào le, nǐ yào mǎi jiù kuài qù.',vi:'SẮP hết vé rồi, bạn muốn mua thì đi nhanh lên.'},
+   ]},
+  {n:2,
+   title:'哪位 — "Vị nào / Ai" (cách nói lịch sự)',
+   pattern:'哪位 + 名词 (trong ngữ cảnh trang trọng/lịch sự)',
+   note:'<b>哪位</b> là cách hỏi lịch sự hơn <b>谁</b> hoặc <b>哪个人</b>. Hay dùng trong:<br><br>• Lớp học: 哪<b>位</b>同学有问题？= Bạn học <b>nào</b> có câu hỏi?<br>• Nơi công cộng: 请问，哪<b>位</b>是王先生？= Xin hỏi, ai là ông Vương?<br>• Dịch vụ: 哪<b>位</b>需要帮助？= Ai cần giúp đỡ?<br><br>→ 哪位 = 哪个人 nhưng trang trọng, lịch sự hơn, thể hiện sự tôn trọng người được hỏi',
+   neg:'',
+   exs:[
+     {cn:'快要下课了，还有<mark>哪位</mark>同学有问题？',py:'Kuài yào xiàkè le, hái yǒu nǎ wèi tóngxué yǒu wèntí?',vi:'Sắp hết giờ rồi, còn BẠN HỌC NÀO có câu hỏi không?'},
+     {cn:'请问，<mark>哪位</mark>是李先生？',py:'Qǐngwèn, nǎ wèi shì Lǐ xiānsheng?',vi:'Xin hỏi, AI là ông Lý?'},
+     {cn:'今晚<mark>哪位</mark>同学来参加活动？',py:'Jīn wǎn nǎ wèi tóngxué lái cānjiā huódòng?',vi:'Tối nay BẠN HỌC NÀO đến tham gia hoạt động?'},
+   ]},
+  {n:3,
+   title:'给+人+动词 / 动词+给+人 — "Làm gì cho ai"',
+   pattern:'给 + 人 + 动词 / 动词 + 给 + 人',
+   note:'<b>给</b> có 2 vị trí tạo ra nghĩa khác nhau:<br><br>① <b>给+人+动词</b>: làm gì cho ai (chưa chuyển giao vật): 给大家唱歌=hát cho mọi người nghe<br>② <b>动词+给+人</b>: chuyển giao vật cho ai: 把票给她=đưa vé cho cô ấy<br><br>Bài 15 dùng cấu trúc ①: 她要唱歌<b>给</b>大家听 = cô ấy sẽ hát <b>cho</b> mọi người nghe.<br>Tham khảo thêm: bài 4 đã học 给我介绍 (giới thiệu cho tôi).',
+   neg:'',
+   exs:[
+     {cn:'她要唱歌<mark>给</mark>大家听。',py:'Tā yào chànggē gěi dàjiā tīng.',vi:'Cô ấy sẽ hát CHO mọi người nghe.'},
+     {cn:'这是你妹妹让我买的票，你能帮我<mark>给</mark>她吗？',py:'Zhè shì nǐ mèimei ràng wǒ mǎi de piào, nǐ néng bāng wǒ gěi tā ma?',vi:'Đây là vé em gái bạn nhờ tôi mua, bạn có thể giúp tôi ĐƯA CHO cô ấy không?'},
+     {cn:'我做了蛋糕，要<mark>给</mark>大家吃。',py:'Wǒ zuò le dàngāo, yào gěi dàjiā chī.',vi:'Tôi làm bánh ngọt rồi, muốn CHO mọi người ăn.'},
+   ]},
+];
+
+const hanzi=[
+  {ch:'新',py:'xīn',vi:'Mới',s:13,tip:'Bộ 斤(rìu)+木(cây)+辛. 13 nét. 新年=Năm mới; 新的=mới; 新来的=mới đến.'},
+  {ch:'年',py:'nián',vi:'Năm',s:6,tip:'Tượng hình lúa chín thu hoạch hằng năm. 6 nét. 新年=Năm mới; 今年=năm nay; 去年=năm ngoái.'},
+  {ch:'快',py:'kuài',vi:'Nhanh / Sắp',s:7,tip:'Bộ 忄(tâm)+夬. 7 nét. 快乐=vui mừng; 快来=đến nhanh; 快要=sắp; 快一点儿=nhanh hơn.'},
+  {ch:'旅',py:'lǚ',vi:'Du lịch / Lữ hành',s:10,tip:'Bộ 方(phương)+旅. 10 nét. 旅游=du lịch; 旅馆=nhà nghỉ; 旅行=chuyến đi.'},
+  {ch:'游',py:'yóu',vi:'Du / Bơi',s:12,tip:'Bộ 氵(nước)+斿. 12 nét. 旅游=du lịch; 游泳=bơi lội; 游览=tham quan.'},
+  {ch:'火',py:'huǒ',vi:'Lửa / Hỏa',s:4,tip:'Tượng hình ngọn lửa. 4 nét. 火车=tàu hỏa (xe lửa); 火车站=nhà ga; 火锅=lẩu.'},
+  {ch:'车',py:'chē',vi:'Xe / Phương tiện',s:4,tip:'Tượng hình xe (giản thể). 4 nét. 火车=tàu hỏa; 开车=lái xe; 汽车=ô tô; 自行车=xe đạp.'},
+  {ch:'站',py:'zhàn',vi:'Trạm / Ga',s:10,tip:'Bộ 立(đứng)+占. 10 nét. 火车站=nhà ga; 公共汽车站=bến xe buýt. Xuất hiện từ bài 7.'},
+  {ch:'阴',py:'yīn',vi:'Âm u / Âm',s:6,tip:'Bộ 阝(gò đất)+月(trăng). 6 nét. 阴天=ngày nhiều mây; 阴历=âm lịch; 阴↔晴(nắng bài 11).'},
+  {ch:'唱',py:'chàng',vi:'Hát',s:11,tip:'Bộ 口(miệng)+昌. 11 nét. 唱歌=hát; 唱得好/不好=hát hay/dở; 合唱=hát hợp ca.'},
+];
+
+// WORKBOOK — Script chính thức từ Pandarin.net (100% chính xác)
+const lp1=[
+  {cn:'明天我要去火车站买票。',py:'Míngtiān wǒ yào qù huǒchēzhàn mǎi piào.',vi:'Ngày mai tôi sẽ đi ga mua vé.',ans:'×',exp:'Hình ảnh không khớp → ×'},
+  {cn:'新年快要到了，我想和朋友一起去旅游。',py:'Xīnnián kuài yào dào le, wǒ xiǎng hé péngyou yīqǐ qù lǚyóu.',vi:'Năm mới sắp đến rồi, tôi muốn cùng bạn bè đi du lịch.',ans:'√',exp:'Hình ảnh khớp (nhóm bạn bè chuẩn bị du lịch) → √'},
+  {cn:'她在公共汽车上呢，我们等她一会儿吧。',py:'Tā zài gōnggòng qìchē shàng ne, wǒmen děng tā yīhuìr ba.',vi:'Cô ấy đang trên xe buýt, chúng ta đợi cô ấy một chút nhé.',ans:'√',exp:'Hình ảnh khớp (người đang trên xe buýt) → √'},
+  {cn:'今天天气不太好，有点儿阴。',py:'Jīntiān tiānqì bú tài hǎo, yǒudiǎnr yīn.',vi:'Hôm nay thời tiết không tốt lắm, hơi âm u.',ans:'×',exp:'Hình ảnh không khớp → ×'},
+  {cn:'王方是我妹妹，她的歌唱得非常好。',py:'Wáng Fāng shì wǒ mèimei, tā de gē chàng de fēicháng hǎo.',vi:'Vương Phương là em gái tôi, cô ấy hát rất hay.',ans:'√',exp:'Hình ảnh khớp (cô gái đang hát) → √'},
+];
+const lp2=[
+  {cn:'女：你好！我的车出问题了，你们能来帮我看一下吗？\n男：好的，请告诉我您在哪儿。',
+   py:'Nǚ: Nǐ hǎo! Wǒ de chē chū wèntí le, nǐmen néng lái bāng wǒ kàn yīxià ma?\nNán: Hǎo de, qǐng gàosù wǒ nín zài nǎr.',
+   vi:'Nữ: Xin chào! Xe của tôi bị sự cố rồi, các bạn có thể đến giúp tôi xem không?\nNam: Được, xin cho biết bạn đang ở đâu.',ans:'C (xe hỏng/cần trợ giúp)'},
+  {cn:'男：都六点了，你怎么还不回家？\n女：我在想晚饭吃什么呢。',
+   py:'Nán: Dōu liù diǎn le, nǐ zěnme hái bù huí jiā?\nNǚ: Wǒ zài xiǎng wǎnfàn chī shénme ne.',
+   vi:'Nam: Đã 6 giờ rồi, sao bạn vẫn chưa về nhà?\nNữ: Tôi đang nghĩ tối ăn gì.',ans:'A (đang suy nghĩ/chưa về nhà)'},
+  {cn:'男：这是你妹妹让我买的火车票，你能帮我给她吗？\n女：没问题，我一会儿就给她。',
+   py:'Nán: Zhè shì nǐ mèimei ràng wǒ mǎi de huǒchē piào, nǐ néng bāng wǒ gěi tā ma?\nNǚ: Méi wèntí, wǒ yīhuìr jiù gěi tā.',
+   vi:'Nam: Đây là vé tàu em gái bạn nhờ tôi mua, bạn có thể giúp tôi đưa cho cô ấy không?\nNữ: Không vấn đề gì, lát tôi sẽ đưa cho cô ấy.',ans:'E (vé tàu/đưa vé)'},
+  {cn:'女：快要下课了，还有哪位同学有问题？\n男：老师，我想问一个问题。',
+   py:'Nǚ: Kuài yào xiàkè le, hái yǒu nǎ wèi tóngxué yǒu wèntí?\nNán: Lǎoshī, wǒ xiǎng wèn yī gè wèntí.',
+   vi:'Nữ: Sắp hết giờ rồi, còn bạn học nào có câu hỏi không?\nNam: Thưa thầy/cô, em muốn hỏi một câu.',ans:'F (trong lớp học/giơ tay hỏi)'},
+  {cn:'男：你的狗怎么不吃东西了？\n女：它这几天病了。',
+   py:'Nán: Nǐ de gǒu zěnme bù chī dōngxi le?\nNǚ: Tā zhè jǐ tiān bìng le.',
+   vi:'Nam: Chó của bạn sao không ăn gì vậy?\nNữ: Nó mấy ngày nay bị bệnh rồi.',ans:'B (chó bị bệnh/không ăn)'},
+];
+const lp3=[
+  {cn:'男：新年快要到了，你准备做什么？\n女：我听说北京很不错，我想和妈妈一起去北京旅游。\n问：女的去过北京吗？',
+   py:'Nán: Xīnnián kuài yào dào le, nǐ zhǔnbèi zuò shénme?\nNǚ: Wǒ tīngshuō Běijīng hěn búcuò, wǒ xiǎng hé māma yīqǐ qù Běijīng lǚyóu.\nWèn: Nǚ de qùguò Běijīng ma?',
+   vi:'Nam: Năm mới sắp đến rồi, bạn chuẩn bị làm gì?\nNữ: Tôi nghe nói Bắc Kinh rất tuyệt, tôi muốn cùng mẹ đi du lịch Bắc Kinh.\nHỏi: Người nữ đã từng đến Bắc Kinh chưa?',ans:'B (听说北京，没去过/想去)'},
+  {cn:'男：你不是想回家过新年吗？买票了没有？\n女：还没有呢，明天我就去火车站买。\n问：女的想买什么票？',
+   py:'Nán: Nǐ bú shì xiǎng huí jiā guò xīnnián ma? Mǎi piào le méiyǒu?\nNǚ: Hái méiyǒu ne, míngtiān wǒ jiù qù huǒchēzhàn mǎi.\nWèn: Nǚ de xiǎng mǎi shénme piào?',
+   vi:'Nam: Bạn không muốn về nhà đón Năm mới sao? Mua vé chưa?\nNữ: Chưa đâu, ngày mai tôi sẽ ra ga mua.\nHỏi: Người nữ muốn mua vé gì?',ans:'C (火车票/回家过新年)'},
+  {cn:'女：都等了半个小时了，公共汽车怎么还没来？\n男：上班时间路上车多，再等一会儿吧，就快来了。\n问：公共汽车来了没有？',
+   py:'Nǚ: Dōu děng le bàn gè xiǎoshí le, gōnggòng qìchē zěnme hái méi lái?\nNán: Shàngbān shíjiān lùshang chē duō, zài děng yīhuìr ba, jiù kuài lái le.\nWèn: Gōnggòng qìchē lái le méiyǒu?',
+   vi:'Nữ: Đã đợi nửa tiếng rồi, xe buýt sao vẫn chưa đến?\nNam: Giờ đi làm đường đông xe, đợi thêm chút nhé, sắp đến rồi.\nHỏi: Xe buýt đến chưa?',ans:'B (还没来/快要来了)'},
+  {cn:'男：快要下雪了，我觉得比昨天更冷了。\n女：没关系，我穿的衣服比昨天多。\n问：今天天气怎么样？',
+   py:'Nán: Kuài yào xià xuě le, wǒ juéde bǐ zuótiān gèng lěng le.\nNǚ: Méiguānxi, wǒ chuān de yīfu bǐ zuótiān duō.\nWèn: Jīntiān tiānqì zěnmeyàng?',
+   vi:'Nam: Sắp có tuyết rồi, tôi thấy lạnh hơn hôm qua.\nNữ: Không sao, tôi mặc quần áo nhiều hơn hôm qua.\nHỏi: Hôm nay thời tiết thế nào?',ans:'A (比昨天冷/快要下雪)'},
+  {cn:'女：儿子，多吃菜啊。\n男：好，您做的菜比饭店的还好吃。\n问：他们最可能在哪儿说话？',
+   py:'Nǚ: Érzi, duō chī cài a.\nNán: Hǎo, nín zuò de cài bǐ fàndiàn de hái hǎochī.\nWèn: Tāmen zuì kěnéng zài nǎr shuōhuà?',
+   vi:'Nữ: Con trai ơi, ăn thêm rau đi.\nNam: Vâng, món ăn mẹ nấu còn ngon hơn nhà hàng.\nHỏi: Họ nhiều khả năng nhất đang ở đâu nói chuyện?',ans:'C (在家/餐桌边/妈妈和儿子)'},
+];
+
+// ĐỌC
+const r1=[
+  {n:16,cn:'新年就要到了，妈妈在做新年准备。',py:'Xīnnián jiù yào dào le, māma zài zuò xīnnián zhǔnbèi.',vi:'Năm mới sắp đến rồi, mẹ đang chuẩn bị đón Năm mới.',
+   opts:['A 🚂','B 🎆','C 🎵','D ☁️','E 🎫','F 🐕'],ans:1,exp:'B — 新年就要到/准备 = chuẩn bị Năm mới (🎆)'},
+  {n:17,cn:'今天有点儿阴，看起来快要下雨了。',py:'Jīntiān yǒudiǎnr yīn, kànqǐlai kuài yào xià yǔ le.',vi:'Hôm nay hơi âm u, trông có vẻ sắp mưa rồi.',
+   opts:['A 🚂','B 🎆','C 🎵','D ☁️','E 🎫','F 🐕'],ans:3,exp:'D — 阴/快要下雨 = trời âm u sắp mưa (☁️)'},
+  {n:18,cn:'她的歌唱得非常好，大家都喜欢听。',py:'Tā de gē chàng de fēicháng hǎo, dàjiā dōu xǐhuān tīng.',vi:'Cô ấy hát rất hay, mọi người đều thích nghe.',
+   opts:['A 🚂','B 🎆','C 🎵','D ☁️','E 🎫','F 🐕'],ans:2,exp:'C — 唱得好/大家喜欢听 = hát hay (🎵)'},
+  {n:19,cn:'明天我要去火车站买回家的票。',py:'Míngtiān wǒ yào qù huǒchēzhàn mǎi huí jiā de piào.',vi:'Ngày mai tôi sẽ đến ga mua vé về nhà.',
+   opts:['A 🚂','B 🎆','C 🎵','D ☁️','E 🎫','F 🐕'],ans:0,exp:'A — 火车站/买票/回家 = tàu hỏa/ga (🚂)'},
+  {n:20,cn:'他的狗这几天病了，不吃东西。',py:'Tā de gǒu zhè jǐ tiān bìng le, bù chī dōngxi.',vi:'Con chó của anh ấy mấy ngày nay bị bệnh, không ăn gì.',
+   opts:['A 🚂','B 🎆','C 🎵','D ☁️','E 🎫','F 🐕'],ans:5,exp:'F — 狗/病了 = chó bệnh (🐕)'},
+];
+const r2=[
+  {n:21,cn:'新年就要到了，你打算怎么过？',py:'Xīnnián jiù yào dào le, nǐ dǎsuàn zěnme guò?',vi:'Năm mới sắp đến rồi, bạn dự tính đón thế nào?',
+   opts:['A 我听说北京很不错，我想和妈妈一起去旅游。','B 还没有呢，明天就去火车站买。','C 就快来了，再等一会儿吧。','D 快要下雪了，比昨天更冷了。','E 没关系，我穿的衣服比昨天多。'],
+   ans:0,exp:'A — 我想和妈妈去旅游 = trả lời kế hoạch Năm mới bằng 就要…了+旅游计划.'},
+  {n:22,cn:'公共汽车还没来，怎么等了半个小时了？',py:'Gōnggòng qìchē hái méi lái, zěnme děng le bàn gè xiǎoshí le?',vi:'Xe buýt vẫn chưa đến, sao đợi được nửa tiếng rồi?',
+   opts:['A 我听说北京很不错，想去旅游。','B 还没有呢，明天就去买。','C 再等一会儿吧，就快来了。','D 快要下雪了，比昨天更冷了。','E 没关系，我穿的衣服比昨天多。'],
+   ans:2,exp:'C — 再等一会儿吧，就快来了 = trả lời xe chưa đến bằng 快…了 nhấn "sắp đến".'},
+  {n:23,cn:'你不是想买回家的票吗？买了没有？',py:'Nǐ bú shì xiǎng mǎi huí jiā de piào ma? Mǎi le méiyǒu?',vi:'Bạn không muốn mua vé về nhà sao? Mua chưa?',
+   opts:['A 我想和妈妈去旅游。','B 再等一会儿吧，就快来了。','C 还没有呢，明天我就去火车站买。','D 快要下雪了，比昨天更冷了。','E 我穿的衣服比昨天多。'],
+   ans:2,exp:'C — 还没有呢，明天就去买 = trả lời mua chưa bằng 还没有呢+明天就要去.'},
+  {n:24,cn:'今天天气怎么样？比昨天冷吗？',py:'Jīntiān tiānqì zěnmeyàng? Bǐ zuótiān lěng ma?',vi:'Hôm nay thời tiết thế nào? Có lạnh hơn hôm qua không?',
+   opts:['A 我想和妈妈去旅游。','B 再等一会儿吧，就快来了。','C 还没有呢，明天就去买。','D 快要下雪了，比昨天更冷了。','E 我穿的衣服比昨天多。'],
+   ans:3,exp:'D — 快要下雪了，比昨天更冷 = trả lời thời tiết bằng 快要…了+比较句.'},
+  {n:25,cn:'快要下雪了，你穿这么少不冷吗？',py:'Kuài yào xià xuě le, nǐ chuān zhème shǎo bù lěng ma?',vi:'Sắp có tuyết rồi, bạn mặc ít thế không lạnh à?',
+   opts:['A 我想和妈妈去旅游。','B 再等一会儿吧，就快来了。','C 还没有呢，明天就去买。','D 快要下雪了，比昨天更冷了。','E 没关系，我穿的衣服比昨天多了。'],
+   ans:4,exp:'E — 没关系，我穿的比昨天多 = trả lời lo ngại về cái lạnh, dùng 比较句 so sánh mặc.'},
+];
+const r3=[
+  {n:26,cn:'王方想和妈妈一起去旅游。',py:'Wáng Fāng xiǎng hé māma yīqǐ qù lǚyóu.',vi:'Vương Phương muốn cùng mẹ đi du lịch.',ans:true,exp:'Đúng (√). Đoạn văn: "王方想和妈妈一起去北京旅游" — khớp chính xác.'},
+  {n:27,cn:'王方以前去过北京。',py:'Wáng Fāng yǐqián qùguò Běijīng.',vi:'Vương Phương trước đây đã từng đến Bắc Kinh.',ans:true,exp:'Đúng (√). Đoạn văn: "虽然去过一次" — đã đến một lần, đúng.'},
+  {n:28,cn:'王方上次在北京玩得很好。',py:'Wáng Fāng shàng cì zài Běijīng wán de hěn hǎo.',vi:'Lần trước Vương Phương chơi ở Bắc Kinh rất vui.',ans:false,exp:'Sai (×). Đoạn văn: "那次时间太短，没好好玩" — không chơi được đàng hoàng.'},
+  {n:29,cn:'妈妈已经买了票。',py:'Māma yǐjīng mǎi le piào.',vi:'Mẹ đã mua vé rồi.',ans:false,exp:'Sai (×). Đoạn văn: "让妈妈去火车站买票" — nhờ mẹ đi mua, chưa mua.'},
+  {n:30,cn:'王方的歌唱得非常好。',py:'Wáng Fāng de gē chàng de fēicháng hǎo.',vi:'Vương Phương hát rất hay.',ans:true,exp:'Đúng (√). Đoạn văn: "王方的歌唱得非常好" — khớp chính xác.'},
+];
+const r4=[
+  {n:31,cn_char:'我想和妈妈一起去旅游，她听说北京很不错。',py:'Wǒ xiǎng hé māma yīqǐ qù lǚyóu, tā tīngshuō Běijīng hěn búcuò.',vi:'Tôi muốn cùng mẹ đi du lịch, mẹ nghe nói Bắc Kinh rất tuyệt.',
+   opts:['A 你的车出问题了吗？','B 你不是想买票吗？买了没有？','C 公共汽车来了没有？','D 新年就要到了，你打算怎么过？','E 今天天气怎么样？'],
+   ans:3,exp:'D — 想和妈妈去旅游 = trả lời kế hoạch Năm mới, dùng 就要…了.'},
+  {n:32,cn_char:'还没有，明天我就去火车站买。',py:'Hái méiyǒu, míngtiān wǒ jiù qù huǒchēzhàn mǎi.',vi:'Chưa đâu, ngày mai tôi sẽ ra ga mua.',
+   opts:['A 你的车出问题了吗？','B 你不是想回家过新年吗？买票了没有？','C 公共汽车来了没有？','D 新年就要到了，打算怎么过？','E 今天天气怎么样？'],
+   ans:1,exp:'B — 还没有呢，明天就去买 = trả lời hỏi mua vé chưa bằng 就要去+火车站.'},
+  {n:33,cn_char:'再等一会儿吧，快要来了。',py:'Zài děng yīhuìr ba, kuài yào lái le.',vi:'Đợi thêm chút nhé, sắp đến rồi.',
+   opts:['A 你的车出问题了吗？','B 你买票了没有？','C 公共汽车等了这么久，怎么还没来？','D 新年就要到了？','E 今天天气怎么样？'],
+   ans:2,exp:'C — 再等一会儿，快要来了 = trả lời xe buýt chưa đến bằng 快要…了.'},
+  {n:34,cn_char:'好的，请告诉我您在哪儿。',py:'Hǎo de, qǐng gàosù wǒ nín zài nǎr.',vi:'Được, xin cho biết bạn đang ở đâu.',
+   opts:['A 你好，我的车出问题了，能来帮我吗？','B 你买票了没有？','C 公共汽车还没来？','D 新年怎么过？','E 今天天气怎么样？'],
+   ans:0,exp:'A — 请告诉我您在哪儿 = trả lời cuộc gọi xin cứu trợ xe hỏng, hỏi vị trí.'},
+  {n:35,cn_char:'没关系，我穿的衣服比昨天多了。',py:'Méiguānxi, wǒ chuān de yīfu bǐ zuótiān duō le.',vi:'Không sao, tôi mặc quần áo nhiều hơn hôm qua rồi.',
+   opts:['A 你好，我的车出问题了。','B 快要下雪了，你穿这么少不冷吗？','C 公共汽车还没来？','D 新年怎么过？','E 你买票了吗？'],
+   ans:1,exp:'B — 没关系，穿的比昨天多 = trả lời lo ngại mặc ít lạnh, dùng 比较句.'},
+];
+
+// PHÁT ÂM bài 15 — tổng ôn 吧↓ và 吗↑ (Pandarin.net chính thức)
+const pr1=[
+  {w:'这本新书是你的吧？',tone:'↓',note:'吧 phỏng đoán → ↓'},
+  {w:'你们明天有汉语课吗？',tone:'↑',note:'吗 hỏi thật → ↑'},
+  {w:'王老师今天不来学校了吧？',tone:'↓',note:'吧 phỏng đoán → ↓'},
+  {w:'你们是坐一点的飞机吗？',tone:'↑',note:'吗 hỏi thật → ↑'},
+];
+const pr2=[
+  {w:'晚上十点，商店还开门吗？',tone:'↑',note:'吗 hỏi thật → ↑'},
+  {w:'太晚了，商店已经关门了吧？',tone:'↓',note:'吧 phỏng đoán → ↓'},
+  {w:'这件衣服这么贵，你还想买吗？',tone:'↑',note:'吗 hỏi thật → ↑'},
+  {w:'跳舞的那个女孩儿是你妹妹吧？',tone:'↓',note:'吧 phỏng đoán → ↓'},
+];
+
+// SẮP XẾP CÂU bài 15
+const ro=[
+  {pieces:['新年','就要','了','到'],answer:'新年就要到了',
+   py:'Xīnnián jiù yào dào le.',vi:'Năm mới sắp đến rồi.',
+   tip:'主语(新年)+就要+动词(到)+了. 就要…了 = sắp xảy ra. 了 bắt buộc ở cuối!'},
+  {pieces:['了','快要','了','下课'],answer:'快要下课了',
+   py:'Kuài yào xiàkè le.',vi:'Sắp hết giờ rồi.',
+   tip:'快要+动词(下课)+了. Không cần chủ ngữ khi ngữ cảnh rõ ràng.'},
+  {pieces:['还有','哪位','快要','下课了','同学','有问题'],answer:'快要下课了还有哪位同学有问题',
+   py:'Kuài yào xiàkè le, hái yǒu nǎ wèi tóngxué yǒu wèntí?',vi:'Sắp hết giờ rồi, còn bạn học nào có câu hỏi không?',
+   tip:'快要下课了+还有+哪位(lịch sự)+同学+有问题. 哪位 thay cho 谁 trong lớp học.'},
+  {pieces:['唱歌','给','要','大家','她','听'],answer:'她要唱歌给大家听',
+   py:'Tā yào chànggē gěi dàjiā tīng.',vi:'Cô ấy sẽ hát cho mọi người nghe.',
+   tip:'她+要+唱歌+给+大家+听. Cấu trúc 给+người+动词 = làm gì cho ai.'},
+  {pieces:['妈妈','一起','和','旅游','我','去','想'],answer:'我想和妈妈一起去旅游',
+   py:'Wǒ xiǎng hé māma yīqǐ qù lǚyóu.',vi:'Tôi muốn cùng mẹ đi du lịch.',
+   tip:'我+想+和+妈妈(伙伴)+一起+去+旅游. 和…一起 = cùng với...'},
+];
+
+// ════════
+// RENDER
+// ════════
+function renderVocab(arr,id){
+  document.getElementById(id).innerHTML=arr.map((v,i)=>`
+    <div class="vc" onclick="tex('${id}',${i})">
+      <div class="vc-char">${v.char}</div>
+      <div style="flex:1"><div class="vc-py">${v.py}</div><div class="vc-vi">${v.vi}</div>
+        <div class="vc-ex" id="${id}-${i}">${v.ex.replace(/\n/g,'<br>')}</div></div>
+      <div class="vc-tags"><div class="vc-pos">${v.pos}</div>${id==='vNew'?'<div class="new-tag">★MỚI</div>':''}</div>
+    </div>`).join('');
+}
+function tex(id,i){document.getElementById(`${id}-${i}`).classList.toggle('open');}
+function renderDlg(arr,id){
+  document.getElementById(id).innerHTML=arr.map((d,i)=>`
+    <div class="dl ${i%2===1?'r':''}">
+      <div class="sp ${d.sp}">${d.sp.toUpperCase()}</div>
+      <div class="dl-body"><div class="dl-cn">${d.cn}</div><div class="dl-py">${d.py}</div><div class="dl-vi">${d.vi}</div></div>
+    </div>`).join('');
+}
+function renderGrammar(){
+  document.getElementById('gramContent').innerHTML=grammar.map(g=>`
+    <div class="gram-card">
+      <div class="gram-head"><div class="gram-n">${g.n}</div><div class="gram-title">${g.title}</div></div>
+      <div class="gram-body">
+        <div class="gram-pattern">${g.pattern}</div>
+        <div class="gram-note">${g.note}</div>
+        ${g.neg?`<div class="gram-neg">${g.neg}</div>`:''}
+        <div class="gram-exs">${g.exs.map(e=>`<div class="gex"><div class="gex-cn">${e.cn}</div><div class="gex-py">${e.py}</div><div class="gex-vi">${e.vi}</div></div>`).join('')}</div>
+      </div>
+    </div>`).join('');
+}
+function renderHanzi(){
+  document.getElementById('hzGrid').innerHTML=hanzi.map((h,i)=>`
+    <div class="hz-card" id="hz-${i}" onclick="showHz(${i})">
+      <div class="hz-ch">${h.ch}</div><div class="hz-py">${h.py}</div><div class="hz-vi">${h.vi}</div>
+    </div>`).join('');
+}
+function showHz(i){
+  document.querySelectorAll('.hz-card').forEach(c=>c.classList.remove('sel'));
+  document.getElementById('hz-'+i).classList.add('sel');
+  const h=hanzi[i];
+  document.getElementById('hzDetail').className='hz-detail show';
+  document.getElementById('hzBig').textContent=h.ch;
+  document.getElementById('hzPy').textContent=h.py;
+  document.getElementById('hzVi').textContent=h.vi;
+  document.getElementById('hzSt').textContent=`Số nét: ${h.s}`;
+  document.getElementById('hzTip').textContent=h.tip;
+  document.getElementById('hzDetail').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function renderListen(arr,id,start){
+  document.getElementById(id).innerHTML=arr.map((l,i)=>`
+    <div class="script-item">
+      <div class="script-num">${start+i}</div>
+      <div class="script-body">
+        <div class="script-cn">${l.cn}</div>
+        <div class="script-py">${l.py}</div>
+        <div class="script-vi">${l.vi}</div>
+        <div class="script-ans">Đáp án: <strong>${l.ans}</strong> — ${l.exp}</div>
+      </div>
+    </div>`).join('');
+}
+let rAns={};
+function mkP(arr,pid,isCol){
+  return arr.map((q,i)=>`
+    <div class="match-item"><div class="match-num">Câu ${q.n}</div>
+      <div class="match-cn">${q.cn||q.cn_char}</div><div class="match-py">${q.py}</div>
+      <div class="match-opts${isCol?' style="flex-direction:column"':''}">
+        ${q.opts.map((o,j)=>`<button class="mopt" id="r${pid}-${i}-${j}" onclick="ansR('${pid}',${i},${j},${q.ans})">${isCol?String.fromCharCode(65+j)+'. ':''}<span${isCol?" style=\"font-family:'Noto Serif SC',serif\"":''}">${o}</span></button>`).join('')}
+      </div><div class="match-fb" id="r${pid}-fb-${i}"></div></div>`).join('');
+}
+function mkP3(){
+  return r3.map((q,i)=>`
+    <div class="tf-card"><div class="match-num">Câu ${q.n}</div>
+      <div class="tf-q">${q.cn}</div><div class="tf-py">${q.py}</div><div class="tf-vi">${q.vi}</div>
+      <div class="tf-btns">
+        <button class="tf-btn" id="rp3t-${i}" onclick="ansT(${i},true,${q.ans})">√ Đúng</button>
+        <button class="tf-btn" id="rp3f-${i}" onclick="ansT(${i},false,${q.ans})">× Sai</button>
+      </div><div class="tf-fb" id="rp3-fb-${i}"></div></div>`).join('');
+}
+function renderRead(){
+  document.getElementById('readP1').innerHTML=mkP(r1,'p1',false);
+  document.getElementById('readP2').innerHTML=mkP(r2,'p2',true);
+  document.getElementById('readP3').innerHTML=mkP3();
+  document.getElementById('readP4').innerHTML=mkP(r4,'p4',true);
+}
+function ansR(pid,qi,oi,correct){
+  const k=`${pid}-${qi}`;if(rAns[k]!==undefined)return;
+  rAns[k]=oi;const ok=oi===correct;
+  document.querySelectorAll(`[id^="r${pid}-${qi}-"]`).forEach(b=>b.classList.add('done'));
+  document.getElementById(`r${pid}-${qi}-${correct}`).classList.add('correct');
+  if(!ok)document.getElementById(`r${pid}-${qi}-${oi}`).classList.add('wrong');
+  const arr=pid==='p1'?r1:pid==='p2'?r2:r4;
+  const fb=document.getElementById(`r${pid}-fb-${qi}`);
+  fb.className='match-fb show '+(ok?'ok':'no');
+  fb.innerHTML=(ok?'✅ Đúng! ':'❌ Sai. ')+arr[qi].exp;
+  chkDone();
+}
+function ansT(qi,v,correct){
+  const k=`p3-${qi}`;if(rAns[k]!==undefined)return;
+  rAns[k]=v;const ok=v===correct;
+  ['t','f'].forEach(x=>document.getElementById(`rp3${x}-${qi}`).classList.add('done'));
+  document.getElementById(`rp3${correct?'t':'f'}-${qi}`).classList.add('correct');
+  if(!ok)document.getElementById(`rp3${v?'t':'f'}-${qi}`).classList.add('wrong');
+  const fb=document.getElementById(`rp3-fb-${qi}`);
+  fb.className='tf-fb show '+(ok?'ok':'no');
+  fb.innerHTML=(ok?'✅ Đúng! ':'❌ Sai. ')+r3[qi].exp;
+  chkDone();
+}
+function chkDone(){
+  const tot=r1.length+r2.length+r3.length+r4.length;
+  if(Object.keys(rAns).length===tot)setTimeout(showReadScore,500);
+}
+function showReadScore(){
+  const c=[...r1.map((_,i)=>rAns[`p1-${i}`]===r1[i].ans),
+           ...r2.map((_,i)=>rAns[`p2-${i}`]===r2[i].ans),
+           ...r3.map((_,i)=>rAns[`p3-${i}`]===r3[i].ans),
+           ...r4.map((_,i)=>rAns[`p4-${i}`]===r4[i].ans)].filter(Boolean).length;
+  const tot=r1.length+r2.length+r3.length+r4.length;
+  const p=Math.round(c/tot*100);
+  document.getElementById('readScoreBig').textContent=`${c}/${tot}`;
+  document.getElementById('readScoreTxt').textContent=p>=75?`🎉 ${p}% — Bài 15 hoàn thành xuất sắc!`:`${p}% — Ôn lại 就要/快要…了 và 哪位 nhé.`;
+  document.getElementById('readScore').classList.add('show');
+  document.getElementById('readScore').scrollIntoView({behavior:'smooth'});
+  updateProgress();
+}
+function resetRead(){rAns={};document.getElementById('readScore').classList.remove('show');renderRead();}
+function renderPron(){
+  document.getElementById('pronP1').innerHTML=pr1.map((s,i)=>`
+    <div class="pw"><div class="pw-left"><div class="pw-num">(${i+1}) ${s.note}</div>
+      <div class="pw-cn">${s.w}</div></div>
+      <div class="pw-tone">${s.tone}</div></div>`).join('');
+  document.getElementById('pronP2').innerHTML=pr2.map((s,i)=>`
+    <div class="pw"><div class="pw-left"><div class="pw-num">(${i+1}) ${s.note}</div>
+      <div class="pw-cn">${s.w}</div></div>
+      <div class="pw-tone">${s.tone}</div></div>`).join('');
+}
+let roS=ro.map(()=>({placed:[],done:false}));
+function renderRO(){
+  document.getElementById('reorderCards').innerHTML=ro.map((r,i)=>`
+    <div class="reorder-card">
+      <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:9px">Câu ${i+1} / ${ro.length}</div>
+      <div class="pieces" id="pc-${i}">${shuf([...r.pieces]).map((p,j)=>`<div class="piece" id="p-${i}-${j}" data-w="${p}" onclick="clk(${i},this)">${p}</div>`).join('')}</div>
+      <div style="font-size:10px;color:var(--muted);margin-bottom:4px">→ Câu của bạn:</div>
+      <div class="ans-area" id="aa-${i}"><span class="ro-ph">Nhấn các từ để sắp xếp...</span></div>
+      <div class="ro-result" id="rr-${i}"></div>
+      <div class="ro-btns"><button class="btn-sm" onclick="chk(${i})">✓ Kiểm tra</button><button class="btn-sm" onclick="rst(${i})">↺ Lại</button></div>
+    </div>`).join('');
+}
+function shuf(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function clk(ci,el){if(el.classList.contains('used'))return;el.classList.add('used');roS[ci].placed.push(el.getAttribute('data-w'));renderAA(ci);}
+function renderAA(ci){
+  const aa=document.getElementById(`aa-${ci}`),p=roS[ci].placed;
+  if(!p.length){aa.innerHTML='<span class="ro-ph">Nhấn các từ để sắp xếp...</span>';aa.classList.remove('has');return;}
+  aa.className='ans-area has';aa.innerHTML=p.map((w,i)=>`<div class="placed" onclick="rmv(${ci},${i})">${w}</div>`).join('');
+}
+function rmv(ci,idx){
+  const w=roS[ci].placed[idx];roS[ci].placed.splice(idx,1);
+  const ps=document.querySelectorAll(`#pc-${ci} .piece`);
+  for(let pp of ps){if(pp.getAttribute('data-w')===w&&pp.classList.contains('used')&&!pp._f){pp.classList.remove('used');pp._f=true;break;}}
+  ps.forEach(p=>delete p._f);renderAA(ci);
+}
+function chk(i){
+  const placed=roS[i].placed.join(''),res=document.getElementById(`rr-${i}`);
+  if(!placed){res.className='ro-result show no';res.textContent='⚠️ Chưa sắp xếp.';return;}
+  if(placed===ro[i].answer){
+    res.className='ro-result show ok';
+    res.innerHTML=`✅ Đúng! ${ro[i].py} — ${ro[i].vi}<br><small>${ro[i].tip}</small>`;
+    roS[i].done=true;
+  }else{
+    res.className='ro-result show no';
+    res.innerHTML=`❌ Chưa đúng. Câu đúng: <strong>${ro[i].answer}</strong><br><small>${ro[i].tip}</small>`;
+  }
+  updateProgress();
+  if(roS.every(s=>s.done)){
+    setTimeout(showWriteScore,500);
+    setTimeout(()=>document.getElementById('completionCard').style.display='block',1500);
+  }
+}
+function rst(i){roS[i]={placed:[],done:false};renderRO();}
+function showWriteScore(){
+  const c=roS.filter(s=>s.done).length,p=Math.round(c/ro.length*100);
+  document.getElementById('writeBig').textContent=`${c}/${ro.length}`;
+  document.getElementById('writeTxt').textContent=p>=75?`🎉 ${p}% — 恭喜完成HSK2全部15课！`:`${p}% — Ôn thêm 就要…了 và 哪位 nhé.`;
+  document.getElementById('writeScore').classList.add('show');
+  document.getElementById('writeScore').scrollIntoView({behavior:'smooth'});
+}
+function resetWrite(){roS=ro.map(()=>({placed:[],done:false}));document.getElementById('writeScore').classList.remove('show');document.getElementById('completionCard').style.display='none';renderRO();}
+const TABS=['vocab','dialog','grammar','hanzi','wb-listen','wb-read','wb-pron','wb-write'];
+document.querySelectorAll('.tab[data-tab]').forEach(tab=>{
+  tab.addEventListener('click',function(){
+    const name=this.getAttribute('data-tab');
+    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    document.getElementById('sec-'+name).classList.add('active');
+    this.classList.add('active');
+    updateProgress();
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+function updateProgress(){
+  const active=document.querySelector('.section.active')?.id?.replace('sec-','');
+  const idx=TABS.indexOf(active);
+  const tp=((idx+1)/TABS.length)*50;
+  const tot=r1.length+r2.length+r3.length+r4.length+ro.length;
+  const done=Object.keys(rAns).length+roS.filter(s=>s.done).length;
+  const wp=(done/tot)*50;
+  document.getElementById('progBar').style.width=Math.min(100,Math.round(tp+wp))+'%';
+}
+renderVocab(vNew,'vNew');renderVocab(vReview,'vReview');
+renderDlg(d1,'dlg1');renderDlg(d2,'dlg2');renderDlg(d3,'dlg3');
+renderGrammar();renderHanzi();
+renderListen(lp1,'listenP1',1);renderListen(lp2,'listenP2',6);renderListen(lp3,'listenP3',11);
+renderRead();renderPron();renderRO();
+updateProgress();
+</script>
+</body>
+</html>

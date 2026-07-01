@@ -1,1 +1,856 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HSK 2 — Bài 12: 你穿得太少了</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Lora:ital,wght@0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pri:#1D4ED8;--pri-l:#EFF6FF;--pri-d:#1E3A8A;
+  --gold:#C8900A;--gold-bg:#FFF8E6;
+  --ink:#18130E;--rice:#F8F4EE;--warm:#EDE4D5;--muted:#7D6B52;
+  --accent:#1E5F8A;--accent-bg:#EEF5FB;
+  --green:#1E7A45;--green-bg:#EBF7F0;
+  --purple:#5B3FA6;--purple-bg:#F0ECFB;--purple-l:#e8e0fa;
+  --red:#B5281C;--red-l:#fdf2f1;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--rice);color:var(--ink);font-family:'DM Sans',sans-serif;overflow-x:hidden;}
+.hero{background:linear-gradient(135deg,var(--pri-d) 0%,var(--pri) 100%);padding:40px 20px 32px;text-align:center;position:relative;overflow:hidden;}
+.hero::after{content:'穿';position:absolute;font-family:'Noto Serif SC',serif;font-size:160px;color:rgba(255,255,255,.05);right:-10px;bottom:-20px;line-height:1;pointer-events:none;}
+.hero-back{display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,.75);font-size:12px;text-decoration:none;margin-bottom:12px;padding:4px 12px;border-radius:20px;border:1px solid rgba(255,255,255,.25);transition:all .2s;}
+.hero-back:hover{background:rgba(255,255,255,.12);color:white;}
+.hero-badge{display:inline-block;background:var(--gold);color:#1a0a00;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 14px;border-radius:20px;margin-bottom:12px;}
+.hero h1{font-family:'Noto Serif SC',serif;font-size:clamp(18px,4vw,32px);color:white;margin-bottom:5px;line-height:1.4;}
+.hero-en{font-family:'Lora',serif;font-style:italic;font-size:13px;color:rgba(255,255,255,.6);margin-bottom:16px;}
+.hero-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;}
+.hero-pill{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.85);font-size:11px;padding:3px 11px;border-radius:20px;}
+.prog-wrap{height:5px;background:var(--warm);position:sticky;top:0;z-index:100;}
+.prog-bar{height:100%;background:linear-gradient(90deg,var(--pri),var(--gold));transition:width .5s;}
+.tabs-wrap{background:white;border-bottom:2px solid var(--warm);position:sticky;top:5px;z-index:99;overflow-x:auto;scrollbar-width:none;}
+.tabs-wrap::-webkit-scrollbar{display:none;}
+.tabs{display:flex;min-width:max-content;}
+.tab-sep{width:2px;background:var(--warm);flex-shrink:0;margin:6px 0;}
+.tab-label{padding:10px 8px 10px 12px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);opacity:.7;display:flex;align-items:center;white-space:nowrap;border-bottom:3px solid transparent;margin-bottom:-2px;}
+.tab{flex-shrink:0;padding:10px 13px;font-size:12px;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;white-space:nowrap;}
+.tab:hover{color:var(--pri);}
+.tab.active{color:var(--pri);border-bottom-color:var(--pri);}
+.tab.wb:hover{color:var(--purple);}
+.tab.wb.active{color:var(--purple);border-bottom-color:var(--purple);}
+.section{display:none;padding:20px 16px 40px;max-width:740px;margin:0 auto;}
+.section.active{display:block;animation:rise .3s ease;}
+@keyframes rise{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.book-banner{padding:7px 16px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-align:center;border-radius:8px;margin-bottom:16px;}
+.book-banner.tb{background:var(--pri-l);color:var(--pri);}
+.book-banner.wb{background:var(--purple-bg);color:var(--purple);}
+.sec-title{font-family:'Lora',serif;font-size:19px;color:var(--pri);margin-bottom:3px;}
+.sec-title.wb{color:var(--purple);}
+.sec-desc{font-size:12px;color:var(--muted);margin-bottom:16px;line-height:1.6;}
+.ctx-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:9px;padding-bottom:5px;border-bottom:1px solid var(--warm);}
+.ctx-sec{margin-bottom:20px;}
+.vlist{display:flex;flex-direction:column;gap:8px;}
+.vc{background:white;border:1px solid var(--warm);border-radius:11px;padding:12px 14px;display:grid;grid-template-columns:72px 1fr auto;align-items:center;gap:12px;cursor:pointer;transition:all .18s;box-shadow:0 1px 5px rgba(0,0,0,.04);}
+.vc:hover{border-color:var(--pri);box-shadow:0 3px 12px rgba(29,78,216,.12);}
+.vc-char{font-family:'Noto Serif SC',serif;font-size:26px;color:var(--pri);text-align:center;line-height:1.2;}
+.vc-py{font-size:12px;color:var(--accent);font-weight:500;margin-bottom:2px;}
+.vc-vi{font-size:13px;color:var(--ink);font-weight:500;}
+.vc-ex{font-size:11px;color:var(--muted);margin-top:5px;line-height:1.6;display:none;grid-column:1/-1;background:var(--rice);border-radius:6px;padding:7px 10px;}
+.vc-ex.open{display:block;}
+.vc-pos{font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;background:var(--warm);color:var(--muted);align-self:flex-start;white-space:nowrap;}
+.new-tag{font-size:9px;font-weight:700;background:var(--pri);color:white;padding:2px 6px;border-radius:8px;text-transform:uppercase;}
+.vc-tags{display:flex;flex-direction:column;gap:3px;align-items:flex-end;}
+/* 程度补语 table */
+.de-table{background:white;border-radius:11px;border:1px solid var(--warm);overflow:hidden;margin-bottom:14px;}
+.de-head{background:var(--pri);color:white;padding:9px 14px;font-size:12px;font-weight:600;}
+.de-row{display:flex;border-bottom:1px solid var(--warm);}
+.de-row:last-child{border-bottom:none;}
+.de-cell{flex:1;padding:9px 13px;font-size:12px;line-height:1.7;}
+.de-cell:first-child{border-right:1px solid var(--warm);font-family:'Noto Serif SC',serif;font-size:14px;color:var(--pri);font-weight:600;flex:0 0 120px;}
+.de-cell b{color:var(--pri);}
+.dlg-box{background:white;border-radius:12px;border:1px solid var(--warm);overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.04);margin-bottom:14px;}
+.dlg-head{background:var(--pri);color:white;padding:9px 15px;font-size:12px;font-weight:500;display:flex;align-items:center;justify-content:space-between;}
+.scene-tag{font-size:10px;background:rgba(255,255,255,.18);padding:2px 8px;border-radius:8px;}
+.dl{display:flex;gap:10px;padding:12px 14px;border-bottom:1px solid var(--warm);align-items:flex-start;}
+.dl:last-child{border-bottom:none;}
+.dl:hover{background:var(--rice);}
+.dl.r{flex-direction:row-reverse;}
+.sp{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif SC',serif;font-size:11px;font-weight:700;color:white;flex-shrink:0;}
+.sp.a{background:var(--pri);}
+.sp.b{background:var(--accent);}
+.dl-body{flex:1;}.dl.r .dl-body{text-align:right;}
+.dl-cn{font-family:'Noto Serif SC',serif;font-size:17px;color:var(--ink);line-height:1.4;margin-bottom:2px;}
+.dl-py{font-size:11px;color:var(--accent);margin-bottom:1px;}
+.dl-vi{font-size:11px;color:var(--muted);}
+.gram-card{background:white;border-radius:12px;border:1px solid var(--warm);margin-bottom:13px;overflow:hidden;}
+.gram-head{background:var(--ink);color:white;padding:11px 15px;display:flex;align-items:center;gap:9px;}
+.gram-n{width:24px;height:24px;border-radius:50%;background:var(--gold);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;}
+.gram-title{font-size:13px;font-weight:500;line-height:1.4;}
+.gram-body{padding:15px;}
+.gram-pattern{background:var(--gold-bg);border-left:4px solid var(--gold);padding:8px 12px;border-radius:0 7px 7px 0;font-family:'Noto Serif SC',serif;font-size:14px;margin-bottom:10px;}
+.gram-note{font-size:12px;color:#333;line-height:1.75;margin-bottom:10px;}
+.gram-neg{background:#fdf4f3;border-radius:6px;padding:7px 11px;font-size:12px;color:#922;margin-bottom:10px;border-left:3px solid var(--red);white-space:pre-line;}
+.gram-exs{display:flex;flex-direction:column;gap:6px;}
+.gex{background:var(--rice);border-radius:7px;padding:8px 11px;}
+.gex-cn{font-family:'Noto Serif SC',serif;font-size:15px;color:var(--ink);}
+.gex-cn mark{background:transparent;color:var(--pri);font-weight:700;}
+.gex-py{font-size:11px;color:var(--accent);margin:2px 0;}
+.gex-vi{font-size:11px;color:var(--muted);}
+.hz-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:8px;}
+.hz-card{background:white;border:1px solid var(--warm);border-radius:10px;padding:11px 5px;text-align:center;cursor:pointer;transition:all .18s;}
+.hz-card:hover,.hz-card.sel{border-color:var(--pri);background:var(--pri-l);}
+.hz-ch{font-family:'Noto Serif SC',serif;font-size:32px;color:var(--pri);}
+.hz-py{font-size:10px;color:var(--accent);margin-top:3px;}
+.hz-vi{font-size:10px;color:var(--muted);}
+.hz-detail{background:white;border-radius:11px;border:1px solid var(--warm);padding:14px;margin-bottom:12px;display:none;}
+.hz-detail.show{display:flex;gap:14px;align-items:flex-start;}
+.hz-big{font-family:'Noto Serif SC',serif;font-size:68px;color:var(--pri);line-height:1;flex-shrink:0;}
+.hz-py-big{font-size:16px;color:var(--accent);font-weight:500;margin-bottom:3px;}
+.hz-vi-big{font-size:13px;font-weight:600;margin-bottom:4px;}
+.hz-strokes{font-size:11px;color:var(--muted);}
+.hz-tip{font-size:11px;color:#444;line-height:1.6;margin-top:4px;}
+.tip{background:var(--gold-bg);border-left:4px solid var(--gold);border-radius:0 9px 9px 0;padding:10px 13px;font-size:12px;color:#5c3d00;line-height:1.7;margin:13px 0;}
+.tip strong{color:#3a2600;}
+.note-box{background:var(--accent-bg);border-left:4px solid var(--accent);border-radius:0 9px 9px 0;padding:10px 13px;font-size:12px;color:#0e3555;line-height:1.7;margin:12px 0;}
+.wb-section-title{font-size:14px;font-weight:700;color:var(--purple);margin:20px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--purple-bg);}
+.wb-part-desc{font-size:11px;color:var(--muted);margin-bottom:10px;line-height:1.5;}
+.answer-note{background:var(--purple-bg);border-radius:9px;padding:10px 13px;font-size:12px;color:var(--purple);margin-bottom:14px;line-height:1.6;}
+.script-card{background:white;border:1px solid var(--warm);border-radius:10px;overflow:hidden;margin-bottom:8px;}
+.script-item{display:flex;gap:10px;padding:10px 13px;border-bottom:1px solid var(--warm);align-items:flex-start;}
+.script-item:last-child{border-bottom:none;}
+.script-num{width:22px;height:22px;border-radius:50%;background:var(--purple);color:white;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.script-body{flex:1;}
+.script-cn{font-family:'Noto Serif SC',serif;font-size:15px;color:var(--ink);line-height:1.5;white-space:pre-line;}
+.script-py{font-size:11px;color:var(--accent);margin-top:2px;white-space:pre-line;}
+.script-vi{font-size:11px;color:var(--muted);margin-top:1px;white-space:pre-line;}
+.script-ans{font-size:11px;color:var(--purple);margin-top:5px;font-weight:600;}
+.read-passage{background:white;border:1px solid var(--warm);border-radius:11px;padding:14px 16px;margin-bottom:12px;}
+.read-cn{font-family:'Noto Serif SC',serif;font-size:16px;color:var(--ink);line-height:1.9;margin-bottom:6px;}
+.read-py{font-size:11px;color:var(--accent);line-height:1.8;margin-bottom:4px;}
+.read-vi{font-size:11px;color:var(--muted);line-height:1.7;}
+.match-item{background:white;border:1.5px solid var(--warm);border-radius:10px;padding:11px 13px;margin-bottom:8px;}
+.match-num{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:5px;}
+.match-cn{font-family:'Noto Serif SC',serif;font-size:16px;color:var(--ink);margin-bottom:2px;}
+.match-py{font-size:11px;color:var(--accent);margin-bottom:8px;}
+.match-opts{display:flex;flex-wrap:wrap;gap:6px;}
+.mopt{border:1.5px solid var(--warm);background:var(--rice);border-radius:7px;padding:6px 11px;font-size:12px;cursor:pointer;transition:all .18s;text-align:left;}
+.mopt:hover:not(.done){border-color:var(--purple);background:var(--purple-bg);}
+.mopt.correct{border-color:var(--green);background:var(--green-bg);color:var(--green);font-weight:600;}
+.mopt.wrong{border-color:var(--red);background:var(--red-l);color:var(--red);}
+.mopt.done{cursor:default;}
+.match-fb{margin-top:7px;font-size:11px;line-height:1.5;display:none;padding:6px 9px;border-radius:6px;}
+.match-fb.show{display:block;}
+.match-fb.ok{background:var(--green-bg);color:var(--green);}
+.match-fb.no{background:var(--red-l);color:var(--red);}
+.tf-card{background:white;border:1.5px solid var(--warm);border-radius:10px;padding:12px 14px;margin-bottom:8px;}
+.tf-q{font-family:'Noto Serif SC',serif;font-size:16px;color:var(--ink);margin-bottom:2px;}
+.tf-py{font-size:11px;color:var(--accent);margin-bottom:3px;}
+.tf-vi{font-size:11px;color:var(--muted);margin-bottom:9px;}
+.tf-btns{display:flex;gap:7px;}
+.tf-btn{flex:1;padding:8px;border-radius:7px;border:1.5px solid var(--warm);background:var(--rice);font-size:13px;font-weight:600;cursor:pointer;transition:all .18s;}
+.tf-btn:hover:not(.done){border-color:var(--purple);background:var(--purple-bg);}
+.tf-btn.correct{border-color:var(--green);background:var(--green-bg);color:var(--green);}
+.tf-btn.wrong{border-color:var(--red);background:var(--red-l);color:var(--red);}
+.tf-btn.done{cursor:default;}
+.tf-fb{margin-top:8px;font-size:11px;line-height:1.5;display:none;padding:6px 9px;border-radius:6px;}
+.tf-fb.show{display:block;}
+.tf-fb.ok{background:var(--green-bg);color:var(--green);}
+.tf-fb.no{background:var(--red-l);color:var(--red);}
+.pron-card{background:white;border:1px solid var(--warm);border-radius:10px;padding:14px;margin-bottom:10px;}
+.pron-instr{font-size:12px;color:var(--muted);margin-bottom:10px;line-height:1.6;}
+.pron-grid{display:flex;flex-direction:column;gap:7px;}
+.pw{background:var(--rice);border:1px solid var(--warm);border-radius:7px;padding:9px 13px;display:flex;justify-content:space-between;align-items:center;}
+.pw-left{flex:1;}
+.pw-num{font-size:10px;color:var(--muted);}
+.pw-cn{font-family:'Noto Serif SC',serif;font-size:14px;color:var(--ink);}
+.pw-note{font-size:10px;color:var(--muted);margin-top:1px;}
+.pw-tone{font-size:22px;font-weight:900;color:var(--pri);margin-left:12px;flex-shrink:0;}
+.reorder-card{background:white;border:1.5px solid var(--warm);border-radius:10px;padding:13px;margin-bottom:8px;}
+.pieces{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:9px;}
+.piece{background:var(--purple-bg);border:1.5px solid #d4c8f8;border-radius:6px;padding:5px 11px;font-family:'Noto Serif SC',serif;font-size:14px;color:var(--purple);cursor:pointer;user-select:none;transition:all .18s;}
+.piece:hover:not(.used){border-color:var(--purple);background:#e5dcfa;}
+.piece.used{opacity:.3;cursor:default;}
+.ans-area{min-height:38px;border:2px dashed var(--warm);border-radius:7px;padding:6px 10px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px;}
+.ans-area.has{border-color:var(--purple);}
+.placed{background:var(--purple);color:white;border-radius:6px;padding:5px 11px;font-family:'Noto Serif SC',serif;font-size:14px;cursor:pointer;transition:all .18s;}
+.placed:hover{background:var(--red);}
+.ro-ph{font-size:11px;color:var(--muted);font-style:italic;}
+.ro-result{font-size:11px;line-height:1.5;display:none;padding:6px 9px;border-radius:6px;margin-top:7px;}
+.ro-result.show{display:block;}
+.ro-result.ok{background:var(--green-bg);color:var(--green);}
+.ro-result.no{background:var(--red-l);color:var(--red);}
+.ro-btns{display:flex;gap:7px;margin-top:9px;}
+.btn-sm{background:transparent;color:var(--purple);border:1.5px solid var(--purple);padding:5px 11px;font-size:11px;border-radius:6px;cursor:pointer;transition:all .18s;}
+.btn-sm:hover{background:var(--purple);color:white;}
+.score-card{background:var(--ink);color:white;border-radius:12px;padding:22px 18px;text-align:center;display:none;margin-top:16px;}
+.score-card.show{display:block;animation:rise .4s ease;}
+.sc-big{font-family:'Noto Serif SC',serif;font-size:48px;color:var(--gold);margin:6px 0;}
+.sc-text{font-size:12px;color:rgba(255,255,255,.65);margin-bottom:14px;line-height:1.6;}
+.btn-ow{background:transparent;color:white;border:1.5px solid rgba(255,255,255,.4);padding:8px 18px;font-size:12px;border-radius:7px;cursor:pointer;}
+.nav-btns{display:flex;gap:10px;margin-top:24px;padding-top:16px;border-top:1px solid var(--warm);}
+.nav-btn{flex:1;padding:10px;border-radius:9px;font-size:12px;font-weight:500;cursor:pointer;text-align:center;text-decoration:none;border:1.5px solid var(--warm);background:white;color:var(--muted);transition:all .18s;}
+.nav-btn:hover{border-color:var(--pri);color:var(--pri);}
+.nav-btn.next{background:var(--pri);color:white;border-color:var(--pri);}
+.nav-btn.next:hover{background:var(--pri-d);}
+@media(max-width:480px){.vc{grid-template-columns:60px 1fr;}.vc-tags .vc-pos{display:none;}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div><a class="hero-back" href="../index.html">← Danh sách bài học</a></div>
+  <div class="hero-badge">HSK Standard Course 2 · 标准教程 · 第12课</div>
+  <h1>你穿得太少了</h1>
+  <div class="hero-en">You're wearing too little</div>
+  <div class="hero-pills">
+    <div class="hero-pill">📗 Sách giáo khoa</div>
+    <div class="hero-pill">📘 Sách bài tập BLCU</div>
+    <div class="hero-pill">10 từ mới</div>
+    <div class="hero-pill">3 ngữ pháp</div>
+    <div class="hero-pill">Nghe 3 phần · Đọc 4 phần</div>
+  </div>
+</div>
+
+<div class="prog-wrap"><div class="prog-bar" id="progBar" style="width:10%"></div></div>
+
+<div class="tabs-wrap">
+  <div class="tabs">
+    <div class="tab-label">📗 Sách GK</div>
+    <div class="tab active" data-tab="vocab">📝 Từ mới</div>
+    <div class="tab" data-tab="dialog">💬 Hội thoại</div>
+    <div class="tab" data-tab="grammar">📖 Ngữ pháp</div>
+    <div class="tab" data-tab="hanzi">✍️ Chữ Hán</div>
+    <div class="tab-sep"></div>
+    <div class="tab-label">📘 Bài tập</div>
+    <div class="tab wb" data-tab="wb-listen">🎧 Nghe</div>
+    <div class="tab wb" data-tab="wb-read">📄 Đọc</div>
+    <div class="tab wb" data-tab="wb-pron">🔊 Phát âm</div>
+    <div class="tab wb" data-tab="wb-write">✏️ Viết câu</div>
+  </div>
+</div>
+
+<!-- ═══ SÁCH GIÁO KHOA ═══ -->
+<div class="section active" id="sec-vocab">
+  <div class="book-banner tb">📗 SÁCH GIÁO KHOA — 教材</div>
+  <div class="sec-title">📝 Từ mới — 新词语</div>
+  <div class="sec-desc">10 từ mới HSK2 (★) bài 12. Chủ đề: Thời tiết, Nhà ở & Đánh giá hành động.</div>
+  <div class="tip">💡 <strong>Chủ đề bài 12:</strong> Trọng tâm là <b>程度补语 (bổ ngữ mức độ)</b> dùng 得 — "做<b>得</b>怎么样？" (làm thế nào?). Bài 12 kết nối với bài 11 (比较句) vì có thể kết hợp: "A比B做<b>得</b>好".</div>
+
+  <div class="ctx-label" style="margin-bottom:10px">📐 Bổ ngữ mức độ 得 — Tóm tắt cấu trúc</div>
+  <div class="de-table">
+    <div class="de-head">动词 + 得 + 程度补语 — "Làm... thế nào / làm... (tính từ)"</div>
+    <div class="de-row"><div class="de-cell">V + 得 + TT</div><div class="de-cell">你穿<b>得</b>太少了 — Bạn mặc quá ít. 他跑<b>得</b>很快 — Anh ấy chạy rất nhanh.</div></div>
+    <div class="de-row"><div class="de-cell">V + 得 + zěnmeyàng</div><div class="de-cell">你做饭做<b>得</b>怎么样？— Bạn nấu ăn thế nào? (hỏi mức độ)</div></div>
+    <div class="de-row"><div class="de-cell">A比B + V得 + TT</div><div class="de-cell">我妻子比我做<b>得</b>好 — Vợ tôi nấu ăn ngon hơn tôi.</div></div>
+    <div class="de-row"><div class="de-cell">❌ Sai thường gặp</div><div class="de-cell">❌ 他跑得很快地跑。 ✅ 他跑得很快。 / Nếu có tân ngữ: 他<b>饭做</b>得很好。</div></div>
+  </div>
+
+  <div class="ctx-sec">
+    <div class="ctx-label">★ Từ mới bài 12 — 10 từ chính</div>
+    <div class="vlist" id="vNew"></div>
+  </div>
+  <div class="ctx-sec">
+    <div class="ctx-label">Từ HSK1/bài trước ôn lại</div>
+    <div class="vlist" id="vReview"></div>
+  </div>
+  <div class="nav-btns">
+    <a class="nav-btn" href="../bai-11/index.html">← Bài 11</a>
+    <a class="nav-btn next" href="../bai-13/index.html">Bài 13 →</a>
+  </div>
+</div>
+
+<div class="section" id="sec-dialog">
+  <div class="book-banner tb">📗 SÁCH GIÁO KHOA — 教材</div>
+  <div class="sec-title">💬 Hội thoại — 课文</div>
+  <div class="sec-desc">Các đoạn hội thoại chính thức HSK Standard Course 2 — Bài 12 (4 đoạn ngắn).</div>
+  <div class="dlg-box">
+    <div class="dlg-head">对话一：几点起床 <span class="scene-tag">⏰ Giờ giấc</span></div>
+    <div id="dlg1"></div>
+  </div>
+  <div class="tip">💡 <strong>比我早起一个小时:</strong> Ở đây kết hợp 比较句 + 程度补语:<br>
+  "你比我早起<b>一个小时</b>" = Bạn dậy sớm hơn tôi <b>một tiếng</b>.<br>
+  So sánh: 他<b>比我大三岁</b>(bài 11) → 你<b>比我早起一个小时</b>(bài 12) — cùng cấu trúc nhưng thêm 得!</div>
+  <div class="dlg-box">
+    <div class="dlg-head">对话二：做饭 <span class="scene-tag">🍳 Nấu ăn</span></div>
+    <div id="dlg2"></div>
+  </div>
+  <div class="dlg-box">
+    <div class="dlg-head">对话三：天气冷 <span class="scene-tag">🌨️ Thời tiết</span></div>
+    <div id="dlg3"></div>
+  </div>
+  <div class="dlg-box">
+    <div class="dlg-head">对话四：找房子 <span class="scene-tag">🏠 Thuê nhà</span></div>
+    <div id="dlg4"></div>
+  </div>
+  <div class="note-box">🔔 <strong>住得远/住得近:</strong> Khi 得 đi sau động từ 住 chỉ trạng thái:<br>
+  • 住<b>得</b>远真的很累 — Ở xa thật sự rất mệt mỏi<br>
+  • 希望能住<b>得</b>近一点儿 — Mong được ở gần hơn một chút<br>
+  → Đây là cách dùng 得 chỉ mức độ với các động từ trạng thái như 住, 睡, 起, 穿, 吃...</div>
+</div>
+
+<div class="section" id="sec-grammar">
+  <div class="book-banner tb">📗 SÁCH GIÁO KHOA — 教材</div>
+  <div class="sec-title">📖 Ngữ pháp — 语法</div>
+  <div class="sec-desc">3 điểm ngữ pháp chính thức HSK Standard Course 2 — Bài 12 (Chinese Grammar Wiki).</div>
+  <div id="gramContent"></div>
+</div>
+
+<div class="section" id="sec-hanzi">
+  <div class="book-banner tb">📗 SÁCH GIÁO KHOA — 教材</div>
+  <div class="sec-title">✍️ Chữ Hán — 汉字</div>
+  <div class="sec-desc">Nhấn vào từng chữ để xem chi tiết. Bài 12 tập trung bộ 人(người) và 冫(lạnh).</div>
+  <div class="hz-detail" id="hzDetail">
+    <div class="hz-big" id="hzBig"></div>
+    <div><div class="hz-py-big" id="hzPy"></div><div class="hz-vi-big" id="hzVi"></div><div class="hz-strokes" id="hzSt"></div><div class="hz-tip" id="hzTip"></div></div>
+  </div>
+  <div class="hz-grid" id="hzGrid"></div>
+  <div class="tip" style="margin-top:14px">💡 <strong>Bộ 冫(bīng = băng):</strong> Xuất hiện trong các từ liên quan đến nhiệt độ lạnh: 冷(lạnh), 冻(đóng băng), 冰(băng đá), 凉(mát). Bài 12 có 零(không độ) và 冷 — nhận biết bộ 冫 rất hữu ích khi học từ vựng thời tiết!</div>
+</div>
+
+<!-- ═══ SÁCH BÀI TẬP ═══ -->
+<div class="section" id="sec-wb-listen">
+  <div class="book-banner wb">📘 SÁCH BÀI TẬP — 练习册 · 一、听力 (Nghe)</div>
+  <div class="sec-title wb">🎧 Luyện nghe — 听力练习</div>
+  <div class="sec-desc">Script chính thức từ 《HSK标准教程2练习册》BLCU Press — Bài 12, nguồn Pandarin.net (pandarin.net/belajar/hsk2-chapter12).</div>
+  <div class="answer-note">📌 <strong>Đáp án bài 12 (chính thức BLCU):</strong> 1-5: × × √ √ × &nbsp;|&nbsp; 6-10: F B A E C &nbsp;|&nbsp; 11-15: C A B A C</div>
+
+  <div class="wb-section-title">第一部分 — Phần 1 (Câu 1–5): Đúng/Sai</div>
+  <div class="wb-part-desc">Nghe câu đơn, phán đoán hình ảnh Đúng (√) hay Sai (×)</div>
+  <div class="script-card" id="listenP1"></div>
+
+  <div class="wb-section-title">第二部分 — Phần 2 (Câu 6–10): Chọn hình</div>
+  <div class="wb-part-desc">Nghe hội thoại ngắn, chọn hình ảnh đúng (A–F)</div>
+  <div class="script-card" id="listenP2"></div>
+
+  <div class="wb-section-title">第三部分 — Phần 3 (Câu 11–15): Hỏi đáp</div>
+  <div class="wb-part-desc">Nghe hội thoại ngắn, chọn câu trả lời đúng (A–F)</div>
+  <div class="script-card" id="listenP3"></div>
+
+  <div class="tip" style="margin-top:14px">💡 <strong>Nghe bài 12:</strong> Chú ý <b>动词+得+程度词</b> như: 起得早/睡得早/跑得快/做得好/穿得少. Phần 3 thường hỏi về "ai làm tốt hơn" hoặc "hành động mức độ thế nào" — nhớ nghe kỹ 得 sau động từ!</div>
+</div>
+
+<div class="section" id="sec-wb-read">
+  <div class="book-banner wb">📘 SÁCH BÀI TẬP — 练习册 · 二、阅读 (Đọc)</div>
+  <div class="sec-title wb">📄 Đọc hiểu — 阅读练习</div>
+  <div class="sec-desc">4 phần đọc hiểu theo đúng cấu trúc đề thi HSK2.</div>
+  <div class="answer-note">📌 <strong>Đáp án bài 12 (chính thức BLCU — Pandarin.net):</strong> 16-20: E C A B F &nbsp;|&nbsp; 21-25: C F B A D &nbsp;|&nbsp; 26-30: × √ × √ √ &nbsp;|&nbsp; 31-35: C F D A B</div>
+
+  <div class="wb-section-title">第一部分 — Phần 1 (Câu 16–20): Nối câu-hình</div>
+  <div class="wb-part-desc">Đọc câu, chọn hình ảnh phù hợp (A–F)</div>
+  <div id="readP1"></div>
+
+  <div class="wb-section-title">第二部分 — Phần 2 (Câu 21–25): Nối hội thoại</div>
+  <div class="wb-part-desc">Đọc câu A, chọn câu B trả lời phù hợp nhất</div>
+  <div id="readP2"></div>
+
+  <div class="wb-section-title">第三部分 — Phần 3 (Câu 26–30): Đúng/Sai</div>
+  <div class="wb-part-desc">Đọc đoạn văn, phán đoán Đúng (√) hay Sai (×)</div>
+  <div class="read-passage">
+    <div class="read-cn">大卫每天早上六点就起床了，他说早睡早起身体好。他每天晚上十点就睡觉，睡得也很早。他跑步跑得非常快，但是做饭做得不怎么样，他妻子比他做得好多了。</div>
+    <div class="read-py">Dàwèi měitiān zǎoshang liù diǎn jiù qǐchuáng le, tā shuō zǎo shuì zǎo qǐ shēntǐ hǎo. Tā měitiān wǎnshàng shí diǎn jiù shuìjiào, shuì de yě hěn zǎo. Tā pǎobù pǎo de fēicháng kuài, dànshì zuòfàn zuò de bù zěnmeyàng, tā qīzi bǐ tā zuò de hǎo duō le.</div>
+    <div class="read-vi">David mỗi sáng 6 giờ đã dậy rồi, anh ấy nói ngủ sớm dậy sớm tốt cho sức khoẻ. Mỗi tối 10 giờ anh ấy đã ngủ rồi, ngủ cũng rất sớm. Anh ấy chạy bộ rất nhanh, nhưng nấu ăn thì không ra làm sao, vợ anh ấy nấu ăn ngon hơn anh ấy nhiều.</div>
+  </div>
+  <div id="readP3"></div>
+
+  <div class="wb-section-title">第四部分 — Phần 4 (Câu 31–35): Nối câu đối thoại</div>
+  <div class="wb-part-desc">Đọc câu A, chọn câu B hoàn chỉnh hội thoại phù hợp nhất</div>
+  <div id="readP4"></div>
+
+  <div class="score-card" id="readScore">
+    <div style="font-size:11px;color:rgba(255,255,255,.6)">Kết quả — 二、阅读</div>
+    <div class="sc-big" id="readScoreBig"></div>
+    <div class="sc-text" id="readScoreTxt"></div>
+    <button class="btn-ow" onclick="resetRead()">🔄 Làm lại</button>
+  </div>
+</div>
+
+<div class="section" id="sec-wb-pron">
+  <div class="book-banner wb">📘 SÁCH BÀI TẬP — 练习册 · 三、语音 (Phát âm)</div>
+  <div class="sec-title wb">🔊 Luyện phát âm — 语音练习</div>
+  <div class="sec-desc">Bài luyện phát âm chính thức từ sách bài tập HSK2 Bài 12 — BLCU (Pandarin.net). Bài 12 luyện <strong>câu hỏi lựa chọn (选择问句) A还是B → xuống ↓</strong>.</div>
+
+  <div class="wb-section-title">第1题 — Câu hỏi lựa chọn "A还是B" — luôn xuống ↓</div>
+  <div class="pron-card">
+    <div class="pron-instr">听录音，注意选择问句的句调 — Bài 12 luyện câu hỏi <b>A还是B</b>. Đây là câu hỏi lựa chọn, giọng XUỐNG ↓ (người hỏi đã cố định 2 lựa chọn).</div>
+    <div class="pron-grid" id="pronP1"></div>
+  </div>
+
+  <div class="wb-section-title" style="margin-top:20px">第2题 — Nghe và đọc theo (A还是B → ↓)</div>
+  <div class="pron-card">
+    <div class="pron-instr">听录音并跟读下列句子，注意句末都是降调↓ — Nghe và đọc theo, tất cả đều xuống ↓.</div>
+    <div class="pron-grid" id="pronP2"></div>
+  </div>
+  <div class="tip">💡 <strong>Tổng kết 3 loại câu hỏi và câu điệu:</strong><br>
+  ↑ <b>吗 câu hỏi</b>: 你吃饭了<b>吗</b>？↑ → thực sự không biết, hỏi thông tin<br>
+  ↓ <b>V不V chính phản</b>: 你吃<b>不吃</b>？↓ → đưa ra 2 lựa chọn rõ ràng<br>
+  ↓ <b>A还是B lựa chọn</b>: 你吃饭<b>还是</b>喝茶？↓ → cũng đưa ra 2 phương án cụ thể<br>
+  → Hai loại sau ↓ vì người hỏi đã xác định phạm vi lựa chọn!</div>
+</div>
+
+<div class="section" id="sec-wb-write">
+  <div class="book-banner wb">📘 SÁCH BÀI TẬP — 练习册 · 四、书写 (Viết)</div>
+  <div class="sec-title wb">✏️ Sắp xếp câu — 连词成句</div>
+  <div class="sec-desc">Sắp xếp các từ thành câu đúng. Tập trung vào <b>程度补语 得</b> và cấu trúc so sánh của bài 12.</div>
+  <div id="reorderCards"></div>
+  <div class="score-card" id="writeScore">
+    <div style="font-size:11px;color:rgba(255,255,255,.6)">Kết quả — 四、书写</div>
+    <div class="sc-big" id="writeBig"></div>
+    <div class="sc-text" id="writeTxt"></div>
+    <button class="btn-ow" onclick="resetWrite()">🔄 Làm lại</button>
+  </div>
+</div>
+
+<script>
+// ════════════
+// DATA BÀI 12
+// ════════════
+const vNew=[
+  {char:'得',py:'de',vi:'Trợ từ bổ ngữ mức độ (complement particle)',pos:'Trợ từ',
+   ex:'你穿得太少了。\nNǐ chuān de tài shǎo le.\nBạn mặc quá ít.\n→ 动词+得+程度补语: cách làm thế nào, mức độ ra sao'},
+  {char:'早',py:'zǎo',vi:'Sớm / Buổi sáng',pos:'Tính từ / Phó từ',
+   ex:'我每天早上六点就起床了。\nWǒ měitiān zǎoshang liù diǎn jiù qǐchuáng le.\nMỗi ngày 6 giờ sáng tôi đã dậy rồi.\n→ 起得早=dậy sớm; 早上=buổi sáng; 早饭=bữa sáng'},
+  {char:'起',py:'qǐ',vi:'Dậy / Khởi dậy',pos:'Động từ',
+   ex:'你比我早起一个小时。\nNǐ bǐ wǒ zǎo qǐ yī gè xiǎoshí.\nBạn dậy sớm hơn tôi một tiếng.\n→ 起床=dậy; 起来=đứng dậy; 起+得+早/晚=dậy sớm/muộn'},
+  {char:'睡',py:'shuì',vi:'Ngủ',pos:'Động từ',
+   ex:'我每天晚上十点就睡觉，睡得很早。\nWǒ měitiān wǎnshàng shí diǎn jiù shuìjiào, shuì de hěn zǎo.\nTôi mỗi tối 10 giờ đã ngủ, ngủ rất sớm.\n→ 睡觉=ngủ; 睡得早/晚=ngủ sớm/muộn'},
+  {char:'零下',py:'língxià',vi:'Dưới không độ / Âm độ',pos:'Danh từ',
+   ex:'有零下十度吗？\nYǒu língxià shí dù ma?\nÂm mười độ rồi à?\n→ 零下 = dưới 0°C (âm độ); 零上 = trên 0°C (dương độ)'},
+  {char:'度',py:'dù',vi:'Độ (nhiệt độ)',pos:'Lượng từ',
+   ex:'今天零下十度，你穿得太少了。\nJīntiān língxià shí dù, nǐ chuān de tài shǎo le.\nHôm nay âm mười độ, bạn mặc quá ít rồi.\n→ 度 = độ; 温度 = nhiệt độ; 几度 = mấy độ'},
+  {char:'房子',py:'fángzi',vi:'Nhà / Ngôi nhà',pos:'Danh từ',
+   ex:'我弟弟让我帮他找个房子。\nWǒ dìdi ràng wǒ bāng tā zhǎo ge fángzi.\nEm trai tôi nhờ tôi giúp anh ấy tìm nhà.\n→ 房子=ngôi nhà; 房间=phòng (bài 3); 找房子=tìm nhà'},
+  {char:'进',py:'jìn',vi:'Vào / Tiến vào',pos:'Động từ',
+   ex:'外边很冷，我们进房间吧。\nWàibian hěn lěng, wǒmen jìn fángjiān ba.\nBên ngoài rất lạnh, chúng ta vào phòng đi.\n→ 进=vào(trong); 进来=vào đây; 进去=đi vào đó'},
+  {char:'成绩',py:'chéngjì',vi:'Thành tích / Điểm số / Kết quả',pos:'Danh từ',
+   ex:'儿子这次考试成绩比上次好一些。\nÉrzi zhè cì kǎoshì chéngjì bǐ shàng cì hǎo yīxiē.\nThành tích bài thi lần này của con trai tốt hơn lần trước một chút.'},
+  {char:'慢',py:'màn',vi:'Chậm',pos:'Tính từ',
+   ex:'他跑得比我慢多了。\nTā pǎo de bǐ wǒ màn duō le.\nAnh ấy chạy chậm hơn tôi nhiều.\n→ 慢↔快; 慢慢=từ từ; 走得慢=đi chậm'},
+];
+
+const vReview=[
+  {char:'穿',py:'chuān',vi:'Mặc / Đi (giày) — bài 5',pos:'ĐT',
+   ex:'你穿得太少了。Bạn mặc quá ít. → 穿+得+TT = mặc... (mức độ)'},
+  {char:'跑步',py:'pǎobù',vi:'Chạy bộ — HSK1',pos:'ĐT',
+   ex:'他跑步跑得非常快。Anh ấy chạy bộ rất nhanh. → V+V+得+TT khi có tân ngữ'},
+  {char:'早睡早起',py:'zǎo shuì zǎo qǐ',vi:'Ngủ sớm dậy sớm — thành ngữ bài 12',pos:'Cụm',
+   ex:'早睡早起身体好。Ngủ sớm dậy sớm tốt cho sức khoẻ. (谚语-tục ngữ dân gian)'},
+];
+
+const d1=[
+  {sp:'a',cn:'你每天早上几点起床？',py:'Nǐ měitiān zǎoshang jǐ diǎn qǐchuáng?',vi:'Mỗi sáng bạn dậy lúc mấy giờ?'},
+  {sp:'b',cn:'六点多。',py:'Liù diǎn duō.',vi:'Khoảng hơn sáu giờ.'},
+  {sp:'a',cn:'你比我早起一个小时呢。',py:'Nǐ bǐ wǒ zǎo qǐ yī gè xiǎoshí ne.',vi:'Bạn dậy sớm hơn tôi một tiếng đó.'},
+  {sp:'b',cn:'我睡得也早，我每天晚上十点就睡觉。早睡早起身体好。',py:'Wǒ shuì de yě zǎo, wǒ měitiān wǎnshàng shí diǎn jiù shuìjiào. Zǎo shuì zǎo qǐ shēntǐ hǎo.',vi:'Tôi ngủ cũng sớm, tôi mỗi tối 10 giờ đã ngủ rồi. Ngủ sớm dậy sớm tốt cho sức khoẻ.'},
+];
+const d2=[
+  {sp:'a',cn:'再来点儿米饭吧，你吃得太少了。',py:'Zài lái diǎnr mǐfàn ba, nǐ chī de tài shǎo le.',vi:'Ăn thêm cơm đi, bạn ăn quá ít rồi.'},
+  {sp:'b',cn:'不少了，今天吃得很好，太谢谢你了。',py:'Bù shǎo le, jīntiān chī de hěn hǎo, tài xièxie nǐ le.',vi:'Không ít đâu, hôm nay ăn rất ngon, cảm ơn bạn nhiều lắm.'},
+  {sp:'a',cn:'你做饭做得怎么样？',py:'Nǐ zuòfàn zuò de zěnmeyàng?',vi:'Bạn nấu ăn thế nào?'},
+  {sp:'b',cn:'不怎么样，我妻子比我做得好。',py:'Bù zěnmeyàng, wǒ qīzi bǐ wǒ zuò de hǎo.',vi:'Không ra làm sao, vợ tôi nấu ăn ngon hơn tôi.'},
+];
+const d3=[
+  {sp:'a',cn:'下雪了，今天真冷。',py:'Xià xuě le, jīntiān zhēn lěng.',vi:'Tuyết rơi rồi, hôm nay thật lạnh.'},
+  {sp:'b',cn:'有零下十度吗？',py:'Yǒu língxià shí dù ma?',vi:'Âm mười độ rồi à?'},
+  {sp:'a',cn:'是啊，你穿得太少了，我们进房间吧。',py:'Shì a, nǐ chuān de tài shǎo le, wǒmen jìn fángjiān ba.',vi:'Đúng vậy, bạn mặc quá ít rồi, chúng ta vào phòng đi.'},
+  {sp:'b',cn:'好吧。',py:'Hǎo ba.',vi:'Thôi được.'},
+];
+const d4=[
+  {sp:'a',cn:'你在忙什么呢？',py:'Nǐ zài máng shénme ne?',vi:'Bạn đang bận làm gì vậy?'},
+  {sp:'b',cn:'我弟弟让我帮他找个房子，现在他家离公司有点儿远。',py:'Wǒ dìdi ràng wǒ bāng tā zhǎo ge fángzi, xiànzài tā jiā lí gōngsī yǒudiǎnr yuǎn.',vi:'Em trai tôi nhờ tôi giúp tìm nhà, hiện tại nhà anh ấy cách công ty hơi xa.'},
+  {sp:'a',cn:'住得远真的很累！',py:'Zhù de yuǎn zhēn de hěn lèi!',vi:'Ở xa thật sự rất mệt!'},
+  {sp:'b',cn:'是啊，他也希望能住得近一点儿。',py:'Shì a, tā yě xīwàng néng zhù de jìn yīdiǎnr.',vi:'Đúng vậy, anh ấy cũng hy vọng được ở gần hơn một chút.'},
+];
+
+const grammar=[
+  {n:1,
+   title:'程度补语 动词+得+形容词/副词 — Bổ ngữ mức độ',
+   pattern:'动词 + 得 + 形容词/副词 (chỉ mức độ/cách thức)',
+   note:'<b>程度补语</b> (bổ ngữ mức độ) dùng <b>得</b> đứng sau động từ để nói <b>hành động đó thực hiện ở mức độ nào / như thế nào</b>.<br><br>Cấu trúc cơ bản: <b>V + 得 + TT</b><br>• 你穿<b>得</b>太少了 — Bạn mặc <b>quá ít</b><br>• 他跑<b>得</b>很快 — Anh ấy chạy <b>rất nhanh</b><br><br>⚠️ Khi có tân ngữ, lặp lại động từ:<br>• 他做饭做<b>得</b>很好 (✅) — Anh ấy nấu cơm <b>rất ngon</b><br>• ~~他做得饭很好~~ (❌)',
+   neg:'❌ 他做得饭很好。(tân ngữ đặt sai)\n✅ 他饭做得很好。/ 他做饭做得很好。',
+   exs:[
+     {cn:'你穿<mark>得</mark>太少了，多穿一件吧。',py:'Nǐ chuān de tài shǎo le, duō chuān yī jiàn ba.',vi:'Bạn mặc QUÁ ÍT rồi, mặc thêm một cái đi.'},
+     {cn:'他跑步跑<mark>得</mark>非常快。',py:'Tā pǎobù pǎo de fēicháng kuài.',vi:'Anh ấy chạy bộ RẤT NHANH.'},
+     {cn:'你做饭做<mark>得</mark>怎么样？',py:'Nǐ zuòfàn zuò de zěnmeyàng?',vi:'Bạn nấu ăn THẾ NÀO? (hỏi mức độ)'},
+   ]},
+  {n:2,
+   title:'A比B + 动词 + 得 + 形容词 — So sánh mức độ thực hiện',
+   pattern:'A + 比 + B + 动词 + 得 + 形容词',
+   note:'Kết hợp <b>比较句</b> (bài 11) với <b>程度补语</b> (bài 12) để so sánh <b>ai làm tốt hơn</b>:<br><br>• 我妻子比我做<b>得</b>好 → Vợ tôi nấu ăn ngon hơn tôi<br>• 他比我跑<b>得</b>快 → Anh ấy chạy nhanh hơn tôi<br><br>Hoặc đặt 比 sau động từ:<br>• 他跑<b>得</b>比我快 → cùng nghĩa, cách nói này cũng rất phổ biến',
+   neg:'',
+   exs:[
+     {cn:'我妻子<mark>比</mark>我做<mark>得</mark>好。',py:'Wǒ qīzi bǐ wǒ zuò de hǎo.',vi:'Vợ tôi nấu ăn ngon HƠN tôi.'},
+     {cn:'你<mark>比</mark>我早起一个小时。',py:'Nǐ bǐ wǒ zǎo qǐ yī gè xiǎoshí.',vi:'Bạn dậy sớm hơn tôi MỘT TIẾNG.'},
+     {cn:'他跑<mark>得</mark><mark>比</mark>我快多了。',py:'Tā pǎo de bǐ wǒ kuài duō le.',vi:'Anh ấy chạy nhanh hơn tôi NHIỀU.'},
+   ]},
+  {n:3,
+   title:'零下/零上 + 度 — Diễn đạt nhiệt độ',
+   pattern:'零下/零上 + 数字 + 度',
+   note:'<b>零下</b> = âm độ (dưới 0°C); <b>零上</b> = dương độ (trên 0°C)<br><br>Cách hỏi và nói nhiệt độ:<br>• 今天几度？— Hôm nay mấy độ?<br>• 零下十度 — Âm mười độ<br>• 三十五度 — Ba mươi lăm độ<br><br>⚠️ Trong hội thoại thường bỏ 零上: 今天三十度 (không cần nói 零上三十度)',
+   neg:'',
+   exs:[
+     {cn:'有<mark>零下</mark>十<mark>度</mark>吗？太冷了！',py:'Yǒu língxià shí dù ma? Tài lěng le!',vi:'ÂM MƯỜI ĐỘ rồi à? Lạnh quá!'},
+     {cn:'今天比昨天冷多了，<mark>零下</mark>五<mark>度</mark>了。',py:'Jīntiān bǐ zuótiān lěng duō le, língxià wǔ dù le.',vi:'Hôm nay lạnh hơn hôm qua nhiều, ÂM NĂM ĐỘ rồi.'},
+     {cn:'北京冬天最冷的时候有<mark>零下</mark>二十<mark>度</mark>。',py:'Běijīng dōngtiān zuì lěng de shíhou yǒu língxià èrshí dù.',vi:'Mùa đông Bắc Kinh lạnh nhất có lúc ÂM HAI MƯƠI ĐỘ.'},
+   ]},
+];
+
+const hanzi=[
+  {ch:'得',py:'de/dé/děi',vi:'Trợ từ / Được / Phải',s:11,tip:'Bộ 彳+旦. 11 nét. 3 cách đọc: de(trợ từ 得), dé(đạt được), děi(phải/cần). Bài 12 dùng de.'},
+  {ch:'早',py:'zǎo',vi:'Sớm / Buổi sáng',s:6,tip:'Bộ 日(mặt trời)+十. 6 nét. 早上=buổi sáng; 早饭=bữa sáng; 早睡早起.'},
+  {ch:'起',py:'qǐ',vi:'Dậy / Khởi',s:10,tip:'Bộ 走(đi)+己. 10 nét. 起床=dậy; 起来=đứng dậy; 起飞=cất cánh.'},
+  {ch:'睡',py:'shuì',vi:'Ngủ',s:13,tip:'Bộ 目(mắt)+垂(rủ xuống). 13 nét. Mắt rủ xuống = ngủ. 睡觉/睡得早/睡得晚.'},
+  {ch:'零',py:'líng',vi:'Không / Lẻ',s:13,tip:'Bộ 雨(mưa)+令. 13 nét. 零下=âm độ; 零度=không độ; 零食=đồ ăn vặt.'},
+  {ch:'度',py:'dù',vi:'Độ / Lần',s:9,tip:'Bộ 广+廿+又. 9 nét. 温度=nhiệt độ; 度数=độ số; 一次/两次=một/hai lần.'},
+  {ch:'房',py:'fáng',vi:'Nhà / Phòng',s:8,tip:'Bộ 户(cửa)+方(phương). 8 nét. 房子=ngôi nhà; 房间=phòng(bài 3); 房费=tiền thuê nhà.'},
+  {ch:'进',py:'jìn',vi:'Vào / Tiến',s:7,tip:'Giản thể 7 nét! Bộ 辶(đi)+井. 进来/进去=vào đây/đó; 进步=tiến bộ; 进入=đi vào.'},
+  {ch:'绩',py:'jì',vi:'Thành tích',s:11,tip:'Bộ 纟(sợi)+责. 11 nét. 成绩=thành tích/điểm số; 业绩=thành tích công việc.'},
+  {ch:'慢',py:'màn',vi:'Chậm',s:14,tip:'Bộ 忄(tâm)+曼. 14 nét. 慢↔快; 慢慢=từ từ; 走慢了=đi muộn.'},
+];
+
+// WORKBOOK — Script chính thức BLCU từ Pandarin.net
+const lp1=[
+  {cn:'你今天起得真早。',py:'Nǐ jīntiān qǐ de zhēn zǎo.',vi:'Hôm nay bạn dậy thật sớm.',ans:'×',exp:'Hình ảnh không khớp → ×'},
+  {cn:'再来点儿米饭吧，你吃得太少了。',py:'Zài lái diǎnr mǐfàn ba, nǐ chī de tài shǎo le.',vi:'Ăn thêm cơm đi, bạn ăn quá ít rồi.',ans:'×',exp:'Hình ảnh không khớp → ×'},
+  {cn:'下雪了，今天真冷。',py:'Xià xuě le, jīntiān zhēn lěng.',vi:'Tuyết rơi rồi, hôm nay thật lạnh.',ans:'√',exp:'Hình ảnh khớp (trời đang tuyết) → √'},
+  {cn:'我觉得很热，今天穿得太多了。',py:'Wǒ juéde hěn rè, jīntiān chuān de tài duō le.',vi:'Tôi cảm thấy rất nóng, hôm nay mặc quá nhiều rồi.',ans:'√',exp:'Hình ảnh khớp (mặc nhiều, đổ mồ hôi) → √'},
+  {cn:'这件衣服比弟弟送给我的那件漂亮。',py:'Zhè jiàn yīfu bǐ dìdi sòng gěi wǒ de nà jiàn piàoliang.',vi:'Cái áo này đẹp hơn cái mà em trai tặng cho tôi.',ans:'×',exp:'Hình ảnh không khớp → ×'},
+];
+const lp2=[
+  {cn:'男：我今天早上七点就起床了。\n女：你比我早起一个小时呢。',
+   py:'Nán: Wǒ jīntiān zǎoshang qī diǎn jiù qǐchuáng le.\nNǚ: Nǐ bǐ wǒ zǎo qǐ yī gè xiǎoshí ne.',
+   vi:'Nam: Sáng nay tôi 7 giờ đã dậy rồi.\nNữ: Bạn dậy sớm hơn tôi một tiếng đó.',ans:'F (dậy sớm/đồng hồ)'},
+  {cn:'女：你做饭做得怎么样？\n男：不怎么样，我妻子比我做得好。',
+   py:'Nǚ: Nǐ zuòfàn zuò de zěnmeyàng?\nNán: Bù zěnmeyàng, wǒ qīzi bǐ wǒ zuò de hǎo.',
+   vi:'Nữ: Bạn nấu ăn thế nào?\nNam: Không ra làm sao, vợ tôi nấu ngon hơn tôi.',ans:'B (nấu ăn)'},
+  {cn:'男：今天天气真冷啊！\n女：是啊，我觉得晚上可能下雪。',
+   py:'Nán: Jīntiān tiānqì zhēn lěng a!\nNǚ: Shì a, wǒ juéde wǎnshàng kěnéng xià xuě.',
+   vi:'Nam: Hôm nay trời thật lạnh!\nNữ: Đúng vậy, tôi nghĩ tối nay có thể có tuyết.',ans:'A (tuyết rơi/lạnh)'},
+  {cn:'女：大卫很喜欢跑步。\n男：是啊，他跑得非常快。',
+   py:'Nǚ: Dàwèi hěn xǐhuān pǎobù.\nNán: Shì a, tā pǎo de fēicháng kuài.',
+   vi:'Nữ: David rất thích chạy bộ.\nNam: Đúng vậy, anh ấy chạy rất nhanh.',ans:'E (chạy bộ/nhanh)'},
+  {cn:'男：你今天穿得真漂亮。\n女：谢谢，今天是我的生日。',
+   py:'Nán: Nǐ jīntiān chuān de zhēn piàoliang.\nNǚ: Xièxie, jīntiān shì wǒ de shēngrì.',
+   vi:'Nam: Hôm nay bạn mặc thật đẹp.\nNữ: Cảm ơn, hôm nay là sinh nhật tôi.',ans:'C (mặc đẹp/sinh nhật)'},
+];
+const lp3=[
+  {cn:'男：你每天几点睡觉？\n女：我每天十点就睡觉了，早睡早起身体好。\n问：女的为什么睡得很早？',
+   py:'Nán: Nǐ měitiān jǐ diǎn shuìjiào?\nNǚ: Wǒ měitiān shí diǎn jiù shuìjiào le, zǎo shuì zǎo qǐ shēntǐ hǎo.\nWèn: Nǚ de wèishénme shuì de hěn zǎo?',
+   vi:'Nam: Mỗi ngày bạn ngủ lúc mấy giờ?\nNữ: Tôi mỗi ngày 10 giờ đã ngủ rồi, ngủ sớm dậy sớm tốt cho sức khoẻ.\nHỏi: Tại sao người nữ ngủ sớm?',ans:'C (早睡早起身体好)'},
+  {cn:'男：明天天气怎么样？\n女：零下十度，比今天冷多了。你要多穿点儿衣服。\n问：明天冷吗？',
+   py:'Nán: Míngtiān tiānqì zěnmeyàng?\nNǚ: Língxià shí dù, bǐ jīntiān lěng duō le. Nǐ yào duō chuān diǎnr yīfu.\nWèn: Míngtiān lěng ma?',
+   vi:'Nam: Ngày mai thời tiết thế nào?\nNữ: Âm mười độ, lạnh hơn hôm nay nhiều. Bạn nên mặc thêm quần áo.\nHỏi: Ngày mai có lạnh không?',ans:'A (很冷，零下十度)'},
+  {cn:'女：你们家谁做饭做得好？\n男：我做得还可以，我妻子做的比我好吃。\n问：谁做饭做得最好？',
+   py:'Nǚ: Nǐmen jiā shéi zuòfàn zuò de hǎo?\nNán: Wǒ zuò de hái kěyǐ, wǒ qīzi zuò de bǐ wǒ hǎochī.\nWèn: Shéi zuòfàn zuò de zuì hǎo?',
+   vi:'Nữ: Ai trong nhà bạn nấu ăn tốt nhất?\nNam: Tôi nấu cũng được, vợ tôi nấu ngon hơn tôi.\nHỏi: Ai nấu ăn ngon nhất?',ans:'B (妻子比他做得好)'},
+  {cn:'男：你这几天在忙什么呢？\n女：我弟弟让我帮他找个房子，他家离公司有点儿远。\n问：她弟弟为什么要找个房子？',
+   py:'Nán: Nǐ zhè jǐ tiān zài máng shénme ne?\nNǚ: Wǒ dìdi ràng wǒ bāng tā zhǎo ge fángzi, tā jiā lí gōngsī yǒudiǎnr yuǎn.\nWèn: Tā dìdi wèishénme yào zhǎo ge fángzi?',
+   vi:'Nam: Mấy ngày này bạn đang bận làm gì?\nNữ: Em trai tôi nhờ tôi tìm nhà cho anh ấy, nhà anh ấy cách công ty hơi xa.\nHỏi: Tại sao em trai cô ấy muốn tìm nhà?',ans:'A (因为家离公司太远)'},
+  {cn:'男：儿子这次考试考得怎么样？\n女：还不错，比上次好一些。\n问：儿子考得怎么样？',
+   py:'Nán: Érzi zhè cì kǎoshì kǎo de zěnmeyàng?\nNǚ: Hái búcuò, bǐ shàng cì hǎo yīxiē.\nWèn: Érzi kǎo de zěnmeyàng?',
+   vi:'Nam: Bài thi lần này con trai thi thế nào?\nNữ: Cũng ổn, tốt hơn lần trước một chút.\nHỏi: Con trai thi thế nào?',ans:'C (比上次好一些/还不错)'},
+];
+
+// ĐỌC
+const r1=[
+  {n:16,cn:'他跑得非常快，跑步跑得很好。',py:'Tā pǎo de fēicháng kuài, pǎobù pǎo de hěn hǎo.',vi:'Anh ấy chạy rất nhanh, chạy bộ rất tốt.',
+   opts:['A 🌨️','B 🍳','C ⏰','D 🏃','E 🏠','F 📝'],ans:3,exp:'D — 跑得快/跑步好 = chạy bộ nhanh (🏃)'},
+  {n:17,cn:'他做饭做得不怎么样，妻子比他做得好。',py:'Tā zuòfàn zuò de bù zěnmeyàng, qīzi bǐ tā zuò de hǎo.',vi:'Anh ấy nấu ăn không ra làm sao, vợ nấu ngon hơn.',
+   opts:['A 🌨️','B 🍳','C ⏰','D 🏃','E 🏠','F 📝'],ans:1,exp:'B — 做饭/妻子比他好 = nấu ăn (🍳)'},
+  {n:18,cn:'下雪了，零下十度，你穿得太少了。',py:'Xià xuě le, língxià shí dù, nǐ chuān de tài shǎo le.',vi:'Tuyết rơi, âm mười độ, bạn mặc quá ít rồi.',
+   opts:['A 🌨️','B 🍳','C ⏰','D 🏃','E 🏠','F 📝'],ans:0,exp:'A — 下雪/零下十度 = tuyết rơi lạnh giá (🌨️)'},
+  {n:19,cn:'儿子这次考试比上次好一些，成绩不错。',py:'Érzi zhè cì kǎoshì bǐ shàng cì hǎo yīxiē, chéngjì búcuò.',vi:'Bài thi lần này của con trai tốt hơn lần trước, thành tích ổn.',
+   opts:['A 🌨️','B 🍳','C ⏰','D 🏃','E 🏠','F 📝'],ans:5,exp:'F — 考试成绩/比上次好 = thi cử, điểm số (📝)'},
+  {n:20,cn:'我弟弟在找房子，他家离公司有点儿远。',py:'Wǒ dìdi zài zhǎo fángzi, tā jiā lí gōngsī yǒudiǎnr yuǎn.',vi:'Em trai tôi đang tìm nhà, nhà anh ấy cách công ty hơi xa.',
+   opts:['A 🌨️','B 🍳','C ⏰','D 🏃','E 🏠','F 📝'],ans:4,exp:'E — 找房子/住得远 = tìm nhà (🏠)'},
+];
+const r2=[
+  {n:21,cn:'你每天早上几点起床？',py:'Nǐ měitiān zǎoshang jǐ diǎn qǐchuáng?',vi:'Mỗi sáng bạn dậy lúc mấy giờ?',
+   opts:['A 今天零下十度，比昨天冷多了。','B 不怎么样，我妻子比我做得好。','C 六点多，我睡得也早。','D 比上次好一些，还不错。','E 因为家离公司太远了。'],
+   ans:2,exp:'C — 六点多，我睡得也早 = trả lời hỏi giờ dậy + mô tả thói quen dùng 得.'},
+  {n:22,cn:'你们家谁做饭做得好？',py:'Nǐmen jiā shéi zuòfàn zuò de hǎo?',vi:'Ai trong nhà bạn nấu ăn ngon?',
+   opts:['A 今天零下十度。','B 我妻子比我做得好多了。','C 六点多，我睡得也早。','D 比上次好一些。','E 因为家离公司太远了。'],
+   ans:1,exp:'B — 我妻子比我做得好多了 = 比较句+程度补语 trả lời hỏi ai nấu ngon hơn.'},
+  {n:23,cn:'今天天气怎么样？',py:'Jīntiān tiānqì zěnmeyàng?',vi:'Hôm nay thời tiết thế nào?',
+   opts:['A 今天零下十度，比昨天冷多了。','B 我妻子比我做得好。','C 六点多，我睡得也早。','D 比上次好一些。','E 因为家离公司太远了。'],
+   ans:0,exp:'A — 今天零下十度，比昨天冷多了 = mô tả thời tiết bằng 零下+度 và 比…冷多了.'},
+  {n:24,cn:'儿子这次考试成绩怎么样？',py:'Érzi zhè cì kǎoshì chéngjì zěnmeyàng?',vi:'Thành tích bài thi lần này của con trai thế nào?',
+   opts:['A 今天零下十度。','B 我妻子比我做得好。','C 六点多，我睡得也早。','D 比上次好一些，还不错。','E 因为家离公司太远了。'],
+   ans:3,exp:'D — 比上次好一些，还不错 = so sánh thành tích bằng 比…好一些.'},
+  {n:25,cn:'你弟弟为什么最近要找房子？',py:'Nǐ dìdi wèishénme zuìjìn yào zhǎo fángzi?',vi:'Gần đây tại sao em trai bạn phải tìm nhà?',
+   opts:['A 今天零下十度。','B 我妻子比我做得好。','C 六点多，我睡得也早。','D 比上次好一些。','E 因为他家离公司太远了，住得很累。'],
+   ans:4,exp:'E — 因为家离公司太远，住得很累 = dùng 因为 + 住得 giải thích lý do tìm nhà.'},
+];
+const r3=[
+  {n:26,cn:'大卫每天早上七点起床。',py:'Dàwèi měitiān zǎoshang qī diǎn qǐchuáng.',vi:'David mỗi sáng 7 giờ dậy.',ans:false,exp:'Sai (×). Đoạn văn: "六点就起床了" — David dậy lúc 6 giờ, không phải 7 giờ.'},
+  {n:27,cn:'大卫每天晚上十点睡觉。',py:'Dàwèi měitiān wǎnshàng shí diǎn shuìjiào.',vi:'David mỗi tối 10 giờ ngủ.',ans:true,exp:'Đúng (√). Đoạn văn: "每天晚上十点就睡觉" — khớp chính xác.'},
+  {n:28,cn:'大卫做饭做得很好。',py:'Dàwèi zuòfàn zuò de hěn hǎo.',vi:'David nấu ăn rất ngon.',ans:false,exp:'Sai (×). Đoạn văn: "做饭做得不怎么样" — nấu không ra làm sao!'},
+  {n:29,cn:'大卫的妻子比他做饭做得好。',py:'Dàwèi de qīzi bǐ tā zuòfàn zuò de hǎo.',vi:'Vợ David nấu ăn ngon hơn anh ấy.',ans:true,exp:'Đúng (√). Đoạn văn: "他妻子比他做得好多了" — khớp chính xác.'},
+  {n:30,cn:'大卫跑步跑得非常快。',py:'Dàwèi pǎobù pǎo de fēicháng kuài.',vi:'David chạy bộ rất nhanh.',ans:true,exp:'Đúng (√). Đoạn văn: "跑步跑得非常快" — khớp chính xác.'},
+];
+const r4=[
+  {n:31,cn_char:'六点多。我睡得也早，每天十点就睡了。',py:'Liù diǎn duō. Wǒ shuì de yě zǎo, měitiān shí diǎn jiù shuì le.',vi:'Khoảng hơn sáu giờ. Tôi ngủ cũng sớm, mỗi ngày 10 giờ đã ngủ rồi.',
+   opts:['A 你每天几点起床？','B 你今天穿得漂亮吗？','C 谁做饭做得好？','D 天气怎么样？','E 儿子考试考得怎么样？'],
+   ans:0,exp:'A — 六点多，睡得也早 = trả lời hỏi giờ dậy dùng 程度补语 睡得早.'},
+  {n:32,cn_char:'谢谢，今天是我的生日，所以穿得漂亮一些。',py:'Xièxie, jīntiān shì wǒ de shēngrì, suǒyǐ chuān de piàoliang yīxiē.',vi:'Cảm ơn, hôm nay là sinh nhật tôi, nên mặc đẹp hơn một chút.',
+   opts:['A 你每天几点起床？','B 你今天穿得真漂亮！','C 谁做饭做得好？','D 天气怎么样？','E 儿子考试考得怎么样？'],
+   ans:1,exp:'B — 穿得真漂亮 → được khen mặc đẹp + giải thích vì sinh nhật.'},
+  {n:33,cn_char:'零下十度，比昨天冷多了，你要多穿衣服。',py:'Língxià shí dù, bǐ zuótiān lěng duō le, nǐ yào duō chuān yīfu.',vi:'Âm mười độ, lạnh hơn hôm qua nhiều, bạn phải mặc thêm quần áo.',
+   opts:['A 你每天几点起床？','B 你今天穿得漂亮吗？','C 谁做饭做得好？','D 今天天气怎么样？','E 儿子考试怎么样？'],
+   ans:3,exp:'D — 零下十度，比昨天冷多了 = trả lời hỏi thời tiết bằng 零下+度+比较句.'},
+  {n:34,cn_char:'我妻子做饭比我做得好，她比我好多了。',py:'Wǒ qīzi zuòfàn bǐ wǒ zuò de hǎo, tā bǐ wǒ hǎo duō le.',vi:'Vợ tôi nấu ăn ngon hơn tôi, cô ấy giỏi hơn tôi nhiều.',
+   opts:['A 你每天几点起床？','B 你今天穿得漂亮吗？','C 你们家谁做饭做得好？','D 今天天气怎么样？','E 儿子考试怎么样？'],
+   ans:2,exp:'C — 妻子比我做得好 = trả lời "谁做饭好" bằng 比较句+程度补语.'},
+  {n:35,cn_char:'比上次好一些，成绩还不错。',py:'Bǐ shàng cì hǎo yīxiē, chéngjì hái búcuò.',vi:'Tốt hơn lần trước một chút, thành tích cũng ổn.',
+   opts:['A 你每天几点起床？','B 你今天穿得漂亮吗？','C 谁做饭做得好？','D 今天天气怎么样？','E 儿子这次考试怎么样？'],
+   ans:4,exp:'E — 比上次好一些，成绩还不错 = trả lời hỏi thành tích bài thi con trai.'},
+];
+
+// PHÁT ÂM bài 12 — 选择问句 A还是B → xuống ↓ (từ Pandarin.net BLCU chính thức)
+const pr1=[
+  {w:'你去商店想买牛奶还是买鸡蛋？',tone:'↓',note:'A还是B lựa chọn → ↓'},
+  {w:'你喜欢白色还是黑色？',tone:'↓',note:'A还是B lựa chọn → ↓'},
+  {w:'他们今天去运动还是明天去运动？',tone:'↓',note:'A还是B lựa chọn → ↓'},
+  {w:'现在是三点还是四点？',tone:'↓',note:'A还是B lựa chọn → ↓'},
+];
+const pr2=[
+  {w:'这件衣服是今天买的还是昨天买的？',tone:'↓',note:'A还是B → ↓'},
+  {w:'你想喝茶还是咖啡？',tone:'↓',note:'A还是B → ↓'},
+  {w:'前边说话的那个人是小王还是大卫？',tone:'↓',note:'A还是B → ↓'},
+  {w:'今天是星期三还是星期四？',tone:'↓',note:'A还是B → ↓'},
+];
+
+// SẮP XẾP CÂU bài 12
+const ro=[
+  {pieces:['穿','太少了','你','得'],answer:'你穿得太少了',
+   py:'Nǐ chuān de tài shǎo le.',vi:'Bạn mặc quá ít rồi.',
+   tip:'主语(你)+动词(穿)+得+程度(太少了). 得 nối động từ với bổ ngữ mức độ.'},
+  {pieces:['做','妻子','我','比','得好'],answer:'我妻子比我做得好',
+   py:'Wǒ qīzi bǐ wǒ zuò de hǎo.',vi:'Vợ tôi nấu ăn ngon hơn tôi.',
+   tip:'A(我妻子)+比+B(我)+动词(做)+得+TT(好). Kết hợp比较句+程度补语.'},
+  {pieces:['跑步','非常快','他','跑','得'],answer:'他跑步跑得非常快',
+   py:'Tā pǎobù pǎo de fēicháng kuài.',vi:'Anh ấy chạy bộ rất nhanh.',
+   tip:'Khi có tân ngữ: 他+V+宾语(跑步)+重复V(跑)+得+程度(非常快).'},
+  {pieces:['比','好一些','儿子','上次','考得'],answer:'儿子比上次考得好一些',
+   py:'Érzi bǐ shàng cì kǎo de hǎo yīxiē.',vi:'Con trai thi tốt hơn lần trước một chút.',
+   tip:'主语(儿子)+比+参照(上次)+动词(考)+得+TT(好一些). 一些=chênh lệch nhỏ.'},
+  {pieces:['零下','有','十度','吗'],answer:'有零下十度吗',
+   py:'Yǒu língxià shí dù ma?',vi:'Âm mười độ rồi à?',
+   tip:'有+零下+数字+度+吗. 零下 đặt trước số độ để chỉ nhiệt độ âm.'},
+];
+
+// ════════
+// RENDER
+// ════════
+function renderVocab(arr,id){
+  document.getElementById(id).innerHTML=arr.map((v,i)=>`
+    <div class="vc" onclick="tex('${id}',${i})">
+      <div class="vc-char">${v.char}</div>
+      <div style="flex:1"><div class="vc-py">${v.py}</div><div class="vc-vi">${v.vi}</div>
+        <div class="vc-ex" id="${id}-${i}">${v.ex.replace(/\n/g,'<br>')}</div></div>
+      <div class="vc-tags"><div class="vc-pos">${v.pos}</div>${id==='vNew'?'<div class="new-tag">★MỚI</div>':''}</div>
+    </div>`).join('');
+}
+function tex(id,i){document.getElementById(`${id}-${i}`).classList.toggle('open');}
+function renderDlg(arr,id){
+  document.getElementById(id).innerHTML=arr.map((d,i)=>`
+    <div class="dl ${i%2===1?'r':''}">
+      <div class="sp ${d.sp}">${d.sp.toUpperCase()}</div>
+      <div class="dl-body"><div class="dl-cn">${d.cn}</div><div class="dl-py">${d.py}</div><div class="dl-vi">${d.vi}</div></div>
+    </div>`).join('');
+}
+function renderGrammar(){
+  document.getElementById('gramContent').innerHTML=grammar.map(g=>`
+    <div class="gram-card">
+      <div class="gram-head"><div class="gram-n">${g.n}</div><div class="gram-title">${g.title}</div></div>
+      <div class="gram-body">
+        <div class="gram-pattern">${g.pattern}</div>
+        <div class="gram-note">${g.note}</div>
+        ${g.neg?`<div class="gram-neg">${g.neg}</div>`:''}
+        <div class="gram-exs">${g.exs.map(e=>`<div class="gex"><div class="gex-cn">${e.cn}</div><div class="gex-py">${e.py}</div><div class="gex-vi">${e.vi}</div></div>`).join('')}</div>
+      </div>
+    </div>`).join('');
+}
+function renderHanzi(){
+  document.getElementById('hzGrid').innerHTML=hanzi.map((h,i)=>`
+    <div class="hz-card" id="hz-${i}" onclick="showHz(${i})">
+      <div class="hz-ch">${h.ch}</div><div class="hz-py">${h.py}</div><div class="hz-vi">${h.vi}</div>
+    </div>`).join('');
+}
+function showHz(i){
+  document.querySelectorAll('.hz-card').forEach(c=>c.classList.remove('sel'));
+  document.getElementById('hz-'+i).classList.add('sel');
+  const h=hanzi[i];
+  document.getElementById('hzDetail').className='hz-detail show';
+  document.getElementById('hzBig').textContent=h.ch;
+  document.getElementById('hzPy').textContent=h.py;
+  document.getElementById('hzVi').textContent=h.vi;
+  document.getElementById('hzSt').textContent=`Số nét: ${h.s}`;
+  document.getElementById('hzTip').textContent=h.tip;
+  document.getElementById('hzDetail').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function renderListen(arr,id,start){
+  document.getElementById(id).innerHTML=arr.map((l,i)=>`
+    <div class="script-item">
+      <div class="script-num">${start+i}</div>
+      <div class="script-body">
+        <div class="script-cn">${l.cn}</div>
+        <div class="script-py">${l.py}</div>
+        <div class="script-vi">${l.vi}</div>
+        <div class="script-ans">Đáp án: <strong>${l.ans}</strong> — ${l.exp}</div>
+      </div>
+    </div>`).join('');
+}
+let rAns={};
+function mkP(arr,pid,isCol){
+  return arr.map((q,i)=>`
+    <div class="match-item"><div class="match-num">Câu ${q.n}</div>
+      <div class="match-cn">${q.cn||q.cn_char}</div><div class="match-py">${q.py}</div>
+      <div class="match-opts${isCol?' style="flex-direction:column"':''}">
+        ${q.opts.map((o,j)=>`<button class="mopt" id="r${pid}-${i}-${j}" onclick="ansR('${pid}',${i},${j},${q.ans})">${isCol?String.fromCharCode(65+j)+'. ':''}<span${isCol?" style=\"font-family:'Noto Serif SC',serif\"":''}">${o}</span></button>`).join('')}
+      </div><div class="match-fb" id="r${pid}-fb-${i}"></div></div>`).join('');
+}
+function mkP3(){
+  return r3.map((q,i)=>`
+    <div class="tf-card"><div class="match-num">Câu ${q.n}</div>
+      <div class="tf-q">${q.cn}</div><div class="tf-py">${q.py}</div><div class="tf-vi">${q.vi}</div>
+      <div class="tf-btns">
+        <button class="tf-btn" id="rp3t-${i}" onclick="ansT(${i},true,${q.ans})">√ Đúng</button>
+        <button class="tf-btn" id="rp3f-${i}" onclick="ansT(${i},false,${q.ans})">× Sai</button>
+      </div><div class="tf-fb" id="rp3-fb-${i}"></div></div>`).join('');
+}
+function renderRead(){
+  document.getElementById('readP1').innerHTML=mkP(r1,'p1',false);
+  document.getElementById('readP2').innerHTML=mkP(r2,'p2',true);
+  document.getElementById('readP3').innerHTML=mkP3();
+  document.getElementById('readP4').innerHTML=mkP(r4,'p4',true);
+}
+function ansR(pid,qi,oi,correct){
+  const k=`${pid}-${qi}`;if(rAns[k]!==undefined)return;
+  rAns[k]=oi;const ok=oi===correct;
+  document.querySelectorAll(`[id^="r${pid}-${qi}-"]`).forEach(b=>b.classList.add('done'));
+  document.getElementById(`r${pid}-${qi}-${correct}`).classList.add('correct');
+  if(!ok)document.getElementById(`r${pid}-${qi}-${oi}`).classList.add('wrong');
+  const arr=pid==='p1'?r1:pid==='p2'?r2:r4;
+  const fb=document.getElementById(`r${pid}-fb-${qi}`);
+  fb.className='match-fb show '+(ok?'ok':'no');
+  fb.innerHTML=(ok?'✅ Đúng! ':'❌ Sai. ')+arr[qi].exp;
+  chkDone();
+}
+function ansT(qi,v,correct){
+  const k=`p3-${qi}`;if(rAns[k]!==undefined)return;
+  rAns[k]=v;const ok=v===correct;
+  ['t','f'].forEach(x=>document.getElementById(`rp3${x}-${qi}`).classList.add('done'));
+  document.getElementById(`rp3${correct?'t':'f'}-${qi}`).classList.add('correct');
+  if(!ok)document.getElementById(`rp3${v?'t':'f'}-${qi}`).classList.add('wrong');
+  const fb=document.getElementById(`rp3-fb-${qi}`);
+  fb.className='tf-fb show '+(ok?'ok':'no');
+  fb.innerHTML=(ok?'✅ Đúng! ':'❌ Sai. ')+r3[qi].exp;
+  chkDone();
+}
+function chkDone(){
+  const tot=r1.length+r2.length+r3.length+r4.length;
+  if(Object.keys(rAns).length===tot)setTimeout(showReadScore,500);
+}
+function showReadScore(){
+  const c=[...r1.map((_,i)=>rAns[`p1-${i}`]===r1[i].ans),
+           ...r2.map((_,i)=>rAns[`p2-${i}`]===r2[i].ans),
+           ...r3.map((_,i)=>rAns[`p3-${i}`]===r3[i].ans),
+           ...r4.map((_,i)=>rAns[`p4-${i}`]===r4[i].ans)].filter(Boolean).length;
+  const tot=r1.length+r2.length+r3.length+r4.length;
+  const p=Math.round(c/tot*100);
+  document.getElementById('readScoreBig').textContent=`${c}/${tot}`;
+  document.getElementById('readScoreTxt').textContent=p>=75?`Xuất sắc! ${p}% — Bài 12 rất vững!`:`${p}% — Ôn lại 动词+得+程度 nhé.`;
+  document.getElementById('readScore').classList.add('show');
+  document.getElementById('readScore').scrollIntoView({behavior:'smooth'});
+  updateProgress();
+}
+function resetRead(){rAns={};document.getElementById('readScore').classList.remove('show');renderRead();}
+function renderPron(){
+  document.getElementById('pronP1').innerHTML=pr1.map((s,i)=>`
+    <div class="pw"><div class="pw-left"><div class="pw-num">(${i+1}) ${s.note}</div>
+      <div class="pw-cn">${s.w}</div></div>
+      <div class="pw-tone">${s.tone}</div></div>`).join('');
+  document.getElementById('pronP2').innerHTML=pr2.map((s,i)=>`
+    <div class="pw"><div class="pw-left"><div class="pw-num">(${i+1}) ${s.note}</div>
+      <div class="pw-cn">${s.w}</div></div>
+      <div class="pw-tone">${s.tone}</div></div>`).join('');
+}
+let roS=ro.map(()=>({placed:[],done:false}));
+function renderRO(){
+  document.getElementById('reorderCards').innerHTML=ro.map((r,i)=>`
+    <div class="reorder-card">
+      <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:9px">Câu ${i+1} / ${ro.length}</div>
+      <div class="pieces" id="pc-${i}">${shuf([...r.pieces]).map((p,j)=>`<div class="piece" id="p-${i}-${j}" data-w="${p}" onclick="clk(${i},this)">${p}</div>`).join('')}</div>
+      <div style="font-size:10px;color:var(--muted);margin-bottom:4px">→ Câu của bạn:</div>
+      <div class="ans-area" id="aa-${i}"><span class="ro-ph">Nhấn các từ để sắp xếp...</span></div>
+      <div class="ro-result" id="rr-${i}"></div>
+      <div class="ro-btns"><button class="btn-sm" onclick="chk(${i})">✓ Kiểm tra</button><button class="btn-sm" onclick="rst(${i})">↺ Lại</button></div>
+    </div>`).join('');
+}
+function shuf(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function clk(ci,el){if(el.classList.contains('used'))return;el.classList.add('used');roS[ci].placed.push(el.getAttribute('data-w'));renderAA(ci);}
+function renderAA(ci){
+  const aa=document.getElementById(`aa-${ci}`),p=roS[ci].placed;
+  if(!p.length){aa.innerHTML='<span class="ro-ph">Nhấn các từ để sắp xếp...</span>';aa.classList.remove('has');return;}
+  aa.className='ans-area has';aa.innerHTML=p.map((w,i)=>`<div class="placed" onclick="rmv(${ci},${i})">${w}</div>`).join('');
+}
+function rmv(ci,idx){
+  const w=roS[ci].placed[idx];roS[ci].placed.splice(idx,1);
+  const ps=document.querySelectorAll(`#pc-${ci} .piece`);
+  for(let pp of ps){if(pp.getAttribute('data-w')===w&&pp.classList.contains('used')&&!pp._f){pp.classList.remove('used');pp._f=true;break;}}
+  ps.forEach(p=>delete p._f);renderAA(ci);
+}
+function chk(i){
+  const placed=roS[i].placed.join(''),res=document.getElementById(`rr-${i}`);
+  if(!placed){res.className='ro-result show no';res.textContent='⚠️ Chưa sắp xếp.';return;}
+  if(placed===ro[i].answer){
+    res.className='ro-result show ok';
+    res.innerHTML=`✅ Đúng! ${ro[i].py} — ${ro[i].vi}<br><small>${ro[i].tip}</small>`;
+    roS[i].done=true;
+  }else{
+    res.className='ro-result show no';
+    res.innerHTML=`❌ Chưa đúng. Câu đúng: <strong>${ro[i].answer}</strong><br><small>${ro[i].tip}</small>`;
+  }
+  updateProgress();
+  if(roS.every(s=>s.done))setTimeout(showWriteScore,500);
+}
+function rst(i){roS[i]={placed:[],done:false};renderRO();}
+function showWriteScore(){
+  const c=roS.filter(s=>s.done).length,p=Math.round(c/ro.length*100);
+  document.getElementById('writeBig').textContent=`${c}/${ro.length}`;
+  document.getElementById('writeTxt').textContent=p>=75?`Xuất sắc! ${p}% — Nắm vững 程度补语!`:`${p}% — Ôn lại V+得+TT nhé.`;
+  document.getElementById('writeScore').classList.add('show');
+  document.getElementById('writeScore').scrollIntoView({behavior:'smooth'});
+}
+function resetWrite(){roS=ro.map(()=>({placed:[],done:false}));document.getElementById('writeScore').classList.remove('show');renderRO();}
+const TABS=['vocab','dialog','grammar','hanzi','wb-listen','wb-read','wb-pron','wb-write'];
+document.querySelectorAll('.tab[data-tab]').forEach(tab=>{
+  tab.addEventListener('click',function(){
+    const name=this.getAttribute('data-tab');
+    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    document.getElementById('sec-'+name).classList.add('active');
+    this.classList.add('active');
+    updateProgress();
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+function updateProgress(){
+  const active=document.querySelector('.section.active')?.id?.replace('sec-','');
+  const idx=TABS.indexOf(active);
+  const tp=((idx+1)/TABS.length)*50;
+  const tot=r1.length+r2.length+r3.length+r4.length+ro.length;
+  const done=Object.keys(rAns).length+roS.filter(s=>s.done).length;
+  const wp=(done/tot)*50;
+  document.getElementById('progBar').style.width=Math.min(100,Math.round(tp+wp))+'%';
+}
+renderVocab(vNew,'vNew');renderVocab(vReview,'vReview');
+renderDlg(d1,'dlg1');renderDlg(d2,'dlg2');renderDlg(d3,'dlg3');renderDlg(d4,'dlg4');
+renderGrammar();renderHanzi();
+renderListen(lp1,'listenP1',1);renderListen(lp2,'listenP2',6);renderListen(lp3,'listenP3',11);
+renderRead();renderPron();renderRO();
+updateProgress();
+</script>
+</body>
+</html>
 
